@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privatkunden | AlltagsHilfe Service</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,sans-serif;background:#fefefd;color:#1f2933;line-height:1.6}
+    .wrap{max-width:1120px;margin:auto;padding:24px}
+    .top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(14,78,45,.15);padding-bottom:18px;margin-bottom:32px}
+    .brand{font-size:22px;font-weight:800;color:#0e4e2d}
+    .back{color:#0e4e2d;text-decoration:none;font-weight:700}
+    h1,h2,h3{color:#0e4e2d}
+    h1{font-size:38px;line-height:1.1;margin-bottom:14px}
+    h2{font-size:29px;margin:42px 0 10px}
+    .lead{font-size:18px;color:#5f6b64;max-width:820px}
+    .checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:22px}
+    .check{background:#f6f3ee;border-radius:14px;padding:14px;font-weight:700}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:20px}
+    .card{background:white;border:1px solid rgba(14,78,45,.15);border-radius:18px;overflow:hidden;box-shadow:0 8px 18px rgba(14,78,45,.07)}
+    .card img{width:100%;height:135px;object-fit:cover;display:block}
+    .card .c{padding:16px}
+    .card h3{font-size:20px;margin-bottom:8px}
+    .card p{font-size:15.5px;color:#394840}
+    details{border-top:1px solid rgba(14,78,45,.15);margin-top:12px;padding-top:10px}
+    summary{cursor:pointer;color:#0e4e2d;font-weight:800}
+    details div{font-size:15px;margin-top:8px;color:#394840}
+    .prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:18px}
+    .price{background:#f6f3ee;border-radius:16px;padding:18px;border:1px solid rgba(14,78,45,.15)}
+    .price b{display:block;color:#0e4e2d;font-size:18px;margin-bottom:6px}
+    .price strong{font-size:25px;color:#0e4e2d}
+    .note{background:#eef4ec;border-radius:14px;padding:15px;margin-top:14px;color:#394840}
+    .areas{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:18px}
+    .area{background:white;border:1px solid rgba(14,78,45,.15);border-radius:14px;padding:14px;text-align:center;font-weight:800;color:#0e4e2d}
+    .contact{background:#0e4e2d;color:white;border-radius:22px;padding:26px;margin-top:45px}
+    .contact h2{color:white;margin:0 0 8px}
+    .contact p{color:#edf4ed;margin-bottom:20px}
+    .contactbox{display:grid;grid-template-columns:1fr 1.25fr;gap:22px}
+    .contactdata{display:grid;gap:12px}
+    .contactdata a,.contactdata div{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:14px;color:white;text-decoration:none;font-weight:700}
+    form{background:white;color:#1f2933;border-radius:18px;padding:20px}
+    label{display:block;color:#0e4e2d;font-weight:800;font-size:14px;margin-bottom:6px}
+    input,select,textarea{width:100%;padding:12px;border:1px solid #d8ded8;border-radius:12px;margin-bottom:13px;font-family:inherit;font-size:15px}
+    textarea{min-height:115px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .btn{border:0;background:#0e4e2d;color:white;border-radius:999px;padding:13px 17px;font-weight:800;cursor:pointer}
+    footer{text-align:center;color:#64706b;padding:30px 0 5px;font-size:14px}
+    @media(max-width:850px){.top,.contactbox,.row{display:block}.back{display:block;margin-top:8px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="brand">AlltagsHilfe Service</div>
+    <a class="back" href="../">← Zur Auswahl</a>
+  </div>
+
+  <section>
+    <h1>Hilfe rund um Haus, Garten und Alltag</h1>
+    <p class="lead">
+      Egal ob kleiner Auftrag oder größeres Projekt – wir unterstützen Sie zuverlässig bei praktischen Arbeiten rund um Ihr Zuhause.
+      Von Gartenpflege und Reinigung über Entrümpelungen bis hin zu Haushaltsauflösungen und Transporten.
+      Auf Wunsch sind auch kurzfristige Termine nach Verfügbarkeit möglich.
+    </p>
+
+    <div class="checks">
+      <div class="check">✓ Kleine und große Aufträge</div>
+      <div class="check">✓ Kurzfristige Termine möglich</div>
+      <div class="check">✓ Klare Preisabsprache vor Beginn</div>
+      <div class="check">✓ Anfrage per WhatsApp möglich</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Unsere Leistungen</h2>
+
+    <div class="grid">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80">
+        <div class="c">
+          <h3>🧹 Reinigung</h3>
+          <p>Reinigung von Treppenhäusern, Gemeinschaftsflächen, Kellerbereichen oder privaten Bereichen nach Absprache.</p>
+          <details><summary>Mehr erfahren</summary><div>Einmalige oder regelmäßige Reinigung möglich. Umfang, Material und gewünschter Ablauf werden vorher klar abgestimmt.</div></details>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1599685315640-33d681d4bf60?auto=format&fit=crop&w=800&q=80">
+        <div class="c">
+          <h3>🌿 Gartenpflege</h3>
+          <p>Rasen mähen, Unkraut entfernen, Hecken schneiden und Gartenflächen wieder ordentlich machen.</p>
+          <details><summary>Mehr erfahren</summary><div>Geeignet für kleine und mittlere Gartenflächen. Einmalige Einsätze oder regelmäßige Pflege sind möglich.</div></details>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1600488999585-e4364713b90a?auto=format&fit=crop&w=800&q=80">
+        <div class="c">
+          <h3>📦 Entrümpelung</h3>
+          <p>Unterstützung beim Räumen von Keller, Garage, Dachboden, Abstellräumen oder einzelnen Zimmern.</p>
+          <details><summary>Mehr erfahren</summary><div>Fotos per WhatsApp helfen bei der schnellen Einschätzung. Entsorgung und Transport werden vorab besprochen.</div></details>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80">
+        <div class="c">
+          <h3>🏠 Haushaltsauflösung</h3>
+          <p>Wohnungs- und Haushaltsauflösungen nach Auszug, Umzug oder im Nachlassfall.</p>
+          <details><summary>Mehr erfahren</summary><div>Je nach Umfang mit Besichtigung oder Einschätzung per Fotos. Ziel ist eine klare Planung und saubere Übergabe.</div></details>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80">
+        <div class="c">
+          <h3>🚚 Transporte</h3>
+          <p>Kleintransporte, Abholungen, Tragehilfe und Unterstützung beim Be- oder Entladen.</p>
+          <details><summary>Mehr erfahren</summary><div>Geeignet für einzelne Möbelstücke, Abholungen oder kleinere Mengen. Strecke und Aufwand werden vorher geklärt.</div></details>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1604762524889-3e2fcc145683?auto=format&fit=crop&w=800&q=80">
+        <div class="c">
+          <h3>🔧 Weitere Arbeiten</h3>
+          <p>Möbelmontage, Keller & Garage ordnen, kleine Hilfsarbeiten und praktische Unterstützung im Alltag.</p>
+          <details><summary>Mehr erfahren</summary><div>Viele kleinere Aufgaben lassen sich unkompliziert erledigen. Eine kurze Beschreibung oder ein Foto reicht oft aus.</div></details>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Preise & Kalkulation</h2>
+    <p class="lead">Die Preise werden je nach Auftrag als Pauschale oder nach Arbeitszeit vereinbart. Vor Beginn erhalten Sie eine klare Einschätzung.</p>
+
+    <div class="prices">
+      <div class="price"><b>Rasen mähen bis 60 m²</b><strong>ab 30 €</strong></div>
+      <div class="price"><b>Treppenhausreinigung</b><strong>ab 50 €</strong></div>
+      <div class="price"><b>Kellerentrümpelung</b><strong>ab 300 €*</strong></div>
+      <div class="price"><b>Möbelmontage</b><strong>ab 50 €</strong></div>
+      <div class="price"><b>Arbeitsleistung</b><strong>ab 29 €/Std.</strong></div>
+      <div class="price"><b>2 Mitarbeiter</b><strong>ab 50 €/Std.</strong></div>
+    </div>
+
+    <div class="note">
+      *Kellerentrümpelung ohne Entsorgungsgebühren. Zusätzliche Kosten wie Entsorgung, Material, besondere Werkzeuge oder längere Anfahrten werden immer vorher besprochen.
+    </div>
+  </section>
+
+  <section>
+    <h2>Einsatzgebiet</h2>
+    <p class="lead">Wir sind im Raum Bargteheide, Ahrensburg, Großhansdorf, Ammersbek, Hamburg und Umgebung tätig.</p>
+
+    <div class="areas">
+      <div class="area">Bargteheide</div>
+      <div class="area">Ahrensburg</div>
+      <div class="area">Großhansdorf</div>
+      <div class="area">Ammersbek</div>
+      <div class="area">Hamburg</div>
+      <div class="area">Umgebung</div>
+    </div>
+
+    <div class="note">
+      Ab 30 km Entfernung von Ahrensburg berechnen wir 0,25 € Fahrtkosten pro Kilometer.
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>Kontakt & Anfrage</h2>
+    <p>Senden Sie uns kurz Ihre Anfrage. Bilder per WhatsApp helfen besonders bei Gartenarbeiten, Entrümpelungen, Transporten oder Haushaltsauflösungen.</p>
+
+    <div class="contactbox">
+      <div class="contactdata">
+        <a href="#">📱 WhatsApp schreiben</a>
+        <a href="#">📞 Direkt anrufen</a>
+        <a href="mailto:info@service-alltagshilfe.de">📧 info@service-alltagshilfe.de</a>
+        <div>📍 Raum Bargteheide, Ahrensburg, Hamburg & Umgebung</div>
+      </div>
+
+      <form>
+        <div class="row">
+          <div><label>Name</label><input placeholder="Ihr Name"></div>
+          <div><label>Telefon</label><input placeholder="Telefonnummer"></div>
+        </div>
+        <label>E-Mail</label>
+        <input placeholder="E-Mail-Adresse">
+        <label>Gewünschte Leistung</label>
+        <select>
+          <option>Reinigung</option>
+          <option>Gartenpflege</option>
+          <option>Entrümpelung</option>
+          <option>Haushaltsauflösung</option>
+          <option>Transport</option>
+          <option>Weitere Arbeiten</option>
+        </select>
+        <label>Nachricht</label>
+        <textarea placeholder="Beschreiben Sie kurz den Auftrag, Ort und gewünschten Zeitraum."></textarea>
+        <button class="btn" type="button">Anfrage senden</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>AlltagsHilfe Service · Privatkunden</footer>
+</div>
+</body>
+</html>
