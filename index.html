@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlltagsHilfe Service</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #fefefd;
+      color: #1f2933;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+    }
+
+    .box {
+      max-width: 980px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .logo {
+      color: #0e4e2d;
+      font-size: 34px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 19px;
+      color: #548031;
+      margin-bottom: 38px;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #0e4e2d;
+      margin-bottom: 28px;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: #f6f3ee;
+      border: 2px solid rgba(14, 78, 45, 0.12);
+      border-radius: 28px;
+      padding: 34px 28px;
+      text-decoration: none;
+      color: #1f2933;
+      transition: 0.2s ease;
+      min-height: 310px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #0e4e2d;
+      box-shadow: 0 14px 30px rgba(14, 78, 45, 0.12);
+    }
+
+    .icon {
+      font-size: 54px;
+      margin-bottom: 18px;
+    }
+
+    .card h2 {
+      color: #0e4e2d;
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .card p {
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #0e4e2d;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-top: auto;
+      align-self: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #64706b;
+    }
+
+    footer a {
+      color: #0e4e2d;
+      text-decoration: none;
+      font-weight: 700;
+      margin: 0 8px;
+    }
+
+    @media (max-width: 760px) {
+      .choices {
+        grid-template-columns: 1fr;
+      }
+
+      .logo {
+        font-size: 28px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .card {
+        min-height: auto;
+        padding: 28px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<main>
+  <div class="box">
+    <div class="logo">AlltagsHilfe Service</div>
+    <div class="subtitle">Unterstützung rund um Haus, Garten und Alltag.</div>
+
+    <h1>Bitte wählen Sie Ihren Bereich</h1>
+
+    <div class="choices">
+      <a class="card" href="privat/">
+        <div class="icon">🏠</div>
+        <h2>Privatkunden</h2>
+        <p>Für Haushalt, Garten, Reinigung, Entrümpelung, Transporte und weitere Unterstützung im Alltag.</p>
+        <span class="btn">Privatkunden öffnen</span>
+      </a>
+
+      <a class="card" href="firmen/">
+        <div class="icon">🏢</div>
+        <h2>Firmenkunden</h2>
+        <p>Für Unternehmen, Hausverwaltungen, Praxen, Kanzleien und Gewerbeobjekte.</p>
+        <span class="btn">Firmenkunden öffnen</span>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <a href="impressum/">Impressum</a>
+  <a href="datenschutz/">Datenschutz</a>
+</footer>
+
+</body>
+</html>
