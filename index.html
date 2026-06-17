@@ -16,16 +16,15 @@
     body {
       font-family: Arial, sans-serif;
       min-height: 100vh;
-      color: #fefefd;
+      color: #1f2933;
       background:
-        linear-gradient(rgba(14, 78, 45, 0.78), rgba(14, 78, 45, 0.88)),
+        linear-gradient(rgba(254,254,253,0.72), rgba(246,243,238,0.82)),
         url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80");
       background-size: cover;
       background-position: center;
       display: flex;
       flex-direction: column;
       cursor: default;
-      overflow-x: hidden;
     }
 
     main {
@@ -33,75 +32,78 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 35px 20px;
-      animation: fadeIn 0.9s ease forwards;
+      padding: 28px 18px;
+      animation: fadeIn 0.8s ease forwards;
     }
 
     .box {
       width: 100%;
-      max-width: 860px;
+      max-width: 760px;
       text-align: center;
-      background: rgba(254, 254, 253, 0.10);
-      border: 1px solid rgba(254, 254, 253, 0.22);
-      border-radius: 30px;
-      padding: 34px 28px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      background: rgba(254,254,253,0.92);
+      border: 1px solid rgba(14,78,45,0.14);
+      border-radius: 26px;
+      padding: 32px 26px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.16);
     }
 
     .logo {
+      color: #0e4e2d;
       font-size: 30px;
       font-weight: 800;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .subtitle {
       font-size: 17px;
-      color: rgba(254,254,253,.88);
-      margin-bottom: 28px;
+      color: #4d5a52;
+      max-width: 560px;
+      margin: 0 auto 12px;
+      line-height: 1.55;
     }
 
-    h1 {
-      font-size: 25px;
-      margin-bottom: 22px;
+    .hint {
+      color: #548031;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 26px;
     }
 
     .choices {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      gap: 16px;
     }
 
     .card {
-      min-height: 230px;
-      background: rgba(254,254,253,.92);
+      background: #f6f3ee;
       color: #1f2933;
       text-decoration: none;
-      border-radius: 24px;
-      padding: 26px 22px;
+      border-radius: 22px;
+      padding: 24px 20px;
+      min-height: 220px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      transition: 0.28s ease;
-      border: 2px solid transparent;
+      border: 1px solid rgba(14,78,45,0.14);
+      transition: 0.25s ease;
     }
 
     .card:hover {
-      transform: translateY(-7px) scale(1.02);
       background: #0e4e2d;
       color: #fefefd;
-      border-color: rgba(254,254,253,.55);
-      box-shadow: 0 16px 35px rgba(0,0,0,.28);
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px rgba(14,78,45,0.22);
     }
 
     .icon {
-      font-size: 44px;
+      font-size: 42px;
       margin-bottom: 12px;
     }
 
     .card h2 {
-      font-size: 25px;
       color: #0e4e2d;
+      font-size: 24px;
       margin-bottom: 10px;
       transition: 0.25s ease;
     }
@@ -111,17 +113,16 @@
     }
 
     .card p {
-      font-size: 15.5px;
+      font-size: 15px;
       line-height: 1.55;
       margin-bottom: 18px;
     }
 
     .btn {
-      display: inline-block;
       background: #0e4e2d;
       color: white;
-      padding: 11px 16px;
       border-radius: 999px;
+      padding: 11px 16px;
       font-weight: 700;
       align-self: center;
       transition: 0.25s ease;
@@ -134,14 +135,13 @@
 
     footer {
       text-align: center;
-      padding: 18px;
+      padding: 16px;
       font-size: 13px;
-      color: rgba(254,254,253,.85);
-      animation: fadeIn 1.2s ease forwards;
+      color: #4d5a52;
     }
 
     footer a {
-      color: #fefefd;
+      color: #0e4e2d;
       text-decoration: none;
       font-weight: 700;
       margin: 0 8px;
@@ -154,7 +154,7 @@
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(18px);
+        transform: translateY(14px);
       }
       to {
         opacity: 1;
@@ -163,29 +163,20 @@
     }
 
     @media (max-width: 760px) {
-      main {
-        padding: 22px 16px;
-      }
-
       .box {
-        padding: 28px 20px;
-        border-radius: 24px;
-      }
-
-      .choices {
-        grid-template-columns: 1fr;
+        padding: 26px 18px;
       }
 
       .logo {
         font-size: 27px;
       }
 
-      h1 {
-        font-size: 22px;
+      .choices {
+        grid-template-columns: 1fr;
       }
 
       .card {
-        min-height: 190px;
+        min-height: 175px;
       }
     }
   </style>
@@ -196,23 +187,26 @@
 <main>
   <div class="box">
     <div class="logo">AlltagsHilfe Service</div>
-    <div class="subtitle">Unterstützung rund um Haus, Garten und Alltag.</div>
 
-    <h1>Bitte wählen Sie Ihren Bereich</h1>
+    <div class="subtitle">
+      Ihr Ansprechpartner für Reinigung, Gartenpflege, Entrümpelung und weitere Dienstleistungen.
+    </div>
+
+    <div class="hint">Privat oder Firma?</div>
 
     <div class="choices">
       <a class="card" href="privat/">
         <div class="icon">🏠</div>
         <h2>Privatkunden</h2>
-        <p>Für Haushalt, Garten, Reinigung, Entrümpelung, Transporte und weitere Unterstützung im Alltag.</p>
-        <span class="btn">Bereich öffnen</span>
+        <p>Für Haushalt, Garten, Reinigung, Entrümpelung, Transporte und Unterstützung im Alltag.</p>
+        <span class="btn">Auswählen</span>
       </a>
 
       <a class="card" href="firmen/">
         <div class="icon">🏢</div>
         <h2>Firmenkunden</h2>
         <p>Für Unternehmen, Hausverwaltungen, Praxen, Kanzleien und Gewerbeobjekte.</p>
-        <span class="btn">Bereich öffnen</span>
+        <span class="btn">Auswählen</span>
       </a>
     </div>
   </div>
