@@ -601,6 +601,13 @@ textarea{
   border-radius:999px;
   font-weight:900;
   margin-top:8px;
+  background:transparent;
+  color:#fefefd;
+  font-family:inherit;
+}
+
+.top-link:hover{
+  background:rgba(255,255,255,.12);
 }
 
 .footer-bottom{
@@ -1013,7 +1020,7 @@ textarea{
     <div>
       <h3>AlltagsHilfe Service</h3>
       <p>Zuverlässige Unterstützung rund um Haus, Garten und Alltag.</p>
-      <a class="top-link" href="#oben">Nach oben</a>
+      <button class="top-link back-to-top" type="button">Nach oben</button>
     </div>
 
     <div>
@@ -1078,7 +1085,18 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 revealItems.forEach(item => observer.observe(item));
+
+  document.querySelectorAll('.back-to-top').forEach(button => {
+  button.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  });
+});
 </script>
+  
 
 </body>
 </html>
