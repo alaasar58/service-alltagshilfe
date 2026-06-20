@@ -8,159 +8,209 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#fefefd;color:#1f2933;line-height:1.6}
-.wrap{max-width:1120px;margin:auto;padding:24px}
-.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(14,78,45,.15);padding-bottom:18px;margin-bottom:32px}
-.brand{font-size:22px;font-weight:800;color:#0e4e2d}
+.wrap{max-width:1100px;margin:auto;padding:24px}
+.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(14,78,45,.15);padding-bottom:18px;margin-bottom:34px}
+.brand{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:800;color:#0e4e2d}
+.brand img{width:48px;height:48px;border-radius:50%;object-fit:cover}
 .back{color:#0e4e2d;text-decoration:none;font-weight:700}
 h1,h2,h3{color:#0e4e2d}
-h1{font-size:38px;line-height:1.1;margin-bottom:14px}
-h2{font-size:29px;margin:42px 0 10px}
-.lead{font-size:18px;color:#5f6b64;max-width:850px}
-.checks,.areas{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:20px}
-.check,.area{background:#f6f3ee;border-radius:14px;padding:14px;font-weight:700}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:20px}
-.card{background:white;border:1px solid rgba(14,78,45,.15);border-radius:18px;overflow:hidden;box-shadow:0 8px 18px rgba(14,78,45,.07)}
-.card img{width:100%;height:135px;object-fit:cover;display:block}
-.card .c{padding:16px}
-.card h3{font-size:20px;margin-bottom:8px}
-.card p{font-size:15.5px;color:#394840}
-details{border-top:1px solid rgba(14,78,45,.15);margin-top:12px;padding-top:10px}
+h1{font-size:38px;line-height:1.12;margin-bottom:16px}
+h2{font-size:29px;margin:46px 0 14px}
+.lead{font-size:18px;color:#56645d;max-width:850px;margin-bottom:12px}
+.intro-points{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.intro-points span{background:#f6f3ee;border-radius:999px;padding:10px 14px;font-weight:700;color:#0e4e2d}
+.service{display:grid;grid-template-columns:42% 58%;gap:0;background:white;border:1px solid rgba(14,78,45,.14);border-radius:24px;overflow:hidden;margin:22px 0;box-shadow:0 10px 24px rgba(14,78,45,.07)}
+.service:nth-child(even){grid-template-columns:58% 42%}
+.service:nth-child(even) img{order:2}
+.service img{width:100%;height:100%;min-height:300px;object-fit:cover}
+.service-content{padding:26px}
+.service h3{font-size:25px;margin-bottom:12px}
+.service p{color:#3d4a43;margin-bottom:14px}
+details{margin-top:14px;border-top:1px solid rgba(14,78,45,.14);padding-top:14px}
 summary{cursor:pointer;color:#0e4e2d;font-weight:800}
-details div{font-size:15px;margin-top:8px;color:#394840}
-.note{background:#eef4ec;border-radius:14px;padding:16px;margin-top:16px;color:#394840}
-.contact{background:#f6f3ee;border:1px solid rgba(14,78,45,.15);border-radius:24px;padding:26px;margin-top:45px}
-.contact-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:22px 0}
-.contact-actions a{background:#0e4e2d;color:white;text-decoration:none;border-radius:999px;padding:14px 16px;text-align:center;font-weight:800}
+details ul{margin-top:12px;padding-left:20px;color:#3d4a43}
+.price-box,.area-box,.contact{background:#f6f3ee;border:1px solid rgba(14,78,45,.14);border-radius:24px;padding:26px;margin-top:20px}
+.price-box p,.area-box p{color:#3d4a43;margin-bottom:12px}
+.areas{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.areas span{background:white;border:1px solid rgba(14,78,45,.13);border-radius:999px;padding:10px 14px;font-weight:800;color:#0e4e2d}
+.contact-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:22px 0}
+.contact-actions a{background:white;color:#0e4e2d;border:1px solid rgba(14,78,45,.18);text-decoration:none;border-radius:16px;padding:14px 16px;font-weight:800}
+.contact-actions small{display:block;color:#56645d;font-weight:400;margin-top:3px}
 .qr-box{display:flex;align-items:center;gap:18px;background:white;border-radius:18px;padding:18px;border:1px solid rgba(14,78,45,.12);margin-bottom:22px}
 .qr-box img{width:130px;height:130px;object-fit:cover;border-radius:14px}
-form{background:white;color:#1f2933;border-radius:18px;padding:20px;border:1px solid rgba(14,78,45,.12)}
+form{background:white;border-radius:18px;padding:20px;border:1px solid rgba(14,78,45,.12)}
 label{display:block;color:#0e4e2d;font-weight:800;font-size:14px;margin-bottom:6px}
 input,select,textarea{width:100%;padding:12px;border:1px solid #d8ded8;border-radius:12px;margin-bottom:13px;font-family:inherit;font-size:15px}
-textarea{min-height:115px;resize:vertical}
+textarea{min-height:120px;resize:vertical}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.btn{border:0;background:#0e4e2d;color:white;border-radius:999px;padding:13px 17px;font-weight:800;cursor:pointer}
-footer{text-align:center;color:#64706b;padding:30px 0 5px;font-size:14px}
-@media(max-width:850px){.top,.row,.qr-box{display:block}.back{display:block;margin-top:8px}.qr-box img{margin-bottom:12px}}
+.btn{border:0;background:#0e4e2d;color:white;border-radius:999px;padding:13px 18px;font-weight:800;cursor:pointer}
+footer{text-align:center;color:#64706b;padding:32px 0 8px;font-size:14px}
+@media(max-width:850px){
+.top,.row,.qr-box{display:block}
+.back{display:block;margin-top:10px}
+.service,.service:nth-child(even){grid-template-columns:1fr}
+.service:nth-child(even) img{order:0}
+.service img{min-height:220px}
+h1{font-size:32px}
+}
 </style>
 </head>
 
 <body>
 <div class="wrap">
 
-<div class="top">
-  <div class="brand">AlltagsHilfe Service</div>
+<header class="top">
+  <div class="brand">
+    <img src="../Logo.png" alt="AlltagsHilfe Service Logo">
+    <span>AlltagsHilfe Service</span>
+  </div>
   <a class="back" href="../">← Zur Auswahl</a>
-</div>
+</header>
 
 <section>
   <h1>Hilfe rund um Haus, Garten und Alltag</h1>
   <p class="lead">
-    Ob kleine Unterstützung im Alltag oder größeres Projekt – wir helfen dort, wo praktische Unterstützung benötigt wird.
-    Von Gartenarbeiten und Reinigungen über Entrümpelungen bis hin zu Haushaltsauflösungen oder Transporten finden wir gemeinsam eine passende Lösung.
+    Ob kleine Unterstützung im Alltag oder größeres Projekt – wir helfen dort, wo praktische Hilfe gebraucht wird.
+  </p>
+  <p class="lead">
+    Von Gartenarbeiten und Reinigung über Entrümpelungen bis hin zu Haushaltsauflösungen oder Transporten finden wir gemeinsam eine passende Lösung für Ihr Anliegen.
   </p>
 
-  <div class="checks">
-    <div class="check">✓ Kleine und große Aufträge</div>
-    <div class="check">✓ Kurzfristige Termine möglich</div>
-    <div class="check">✓ Kostenlose Angebotserstellung</div>
-    <div class="check">✓ Klare Absprache vor Beginn</div>
+  <div class="intro-points">
+    <span>Kleine & große Aufträge</span>
+    <span>Kurzfristige Termine möglich</span>
+    <span>Kostenlose Angebotserstellung</span>
+    <span>Klare Absprache vor Beginn</span>
   </div>
 </section>
 
 <section>
   <h2>Unsere Leistungen</h2>
 
-  <div class="grid">
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80">
-      <div class="c">
-        <h3>🧹 Reinigung</h3>
-        <p>Einmalige oder regelmäßige Reinigungsarbeiten rund um Haus, Treppenhaus und Gemeinschaftsflächen.</p>
-        <details><summary>Mehr erfahren</summary><div>Wir stimmen Umfang, Material und Ablauf vorher mit Ihnen ab.</div></details>
-      </div>
-    </article>
+  <article class="service">
+    <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1000&q=80" alt="Reinigung">
+    <div class="service-content">
+      <h3>🧹 Reinigung</h3>
+      <p>Saubere Räume und gepflegte Bereiche sorgen für einen besseren Eindruck. Wir unterstützen bei einmaligen oder regelmäßigen Reinigungsarbeiten nach Absprache.</p>
+      <details>
+        <summary>Mehr erfahren</summary>
+        <ul>
+          <li>Treppenhäuser und Eingangsbereiche</li>
+          <li>Gemeinschaftsflächen und Kellerbereiche</li>
+          <li>Einmalige oder regelmäßige Reinigung</li>
+          <li>Umfang und Material werden vorher abgestimmt</li>
+        </ul>
+      </details>
+    </div>
+  </article>
 
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1599685315640-33d681d4bf60?auto=format&fit=crop&w=800&q=80">
-      <div class="c">
-        <h3>🌿 Gartenpflege</h3>
-        <p>Rasen mähen, Unkraut entfernen, Hecken schneiden und Gartenflächen wieder ordentlich machen.</p>
-        <details><summary>Mehr erfahren</summary><div>Einmalige Einsätze oder regelmäßige Pflege sind möglich.</div></details>
-      </div>
-    </article>
+  <article class="service">
+    <img src="https://images.unsplash.com/photo-1599685315640-33d681d4bf60?auto=format&fit=crop&w=1000&q=80" alt="Gartenpflege">
+    <div class="service-content">
+      <h3>🌿 Gartenpflege</h3>
+      <p>Damit Ihr Garten wieder gepflegt aussieht, unterstützen wir bei regelmäßigen oder einmaligen Arbeiten rund um Grünflächen und Außenbereiche.</p>
+      <details>
+        <summary>Mehr erfahren</summary>
+        <ul>
+          <li>Rasen mähen</li>
+          <li>Unkraut entfernen</li>
+          <li>Hecken schneiden</li>
+          <li>Gartenflächen wieder ordentlich machen</li>
+        </ul>
+      </details>
+    </div>
+  </article>
 
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1600488999585-e4364713b90a?auto=format&fit=crop&w=800&q=80">
-      <div class="c">
-        <h3>📦 Entrümpelung</h3>
-        <p>Unterstützung beim Räumen von Keller, Garage, Dachboden, Abstellräumen oder einzelnen Zimmern.</p>
-        <details><summary>Mehr erfahren</summary><div>Fotos per WhatsApp helfen bei einer schnellen Einschätzung.</div></details>
-      </div>
-    </article>
+  <article class="service">
+    <img src="https://images.unsplash.com/photo-1600488999585-e4364713b90a?auto=format&fit=crop&w=1000&q=80" alt="Entrümpelung">
+    <div class="service-content">
+      <h3>📦 Entrümpelung</h3>
+      <p>Ob Keller, Garage, Dachboden oder einzelne Räume – wir helfen dabei, wieder Platz und Ordnung zu schaffen.</p>
+      <details>
+        <summary>Mehr erfahren</summary>
+        <ul>
+          <li>Keller, Garage und Dachboden</li>
+          <li>Abstellräume oder einzelne Zimmer</li>
+          <li>Sortieren, Tragen und Räumen</li>
+          <li>Fotos per WhatsApp helfen bei der Einschätzung</li>
+        </ul>
+      </details>
+    </div>
+  </article>
 
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80">
-      <div class="c">
-        <h3>🏠 Haushaltsauflösung</h3>
-        <p>Wohnungs- und Haushaltsauflösungen nach Auszug, Umzug oder im Nachlassfall.</p>
-        <details><summary>Mehr erfahren</summary><div>Je nach Umfang mit Besichtigung oder Einschätzung per Fotos.</div></details>
-      </div>
-    </article>
+  <article class="service">
+    <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1000&q=80" alt="Haushaltsauflösung">
+    <div class="service-content">
+      <h3>🏠 Haushaltsauflösung</h3>
+      <p>Wir unterstützen bei Wohnungs- und Haushaltsauflösungen nach Auszug, Umzug oder im Nachlassfall.</p>
+      <details>
+        <summary>Mehr erfahren</summary>
+        <ul>
+          <li>Räumung von Wohnungen und Nebenräumen</li>
+          <li>Vorbereitung für Übergabe oder Besichtigung</li>
+          <li>Besichtigung bei Bedarf möglich</li>
+          <li>Preisabsprache vor Beginn</li>
+        </ul>
+      </details>
+    </div>
+  </article>
 
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80">
-      <div class="c">
-        <h3>🚚 Transporte</h3>
-        <p>Kleintransporte, Abholungen, Tragehilfe und Unterstützung beim Be- oder Entladen.</p>
-        <details><summary>Mehr erfahren</summary><div>Strecke, Aufwand und gewünschter Zeitraum werden vorher geklärt.</div></details>
-      </div>
-    </article>
+  <article class="service">
+    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1000&q=80" alt="Transporte">
+    <div class="service-content">
+      <h3>🚚 Transporte</h3>
+      <p>Für Kleintransporte, Abholungen, Tragehilfe und Unterstützung beim Be- oder Entladen finden wir eine passende Lösung.</p>
+      <details>
+        <summary>Mehr erfahren</summary>
+        <ul>
+          <li>Kleintransporte und Abholungen</li>
+          <li>Tragehilfe</li>
+          <li>Be- und Entladen</li>
+          <li>Strecke und Aufwand werden vorher geklärt</li>
+        </ul>
+      </details>
+    </div>
+  </article>
 
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1604762524889-3e2fcc145683?auto=format&fit=crop&w=800&q=80">
-      <div class="c">
-        <h3>🔧 Weitere Arbeiten</h3>
-        <p>Möbelmontage, Keller & Garage ordnen, kleine Hilfsarbeiten und praktische Unterstützung im Alltag.</p>
-        <details><summary>Mehr erfahren</summary><div>Eine kurze Beschreibung oder ein Foto reicht oft aus.</div></details>
-      </div>
-    </article>
-  </div>
+  <article class="service">
+    <img src="https://images.unsplash.com/photo-1604762524889-3e2fcc145683?auto=format&fit=crop&w=1000&q=80" alt="Weitere Arbeiten">
+    <div class="service-content">
+      <h3>🔧 Weitere Unterstützung</h3>
+      <p>Auch bei kleinen praktischen Aufgaben rund um Haus, Keller, Garage oder Möbelmontage können Sie uns anfragen.</p>
+      <details>
+        <summary>Mehr erfahren</summary>
+        <ul>
+          <li>Möbelmontage</li>
+          <li>Keller und Garage ordnen</li>
+          <li>Kleine Hilfsarbeiten</li>
+          <li>Kurze Beschreibung oder Foto reicht oft aus</li>
+        </ul>
+      </details>
+    </div>
+  </article>
 </section>
 
 <section>
   <h2>Transparente Preise</h2>
-  <p class="lead">
-    Jeder Auftrag ist individuell. Deshalb erstellen wir Ihnen vor Beginn eine klare und unverbindliche Preisübersicht.
-    Die Angebotserstellung ist kostenlos.
-  </p>
-  <p class="lead">
-    Bei Bedarf ist auch eine kurze Besichtigung möglich, damit wir den Aufwand besser einschätzen und Ihnen direkt einen passenden Preis vorschlagen können.
-  </p>
-  <p class="lead">
-    Ob kleine Hilfe oder größeres Projekt: Wir sind für Sie da, wenn Unterstützung gebraucht wird. Kurzfristige Termine sind nach Verfügbarkeit oft innerhalb der nächsten Tage bis zu einer Woche möglich.
-  </p>
-
-  <div class="checks">
-    <div class="check">✓ Kostenlose Angebotserstellung</div>
-    <div class="check">✓ Preisabsprache vor Beginn</div>
-    <div class="check">✓ Besichtigung bei Bedarf möglich</div>
-    <div class="check">✓ Kurzfristige Termine nach Verfügbarkeit</div>
+  <div class="price-box">
+    <p>Jeder Auftrag ist individuell. Deshalb erstellen wir Ihnen vor Beginn eine klare und unverbindliche Preisübersicht. Die Angebotserstellung ist kostenlos.</p>
+    <p>Bei Bedarf ist auch eine kurze Besichtigung möglich, damit wir den Aufwand besser einschätzen und Ihnen direkt einen passenden Preis vorschlagen können.</p>
+    <p>Ob kleine Hilfe oder größeres Projekt: Wir sind für Sie da, wenn Unterstützung gebraucht wird. Kurzfristige Termine sind nach Verfügbarkeit oft innerhalb der nächsten Tage bis zu einer Woche möglich.</p>
   </div>
 </section>
 
 <section>
   <h2>Einsatzgebiet</h2>
-  <p class="lead">
-    Wir sind im Raum Ahrensburg, Bargteheide, Großhansdorf, Ammersbek, Hamburg und Umgebung tätig.
-  </p>
-
-  <div class="areas">
-    <div class="area">Ahrensburg</div>
-    <div class="area">Bargteheide</div>
-    <div class="area">Großhansdorf</div>
-    <div class="area">Ammersbek</div>
-    <div class="area">Hamburg</div>
-    <div class="area">Umgebung</div>
+  <div class="area-box">
+    <p>Wir sind im Raum Ahrensburg, Bargteheide, Großhansdorf, Ammersbek, Hamburg und Umgebung tätig.</p>
+    <div class="areas">
+      <span>Ahrensburg</span>
+      <span>Bargteheide</span>
+      <span>Großhansdorf</span>
+      <span>Ammersbek</span>
+      <span>Hamburg</span>
+      <span>Umgebung</span>
+    </div>
   </div>
 </section>
 
@@ -172,9 +222,9 @@ footer{text-align:center;color:#64706b;padding:30px 0 5px;font-size:14px}
   </p>
 
   <div class="contact-actions">
-    <a href="https://wa.me/4915229546946" target="_blank">📱 WhatsApp schreiben</a>
-    <a href="tel:+4915229546946">📞 Jetzt anrufen</a>
-    <a href="mailto:info@service-alltagshilfe.de?subject=Anfrage%20AlltagsHilfe%20Service">📧 E-Mail senden</a>
+    <a href="https://wa.me/4915229546946" target="_blank">📱 WhatsApp<br><small>Nachricht schreiben</small></a>
+    <a href="tel:+4915229546946">📞 Telefon<br><small>+49 1522 9546946</small></a>
+    <a href="mailto:info@service-alltagshilfe.de?subject=Anfrage%20AlltagsHilfe%20Service">📧 E-Mail<br><small>info@service-alltagshilfe.de</small></a>
   </div>
 
   <div class="qr-box">
@@ -211,7 +261,7 @@ footer{text-align:center;color:#64706b;padding:30px 0 5px;font-size:14px}
       <option>Entrümpelung</option>
       <option>Haushaltsauflösung</option>
       <option>Transport</option>
-      <option>Weitere Arbeiten</option>
+      <option>Weitere Unterstützung</option>
     </select>
 
     <label>Nachricht</label>
