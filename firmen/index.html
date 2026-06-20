@@ -25,12 +25,16 @@ body{
   cursor:default;
 }
 
-input,textarea,select{
+input,
+textarea,
+select{
   user-select:text;
   cursor:text;
 }
 
-a,button,summary{
+a,
+button,
+summary{
   cursor:pointer;
 }
 
@@ -178,7 +182,9 @@ a,button,summary{
   margin-bottom:10px;
 }
 
-h1,h2,h3{
+h1,
+h2,
+h3{
   color:#0e4e2d;
 }
 
@@ -322,22 +328,30 @@ h3{
 .short{
   color:#3d4a43;
   font-size:15.5px;
-  margin-bottom:6px;
+  margin-bottom:8px;
   max-width:730px;
 }
 
 details{
   margin-top:12px;
   border-top:1px solid rgba(14,78,45,.14);
-  padding-top:12px;
+  padding-top:14px;
 }
 
 summary{
   color:#0e4e2d;
+  background:#eef4ec;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:999px;
   font-weight:900;
   list-style:none;
   width:fit-content;
-  padding:8px 0;
+  padding:9px 14px;
+  transition:.25s ease;
+}
+
+summary:hover{
+  background:#dfe9dc;
 }
 
 summary::-webkit-details-marker{
@@ -345,17 +359,16 @@ summary::-webkit-details-marker{
 }
 
 summary::after{
-  content:" anzeigen";
-  font-size:14px;
-  color:#548031;
+  content:"  ▾";
+  color:#0e4e2d;
 }
 
 details[open] summary::after{
-  content:" schließen";
+  content:"  ▴";
 }
 
 .details-text{
-  margin-top:12px;
+  margin-top:14px;
   color:#3d4a43;
   font-size:15.5px;
   max-width:760px;
@@ -469,34 +482,6 @@ details[open] summary::after{
   border:1px solid rgba(14,78,45,.12);
 }
 
-.area-fallback{
-  position:absolute;
-  inset:auto 18px 18px 18px;
-  background:rgba(254,254,253,.86);
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:18px;
-  padding:14px;
-  color:#0e4e2d;
-  font-weight:900;
-  text-align:center;
-}
-
-.areas{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:18px;
-}
-
-.areas span{
-  background:white;
-  border:1px solid rgba(14,78,45,.13);
-  border-radius:999px;
-  padding:10px 14px;
-  font-weight:900;
-  color:#0e4e2d;
-}
-
 .extra-area{
   margin-top:18px;
   color:#3d4a43;
@@ -537,7 +522,9 @@ label{
   margin-bottom:6px;
 }
 
-input,select,textarea{
+input,
+select,
+textarea{
   width:100%;
   padding:12px;
   border:1px solid #d8ded8;
@@ -549,7 +536,16 @@ input,select,textarea{
 
 textarea{
   min-height:135px;
-  resize:vertical;
+  max-height:135px;
+  resize:none;
+}
+
+.field-hint{
+  display:block;
+  margin-top:-7px;
+  margin-bottom:13px;
+  color:#6d776f;
+  font-size:12.5px;
 }
 
 .row{
@@ -793,7 +789,7 @@ textarea{
           <a href="#reinigung">Reinigung</a>
           <a href="#raeumung">Räumung & Ordnung</a>
           <a href="#garten">Außenbereiche</a>
-          <a href="#sonderaufgaben">Sonderaufgaben</a>
+          <a href="#sonderaufgaben">Weitere Unterstützung</a>
         </div>
       </div>
 
@@ -826,7 +822,7 @@ textarea{
     </p>
 
     <p class="lead">
-      Entscheidend ist der konkrete Bedarf: Wir prüfen den Aufwand, besprechen den Umfang und erstellen ein klares Angebot vor Beginn.
+      Entscheidend ist der konkrete Bedarf: Wir prüfen den Umfang, besprechen die Umsetzung und erstellen vor Beginn eine klare Preisübersicht.
     </p>
 
     <div class="hero-actions">
@@ -848,8 +844,7 @@ textarea{
     </p>
 
     <p>
-      Wir übernehmen praktische Arbeiten mit klarer Absprache:
-      Was soll gemacht werden, wann wird Unterstützung gebraucht und welcher Umfang ist realistisch?
+      Wir übernehmen praktische Arbeiten mit klarer Absprache: Was soll gemacht werden, wann wird Unterstützung gebraucht und welcher Umfang ist realistisch?
     </p>
 
     <p>
@@ -870,7 +865,7 @@ textarea{
       </p>
 
       <details>
-        <summary>Leistungsumfang</summary>
+        <summary>Leistungsdetails</summary>
         <p class="details-text">
           Je nach Auftrag reinigen wir Böden, Treppen, Eingangsbereiche, Gemeinschaftsflächen, Nebenräume, Oberflächen oder andere genutzte Bereiche.
           Vor Beginn klären wir genau, welche Flächen gereinigt werden sollen, ob Material vorhanden ist und ob die Unterstützung einmalig oder regelmäßig gebraucht wird.
@@ -888,7 +883,7 @@ textarea{
       </p>
 
       <details>
-        <summary>Leistungsumfang</summary>
+        <summary>Leistungsdetails</summary>
         <p class="details-text">
           Wir unterstützen beim Räumen, Sortieren, Tragen und Vorbereiten von Bereichen, die leer, ordentlich oder übergabefähig gemacht werden sollen.
           Das kann bei einzelnen Räumen, Abstellflächen, Kellern, Garagen, Nebenräumen oder kleineren Leerständen sinnvoll sein.
@@ -903,14 +898,14 @@ textarea{
     <div class="service-content">
       <h3>Gartenpflege & Außenbereiche</h3>
       <p class="short">
-        Außenflächen ordentlich und gepflegt halten.
+        Einfache Pflegearbeiten für gepflegte Außenbereiche.
       </p>
 
       <details>
-        <summary>Leistungsumfang</summary>
+        <summary>Leistungsdetails</summary>
         <p class="details-text">
-          Je nach Fläche übernehmen wir Rasenpflege, Unkrautentfernung, Laubarbeiten, Pflege von Randbereichen, einfache Schnittarbeiten und das Ordnen von Außenflächen.
-          Vor dem Einsatz wird besprochen, was gemacht werden soll, welche Fläche betroffen ist und welcher Aufwand realistisch ist.
+          Wir übernehmen einfache Garten- und Pflegearbeiten wie Rasenpflege, Unkrautentfernung, Laubarbeiten, Randbereiche, Wege und kleinere Schnittarbeiten nach Absprache.
+          Bei größeren oder komplexeren Arbeiten prüfen wir vorab ehrlich, ob wir diese übernehmen können.
         </p>
       </details>
     </div>
@@ -919,17 +914,16 @@ textarea{
   <article class="service reverse reveal" id="sonderaufgaben">
     <div class="service-media" style="--img:url('../bilder/firmen-sonderaufgaben.jpg')"></div>
     <div class="service-content">
-      <h3>Praktische Unterstützung nach Bedarf</h3>
+      <h3>Weitere praktische Unterstützung</h3>
       <p class="short">
-        Flexible Hilfe für Aufgaben von A nach B.
+        Sie beschreiben die Aufgabe – wir prüfen die Umsetzung.
       </p>
 
       <details>
-        <summary>Leistungsumfang</summary>
+        <summary>Leistungsdetails</summary>
         <p class="details-text">
-          Dazu gehören zum Beispiel Aufräumarbeiten, Vorbereitung von Räumen, einfache Hilfsarbeiten, Botengänge sowie Fahrten von A nach B nach Absprache.
-          Das kann Material, Unterlagen, kleinere Waren, wichtige Dokumente oder ähnliche Aufgaben betreffen.
-          Wir prüfen vorab ehrlich, ob wir den Einsatz übernehmen können, welcher Umfang sinnvoll ist und ob die Aufgabe zeitlich realistisch umsetzbar ist.
+          Auch Botengänge oder einfache Fahrten von A nach B sind nach Absprache möglich, zum Beispiel für Unterlagen, kleinere Waren, Material oder wichtige Dokumente.
+          Vorab prüfen wir ehrlich, ob der Einsatz zeitlich, organisatorisch und vom Umfang her sinnvoll umsetzbar ist.
         </p>
       </details>
     </div>
@@ -990,8 +984,8 @@ textarea{
 
     <div class="process-card">
       <span>3</span>
-      <h3>Angebot</h3>
-      <p>Vor Beginn erhalten Sie eine klare und unverbindliche Preisübersicht.</p>
+      <h3>Preisübersicht</h3>
+      <p>Sie erhalten vor Beginn eine klare Übersicht auf Grundlage der besprochenen Leistung.</p>
     </div>
 
     <div class="process-card">
@@ -1017,7 +1011,8 @@ textarea{
     </p>
 
     <p>
-      Die Angebotserstellung ist kostenlos. Der genaue Preis richtet sich nach Aufgabe, Aufwand, Umfang und Einsatzort.
+      Vor Beginn erhalten Sie eine klare Preisübersicht auf Grundlage der besprochenen Leistung.
+      Sollte sich der Umfang ändern, sprechen wir dies vorher mit Ihnen ab.
     </p>
   </div>
 </section>
@@ -1031,17 +1026,8 @@ textarea{
       <h3>Unser Einsatzbereich</h3>
 
       <p class="lead">
-        Unser Fokus liegt auf Ahrensburg, Bargteheide, Großhansdorf, Ammersbek, Hamburg und der Umgebung.
+        Unser Fokus liegt auf Ahrensburg, Bargteheide, Großhansdorf, Ammersbek, Hamburg und der näheren Umgebung.
       </p>
-
-      <div class="areas">
-        <span>Ahrensburg</span>
-        <span>Bargteheide</span>
-        <span>Großhansdorf</span>
-        <span>Ammersbek</span>
-        <span>Hamburg</span>
-        <span>Umgebung</span>
-      </div>
 
       <p class="extra-area">
         <strong>Ihr Ort ist nicht dabei?</strong><br>
@@ -1049,9 +1035,7 @@ textarea{
       </p>
     </div>
 
-    <div class="area-visual">
-      <div class="area-fallback">Hamburg · Ahrensburg · Bargteheide · Großhansdorf · Ammersbek</div>
-    </div>
+    <div class="area-visual"></div>
   </div>
 </section>
 
@@ -1067,36 +1051,36 @@ textarea{
       <div class="row">
         <div>
           <label>Firma / Betrieb</label>
-          <input name="Firma" placeholder="Name des Unternehmens">
+          <input name="Firma" maxlength="80" placeholder="Name des Unternehmens">
         </div>
 
         <div>
           <label>Ansprechpartner</label>
-          <input name="Ansprechpartner" placeholder="Ihr Name">
+          <input name="Ansprechpartner" maxlength="80" placeholder="Ihr Name">
         </div>
       </div>
 
       <div class="row">
         <div>
           <label>Telefon</label>
-          <input name="Telefon" placeholder="Telefonnummer">
+          <input name="Telefon" maxlength="40" placeholder="Telefonnummer">
         </div>
 
         <div>
           <label>E-Mail</label>
-          <input name="E-Mail" placeholder="E-Mail-Adresse">
+          <input name="E-Mail" maxlength="90" placeholder="E-Mail-Adresse">
         </div>
       </div>
 
       <div class="row">
         <div>
           <label>PLZ</label>
-          <input name="PLZ" placeholder="z. B. 22926">
+          <input name="PLZ" maxlength="10" placeholder="z. B. 22926">
         </div>
 
         <div>
           <label>Ort</label>
-          <input name="Ort" placeholder="z. B. Ahrensburg">
+          <input name="Ort" maxlength="60" placeholder="z. B. Ahrensburg">
         </div>
       </div>
 
@@ -1106,7 +1090,7 @@ textarea{
         <option>Reinigung & Pflege von Flächen</option>
         <option>Räumung & Ordnung schaffen</option>
         <option>Gartenpflege & Außenbereiche</option>
-        <option>Praktische Unterstützung nach Bedarf</option>
+        <option>Weitere praktische Unterstützung</option>
         <option>Noch unklar / bitte beraten</option>
       </select>
 
@@ -1124,12 +1108,13 @@ textarea{
 
         <div>
           <label>Wunschtermin / Zeitraum</label>
-          <input name="Wunschtermin" placeholder="Optional, z. B. nächste Woche">
+          <input name="Wunschtermin" maxlength="80" placeholder="Optional, z. B. nächste Woche">
         </div>
       </div>
 
       <label>Nachricht</label>
-      <textarea name="Nachricht" placeholder="Beschreiben Sie kurz den Auftrag, die Fläche, den Zustand oder wichtige Hinweise."></textarea>
+      <textarea name="Nachricht" maxlength="900" placeholder="Beschreiben Sie kurz den Auftrag, die Fläche, den Zustand oder wichtige Hinweise."></textarea>
+      <small class="field-hint">Maximal 900 Zeichen</small>
 
       <button class="btn" type="submit">Firmenanfrage senden</button>
     </form>
