@@ -6,114 +6,697 @@
 <title>Privatkunden | AlltagsHilfe Service</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;user-select:none}
-html{scroll-behavior:smooth}
-body{font-family:Arial,sans-serif;background:#fefefd;color:#1f2933;line-height:1.6;cursor:default}
-input,textarea,select{user-select:text}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  user-select:none;
+}
 
-.wrap{max-width:1120px;margin:auto;padding:22px}
-.header{position:sticky;top:0;z-index:50;background:rgba(254,254,253,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(14,78,45,.12)}
-.header-inner{max-width:1120px;margin:auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:12px;color:#0e4e2d;font-weight:800;font-size:21px}
-.brand img{width:48px;height:48px;border-radius:50%;object-fit:cover}
-.nav{display:flex;align-items:center;gap:8px}
-.nav a,.dropbtn{color:#0e4e2d;text-decoration:none;font-weight:800;padding:10px 12px;border-radius:999px;background:transparent;border:0;font-size:14px;cursor:pointer}
-.nav a:hover,.dropdown:hover .dropbtn{background:#eef4ec}
-.dropdown{position:relative}
-.dropdown-content{display:none;position:absolute;top:42px;left:0;background:white;border:1px solid rgba(14,78,45,.14);border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.12);min-width:220px;padding:8px}
-.dropdown-content a{display:block;border-radius:12px;padding:10px 12px}
-.dropdown:hover .dropdown-content{display:block}
-.home-btn{background:#0e4e2d!important;color:white!important}
+html{
+  scroll-behavior:smooth;
+}
 
-.hero{padding:42px 0 30px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
-.hero-img{border-radius:30px;min-height:360px;background:linear-gradient(rgba(14,78,45,.18),rgba(14,78,45,.18)),url("../hintergrundbild.png");background-size:cover;background-position:center;box-shadow:0 18px 40px rgba(14,78,45,.16)}
-.kicker{color:#548031;font-weight:900;margin-bottom:10px;text-transform:uppercase;font-size:13px;letter-spacing:.5px}
-h1,h2,h3{color:#0e4e2d}
-h1{font-size:42px;line-height:1.08;margin-bottom:16px}
-h2{font-size:30px;margin:52px 0 18px}
-.lead{font-size:18px;color:#56645d;max-width:850px;margin-bottom:12px}
-.promise{margin-top:20px;background:#0e4e2d;color:white;border-radius:20px;padding:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.promise div{font-weight:800}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
-.reveal.show{opacity:1;transform:translateY(0)}
+body{
+  font-family:Arial, sans-serif;
+  background:#fefefd;
+  color:#1f2933;
+  line-height:1.6;
+  cursor:default;
+}
 
-.about-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.about-card{background:#f6f3ee;border:1px solid rgba(14,78,45,.14);border-radius:20px;padding:18px}
-.about-card h3{font-size:18px;margin-bottom:8px}
-.about-card p{color:#3d4a43;font-size:15px}
+input, textarea, select{
+  user-select:text;
+  cursor:text;
+}
 
-.service{display:grid;grid-template-columns:42% 58%;background:white;border:1px solid rgba(14,78,45,.14);border-radius:26px;overflow:hidden;margin:24px 0;box-shadow:0 10px 24px rgba(14,78,45,.07);transition:.25s ease}
-.service:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(14,78,45,.12)}
-.service:nth-child(even){grid-template-columns:58% 42%}
-.service:nth-child(even) img{order:2}
-.service img{width:100%;height:100%;min-height:285px;object-fit:cover}
-.service-content{padding:28px}
-.service h3{font-size:25px;margin-bottom:10px}
-.short{color:#3d4a43;font-size:15.5px;margin-bottom:12px}
-details{margin-top:12px;border-top:1px solid rgba(14,78,45,.14);padding-top:12px}
-summary{cursor:pointer;color:#0e4e2d;font-weight:900;list-style:none}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"  ▾"}
-details[open] summary::after{content:"  ▴"}
-.details-text{margin-top:12px;color:#3d4a43;font-size:15.5px}
+a, button, summary{
+  cursor:pointer;
+}
 
-.info-box{background:#f6f3ee;border:1px solid rgba(14,78,45,.14);border-radius:24px;padding:26px;margin-top:20px}
-.info-box p{color:#3d4a43;margin-bottom:12px}
+:target{
+  scroll-margin-top:105px;
+}
 
-.area-section{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:center;background:#f6f3ee;border-radius:28px;padding:26px;border:1px solid rgba(14,78,45,.14)}
-.area-img{min-height:280px;border-radius:22px;background:url("../einsatzgebiet.png");background-size:cover;background-position:center;box-shadow:0 12px 28px rgba(14,78,45,.12)}
-.areas{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-.areas span{background:white;border:1px solid rgba(14,78,45,.13);border-radius:999px;padding:10px 14px;font-weight:800;color:#0e4e2d}
+.header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(254,254,253,.93);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(14,78,45,.12);
+  transition:.25s ease;
+}
 
-.contact{background:#f6f3ee;border:1px solid rgba(14,78,45,.14);border-radius:28px;padding:28px;margin-top:52px}
-.contact-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;margin-top:18px}
-form{background:white;border-radius:20px;padding:22px;border:1px solid rgba(14,78,45,.12)}
-label{display:block;color:#0e4e2d;font-weight:800;font-size:14px;margin-bottom:6px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #d8ded8;border-radius:12px;margin-bottom:13px;font-family:inherit;font-size:15px}
-textarea{min-height:130px;resize:vertical}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.btn{border:0;background:#0e4e2d;color:white;border-radius:999px;padding:13px 18px;font-weight:900;cursor:pointer;width:100%}
-.side-contact{display:grid;gap:14px}
-.contact-card{background:white;border:1px solid rgba(14,78,45,.13);border-radius:18px;padding:18px;text-decoration:none;color:#1f2933;transition:.25s ease}
-.contact-card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(14,78,45,.1)}
-.contact-card strong{display:block;color:#0e4e2d;margin-bottom:5px}
-.contact-card span{color:#56645d;font-size:15px}
-.qr-box{background:white;border-radius:18px;padding:18px;border:1px solid rgba(14,78,45,.12);text-align:center}
-.qr-box img{width:130px;height:130px;object-fit:cover;border-radius:14px;margin-bottom:10px}
+.header.scrolled{
+  background:rgba(254,254,253,.82);
+  box-shadow:0 8px 24px rgba(14,78,45,.08);
+}
 
-.footer{margin-top:56px;background:#0e4e2d;color:white;border-radius:28px 28px 0 0;padding:28px}
-.footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:20px}
-.footer h3{color:white;font-size:17px}
-.footer p{color:#e7efe8;font-size:14px}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.18);padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px}
-.footer a{color:white;text-decoration:none;margin-left:14px}
+.header-inner{
+  max-width:1180px;
+  margin:auto;
+  padding:12px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
 
-@media(max-width:900px){
-.header-inner,.nav{display:block}
-.nav{margin-top:12px}
-.dropdown-content{position:static;box-shadow:none;margin:4px 0}
-.hero,.about-grid,.area-section,.contact-layout,.footer-grid,.row{grid-template-columns:1fr}
-.service,.service:nth-child(even){grid-template-columns:1fr}
-.service:nth-child(even) img{order:0}
-.service img{min-height:220px}
-.promise{grid-template-columns:1fr}
-h1{font-size:32px}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  color:#0e4e2d;
+  font-weight:900;
+  font-size:23px;
+  text-decoration:none;
+}
+
+.brand img{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  object-fit:cover;
+  box-shadow:0 6px 18px rgba(14,78,45,.18);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.nav a,
+.dropbtn{
+  color:#0e4e2d;
+  text-decoration:none;
+  font-weight:800;
+  padding:10px 13px;
+  border-radius:999px;
+  background:transparent;
+  border:0;
+  font-size:14px;
+  transition:.2s ease;
+}
+
+.nav a:hover,
+.dropdown:hover .dropbtn{
+  background:#eef4ec;
+}
+
+.home-btn{
+  background:#0e4e2d!important;
+  color:#fefefd!important;
+}
+
+.home-btn:hover{
+  background:#08391f!important;
+}
+
+.dropdown{
+  position:relative;
+}
+
+.dropdown-content{
+  display:none;
+  position:absolute;
+  top:42px;
+  left:0;
+  background:#fefefd;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  min-width:240px;
+  padding:8px;
+}
+
+.dropdown-content a{
+  display:block;
+  border-radius:12px;
+  padding:10px 12px;
+  white-space:nowrap;
+}
+
+.dropdown:hover .dropdown-content{
+  display:block;
+}
+
+.wrap{
+  max-width:1120px;
+  margin:auto;
+  padding:26px 24px 0;
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.kicker{
+  color:#548031;
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:13px;
+  letter-spacing:.6px;
+  margin-bottom:10px;
+}
+
+h1,h2,h3{
+  color:#0e4e2d;
+}
+
+h1{
+  font-size:43px;
+  line-height:1.08;
+  margin-bottom:18px;
+}
+
+h2{
+  font-size:31px;
+  margin:56px 0 20px;
+}
+
+h3{
+  font-size:22px;
+}
+
+.lead{
+  font-size:18px;
+  color:#56645d;
+  max-width:850px;
+  margin-bottom:13px;
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:36px;
+  align-items:center;
+  padding:38px 0 34px;
+}
+
+.hero-img{
+  min-height:360px;
+  border-radius:32px;
+  background:
+    linear-gradient(rgba(14,78,45,.10), rgba(14,78,45,.10)),
+    url("../hintergrundbild.png");
+  background-size:cover;
+  background-position:center;
+  box-shadow:0 18px 42px rgba(14,78,45,.16);
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:22px;
+}
+
+.hero-actions a{
+  text-decoration:none;
+  font-weight:900;
+  border-radius:999px;
+  padding:13px 18px;
+  transition:.25s ease;
+}
+
+.primary-link{
+  background:#0e4e2d;
+  color:white;
+}
+
+.secondary-link{
+  background:#f6f3ee;
+  color:#0e4e2d;
+  border:1px solid rgba(14,78,45,.16);
+}
+
+.hero-actions a:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 24px rgba(14,78,45,.12);
+}
+
+.about-layout{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:24px;
+  align-items:start;
+}
+
+.about-intro{
+  background:#f6f3ee;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:26px;
+  padding:26px;
+}
+
+.about-intro p{
+  color:#3d4a43;
+  margin-bottom:12px;
+}
+
+.about-cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.about-card{
+  background:white;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:22px;
+  padding:20px;
+  box-shadow:0 8px 20px rgba(14,78,45,.06);
+  transition:.25s ease;
+}
+
+.about-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 28px rgba(14,78,45,.10);
+}
+
+.about-card h3{
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.about-card p{
+  color:#3d4a43;
+  font-size:15px;
+}
+
+.service{
+  display:grid;
+  grid-template-columns:36% 64%;
+  background:white;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:24px;
+  overflow:hidden;
+  margin:22px 0;
+  box-shadow:0 8px 22px rgba(14,78,45,.07);
+  transition:.25s ease;
+}
+
+.service:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 34px rgba(14,78,45,.12);
+}
+
+.service:nth-child(even){
+  grid-template-columns:64% 36%;
+}
+
+.service:nth-child(even) img{
+  order:2;
+}
+
+.service img{
+  width:100%;
+  height:100%;
+  min-height:230px;
+  max-height:270px;
+  object-fit:cover;
+}
+
+.service-content{
+  padding:24px 26px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.service h3{
+  font-size:24px;
+  margin-bottom:8px;
+}
+
+.short{
+  color:#3d4a43;
+  font-size:15.5px;
+  margin-bottom:10px;
+}
+
+details{
+  margin-top:12px;
+  border-top:1px solid rgba(14,78,45,.14);
+  padding-top:12px;
+}
+
+summary{
+  color:#0e4e2d;
+  font-weight:900;
+  list-style:none;
+  width:fit-content;
+  padding:8px 0;
+}
+
+summary::-webkit-details-marker{
+  display:none;
+}
+
+summary::after{
+  content:"  anzeigen";
+  font-size:14px;
+  color:#548031;
+}
+
+details[open] summary::after{
+  content:"  schließen";
+}
+
+.details-text{
+  margin-top:12px;
+  color:#3d4a43;
+  font-size:15.5px;
+  max-width:720px;
+}
+
+.info-box{
+  background:#f6f3ee;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:26px;
+  padding:26px;
+  margin-top:20px;
+}
+
+.info-box p{
+  color:#3d4a43;
+  margin-bottom:12px;
+}
+
+.area-section{
+  display:grid;
+  grid-template-columns:.95fr 1.05fr;
+  gap:26px;
+  align-items:center;
+  background:#f6f3ee;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:28px;
+  padding:26px;
+}
+
+.area-img{
+  min-height:310px;
+  border-radius:24px;
+  background:
+    linear-gradient(rgba(14,78,45,.06), rgba(14,78,45,.06)),
+    url("../einsatzgebiet.png");
+  background-size:cover;
+  background-position:center;
+  box-shadow:0 12px 28px rgba(14,78,45,.12);
+}
+
+.areas{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.areas span{
+  background:white;
+  border:1px solid rgba(14,78,45,.13);
+  border-radius:999px;
+  padding:10px 14px;
+  font-weight:900;
+  color:#0e4e2d;
+}
+
+.extra-area{
+  margin-top:18px;
+  color:#3d4a43;
+}
+
+.extra-area strong{
+  color:#0e4e2d;
+}
+
+.contact{
+  background:#f6f3ee;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:28px;
+  padding:28px;
+  margin-top:56px;
+}
+
+.contact-layout{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:24px;
+  margin-top:18px;
+}
+
+form{
+  background:white;
+  border:1px solid rgba(14,78,45,.12);
+  border-radius:22px;
+  padding:22px;
+}
+
+label{
+  display:block;
+  color:#0e4e2d;
+  font-weight:900;
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #d8ded8;
+  border-radius:12px;
+  margin-bottom:13px;
+  font-family:inherit;
+  font-size:15px;
+}
+
+textarea{
+  min-height:135px;
+  resize:vertical;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.btn{
+  border:0;
+  background:#0e4e2d;
+  color:white;
+  border-radius:999px;
+  padding:14px 18px;
+  font-weight:900;
+  cursor:pointer;
+  width:100%;
+  transition:.25s ease;
+}
+
+.btn:hover{
+  background:#08391f;
+  transform:translateY(-2px);
+}
+
+.side-contact{
+  display:grid;
+  gap:14px;
+}
+
+.contact-card{
+  background:white;
+  border:1px solid rgba(14,78,45,.13);
+  border-radius:18px;
+  padding:18px;
+  text-decoration:none;
+  color:#1f2933;
+  transition:.25s ease;
+}
+
+.contact-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 24px rgba(14,78,45,.10);
+}
+
+.contact-card strong{
+  display:block;
+  color:#0e4e2d;
+  margin-bottom:5px;
+}
+
+.contact-card span{
+  color:#56645d;
+  font-size:15px;
+}
+
+.qr-box{
+  background:white;
+  border:1px solid rgba(14,78,45,.12);
+  border-radius:18px;
+  padding:18px;
+  text-align:center;
+}
+
+.qr-box img{
+  width:132px;
+  height:132px;
+  object-fit:cover;
+  border-radius:14px;
+  margin-bottom:10px;
+}
+
+.footer{
+  margin-top:60px;
+  background:#0e4e2d;
+  color:white;
+  border-radius:30px 30px 0 0;
+  padding:30px 30px 18px;
+}
+
+.footer-main{
+  display:grid;
+  grid-template-columns:1.1fr .9fr .9fr .9fr;
+  gap:24px;
+  margin-bottom:24px;
+}
+
+.footer h3{
+  color:white;
+  font-size:17px;
+  margin-bottom:8px;
+}
+
+.footer p,
+.footer li{
+  color:#e7efe8;
+  font-size:14px;
+}
+
+.footer ul{
+  list-style:none;
+}
+
+.footer a{
+  color:#fefefd;
+  text-decoration:none;
+}
+
+.footer a:hover{
+  text-decoration:underline;
+}
+
+.top-link{
+  display:inline-block;
+  border:1px solid rgba(255,255,255,.35);
+  padding:10px 14px;
+  border-radius:999px;
+  font-weight:900;
+  margin-top:8px;
+}
+
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.18);
+  padding-top:16px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  font-size:13px;
+  color:#e7efe8;
+}
+
+.footer-bottom a{
+  margin-left:14px;
+}
+
+@media(max-width:950px){
+  .header-inner{
+    display:block;
+  }
+
+  .nav{
+    margin-top:14px;
+    display:flex;
+    flex-wrap:wrap;
+  }
+
+  .dropdown-content{
+    position:static;
+    box-shadow:none;
+    margin-top:6px;
+  }
+
+  .hero,
+  .about-layout,
+  .area-section,
+  .contact-layout,
+  .footer-main,
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  .about-cards{
+    grid-template-columns:1fr;
+  }
+
+  .service,
+  .service:nth-child(even){
+    grid-template-columns:1fr;
+  }
+
+  .service:nth-child(even) img{
+    order:0;
+  }
+
+  .service img{
+    min-height:220px;
+    max-height:none;
+  }
+
+  h1{
+    font-size:33px;
+  }
+
+  h2{
+    font-size:27px;
+  }
+
+  .brand img{
+    width:58px;
+    height:58px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header class="header">
+<header class="header" id="oben">
   <div class="header-inner">
-    <div class="brand">
+    <a class="brand" href="../">
       <img src="../Logo.png" alt="AlltagsHilfe Service Logo">
       <span>AlltagsHilfe Service</span>
-    </div>
+    </a>
 
     <nav class="nav">
-      <a href="../" class="home-btn">Startseite</a>
-      <a href="#ueber-uns">Über uns</a>
+      <a href="../" class="home-btn">Zur Startseite</a>
+
+      <div class="dropdown">
+        <button class="dropbtn">Über uns ▾</button>
+        <div class="dropdown-content">
+          <a href="#ueber-uns">Warum AlltagsHilfe?</a>
+          <a href="#fuer-wen">Für wen wir da sind</a>
+        </div>
+      </div>
 
       <div class="dropdown">
         <button class="dropbtn">Leistungen ▾</button>
@@ -149,106 +732,155 @@ h1{font-size:32px}
   <div>
     <div class="kicker">Privatkunden</div>
     <h1>Hilfe rund um Haus, Garten und Alltag</h1>
-    <p class="lead">Im Alltag bleiben viele Aufgaben liegen, weil Zeit, Kraft oder die passende Unterstützung fehlen. Genau hier möchten wir entlasten.</p>
-    <p class="lead">Wir helfen bei kleinen und großen Aufgaben – zuverlässig, persönlich und mit klarer Absprache vor Beginn.</p>
 
-    <div class="promise">
-      <div>✓ Persönlich</div>
-      <div>✓ Transparent</div>
-      <div>✓ Kurzfristig möglich</div>
+    <p class="lead">
+      Im Alltag bleiben viele Aufgaben liegen, weil Zeit, Kraft oder die passende Unterstützung fehlen.
+      Genau hier möchten wir entlasten.
+    </p>
+
+    <p class="lead">
+      Wir unterstützen bei kleinen und großen Aufgaben – persönlich, zuverlässig und mit klarer Absprache vor Beginn.
+    </p>
+
+    <div class="hero-actions">
+      <a class="primary-link" href="#kontakt">Anfrage stellen</a>
+      <a class="secondary-link" href="#leistungen">Leistungen ansehen</a>
     </div>
   </div>
+
   <div class="hero-img"></div>
 </section>
 
-<section class="reveal">
+<section class="reveal" id="fuer-wen">
   <h2>Warum AlltagsHilfe?</h2>
 
-  <div class="about-grid">
-    <div class="about-card">
-      <h3>Für Senioren</h3>
-      <p>Viele Menschen möchten möglichst lange selbstständig zuhause leben. Wir unterstützen bei Aufgaben, die im Alltag schwerer fallen.</p>
+  <div class="about-layout">
+    <div class="about-intro">
+      <p>
+        Unser Alltag ist oft voller Aufgaben, die erledigt werden müssen – im Haushalt, im Garten, im Keller, bei einem Umzug oder rund um das eigene Zuhause.
+      </p>
+      <p>
+        Für manche fehlt die Zeit. Für andere fehlt die Kraft. Und manchmal braucht man einfach jemanden, der zuverlässig mit anpackt.
+      </p>
+      <p>
+        AlltagsHilfe Service soll genau diese Lücke schließen: unkompliziert, persönlich und mit einem offenen Ohr für Ihre Situation.
+      </p>
     </div>
-    <div class="about-card">
-      <h3>Für Familien</h3>
-      <p>Wenn Alltag, Kinder, Arbeit und Haushalt zusammenkommen, bleibt vieles liegen. Wir übernehmen praktische Aufgaben und schaffen Entlastung.</p>
-    </div>
-    <div class="about-card">
-      <h3>Für Berufstätige</h3>
-      <p>Wer wenig Zeit hat, muss nicht jede Aufgabe selbst erledigen. Wir helfen, damit mehr Zeit für Familie, Freizeit und Erholung bleibt.</p>
-    </div>
-    <div class="about-card">
-      <h3>Für Angehörige</h3>
-      <p>Nicht jeder kann immer vor Ort sein. Wir unterstützen zuverlässig dort, wo Angehörige Hilfe organisieren möchten.</p>
+
+    <div class="about-cards">
+      <div class="about-card">
+        <h3>Für Senioren</h3>
+        <p>Wir unterstützen Menschen, die möglichst lange selbstständig zuhause leben möchten und bei bestimmten Aufgaben Entlastung brauchen.</p>
+      </div>
+
+      <div class="about-card">
+        <h3>Für Familien</h3>
+        <p>Wenn Arbeit, Kinder und Alltag zusammenkommen, bleibt oft wenig Zeit. Wir übernehmen Aufgaben, damit mehr Raum für Familie bleibt.</p>
+      </div>
+
+      <div class="about-card">
+        <h3>Für Berufstätige</h3>
+        <p>Wer viel arbeitet, muss nicht jede Aufgabe selbst erledigen. Wir helfen dort, wo Dinge immer wieder aufgeschoben werden.</p>
+      </div>
+
+      <div class="about-card">
+        <h3>Für Angehörige</h3>
+        <p>Nicht jeder kann immer vor Ort sein. Wir helfen Angehörigen dabei, praktische Unterstützung zuverlässig zu organisieren.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="leistungen">
   <h2 class="reveal">Unsere Leistungen</h2>
 
   <article class="service reveal" id="reinigung">
-    <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1000&q=80" alt="Reinigung">
+    <img src="../bilder/reinigung.jpg" alt="Reinigung">
     <div class="service-content">
-      <h3>🧹 Reinigung</h3>
+      <h3>Reinigung</h3>
       <p class="short">Einmalige oder regelmäßige Reinigungsarbeiten nach Absprache.</p>
-      <details><summary>Leistungsumfang ansehen</summary>
-        <p class="details-text">Wir übernehmen Reinigungsarbeiten für Treppenhäuser, Eingangsbereiche, Gemeinschaftsflächen oder private Bereiche. Vor Beginn klären wir gemeinsam, welche Flächen gereinigt werden sollen, ob Reinigungsmaterial vorhanden ist und in welchem Umfang die Reinigung gewünscht wird.</p>
+      <details>
+        <summary>Leistungsumfang</summary>
+        <p class="details-text">
+          Wir übernehmen Reinigungsarbeiten für Treppenhäuser, Eingangsbereiche, Gemeinschaftsflächen oder private Bereiche.
+          Vor Beginn klären wir gemeinsam, welche Flächen gereinigt werden sollen, ob Reinigungsmaterial vorhanden ist und in welchem Umfang die Reinigung gewünscht wird.
+        </p>
       </details>
     </div>
   </article>
 
   <article class="service reveal" id="gartenpflege">
-    <img src="https://images.unsplash.com/photo-1599685315640-33d681d4bf60?auto=format&fit=crop&w=1000&q=80" alt="Gartenpflege">
+    <img src="../bilder/gartenpflege.jpg" alt="Gartenpflege">
     <div class="service-content">
-      <h3>🌿 Gartenpflege</h3>
+      <h3>Gartenpflege</h3>
       <p class="short">Gartenflächen wieder ordentlich und gepflegt aussehen lassen.</p>
-      <details><summary>Leistungsumfang ansehen</summary>
-        <p class="details-text">Wir unterstützen bei Rasenpflege, Unkrautentfernung, Heckenschnitt und weiteren Arbeiten rund um Garten und Außenbereich. Ob einmalige Hilfe oder regelmäßige Unterstützung – wir besprechen den Umfang vorab und finden eine passende Lösung.</p>
+      <details>
+        <summary>Leistungsumfang</summary>
+        <p class="details-text">
+          Wir unterstützen bei Rasenpflege, Unkrautentfernung, Heckenschnitt und weiteren Arbeiten rund um Garten und Außenbereich.
+          Ob einmalige Hilfe oder regelmäßige Unterstützung – wir besprechen den Umfang vorab und finden eine passende Lösung.
+        </p>
       </details>
     </div>
   </article>
 
   <article class="service reveal" id="entruempelung">
-    <img src="https://images.unsplash.com/photo-1600488999585-e4364713b90a?auto=format&fit=crop&w=1000&q=80" alt="Entrümpelung">
+    <img src="../bilder/entruempelung.jpg" alt="Entrümpelung">
     <div class="service-content">
-      <h3>📦 Entrümpelung</h3>
+      <h3>Entrümpelung</h3>
       <p class="short">Wir helfen dabei, wieder Platz und Ordnung zu schaffen.</p>
-      <details><summary>Leistungsumfang ansehen</summary>
-        <p class="details-text">Ob Keller, Garage, Dachboden oder einzelne Räume – wir unterstützen beim Sortieren, Tragen, Räumen und Vorbereiten für Entsorgung oder Übergabe. Fotos per WhatsApp helfen uns, den Aufwand schnell und realistisch einzuschätzen.</p>
+      <details>
+        <summary>Leistungsumfang</summary>
+        <p class="details-text">
+          Ob Keller, Garage, Dachboden oder einzelne Räume – wir unterstützen beim Sortieren, Tragen, Räumen und Vorbereiten für Entsorgung oder Übergabe.
+          Fotos per WhatsApp helfen uns, den Aufwand schnell und realistisch einzuschätzen.
+        </p>
       </details>
     </div>
   </article>
 
   <article class="service reveal" id="haushaltsaufloesung">
-    <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1000&q=80" alt="Haushaltsauflösung">
+    <img src="../bilder/haushaltsaufloesung.jpg" alt="Haushaltsauflösung">
     <div class="service-content">
-      <h3>🏠 Haushaltsauflösung</h3>
+      <h3>Haushaltsauflösung</h3>
       <p class="short">Unterstützung bei Wohnungs- und Haushaltsauflösungen.</p>
-      <details><summary>Leistungsumfang ansehen</summary>
-        <p class="details-text">Bei Haushaltsauflösungen ist eine gute Planung besonders wichtig. Wir besprechen, welche Bereiche geräumt werden sollen, was erhalten bleibt und wie die Übergabe vorbereitet werden kann. Bei Bedarf ist eine kurze Besichtigung möglich.</p>
+      <details>
+        <summary>Leistungsumfang</summary>
+        <p class="details-text">
+          Bei Haushaltsauflösungen ist eine gute Planung besonders wichtig.
+          Wir besprechen, welche Bereiche geräumt werden sollen, was erhalten bleibt und wie die Übergabe vorbereitet werden kann.
+          Bei Bedarf ist eine kurze Besichtigung möglich.
+        </p>
       </details>
     </div>
   </article>
 
   <article class="service reveal" id="transporte">
-    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1000&q=80" alt="Transporte">
+    <img src="../bilder/transporte.jpg" alt="Transporte">
     <div class="service-content">
-      <h3>🚚 Transporte</h3>
+      <h3>Transporte</h3>
       <p class="short">Kleintransporte, Abholungen und Unterstützung beim Tragen.</p>
-      <details><summary>Leistungsumfang ansehen</summary>
-        <p class="details-text">Wir unterstützen bei kleineren Transporten, Abholungen sowie beim Be- und Entladen. Vorab klären wir Strecke, Tragewege, Aufwand und gewünschten Zeitraum, damit der Einsatz gut geplant werden kann.</p>
+      <details>
+        <summary>Leistungsumfang</summary>
+        <p class="details-text">
+          Wir unterstützen bei kleineren Transporten, Abholungen sowie beim Be- und Entladen.
+          Vorab klären wir Strecke, Tragewege, Aufwand und gewünschten Zeitraum, damit der Einsatz gut geplant werden kann.
+        </p>
       </details>
     </div>
   </article>
 
   <article class="service reveal" id="weitere">
-    <img src="https://images.unsplash.com/photo-1604762524889-3e2fcc145683?auto=format&fit=crop&w=1000&q=80" alt="Weitere Arbeiten">
+    <img src="../bilder/weitere-unterstuetzung.jpg" alt="Weitere Unterstützung">
     <div class="service-content">
-      <h3>🔧 Weitere Unterstützung</h3>
+      <h3>Weitere Unterstützung</h3>
       <p class="short">Praktische Hilfe bei kleineren Aufgaben rund um Haus und Alltag.</p>
-      <details><summary>Leistungsumfang ansehen</summary>
-        <p class="details-text">Auch bei Möbelmontage, Keller und Garage, kleinen Hilfsarbeiten oder anderen praktischen Aufgaben können Sie uns anfragen. Oft reicht eine kurze Beschreibung oder ein Foto, damit wir einschätzen können, ob und wie wir helfen können.</p>
+      <details>
+        <summary>Leistungsumfang</summary>
+        <p class="details-text">
+          Auch bei Möbelmontage, Keller und Garage, kleinen Hilfsarbeiten oder anderen praktischen Aufgaben können Sie uns anfragen.
+          Oft reicht eine kurze Beschreibung oder ein Foto, damit wir einschätzen können, ob und wie wir helfen können.
+        </p>
       </details>
     </div>
   </article>
@@ -256,20 +888,35 @@ h1{font-size:32px}
 
 <section class="reveal" id="preise">
   <h2>Transparente Preise</h2>
+
   <div class="info-box">
-    <p>Jeder Auftrag ist individuell. Deshalb erstellen wir Ihnen vor Beginn eine klare und unverbindliche Preisübersicht. Die Angebotserstellung ist kostenlos.</p>
-    <p>Bei Bedarf ist auch eine kurze Besichtigung möglich, damit wir den Aufwand besser einschätzen und Ihnen direkt einen passenden Preis vorschlagen können.</p>
-    <p>Kurzfristige Termine sind nach Verfügbarkeit oft innerhalb der nächsten Tage bis zu einer Woche möglich.</p>
+    <p>
+      Jeder Auftrag ist individuell. Deshalb erstellen wir Ihnen vor Beginn eine klare und unverbindliche Preisübersicht.
+      Die Angebotserstellung ist kostenlos.
+    </p>
+
+    <p>
+      Bei Bedarf ist auch eine kurze Besichtigung möglich, damit wir den Aufwand besser einschätzen und Ihnen direkt einen passenden Preis vorschlagen können.
+    </p>
+
+    <p>
+      Kurzfristige Termine sind nach Verfügbarkeit oft innerhalb der nächsten Tage bis zu einer Woche möglich.
+    </p>
   </div>
 </section>
 
 <section class="reveal" id="einsatzgebiet">
   <h2>Einsatzgebiet</h2>
+
   <div class="area-section">
     <div>
       <div class="kicker">Regional für Sie unterwegs</div>
       <h3>Wir sind in Ihrer Nähe</h3>
-      <p class="lead">Unser Fokus liegt auf Ahrensburg, Bargteheide, Großhansdorf, Ammersbek, Hamburg und der Umgebung.</p>
+
+      <p class="lead">
+        Unser Fokus liegt auf Ahrensburg, Bargteheide, Großhansdorf, Ammersbek, Hamburg und der Umgebung.
+      </p>
+
       <div class="areas">
         <span>Ahrensburg</span>
         <span>Bargteheide</span>
@@ -278,32 +925,55 @@ h1{font-size:32px}
         <span>Hamburg</span>
         <span>Umgebung</span>
       </div>
+
+      <p class="extra-area">
+        <strong>Ihr Ort ist nicht dabei?</strong><br>
+        Schreiben Sie uns gerne. Wir prüfen, ob ein Einsatz auch bei Ihnen möglich ist.
+      </p>
     </div>
+
     <div class="area-img"></div>
   </div>
 </section>
 
 <section class="contact reveal" id="kontakt">
   <h2>Kontakt & Anfrage</h2>
-  <p class="lead">Beschreiben Sie kurz Ihr Anliegen. Wir melden uns schnellstmöglich zurück.</p>
+
+  <p class="lead">
+    Beschreiben Sie kurz Ihr Anliegen. Wir melden uns schnellstmöglich zurück.
+  </p>
 
   <div class="contact-layout">
-    <form>
+    <form action="mailto:info@service-alltagshilfe.de" method="post" enctype="text/plain">
       <div class="row">
-        <div><label>Vor- und Nachname</label><input placeholder="Ihr Name"></div>
-        <div><label>Telefon</label><input placeholder="Telefonnummer"></div>
+        <div>
+          <label>Vor- und Nachname</label>
+          <input name="Name" placeholder="Ihr Name">
+        </div>
+
+        <div>
+          <label>Telefon</label>
+          <input name="Telefon" placeholder="Telefonnummer">
+        </div>
       </div>
 
       <label>E-Mail</label>
-      <input placeholder="E-Mail-Adresse">
+      <input name="E-Mail" placeholder="E-Mail-Adresse">
 
       <div class="row">
-        <div><label>PLZ</label><input placeholder="z. B. 22926"></div>
-        <div><label>Ort</label><input placeholder="z. B. Ahrensburg"></div>
+        <div>
+          <label>PLZ</label>
+          <input name="PLZ" placeholder="z. B. 22926">
+        </div>
+
+        <div>
+          <label>Ort</label>
+          <input name="Ort" placeholder="z. B. Ahrensburg">
+        </div>
       </div>
 
       <label>Gewünschte Leistung</label>
-      <select>
+      <select name="Leistung">
         <option>Bitte auswählen</option>
         <option>Reinigung</option>
         <option>Gartenpflege</option>
@@ -314,18 +984,29 @@ h1{font-size:32px}
       </select>
 
       <label>Wunschtermin / Zeitraum</label>
-      <input placeholder="Optional, z. B. nächste Woche">
+      <input name="Wunschtermin" placeholder="Optional, z. B. nächste Woche">
 
       <label>Nachricht</label>
-      <textarea placeholder="Beschreiben Sie kurz den Auftrag und wichtige Hinweise."></textarea>
+      <textarea name="Nachricht" placeholder="Beschreiben Sie kurz den Auftrag und wichtige Hinweise."></textarea>
 
-      <button class="btn" type="button">Anfrage senden</button>
+      <button class="btn" type="submit">Anfrage senden</button>
     </form>
 
     <div class="side-contact">
-      <a class="contact-card" href="tel:+4915229546946"><strong>Telefon</strong><span>+49 1522 9546946</span></a>
-      <a class="contact-card" href="mailto:info@service-alltagshilfe.de?subject=Anfrage%20AlltagsHilfe%20Service"><strong>E-Mail</strong><span>info@service-alltagshilfe.de</span></a>
-      <a class="contact-card" href="https://wa.me/4915229546946" target="_blank"><strong>WhatsApp</strong><span>Nachricht schreiben</span></a>
+      <a class="contact-card" href="tel:+4915229546946">
+        <strong>Telefon</strong>
+        <span>+49 1522 9546946</span>
+      </a>
+
+      <a class="contact-card" href="mailto:info@service-alltagshilfe.de?subject=Anfrage%20AlltagsHilfe%20Service">
+        <strong>E-Mail</strong>
+        <span>info@service-alltagshilfe.de</span>
+      </a>
+
+      <a class="contact-card" href="https://wa.me/4915229546946" target="_blank">
+        <strong>WhatsApp</strong>
+        <span>Nachricht schreiben</span>
+      </a>
 
       <div class="qr-box">
         <img src="../whatsapp-qr.jpg" alt="WhatsApp QR-Code">
@@ -337,23 +1018,42 @@ h1{font-size:32px}
 </section>
 
 <footer class="footer">
-  <div class="footer-grid">
+  <div class="footer-main">
     <div>
-      <h3>Zuverlässig & fair</h3>
-      <p>Klare Absprachen und kostenlose Angebotserstellung.</p>
+      <h3>AlltagsHilfe Service</h3>
+      <p>Zuverlässige Unterstützung rund um Haus, Garten und Alltag.</p>
+      <a class="top-link" href="#oben">Nach oben</a>
     </div>
+
     <div>
-      <h3>Persönlich & nah</h3>
-      <p>Wir nehmen uns Zeit für Ihr Anliegen.</p>
+      <h3>Schnelllinks</h3>
+      <ul>
+        <li><a href="../">Startseite</a></li>
+        <li><a href="#ueber-uns">Über uns</a></li>
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
     </div>
+
     <div>
-      <h3>Praktisch & unkompliziert</h3>
-      <p>Unterstützung dort, wo Hilfe gebraucht wird.</p>
+      <h3>Informationen</h3>
+      <ul>
+        <li><a href="#preise">Preise</a></li>
+        <li><a href="#einsatzgebiet">Einsatzgebiet</a></li>
+        <li><a href="../firmen/">Firmenkunden</a></li>
+        <li><a href="../impressum/">Impressum</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Unser Anspruch</h3>
+      <p>Persönlich, zuverlässig und unkompliziert – mit klarer Absprache vor Beginn.</p>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <span>© 2026 AlltagsHilfe Service · Privatkunden</span>
+    <span>© 2026 AlltagsHilfe Service</span>
+    <span>Webseite erstellt von AlltagsHilfe Service · Bilder teilweise KI-generiert</span>
     <span>
       <a href="../datenschutz/">Datenschutz</a>
       <a href="../impressum/">Impressum</a>
@@ -364,14 +1064,29 @@ h1{font-size:32px}
 </div>
 
 <script>
-const revealItems=document.querySelectorAll('.reveal');
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){entry.target.classList.add('show')}
-    else{entry.target.classList.remove('show')}
+const header = document.querySelector('.header');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+const revealItems = document.querySelectorAll('.reveal');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    } else {
+      entry.target.classList.remove('show');
+    }
   });
-},{threshold:.12});
-revealItems.forEach(item=>observer.observe(item));
+}, { threshold: 0.12 });
+
+revealItems.forEach(item => observer.observe(item));
 </script>
 
 </body>
