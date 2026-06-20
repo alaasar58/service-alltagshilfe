@@ -35,14 +35,15 @@ a,button,summary{
 }
 
 :target{
-  scroll-margin-top:110px;
+  scroll-margin-top:112px;
 }
 
+/* Header */
 .header{
   position:sticky;
   top:0;
   z-index:100;
-  background:rgba(254,254,253,.93);
+  background:rgba(254,254,253,.94);
   backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(14,78,45,.12);
   transition:.25s ease;
@@ -71,6 +72,7 @@ a,button,summary{
   font-weight:900;
   font-size:23px;
   text-decoration:none;
+  white-space:nowrap;
 }
 
 .brand img{
@@ -85,18 +87,25 @@ a,button,summary{
   display:flex;
   align-items:center;
   gap:8px;
+  flex-wrap:wrap;
 }
 
 .nav a,
 .dropbtn{
+  height:42px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
   color:#0e4e2d;
   text-decoration:none;
   font-weight:800;
-  padding:10px 13px;
+  padding:0 14px;
   border-radius:999px;
   background:transparent;
   border:0;
   font-size:14px;
+  line-height:1;
+  font-family:inherit;
   transition:.2s ease;
 }
 
@@ -121,7 +130,7 @@ a,button,summary{
 .dropdown-content{
   display:none;
   position:absolute;
-  top:42px;
+  top:48px;
   left:0;
   background:#fefefd;
   border:1px solid rgba(14,78,45,.14);
@@ -132,9 +141,11 @@ a,button,summary{
 }
 
 .dropdown-content a{
-  display:block;
+  display:flex;
+  justify-content:flex-start;
+  width:100%;
   border-radius:12px;
-  padding:10px 12px;
+  padding:0 12px;
   white-space:nowrap;
 }
 
@@ -142,6 +153,7 @@ a,button,summary{
   display:block;
 }
 
+/* Layout */
 .wrap{
   max-width:1120px;
   margin:auto;
@@ -194,6 +206,7 @@ h3{
   margin-bottom:13px;
 }
 
+/* Hero */
 .hero{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -206,51 +219,13 @@ h3{
   min-height:360px;
   border-radius:32px;
   background:
-    radial-gradient(circle at 22% 24%, rgba(84,128,49,.24), transparent 32%),
-    radial-gradient(circle at 78% 68%, rgba(14,78,45,.20), transparent 34%),
-    linear-gradient(135deg, #f6f3ee 0%, #eef4ec 52%, #dfe9dc 100%);
+    linear-gradient(rgba(14,78,45,.08), rgba(14,78,45,.08)),
+    url("../hintergrundbild.png"),
+    linear-gradient(135deg,#f6f3ee 0%,#eef4ec 55%,#dfe9dc 100%);
+  background-size:cover;
+  background-position:center;
   box-shadow:0 18px 42px rgba(14,78,45,.16);
-  position:relative;
-  overflow:hidden;
   border:1px solid rgba(14,78,45,.12);
-}
-
-.visual-card{
-  position:absolute;
-  background:rgba(254,254,253,.88);
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:22px;
-  padding:18px;
-  box-shadow:0 12px 28px rgba(14,78,45,.12);
-}
-
-.visual-card.one{
-  top:34px;
-  left:34px;
-  width:230px;
-}
-
-.visual-card.two{
-  right:30px;
-  bottom:34px;
-  width:250px;
-}
-
-.visual-card.three{
-  left:60px;
-  bottom:52px;
-  width:190px;
-}
-
-.visual-card strong{
-  display:block;
-  color:#0e4e2d;
-  margin-bottom:5px;
-}
-
-.visual-card span{
-  color:#56645d;
-  font-size:14px;
 }
 
 .hero-actions{
@@ -284,6 +259,7 @@ h3{
   box-shadow:0 10px 24px rgba(14,78,45,.12);
 }
 
+/* Intro */
 .intro-box{
   background:#f6f3ee;
   border:1px solid rgba(14,78,45,.14);
@@ -297,38 +273,63 @@ h3{
   margin-bottom:12px;
 }
 
-.service-grid{
+/* Services */
+.service{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-
-.service-card{
+  grid-template-columns:36% 64%;
   background:white;
   border:1px solid rgba(14,78,45,.14);
   border-radius:24px;
-  padding:24px;
+  overflow:hidden;
+  margin:22px 0;
   box-shadow:0 8px 22px rgba(14,78,45,.07);
   transition:.25s ease;
 }
 
-.service-card:hover{
+.service:hover{
   transform:translateY(-4px);
   box-shadow:0 16px 34px rgba(14,78,45,.12);
 }
 
-.service-card h3{
-  font-size:23px;
-  margin-bottom:10px;
+.service:nth-child(even){
+  grid-template-columns:64% 36%;
 }
 
-.service-card p{
+.service:nth-child(even) .service-media{
+  order:2;
+}
+
+.service-media{
+  min-height:240px;
+  background:
+    linear-gradient(rgba(14,78,45,.16),rgba(14,78,45,.16)),
+    var(--img),
+    linear-gradient(135deg,#eef4ec 0%,#dfe9dc 100%);
+  background-size:cover;
+  background-position:center;
+}
+
+.service-content{
+  padding:24px 26px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.service h3{
+  font-size:24px;
+  margin-bottom:8px;
+}
+
+.short{
   color:#3d4a43;
-  margin-bottom:12px;
+  font-size:15.5px;
+  margin-bottom:6px;
+  max-width:720px;
 }
 
 details{
-  margin-top:14px;
+  margin-top:12px;
   border-top:1px solid rgba(14,78,45,.14);
   padding-top:12px;
 }
@@ -359,12 +360,14 @@ details[open] summary::after{
   margin-top:12px;
   color:#3d4a43;
   font-size:15.5px;
+  max-width:760px;
 }
 
+/* Target groups */
 .target-grid{
   display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:14px;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
 }
 
 .target-card{
@@ -381,7 +384,7 @@ details[open] summary::after{
 }
 
 .target-card h3{
-  font-size:17px;
+  font-size:18px;
   margin-bottom:8px;
 }
 
@@ -390,6 +393,7 @@ details[open] summary::after{
   font-size:14.5px;
 }
 
+/* Process */
 .process{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -440,6 +444,7 @@ details[open] summary::after{
   margin-bottom:12px;
 }
 
+/* Area */
 .area-section{
   display:grid;
   grid-template-columns:.95fr 1.05fr;
@@ -455,39 +460,28 @@ details[open] summary::after{
   min-height:300px;
   border-radius:24px;
   background:
-    radial-gradient(circle at 25% 30%, rgba(84,128,49,.28), transparent 32%),
-    radial-gradient(circle at 75% 70%, rgba(14,78,45,.20), transparent 32%),
+    linear-gradient(rgba(14,78,45,.08), rgba(14,78,45,.08)),
+    url("../einsatzgebiet.png"),
     linear-gradient(135deg,#fefefd 0%,#eef4ec 50%,#dfe9dc 100%);
+  background-size:cover;
+  background-position:center;
   position:relative;
   overflow:hidden;
   box-shadow:0 12px 28px rgba(14,78,45,.12);
   border:1px solid rgba(14,78,45,.12);
 }
 
-.route{
+.area-fallback{
   position:absolute;
-  inset:42px;
-  border:2px dashed rgba(14,78,45,.28);
-  border-radius:38% 62% 40% 60%;
-}
-
-.city{
-  position:absolute;
-  background:white;
+  inset:auto 18px 18px 18px;
+  background:rgba(254,254,253,.86);
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:18px;
+  padding:14px;
   color:#0e4e2d;
-  border:1px solid rgba(14,78,45,.18);
-  border-radius:999px;
-  padding:8px 12px;
   font-weight:900;
-  font-size:13px;
-  box-shadow:0 8px 18px rgba(14,78,45,.10);
+  text-align:center;
 }
-
-.city.hamburg{left:38px;bottom:58px}
-.city.ahrensburg{right:70px;top:72px}
-.city.bargteheide{right:40px;bottom:76px}
-.city.grosshansdorf{right:132px;top:132px}
-.city.ammersbek{left:118px;top:82px}
 
 .areas{
   display:flex;
@@ -514,6 +508,7 @@ details[open] summary::after{
   color:#0e4e2d;
 }
 
+/* Contact */
 .contact{
   background:#f6f3ee;
   border:1px solid rgba(14,78,45,.14);
@@ -629,6 +624,7 @@ textarea{
   margin-bottom:10px;
 }
 
+/* Footer */
 .footer{
   margin-top:60px;
   background:#0e4e2d;
@@ -693,6 +689,7 @@ textarea{
   margin-left:14px;
 }
 
+/* Responsive */
 @media(max-width:1050px){
   .target-grid{
     grid-template-columns:1fr 1fr;
@@ -710,8 +707,6 @@ textarea{
 
   .nav{
     margin-top:14px;
-    display:flex;
-    flex-wrap:wrap;
   }
 
   .dropdown-content{
@@ -724,14 +719,26 @@ textarea{
   .area-section,
   .contact-layout,
   .footer-main,
-  .row,
-  .service-grid{
+  .row{
     grid-template-columns:1fr;
   }
 
   .target-grid,
   .process{
     grid-template-columns:1fr;
+  }
+
+  .service,
+  .service:nth-child(even){
+    grid-template-columns:1fr;
+  }
+
+  .service:nth-child(even) .service-media{
+    order:0;
+  }
+
+  .service-media{
+    min-height:220px;
   }
 
   h1{
@@ -749,27 +756,6 @@ textarea{
 
   .hero-visual{
     min-height:300px;
-  }
-
-  .visual-card.one{
-    width:210px;
-    left:18px;
-    top:22px;
-  }
-
-  .visual-card.two{
-    width:220px;
-    right:18px;
-    bottom:22px;
-  }
-
-  .visual-card.three{
-    display:none;
-  }
-
-  .city{
-    font-size:12px;
-    padding:7px 10px;
   }
 }
 </style>
@@ -791,7 +777,7 @@ textarea{
         <button class="dropbtn">Überblick ▾</button>
         <div class="dropdown-content">
           <a href="#ueberblick">Firmenkunden</a>
-          <a href="#leistungen">Leistungsbereiche</a>
+          <a href="#leistungen">Leistungen</a>
           <a href="#zielgruppen">Für wen wir tätig sind</a>
         </div>
       </div>
@@ -799,9 +785,9 @@ textarea{
       <div class="dropdown">
         <button class="dropbtn">Leistungen ▾</button>
         <div class="dropdown-content">
-          <a href="#reinigung">Reinigung & Objektpflege</a>
-          <a href="#raeumung">Räumung & Leerstände</a>
-          <a href="#garten">Gartenpflege & Außenanlagen</a>
+          <a href="#reinigung">Reinigung</a>
+          <a href="#raeumung">Räumung & Entrümpelung</a>
+          <a href="#garten">Gartenpflege</a>
           <a href="#sonderaufgaben">Sonderaufgaben</a>
         </div>
       </div>
@@ -828,38 +814,23 @@ textarea{
   <div>
     <div class="kicker">Firmenkunden</div>
 
-    <h1>Praktische Unterstützung für Firmen, Gewerbeflächen und Objekte</h1>
+    <h1>Praktische Unterstützung für Firmenkunden in der Region</h1>
 
     <p class="lead">
-      AlltagsHilfe Service unterstützt Unternehmen, Einrichtungen und Objektverantwortliche bei praktischen Aufgaben rund um Reinigung, Außenbereiche, Räumung und kurzfristige Unterstützung.
+      Wir übernehmen praktische Arbeiten rund um Reinigung, Räumung, Außenbereiche und kurzfristige Unterstützung.
     </p>
 
     <p class="lead">
-      Ob einmaliger Einsatz oder regelmäßige Unterstützung: Wir arbeiten zuverlässig, klar abgesprochen und passend zum tatsächlichen Bedarf.
+      Ob einmaliger Einsatz oder regelmäßige Unterstützung: Der Umfang wird vor Beginn klar abgesprochen.
     </p>
 
     <div class="hero-actions">
       <a class="primary-link" href="#kontakt">Firmenanfrage stellen</a>
-      <a class="secondary-link" href="#leistungen">Leistungsbereiche ansehen</a>
+      <a class="secondary-link" href="#leistungen">Leistungen ansehen</a>
     </div>
   </div>
 
-  <div class="hero-visual">
-    <div class="visual-card one">
-      <strong>Objekt & Betrieb</strong>
-      <span>Unterstützung dort, wo praktische Arbeit gebraucht wird.</span>
-    </div>
-
-    <div class="visual-card two">
-      <strong>Kurzfristig nach Verfügbarkeit</strong>
-      <span>Bei dringenden Anliegen prüfen wir zeitnah unsere Kapazitäten.</span>
-    </div>
-
-    <div class="visual-card three">
-      <strong>Klare Absprache</strong>
-      <span>Vor Beginn wird der Umfang transparent geklärt.</span>
-    </div>
-  </div>
+  <div class="hero-visual"></div>
 </section>
 
 <section class="reveal">
@@ -867,85 +838,95 @@ textarea{
 
   <div class="intro-box">
     <p>
-      Im gewerblichen Bereich müssen Aufgaben oft zuverlässig und ohne lange Umwege erledigt werden.
-      Genau hier setzen wir an: Wir übernehmen praktische Arbeiten, die im laufenden Betrieb, bei Objekten oder bei kurzfristigem Bedarf anfallen.
+      Im geschäftlichen Alltag gibt es immer wieder Aufgaben, die zuverlässig und ohne lange Umwege erledigt werden müssen.
+      Genau dabei unterstützen wir.
     </p>
 
     <p>
-      Dabei konzentrieren wir uns nicht auf eine einzelne Branche, sondern unterstützen unterschiedliche Firmenkunden, Einrichtungen und Verantwortliche – je nach Aufgabe, Umfang und Verfügbarkeit.
+      Wir arbeiten für verschiedene Firmenkunden und lokale Betriebe. Wichtig ist nicht die Branche, sondern die Aufgabe:
+      Was soll erledigt werden, wann wird Hilfe gebraucht und welcher Umfang ist realistisch?
     </p>
 
     <p>
-      Wichtig ist uns eine klare Kommunikation: Was soll erledigt werden, wann wird Unterstützung gebraucht und welcher Aufwand ist realistisch?
-      Auf dieser Basis erhalten Sie eine passende Einschätzung oder ein individuelles Angebot.
+      Auf dieser Grundlage erhalten Sie eine klare Einschätzung oder ein individuelles Angebot.
     </p>
   </div>
 </section>
 
 <section id="leistungen">
-  <h2 class="reveal">Unsere Leistungsbereiche</h2>
+  <h2 class="reveal">Unsere Leistungen</h2>
 
-  <div class="service-grid">
-    <article class="service-card reveal" id="reinigung">
+  <article class="service reveal" id="reinigung">
+    <div class="service-media" style="--img:url('../bilder/firmen-reinigung.jpg')"></div>
+    <div class="service-content">
       <h3>Reinigung & Objektpflege</h3>
-      <p>
-        Für gewerbliche Flächen, Eingangsbereiche, Gemeinschaftsflächen, Treppenhäuser, Büros, Praxen, Kanzleien oder kleinere Objekte.
+      <p class="short">
+        Für Büros, Treppenhäuser, Eingangsbereiche, Gemeinschaftsflächen, Praxen, Kanzleien und kleinere Gewerbeflächen.
       </p>
 
       <details>
         <summary>Leistungsumfang</summary>
         <p class="details-text">
-          Wir unterstützen bei einmaligen oder regelmäßigen Reinigungsarbeiten nach Absprache.
-          Der Umfang wird vor Beginn klar festgelegt, damit ersichtlich ist, welche Bereiche gereinigt werden sollen und welche Anforderungen bestehen.
+          Wir übernehmen einmalige oder regelmäßige Reinigungsarbeiten nach Absprache.
+          Vor Beginn wird klar festgelegt, welche Bereiche gereinigt werden sollen, wie oft die Reinigung erfolgen soll und ob besondere Anforderungen zu beachten sind.
         </p>
       </details>
-    </article>
+    </div>
+  </article>
 
-    <article class="service-card reveal" id="raeumung">
-      <h3>Räumung, Entrümpelung & Leerstände</h3>
-      <p>
-        Für Nebenräume, Keller, Lagerflächen, Garagen, Leerflächen, Übergaben oder Räume, die wieder nutzbar gemacht werden sollen.
+  <article class="service reveal" id="raeumung">
+    <div class="service-media" style="--img:url('../bilder/firmen-raeumung.jpg')"></div>
+    <div class="service-content">
+      <h3>Räumung & Entrümpelung</h3>
+      <p class="short">
+        Für Keller, Nebenräume, Lagerflächen, Garagen, Leerflächen oder Räume, die wieder nutzbar gemacht werden sollen.
       </p>
 
       <details>
         <summary>Leistungsumfang</summary>
         <p class="details-text">
-          Wir helfen beim Räumen, Sortieren, Tragen und Vorbereiten von Bereichen, die leergeräumt oder wieder ordentlich übergeben werden sollen.
-          Gerade bei kleineren bis mittleren Aufgaben kann eine schnelle Einschätzung oft anhand von Fotos erfolgen.
+          Wir unterstützen beim Räumen, Sortieren, Tragen und Vorbereiten von Bereichen, die leergeräumt oder ordentlich übergeben werden sollen.
+          Eine erste Einschätzung ist oft anhand von Fotos möglich.
         </p>
       </details>
-    </article>
+    </div>
+  </article>
 
-    <article class="service-card reveal" id="garten">
-      <h3>Gartenpflege & Außenanlagen</h3>
-      <p>
-        Für Eingangsbereiche, Grünflächen, Wege, Randbereiche, kleine Außenanlagen und saisonale Pflegearbeiten.
+  <article class="service reveal" id="garten">
+    <div class="service-media" style="--img:url('../bilder/firmen-gartenpflege.jpg')"></div>
+    <div class="service-content">
+      <h3>Gartenpflege & Außenbereiche</h3>
+      <p class="short">
+        Für Eingangsbereiche, Grünflächen, Wege, Randbereiche und kleinere Außenanlagen.
       </p>
 
       <details>
         <summary>Leistungsumfang</summary>
         <p class="details-text">
-          Wir unterstützen bei Pflegearbeiten im Außenbereich, damit Objekte, Eingänge und Grünflächen ordentlich und gepflegt wirken.
+          Wir unterstützen bei Pflegearbeiten im Außenbereich, damit Grundstücke, Eingänge und Grünflächen ordentlich wirken.
           Der genaue Umfang richtet sich nach Fläche, Zustand und gewünschtem Ergebnis.
         </p>
       </details>
-    </article>
+    </div>
+  </article>
 
-    <article class="service-card reveal" id="sonderaufgaben">
+  <article class="service reveal" id="sonderaufgaben">
+    <div class="service-media" style="--img:url('../bilder/firmen-sonderaufgaben.jpg')"></div>
+    <div class="service-content">
       <h3>Unterstützung bei Sonderaufgaben</h3>
-      <p>
-        Für praktische Aufgaben, die nicht sauber in eine Standardleistung passen, aber im Alltag eines Betriebs oder Objekts erledigt werden müssen.
+      <p class="short">
+        Für praktische Aufgaben, die im Betrieb oder rund um eine Fläche kurzfristig erledigt werden müssen.
       </p>
 
       <details>
         <summary>Leistungsumfang</summary>
         <p class="details-text">
-          Dazu gehören kurzfristige Hilfsarbeiten, Vorbereitung von Räumen, Aufräumarbeiten nach internen Änderungen oder Unterstützung bei einzelnen praktischen Aufgaben.
-          Wir prüfen ehrlich, ob wir die Aufgabe übernehmen können.
+          Dazu gehören Aufräumarbeiten, Vorbereitung von Räumen, Hilfe bei kurzfristigem Bedarf oder andere praktische Aufgaben.
+          Wir prüfen ehrlich, ob wir den Einsatz übernehmen können und welcher Umfang realistisch ist.
         </p>
       </details>
-    </article>
-  </div>
+    </div>
+  </article>
 </section>
 
 <section class="reveal" id="zielgruppen">
@@ -953,28 +934,33 @@ textarea{
 
   <div class="target-grid">
     <div class="target-card">
-      <h3>Unternehmen & Gewerbeflächen</h3>
+      <h3>Unternehmen</h3>
       <p>Praktische Unterstützung für kleine und mittlere Betriebe.</p>
     </div>
 
     <div class="target-card">
-      <h3>Praxen & Einrichtungen</h3>
-      <p>Unterstützung bei Flächen, Nebenbereichen und praktischen Aufgaben.</p>
+      <h3>Büros & Kanzleien</h3>
+      <p>Für gepflegte Arbeitsbereiche, Nebenräume und kurzfristige Aufgaben.</p>
     </div>
 
     <div class="target-card">
-      <h3>Kanzleien & Büros</h3>
-      <p>Für gepflegte Arbeitsbereiche, Nebenräume und kurzfristige Hilfe.</p>
+      <h3>Praxen</h3>
+      <p>Unterstützung bei Flächen, Nebenbereichen und organisatorischen Aufgaben.</p>
     </div>
 
     <div class="target-card">
-      <h3>Wohnanlagen & Objekte</h3>
+      <h3>Gewerbeflächen</h3>
+      <p>Für Räume, Eingänge, Außenbereiche und genutzte Flächen.</p>
+    </div>
+
+    <div class="target-card">
+      <h3>Wohnanlagen</h3>
       <p>Unterstützung rund um gemeinschaftlich genutzte Bereiche.</p>
     </div>
 
     <div class="target-card">
-      <h3>Lokale Einrichtungen</h3>
-      <p>Für Betriebe, Räume und Außenbereiche in der Region.</p>
+      <h3>Lokale Betriebe</h3>
+      <p>Flexible Hilfe für Aufgaben, die im Alltag eines Betriebs anfallen.</p>
     </div>
   </div>
 </section>
@@ -992,19 +978,19 @@ textarea{
     <div class="process-card">
       <span>2</span>
       <h3>Einschätzung</h3>
-      <p>Wir prüfen Aufwand, Verfügbarkeit und ob eine Besichtigung oder Fotos zur Einschätzung sinnvoll sind.</p>
+      <p>Wir prüfen Aufwand, Verfügbarkeit und ob Fotos oder eine kurze Besichtigung sinnvoll sind.</p>
     </div>
 
     <div class="process-card">
       <span>3</span>
       <h3>Angebot</h3>
-      <p>Vor Beginn erhalten Sie eine klare und unverbindliche Preisübersicht passend zum Auftrag.</p>
+      <p>Vor Beginn erhalten Sie eine klare und unverbindliche Preisübersicht.</p>
     </div>
 
     <div class="process-card">
       <span>4</span>
       <h3>Umsetzung</h3>
-      <p>Der Einsatz erfolgt nach Absprache zuverlässig und mit klar definiertem Leistungsumfang.</p>
+      <p>Der Einsatz erfolgt nach Absprache mit klar definiertem Leistungsumfang.</p>
     </div>
   </div>
 
@@ -1051,12 +1037,7 @@ textarea{
     </div>
 
     <div class="area-visual">
-      <div class="route"></div>
-      <span class="city hamburg">Hamburg</span>
-      <span class="city ahrensburg">Ahrensburg</span>
-      <span class="city bargteheide">Bargteheide</span>
-      <span class="city grosshansdorf">Großhansdorf</span>
-      <span class="city ammersbek">Ammersbek</span>
+      <div class="area-fallback">Hamburg · Ahrensburg · Bargteheide · Großhansdorf · Ammersbek</div>
     </div>
   </div>
 </section>
@@ -1072,7 +1053,7 @@ textarea{
     <form action="mailto:info@service-alltagshilfe.de" method="post" enctype="text/plain">
       <div class="row">
         <div>
-          <label>Firma / Einrichtung</label>
+          <label>Firma / Betrieb</label>
           <input name="Firma" placeholder="Name des Unternehmens">
         </div>
 
@@ -1110,8 +1091,8 @@ textarea{
       <select name="Leistung">
         <option>Bitte auswählen</option>
         <option>Reinigung & Objektpflege</option>
-        <option>Räumung / Entrümpelung / Leerstand</option>
-        <option>Gartenpflege & Außenanlage</option>
+        <option>Räumung / Entrümpelung</option>
+        <option>Gartenpflege & Außenbereich</option>
         <option>Unterstützung bei Sonderaufgaben</option>
         <option>Noch unklar / bitte beraten</option>
       </select>
@@ -1169,7 +1150,7 @@ textarea{
   <div class="footer-main">
     <div>
       <h3>AlltagsHilfe Service</h3>
-      <p>Zuverlässige Unterstützung für Privatkunden, Firmenkunden und Objekte in der Region.</p>
+      <p>Zuverlässige Unterstützung für Privatkunden und Firmenkunden in der Region.</p>
       <a class="top-link" href="#oben">Nach oben</a>
     </div>
 
