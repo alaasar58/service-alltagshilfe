@@ -492,7 +492,9 @@ textarea{min-height:135px;max-height:135px;resize:none}
   <p class="lead">Beschreiben Sie kurz den Bedarf. Wir melden uns schnellstmöglich zurück und prüfen, wie wir unterstützen können.</p>
 
   <div class="contact-layout">
-    <form autocomplete="on">
+    <form action="https://script.google.com/macros/s/AKfycbxI4Kt5LGSMklc-8Cpwmwcu07kxTwC1kaYeTtH-IL7PxhaHJCqaMueLR-tShUi_EAmv6Q/exec" method="POST" autocomplete="on">
+  <input type="hidden" name="form_type" value="firmen">
+  <input type="text" name="website" style="display:none">
       <div class="row">
         <div><label>Firma / Betrieb</label><input name="Firma" maxlength="80" autocomplete="organization" placeholder="Name des Unternehmens"></div>
         <div><label>Ansprechpartner</label><input name="Ansprechpartner" maxlength="80" autocomplete="name" placeholder="Ihr Name"></div>
@@ -537,7 +539,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
       <textarea name="Nachricht" maxlength="900" placeholder="Beschreiben Sie kurz den Auftrag, die Fläche, den Zustand oder wichtige Hinweise."></textarea>
       <small class="field-hint">Maximal 900 Zeichen</small>
 
-      <button class="btn" type="button">Firmenanfrage senden</button>
+      <button class="btn" type="submit">Firmenanfrage senden</button>
     </form>
 
     <div class="side-contact">
