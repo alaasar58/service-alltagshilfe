@@ -616,11 +616,11 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
 
     <div class="form-field">
-  <label>Nachricht *</label>
-  <textarea name="Nachricht" maxlength="900" placeholder="Beschreiben Sie kurz den Auftrag, die Fläche, den Zustand oder wichtige Hinweise." required data-error="Bitte Nachricht eingeben."></textarea>
-  <small class="field-hint char-counter">0 / 900 Zeichen</small>
-  <small class="error-message"></small>
-</div>
+      <label>Nachname *</label>
+      <input name="Nachname" maxlength="80" autocomplete="family-name" placeholder="Nachname des Ansprechpartners" required data-error="Bitte Nachname eingeben.">
+      <small class="error-message"></small>
+    </div>
+  </div>
 
   <div class="row">
     <div class="form-field">
@@ -690,27 +690,34 @@ textarea{min-height:135px;max-height:135px;resize:none}
     <small class="error-message"></small>
   </div>
 
- <div class="form-field">
-  <label>Wie haben Sie uns gefunden?</label>
-  <select name="Gefunden" class="found-select">
-    <option value="">Bitte auswählen</option>
-    <option>Google</option>
-    <option>Facebook</option>
-    <option>Instagram</option>
-    <option>Empfehlung</option>
-    <option>Flyer</option>
-    <option>eBay Kleinanzeigen</option>
-    <option>WhatsApp / Kontaktkarte</option>
-    <option>Sonstiges</option>
-  </select>
-  <small class="error-message"></small>
-</div>
+  <div class="form-field">
+    <label>Wie haben Sie uns gefunden?</label>
+    <select name="Gefunden" class="found-select">
+      <option value="">Bitte auswählen</option>
+      <option>Google</option>
+      <option>Facebook</option>
+      <option>Instagram</option>
+      <option>Empfehlung</option>
+      <option>Flyer</option>
+      <option>eBay Kleinanzeigen</option>
+      <option>WhatsApp / Kontaktkarte</option>
+      <option>Sonstiges</option>
+    </select>
+    <small class="error-message"></small>
+  </div>
 
-<div class="form-field found-other-wrap" style="display:none">
-  <label>Bitte kurz angeben</label>
-  <input name="GefundenSonstiges" maxlength="80" placeholder="z. B. Nachbar, Verein, Firma, Sonstiges" data-error="Bitte kurz angeben.">
-  <small class="error-message"></small>
-</div>
+  <div class="form-field found-other-wrap" style="display:none">
+    <label>Bitte kurz angeben</label>
+    <input name="GefundenSonstiges" maxlength="80" placeholder="z. B. Nachbar, Verein, Firma, Sonstiges" data-error="Bitte kurz angeben.">
+    <small class="error-message"></small>
+  </div>
+
+  <div class="form-field">
+    <label>Nachricht *</label>
+    <textarea name="Nachricht" maxlength="900" placeholder="Beschreiben Sie kurz den Auftrag, die Fläche, den Zustand oder wichtige Hinweise." required data-error="Bitte Nachricht eingeben."></textarea>
+    <small class="field-hint char-counter">0 / 900 Zeichen</small>
+    <small class="error-message"></small>
+  </div>
 
   <div class="form-field">
     <label class="checkline">
@@ -793,9 +800,11 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
 <script>
 const header = document.querySelector('.header');
-window.addEventListener('scroll', () => {
-  window.scrollY > 20 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
-});
+if(header){
+  window.addEventListener('scroll', () => {
+    window.scrollY > 20 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
+  });
+}
 
 const revealItems = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
@@ -821,18 +830,23 @@ document.querySelectorAll('.date-field').forEach(field => {
   field.setAttribute('min', today);
 });
 
-document.querySelectorAll('textarea[maxlength]').forEach(textarea => {
-  const counter = textarea.closest('.form-field')?.querySelector('.char-counter');
+function updateAllCounters(){
+  document.querySelectorAll('textarea[maxlength]').forEach(textarea => {
+    const counter = textarea.closest('.form-field')?.querySelector('.char-counter');
 
-  function updateCounter(){
-    if(counter){
-      counter.textContent = textarea.value.length + ' / ' + textarea.getAttribute('maxlength') + ' Zeichen';
+    function updateCounter(){
+      if(counter){
+        counter.textContent = textarea.value.length + ' / ' + textarea.getAttribute('maxlength') + ' Zeichen';
+      }
     }
-  }
 
-  textarea.addEventListener('input', updateCounter);
-  updateCounter();
-});
+    textarea.removeEventListener('input', updateCounter);
+    textarea.addEventListener('input', updateCounter);
+    updateCounter();
+  });
+}
+
+updateAllCounters();
 
 document.querySelectorAll('.found-select').forEach(select => {
   const sonstigesField = select.closest('form')?.querySelector('.found-other-wrap');
@@ -988,7 +1002,6 @@ document.querySelectorAll('.ajax-form').forEach(form => {
 });
 
 const popupClose = document.getElementById('popupClose');
-
 if(popupClose){
   popupClose.addEventListener('click', () => {
     const popup = document.getElementById('formPopup');
