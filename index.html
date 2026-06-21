@@ -1,290 +1,250 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlltagsHilfe Service</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlltagsHilfe Service</title>
 
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  user-select:none;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
 
-html,
-body{
-  width:100%;
-  height:100%;
-}
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
 
-body{
-  font-family:Arial, sans-serif;
-  background:#fefefd;
-  color:#1f2933;
-  line-height:1.6;
-  overflow:hidden;
-  cursor:default;
-}
+    body {
+      font-family: Arial, sans-serif;
+      color: #fefefd;
+      background:
+        linear-gradient(rgba(20, 28, 24, 0.42), rgba(20, 28, 24, 0.50)),
+        url("bilder/hintergrundbild.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      cursor: default;
+    }
 
-a{
-  cursor:pointer;
-}
+    main {
+      height: calc(100vh - 46px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      animation: fadeIn 0.8s ease forwards;
+    }
 
-/* Hintergrund */
-.start-page{
-  width:100%;
-  height:100vh;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:30px;
-  background:
-    linear-gradient(
-      to right,
-      rgba(254,254,253,.96) 0%,
-      rgba(254,254,253,.88) 36%,
-      rgba(254,254,253,.62) 62%,
-      rgba(254,254,253,.28) 100%
-    ),
-    url("bilder/hintergrundbild.png");
-  background-size:cover;
-  background-position:center right;
-}
+    .box {
+      width: 100%;
+      max-width: 920px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      border-radius: 34px;
+      padding: 30px 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+      backdrop-filter: blur(8px);
+    }
 
-.start-page::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 18% 20%, rgba(84,128,49,.12), transparent 28%),
-    radial-gradient(circle at 80% 82%, rgba(14,78,45,.10), transparent 34%);
-  pointer-events:none;
-}
-
-/* Box */
-.start-box{
-  position:relative;
-  z-index:2;
-  width:100%;
-  max-width:980px;
-  background:rgba(254,254,253,.78);
-  backdrop-filter:blur(14px);
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:34px;
-  padding:42px;
-  box-shadow:0 24px 70px rgba(14,78,45,.16);
-}
-
-/* Logo */
-.logo-wrap{
-  display:flex;
-  justify-content:center;
-  margin-bottom:22px;
-}
-
-.logo{
-  width:118px;
-  height:118px;
+    .logo-img {
+  width:120px;
+  height:120px;
   border-radius:50%;
   object-fit:cover;
-  background:#fefefd;
-  box-shadow:0 14px 34px rgba(14,78,45,.20);
-}
+    }
 
-/* Text */
-.text{
-  text-align:center;
-  max-width:780px;
-  margin:0 auto 30px;
-}
+    .brand {
+      font-size: 31px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #fefefd;
+      text-shadow: 0 4px 18px rgba(0,0,0,0.45);
+    }
 
-h1{
-  color:#0e4e2d;
-  font-size:44px;
-  line-height:1.08;
-  margin-bottom:14px;
-  font-weight:900;
-}
+    .subtitle {
+      font-size: 18px;
+      color: rgba(254,254,253,0.94);
+      margin-bottom: 26px;
+      line-height: 1.5;
+      text-shadow: 0 3px 14px rgba(0,0,0,0.42);
+    }
 
-.subtitle{
-  color:#3d4a43;
-  font-size:19px;
-}
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
 
-/* Auswahl */
-.choice-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-  margin-top:26px;
-}
+    .card {
+      min-height: 250px;
+      background: rgba(255,255,255,0.84);
+      color: #1f2933;
+      text-decoration: none;
+      border-radius: 30px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.55);
+      transition: 0.28s ease;
+    }
 
-.choice{
-  display:block;
-  text-decoration:none;
-  color:#1f2933;
-  background:rgba(255,255,255,.86);
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:26px;
-  padding:28px;
-  min-height:210px;
-  transition:.28s ease;
-}
+    .card:hover {
+      background: rgba(14,78,45,0.92);
+      color: #fefefd;
+      transform: translateY(-6px);
+      box-shadow: 0 18px 38px rgba(0,0,0,0.30);
+    }
 
-.choice:hover{
-  transform:translateY(-6px);
-  box-shadow:0 18px 38px rgba(14,78,45,.14);
-  border-color:rgba(14,78,45,.30);
-}
+    .icon {
+      font-size: 46px;
+      margin-bottom: 12px;
+    }
 
-.choice small{
-  display:block;
-  color:#548031;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.5px;
-  margin-bottom:10px;
-}
+    .card h2 {
+      color: #0e4e2d;
+      font-size: 25px;
+      margin-bottom: 10px;
+      transition: 0.25s ease;
+    }
 
-.choice h2{
-  color:#0e4e2d;
-  font-size:29px;
-  line-height:1.15;
-  margin-bottom:12px;
-}
+    .card:hover h2 {
+      color: #fefefd;
+    }
 
-.choice p{
-  color:#3d4a43;
-  font-size:15.8px;
-  margin-bottom:20px;
-}
+    .card p {
+      font-size: 15.5px;
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
 
-.choice span{
-  display:inline-flex;
-  align-items:center;
-  background:#0e4e2d;
-  color:white;
-  border-radius:999px;
-  padding:12px 17px;
-  font-weight:900;
-  font-size:14px;
-}
+    .btn {
+      background: #0e4e2d;
+      color: #fefefd;
+      border-radius: 999px;
+      padding: 11px 17px;
+      font-weight: 700;
+      align-self: center;
+      transition: 0.25s ease;
+    }
 
-.choice.business span{
-  background:#548031;
-}
+    .card:hover .btn {
+      background: #fefefd;
+      color: #0e4e2d;
+    }
 
-/* Footer Links */
-.links{
-  display:flex;
-  justify-content:center;
-  gap:18px;
-  margin-top:28px;
-  font-size:14px;
-}
+    footer {
+      height: 46px;
+      text-align: center;
+      padding: 13px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.92);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+    }
 
-.links a{
-  color:#0e4e2d;
-  font-weight:800;
-  text-decoration:none;
-}
+    footer a {
+      color: #fefefd;
+      text-decoration: none;
+      font-weight: 700;
+      margin: 0 8px;
+    }
 
-.links a:hover{
-  text-decoration:underline;
-}
+    footer a:hover {
+      text-decoration: underline;
+    }
 
-/* Mobile */
-@media(max-width:850px){
-  body{
-    overflow:auto;
-  }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  .start-page{
-    height:auto;
-    min-height:100vh;
-    padding:22px 16px;
-    align-items:flex-start;
-  }
+    @media (max-width: 760px) {
+      body {
+        overflow: auto;
+      }
 
-  .start-box{
-    padding:28px;
-    border-radius:28px;
-  }
+      main {
+        min-height: calc(100vh - 46px);
+        height: auto;
+        padding: 18px;
+      }
 
-  .logo{
-    width:94px;
-    height:94px;
-  }
+      .box {
+        padding: 24px 18px;
+        border-radius: 28px;
+      }
 
-  h1{
-    font-size:33px;
-  }
+      .logo-img {
+        width: 96px;
+      }
 
-  .subtitle{
-    font-size:17px;
-  }
+      .brand {
+        font-size: 27px;
+      }
 
-  .choice-grid{
-    grid-template-columns:1fr;
-  }
+      .subtitle {
+        font-size: 16px;
+      }
 
-  .choice{
-    min-height:auto;
-  }
-}
-</style>
+      .choices {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .card {
+        min-height: 175px;
+        padding: 22px 18px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<main class="start-page">
-  <section class="start-box">
+<main>
+  <div class="box">
+    <img src="bilder/Logo.png" alt="AlltagsHilfe Service Logo" class="logo-img">
 
-    <div class="logo-wrap">
-      <img class="logo" src="bilder/Logo.png" alt="AlltagsHilfe Service Logo">
+    <div class="brand">AlltagsHilfe Service</div>
+
+    <div class="subtitle">
+Ihr Ansprechpartner für praktische Dienstleistungen in der Region.
     </div>
 
-    <div class="text">
-      <h1>AlltagsHilfe Service</h1>
-      <p class="subtitle">
-        Zuverlässige Hilfe für Privatpersonen, Unternehmen und lokale Betriebe.
-      </p>
-    </div>
-
-    <div class="choice-grid">
-
-      <a class="choice" href="privat/">
-        <small>Privatkunden</small>
-        <h2>Hilfe rund um Haus, Garten und Alltag</h2>
-        <p>
-          Unterstützung bei Reinigung, Gartenpflege, Entrümpelung, Haushaltsauflösung,
-          Transporten und weiteren praktischen Aufgaben.
-        </p>
-        <span>Zum Privatbereich</span>
+    <div class="choices">
+      <a class="card" href="privat/">
+        <div class="icon">🏠</div>
+        <h2>Privatkunden</h2>
+        <p>Für Haushalt, Garten, Reinigung, Entrümpelung, Transporte und Unterstützung im Alltag.</p>
+        <span class="btn">Zum Privatbereich</span>
       </a>
 
-      <a class="choice business" href="firmen/">
-        <small>Firmenkunden</small>
-        <h2>Praktische Unterstützung für Betriebe</h2>
-        <p>
-          Hilfe bei Reinigung, Räumung, Außenbereichen und praktischer Unterstützung
-          nach Absprache – einmalig oder regelmäßig.
-        </p>
-        <span>Zum Firmenbereich</span>
+      <a class="card" href="firmen/">
+        <div class="icon">🏢</div>
+        <h2>Firmenkunden</h2>
+        <p>Für Unternehmen, Hausverwaltungen, Praxen, Kanzleien und Gewerbeobjekte.</p>
+        <span class="btn">Zum Firmenbereich</span>
       </a>
-
     </div>
-
-    <div class="links">
-      <a href="datenschutz/">Datenschutz</a>
-      <a href="impressum/">Impressum</a>
-    </div>
-
-  </section>
+  </div>
 </main>
+
+<footer>
+  <a href="impressum/">Impressum</a>
+  <a href="datenschutz/">Datenschutz</a>
+</footer>
 
 </body>
 </html>
