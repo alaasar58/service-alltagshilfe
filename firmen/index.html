@@ -219,33 +219,47 @@ h3{
   padding:38px 0 34px;
 }
 
-.hero-visual{
+/* HERO */
+.hero{
   position:relative;
-  min-height:360px;
-  border-radius:32px;
+  min-height:430px;
+  border-radius:0;
+  margin:18px 0 34px;
+  padding:54px 54px;
   overflow:hidden;
-  background:
-    url("../hintergrundbild.png");
+  border:1px solid rgba(14,78,45,.10);
+  box-shadow:0 14px 34px rgba(14,78,45,.08);
   background-size:cover;
-  background-position:center;
-  box-shadow:0 18px 42px rgba(14,78,45,.16);
-  border:1px solid rgba(14,78,45,.12);
+  background-position:center right;
 }
-  .hero-visual::before{
+
+.hero::before{
   content:"";
   position:absolute;
   inset:0;
   background:
     linear-gradient(
       to right,
-      rgba(254,254,253,0.95) 0%,
-      rgba(254,254,253,0.82) 14%,
-      rgba(254,254,253,0.55) 28%,
-      rgba(254,254,253,0.22) 42%,
-      rgba(254,254,253,0.00) 62%
+      rgba(254,254,253,1) 0%,
+      rgba(254,254,253,.96) 26%,
+      rgba(254,254,253,.82) 42%,
+      rgba(254,254,253,.45) 58%,
+      rgba(254,254,253,.08) 78%,
+      rgba(254,254,253,0) 100%
     );
   pointer-events:none;
 }
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:620px;
+}
+
+.hero-firmen{
+  background-image:url("../bilder/firmen-hero.png");
+}
+
 .hero-actions{
   display:flex;
   flex-wrap:wrap;
@@ -705,13 +719,25 @@ textarea{
 }
 
 /* RESPONSIVE */
-@media(max-width:1050px){
-  .target-grid{
-    grid-template-columns:1fr 1fr;
+@media(max-width:900px){
+  .hero{
+    min-height:auto;
+    padding:38px 24px;
+    background-position:center right;
   }
 
-  .process{
-    grid-template-columns:1fr 1fr;
+  .hero::before{
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(254,254,253,.98) 0%,
+        rgba(254,254,253,.92) 52%,
+        rgba(254,254,253,.68) 100%
+      );
+  }
+
+  .hero-content{
+    max-width:100%;
   }
 }
 
@@ -825,8 +851,8 @@ textarea{
 
 <div class="wrap">
 
-<section class="hero reveal" id="ueberblick">
-  <div>
+<section class="hero hero-firmen reveal" id="ueberblick">
+  <div class="hero-content">
     <div class="kicker">Firmenkunden</div>
 
     <h1>Praktische Unterstützung für Firmenkunden in der Region</h1>
@@ -844,8 +870,6 @@ textarea{
       <a class="secondary-link" href="#leistungen">Leistungen ansehen</a>
     </div>
   </div>
-
-  <div class="hero-visual"></div>
 </section>
 
 <section class="reveal">
