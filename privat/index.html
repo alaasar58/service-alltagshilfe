@@ -558,42 +558,114 @@ textarea{min-height:135px;max-height:135px;resize:none}
   <p class="lead">Beschreiben Sie kurz Ihr Anliegen. Wir melden uns schnellstmöglich zurück.</p>
 
   <div class="contact-layout">
-    <form action="https://script.google.com/macros/s/AKfycbxI4Kt5LGSMklc-8Cpwmwcu07kxTwC1kaYeTtH-IL7PxhaHJCqaMueLR-tShUi_EAmv6Q/exec" method="POST" autocomplete="on">
+<form action="https://script.google.com/macros/s/AKfycbz1YPu4Li35oDFT2PgT2KvrZMiKJifDhXhaCYYgxw2u6NItMKRaMivm9UirW2e2hZPQ5A/exec" method="POST" autocomplete="on" class="ajax-form" data-button-text="Anfrage senden">
   <input type="hidden" name="form_type" value="privat">
   <input type="text" name="website" style="display:none">
-      <div class="row">
-        <div><label>Vor- und Nachname</label><input name="Name" maxlength="80" autocomplete="name" placeholder="Ihr Name"></div>
-        <div><label>Telefon</label><input name="Telefon" maxlength="40" autocomplete="tel" placeholder="Telefonnummer"></div>
-      </div>
 
-      <label>E-Mail</label>
-      <input name="E-Mail" maxlength="90" autocomplete="email" placeholder="E-Mail-Adresse">
+  <div class="row">
+    <div class="form-field">
+      <label>Vorname</label>
+      <input name="Vorname" maxlength="60" autocomplete="given-name" placeholder="Optional">
+      <small class="error-message"></small>
+    </div>
 
-      <div class="row">
-        <div><label>PLZ</label><input name="PLZ" maxlength="10" autocomplete="postal-code" placeholder="z. B. 22926"></div>
-        <div><label>Ort</label><input name="Ort" maxlength="60" autocomplete="address-level2" placeholder="z. B. Ahrensburg"></div>
-      </div>
+    <div class="form-field">
+      <label>Nachname *</label>
+      <input name="Nachname" maxlength="80" autocomplete="family-name" placeholder="Ihr Nachname" required data-error="Bitte Nachname eingeben.">
+      <small class="error-message"></small>
+    </div>
+  </div>
 
-      <label>Gewünschte Leistung</label>
-      <select name="Leistung">
-        <option>Bitte auswählen</option>
-        <option>Reinigung</option>
-        <option>Gartenpflege</option>
-        <option>Entrümpelung</option>
-        <option>Haushaltsauflösung</option>
-        <option>Transport</option>
-        <option>Weitere Unterstützung</option>
-      </select>
+  <div class="row">
+    <div class="form-field">
+      <label>E-Mail *</label>
+      <input name="E-Mail" type="email" maxlength="90" autocomplete="email" placeholder="E-Mail-Adresse" required data-error="Bitte gültige E-Mail-Adresse eingeben.">
+      <small class="error-message"></small>
+    </div>
 
-      <label>Wunschtermin / Zeitraum</label>
-      <input name="Wunschtermin" maxlength="80" placeholder="Optional, z. B. nächste Woche">
+    <div class="form-field">
+      <label>Telefon</label>
+      <input name="Telefon" maxlength="40" autocomplete="tel" placeholder="Telefonnummer">
+      <small class="error-message"></small>
+    </div>
+  </div>
 
-      <label>Nachricht</label>
-      <textarea name="Nachricht" maxlength="900" placeholder="Beschreiben Sie kurz den Auftrag und wichtige Hinweise."></textarea>
-      <small class="field-hint">Maximal 900 Zeichen</small>
+  <div class="form-field">
+    <label>Rückruf gewünscht?</label>
+    <select name="Rueckruf" class="callback-select">
+      <option value="Nein">Nein</option>
+      <option value="Ja">Ja, bitte zurückrufen</option>
+    </select>
+    <small class="error-message"></small>
+  </div>
 
-      <button class="btn" type="submit">Anfrage senden</button>
-    </form>
+  <div class="row">
+    <div class="form-field">
+      <label>PLZ *</label>
+      <input name="PLZ" maxlength="10" autocomplete="postal-code" placeholder="z. B. 22926" required data-error="Bitte PLZ eingeben.">
+      <small class="error-message"></small>
+    </div>
+
+    <div class="form-field">
+      <label>Ort *</label>
+      <input name="Ort" maxlength="60" autocomplete="address-level2" placeholder="z. B. Ahrensburg" required data-error="Bitte Ort eingeben.">
+      <small class="error-message"></small>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label>Gewünschte Leistung *</label>
+    <select name="Leistung" required data-error="Bitte gewünschte Leistung auswählen.">
+      <option value="">Bitte auswählen</option>
+      <option>Reinigung</option>
+      <option>Gartenpflege</option>
+      <option>Entrümpelung</option>
+      <option>Haushaltsauflösung</option>
+      <option>Transport</option>
+      <option>Weitere Unterstützung</option>
+    </select>
+    <small class="error-message"></small>
+  </div>
+
+  <div class="form-field">
+    <label>Wunschtermin</label>
+    <input name="Wunschtermin" type="date" class="date-field">
+    <small class="error-message"></small>
+  </div>
+
+  <div class="form-field">
+    <label>Wie haben Sie uns gefunden?</label>
+    <select name="Gefunden">
+      <option value="">Bitte auswählen</option>
+      <option>Google</option>
+      <option>Facebook</option>
+      <option>Instagram</option>
+      <option>Empfehlung</option>
+      <option>Flyer</option>
+      <option>eBay Kleinanzeigen</option>
+      <option>WhatsApp / Kontaktkarte</option>
+      <option>Sonstiges</option>
+    </select>
+    <small class="error-message"></small>
+  </div>
+
+  <div class="form-field">
+    <label>Nachricht *</label>
+    <textarea name="Nachricht" maxlength="900" placeholder="Beschreiben Sie kurz den Auftrag und wichtige Hinweise." required data-error="Bitte Nachricht eingeben."></textarea>
+    <small class="field-hint">Maximal 900 Zeichen</small>
+    <small class="error-message"></small>
+  </div>
+
+  <div class="form-field">
+    <label class="checkline">
+      <input type="checkbox" name="Datenschutz" value="Akzeptiert" required data-error="Bitte Datenschutzerklärung bestätigen.">
+      <span>Ich habe die <a href="../datenschutz/" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu. *</span>
+    </label>
+    <small class="error-message"></small>
+  </div>
+
+  <button class="btn submit-btn" type="submit">Anfrage senden</button>
+</form>
 
     <div class="side-contact">
       <a class="contact-card" href="tel:+4915229546946"><strong>Telefon</strong><span>+49 1522 9546946</span></a>
