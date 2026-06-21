@@ -1,250 +1,390 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AlltagsHilfe Service</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlltagsHilfe Service</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      user-select: none;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  user-select:none;
+}
 
-    html, body {
-      width: 100%;
-      height: 100%;
-    }
+html,
+body{
+  width:100%;
+  min-height:100%;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      color: #fefefd;
-      background:
-        linear-gradient(rgba(20, 28, 24, 0.42), rgba(20, 28, 24, 0.50)),
-        url("hintergrundbild.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      overflow: hidden;
-      cursor: default;
-    }
+body{
+  font-family:Arial, sans-serif;
+  background:#fefefd;
+  color:#1f2933;
+  line-height:1.6;
+  cursor:default;
+  overflow:hidden;
+}
 
-    main {
-      height: calc(100vh - 46px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 22px;
-      animation: fadeIn 0.8s ease forwards;
-    }
+/* PAGE BACKGROUND */
+.page{
+  min-height:100vh;
+  width:100%;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:34px 24px;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      to right,
+      rgba(254,254,253,1) 0%,
+      rgba(254,254,253,.96) 24%,
+      rgba(254,254,253,.82) 44%,
+      rgba(254,254,253,.44) 66%,
+      rgba(254,254,253,.16) 100%
+    ),
+    url("bilder/hintergrundbild.png");
+  background-size:cover;
+  background-position:center right;
+}
 
-    .box {
-      width: 100%;
-      max-width: 920px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.16);
-      border: 1px solid rgba(255, 255, 255, 0.34);
-      border-radius: 34px;
-      padding: 30px 28px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.28);
-      backdrop-filter: blur(8px);
-    }
+.page::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 15% 18%, rgba(84,128,49,.12), transparent 28%),
+    radial-gradient(circle at 82% 80%, rgba(14,78,45,.10), transparent 34%);
+  pointer-events:none;
+}
 
-    .logo-img {
-  width:120px;
-  height:120px;
+/* MAIN BOX */
+.start-box{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:980px;
+  background:rgba(254,254,253,.82);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:34px;
+  padding:44px;
+  box-shadow:0 24px 70px rgba(14,78,45,.16);
+  animation:fadeUp .75s ease both;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(26px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* BRAND */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:28px;
+}
+
+.logo{
+  width:92px;
+  height:92px;
   border-radius:50%;
   object-fit:cover;
-    }
+  box-shadow:0 12px 30px rgba(14,78,45,.18);
+  background:#fefefd;
+}
 
-    .brand {
-      font-size: 31px;
-      font-weight: 800;
-      margin-bottom: 8px;
-      color: #fefefd;
-      text-shadow: 0 4px 18px rgba(0,0,0,0.45);
-    }
+.brand-text{
+  color:#0e4e2d;
+}
 
-    .subtitle {
-      font-size: 18px;
-      color: rgba(254,254,253,0.94);
-      margin-bottom: 26px;
-      line-height: 1.5;
-      text-shadow: 0 3px 14px rgba(0,0,0,0.42);
-    }
+.brand-text strong{
+  display:block;
+  font-size:30px;
+  line-height:1.1;
+  font-weight:900;
+}
 
-    .choices {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 22px;
-    }
+.brand-text span{
+  display:block;
+  color:#548031;
+  font-weight:800;
+  margin-top:4px;
+}
 
-    .card {
-      min-height: 250px;
-      background: rgba(255,255,255,0.84);
-      color: #1f2933;
-      text-decoration: none;
-      border-radius: 30px;
-      padding: 28px 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      border: 1px solid rgba(255,255,255,0.55);
-      transition: 0.28s ease;
-    }
+/* INTRO */
+h1{
+  color:#0e4e2d;
+  font-size:44px;
+  line-height:1.08;
+  max-width:720px;
+  margin-bottom:16px;
+}
 
-    .card:hover {
-      background: rgba(14,78,45,0.92);
-      color: #fefefd;
-      transform: translateY(-6px);
-      box-shadow: 0 18px 38px rgba(0,0,0,0.30);
-    }
+.lead{
+  color:#3d4a43;
+  font-size:19px;
+  max-width:760px;
+  margin-bottom:30px;
+}
 
-    .icon {
-      font-size: 46px;
-      margin-bottom: 12px;
-    }
+/* CHOICE CARDS */
+.choice-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-top:12px;
+}
 
-    .card h2 {
-      color: #0e4e2d;
-      font-size: 25px;
-      margin-bottom: 10px;
-      transition: 0.25s ease;
-    }
+.choice{
+  position:relative;
+  display:block;
+  min-height:190px;
+  background:rgba(255,255,255,.86);
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:26px;
+  padding:26px;
+  text-decoration:none;
+  color:#1f2933;
+  overflow:hidden;
+  transition:.28s ease;
+}
 
-    .card:hover h2 {
-      color: #fefefd;
-    }
+.choice::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(84,128,49,.13),
+      rgba(14,78,45,.04)
+    );
+  opacity:.7;
+  transition:.28s ease;
+}
 
-    .card p {
-      font-size: 15.5px;
-      line-height: 1.55;
-      margin-bottom: 18px;
-    }
+.choice:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 38px rgba(14,78,45,.14);
+  border-color:rgba(14,78,45,.28);
+}
 
-    .btn {
-      background: #0e4e2d;
-      color: #fefefd;
-      border-radius: 999px;
-      padding: 11px 17px;
-      font-weight: 700;
-      align-self: center;
-      transition: 0.25s ease;
-    }
+.choice:hover::before{
+  opacity:1;
+}
 
-    .card:hover .btn {
-      background: #fefefd;
-      color: #0e4e2d;
-    }
+.choice-content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:18px;
+}
 
-    footer {
-      height: 46px;
-      text-align: center;
-      padding: 13px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.92);
-      text-shadow: 0 2px 8px rgba(0,0,0,0.45);
-    }
+.choice small{
+  color:#548031;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
 
-    footer a {
-      color: #fefefd;
-      text-decoration: none;
-      font-weight: 700;
-      margin: 0 8px;
-    }
+.choice h2{
+  color:#0e4e2d;
+  font-size:28px;
+  line-height:1.12;
+  margin:8px 0;
+}
 
-    footer a:hover {
-      text-decoration: underline;
-    }
+.choice p{
+  color:#3d4a43;
+  font-size:15.5px;
+}
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+.choice-button{
+  display:inline-flex;
+  align-items:center;
+  width:fit-content;
+  background:#0e4e2d;
+  color:white;
+  border-radius:999px;
+  padding:11px 16px;
+  font-weight:900;
+  font-size:14px;
+}
 
-    @media (max-width: 760px) {
-      body {
-        overflow: auto;
-      }
+.choice.secondary .choice-button{
+  background:#548031;
+}
 
-      main {
-        min-height: calc(100vh - 46px);
-        height: auto;
-        padding: 18px;
-      }
+/* FOOTER LINKS */
+.start-links{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  margin-top:26px;
+  color:#64706b;
+  font-size:13.5px;
+  flex-wrap:wrap;
+}
 
-      .box {
-        padding: 24px 18px;
-        border-radius: 28px;
-      }
+.start-links a{
+  color:#0e4e2d;
+  font-weight:800;
+  text-decoration:none;
+  margin-left:14px;
+}
 
-      .logo-img {
-        width: 96px;
-      }
+.start-links a:hover{
+  text-decoration:underline;
+}
 
-      .brand {
-        font-size: 27px;
-      }
+/* RESPONSIVE */
+@media(max-width:850px){
+  body{
+    overflow:auto;
+  }
 
-      .subtitle {
-        font-size: 16px;
-      }
+  .page{
+    align-items:flex-start;
+    padding:24px 16px;
+    background-position:center;
+  }
 
-      .choices {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
+  .start-box{
+    padding:28px;
+    border-radius:28px;
+  }
 
-      .card {
-        min-height: 175px;
-        padding: 22px 18px;
-      }
-    }
-  </style>
+  .brand{
+    align-items:flex-start;
+  }
+
+  .logo{
+    width:76px;
+    height:76px;
+  }
+
+  .brand-text strong{
+    font-size:24px;
+  }
+
+  h1{
+    font-size:34px;
+  }
+
+  .lead{
+    font-size:17px;
+  }
+
+  .choice-grid{
+    grid-template-columns:1fr;
+  }
+
+  .choice{
+    min-height:170px;
+  }
+
+  .start-links{
+    display:block;
+  }
+
+  .start-links span{
+    display:block;
+    margin-bottom:10px;
+  }
+
+  .start-links a{
+    margin-left:0;
+    margin-right:14px;
+  }
+}
+
+@media(max-width:480px){
+  .brand{
+    display:block;
+  }
+
+  .logo{
+    margin-bottom:14px;
+  }
+
+  h1{
+    font-size:30px;
+  }
+
+  .choice h2{
+    font-size:24px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-<main>
-  <div class="box">
-    <img src="Logo.png" alt="AlltagsHilfe Service Logo" class="logo-img">
+<main class="page">
+  <section class="start-box">
 
-    <div class="brand">AlltagsHilfe Service</div>
-
-    <div class="subtitle">
-Ihr Ansprechpartner für praktische Dienstleistungen in der Region.
+    <div class="brand">
+      <img class="logo" src="bilder/Logo.png" alt="AlltagsHilfe Service Logo">
+      <div class="brand-text">
+        <strong>AlltagsHilfe Service</strong>
+        <span>Privat & Gewerbe</span>
+      </div>
     </div>
 
-    <div class="choices">
-      <a class="card" href="privat/">
-        <div class="icon">🏠</div>
-        <h2>Privatkunden</h2>
-        <p>Für Haushalt, Garten, Reinigung, Entrümpelung, Transporte und Unterstützung im Alltag.</p>
-        <span class="btn">Zum Privatbereich</span>
+    <h1>Zuverlässige Hilfe für Privatpersonen, Unternehmen und lokale Betriebe.</h1>
+
+    <p class="lead">
+      Wählen Sie den passenden Bereich aus. So finden Sie schnell die Informationen, Leistungen und Kontaktmöglichkeiten, die zu Ihrem Anliegen passen.
+    </p>
+
+    <div class="choice-grid">
+      <a class="choice" href="privat/">
+        <div class="choice-content">
+          <div>
+            <small>Für Privatkunden</small>
+            <h2>Hilfe rund um Haus, Garten und Alltag</h2>
+            <p>
+              Unterstützung bei Reinigung, Gartenpflege, Entrümpelung, Haushaltsauflösung, Transporten und weiteren praktischen Aufgaben.
+            </p>
+          </div>
+          <span class="choice-button">Zum Privatbereich</span>
+        </div>
       </a>
 
-      <a class="card" href="firmen/">
-        <div class="icon">🏢</div>
-        <h2>Firmenkunden</h2>
-        <p>Für Unternehmen, Hausverwaltungen, Praxen, Kanzleien und Gewerbeobjekte.</p>
-        <span class="btn">Zum Firmenbereich</span>
+      <a class="choice secondary" href="firmen/">
+        <div class="choice-content">
+          <div>
+            <small>Für Firmenkunden</small>
+            <h2>Praktische Unterstützung für Betriebe</h2>
+            <p>
+              Hilfe bei Reinigung, Räumung, Außenbereichen und praktischer Unterstützung nach Absprache – einmalig oder regelmäßig.
+            </p>
+          </div>
+          <span class="choice-button">Zum Firmenbereich</span>
+        </div>
       </a>
     </div>
-  </div>
+
+    <div class="start-links">
+      <span>© 2026 AlltagsHilfe Service</span>
+      <div>
+        <a href="datenschutz/">Datenschutz</a>
+        <a href="impressum/">Impressum</a>
+      </div>
+    </div>
+
+  </section>
 </main>
-
-<footer>
-  <a href="impressum/">Impressum</a>
-  <a href="datenschutz/">Datenschutz</a>
-</footer>
 
 </body>
 </html>
