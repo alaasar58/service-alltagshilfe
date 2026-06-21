@@ -222,15 +222,22 @@ h3{
 /* HERO */
 .hero{
   position:relative;
-  min-height:430px;
-  border-radius:0;
-  margin:18px 0 34px;
-  padding:54px 54px;
+  width:100vw;
+  min-height:390px;
+  margin-top:-26px;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  margin-bottom:54px;
+  padding:0;
   overflow:hidden;
-  border:1px solid rgba(14,78,45,.10);
-  box-shadow:0 14px 34px rgba(14,78,45,.08);
+  background:
+    url("../bilder/firmen-hero.png"),
+    linear-gradient(135deg,#f6f3ee 0%,#eef4ec 55%,#dfe9dc 100%);
   background-size:cover;
   background-position:center right;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
 }
 
 .hero::before{
@@ -241,23 +248,40 @@ h3{
     linear-gradient(
       to right,
       rgba(254,254,253,1) 0%,
-      rgba(254,254,253,.96) 26%,
-      rgba(254,254,253,.82) 42%,
-      rgba(254,254,253,.45) 58%,
-      rgba(254,254,253,.08) 78%,
-      rgba(254,254,253,0) 100%
+      rgba(254,254,253,.98) 24%,
+      rgba(254,254,253,.90) 38%,
+      rgba(254,254,253,.68) 52%,
+      rgba(254,254,253,.30) 68%,
+      rgba(254,254,253,0) 88%
     );
+  pointer-events:none;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:80px;
+  background:linear-gradient(to bottom, rgba(254,254,253,0), #fefefd);
   pointer-events:none;
 }
 
 .hero-content{
   position:relative;
   z-index:2;
-  max-width:620px;
+  max-width:1120px;
+  min-height:390px;
+  margin:0 auto;
+  padding:54px 24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
 
-.hero-firmen{
-  background-image:url("../bilder/firmen-hero.png");
+.hero-content h1,
+.hero-content .lead,
+.hero-actions{
+  max-width:590px;
 }
 
 .hero-actions{
@@ -722,7 +746,7 @@ textarea{
 @media(max-width:900px){
   .hero{
     min-height:auto;
-    padding:38px 24px;
+    margin-top:-26px;
     background-position:center right;
   }
 
@@ -731,12 +755,19 @@ textarea{
       linear-gradient(
         to bottom,
         rgba(254,254,253,.98) 0%,
-        rgba(254,254,253,.92) 52%,
-        rgba(254,254,253,.68) 100%
+        rgba(254,254,253,.94) 52%,
+        rgba(254,254,253,.76) 100%
       );
   }
 
   .hero-content{
+    min-height:auto;
+    padding:42px 24px;
+  }
+
+  .hero-content h1,
+  .hero-content .lead,
+  .hero-actions{
     max-width:100%;
   }
 }
