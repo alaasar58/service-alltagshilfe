@@ -220,18 +220,32 @@ h3{
 }
 
 .hero-visual{
+  position:relative;
   min-height:360px;
   border-radius:32px;
+  overflow:hidden;
   background:
-    linear-gradient(rgba(14,78,45,.08), rgba(14,78,45,.08)),
-    url("../hintergrundbild.png"),
-    linear-gradient(135deg,#f6f3ee 0%,#eef4ec 55%,#dfe9dc 100%);
+    url("../hintergrundbild.png");
   background-size:cover;
   background-position:center;
   box-shadow:0 18px 42px rgba(14,78,45,.16);
   border:1px solid rgba(14,78,45,.12);
 }
-
+  .hero-visual::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      to right,
+      rgba(254,254,253,0.95) 0%,
+      rgba(254,254,253,0.82) 14%,
+      rgba(254,254,253,0.55) 28%,
+      rgba(254,254,253,0.22) 42%,
+      rgba(254,254,253,0.00) 62%
+    );
+  pointer-events:none;
+}
 .hero-actions{
   display:flex;
   flex-wrap:wrap;
