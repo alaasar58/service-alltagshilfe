@@ -6,681 +6,213 @@
 <title>Privatkunden | AlltagsHilfe Service</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  user-select:none;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:Arial, sans-serif;
-  background:#fefefd;
-  color:#1f2933;
-  line-height:1.6;
-  cursor:default;
-}
-
-input, textarea, select{
-  user-select:text;
-  cursor:text;
-}
-
-a, button, summary{
-  cursor:pointer;
-}
-
-:target{
-  scroll-margin-top:105px;
-}
+*{box-sizing:border-box;margin:0;padding:0;user-select:none}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#fefefd;color:#1f2933;line-height:1.6;cursor:default}
+input,textarea,select{user-select:text;cursor:text}
+a,button,summary{cursor:pointer}
+:target{scroll-margin-top:112px}
 
 .header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(254,254,253,.93);
+  position:sticky;top:0;z-index:100;
+  background:rgba(254,254,253,.94);
   backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(14,78,45,.12);
-  transition:.25s ease;
+  transition:.25s ease
 }
-
-.header.scrolled{
-  background:rgba(254,254,253,.82);
-  box-shadow:0 8px 24px rgba(14,78,45,.08);
+.header.scrolled{background:rgba(254,254,253,.84);box-shadow:0 8px 24px rgba(14,78,45,.08)}
+.header-inner{max-width:1180px;margin:auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:14px;color:#0e4e2d;font-weight:900;font-size:23px;text-decoration:none;white-space:nowrap}
+.brand img{width:64px;height:64px;border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(14,78,45,.18)}
+.nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nav a,.dropbtn{
+  height:42px;display:inline-flex;align-items:center;justify-content:center;
+  color:#0e4e2d;text-decoration:none;font-weight:800;padding:0 14px;
+  border-radius:999px;background:transparent;border:0;font-size:14px;line-height:1;font-family:inherit;transition:.2s ease
 }
-
-.header-inner{
-  max-width:1180px;
-  margin:auto;
-  padding:12px 24px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  color:#0e4e2d;
-  font-weight:900;
-  font-size:23px;
-  text-decoration:none;
-}
-
-.brand img{
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  object-fit:cover;
-  box-shadow:0 6px 18px rgba(14,78,45,.18);
-}
-
-.nav{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.nav a,
-.dropbtn{
-  color:#0e4e2d;
-  text-decoration:none;
-  font-weight:800;
-  padding:10px 13px;
-  border-radius:999px;
-  background:transparent;
-  border:0;
-  font-size:14px;
-  transition:.2s ease;
-}
-
-.nav a:hover,
-.dropdown:hover .dropbtn{
-  background:#eef4ec;
-}
-
-.home-btn{
-  background:#0e4e2d!important;
-  color:#fefefd!important;
-}
-
-.home-btn:hover{
-  background:#08391f!important;
-}
-
-.dropdown{
-  position:relative;
-}
-
+.nav a:hover,.dropdown:hover .dropbtn{background:#eef4ec}
+.home-btn{background:#0e4e2d!important;color:#fefefd!important}
+.home-btn:hover{background:#08391f!important}
+.dropdown{position:relative}
 .dropdown-content{
-  display:none;
-  position:absolute;
-  top:42px;
-  left:0;
-  background:#fefefd;
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:16px;
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
-  min-width:240px;
-  padding:8px;
+  display:none;position:absolute;top:48px;left:0;background:#fefefd;
+  border:1px solid rgba(14,78,45,.14);border-radius:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);min-width:245px;padding:8px
 }
+.dropdown-content a{width:100%;justify-content:flex-start;border-radius:12px;white-space:nowrap}
+.dropdown:hover .dropdown-content{display:block}
 
-.dropdown-content a{
-  display:block;
-  border-radius:12px;
-  padding:10px 12px;
-  white-space:nowrap;
-}
+.wrap{max-width:1120px;margin:auto;padding:26px 24px 0}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.show{opacity:1;transform:translateY(0)}
+.kicker{color:#548031;font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:.6px;margin-bottom:10px}
+h1,h2,h3{color:#0e4e2d}
+h1{font-size:43px;line-height:1.08;margin-bottom:18px}
+h2{font-size:31px;margin:56px 0 20px}
+h3{font-size:22px}
+.lead{font-size:18px;color:#56645d;max-width:850px;margin-bottom:13px}
 
-.dropdown:hover .dropdown-content{
-  display:block;
-}
-
-.wrap{
-  max-width:1120px;
-  margin:auto;
-  padding:26px 24px 0;
-}
-
-.reveal{
-  opacity:0;
-  transform:translateY(28px);
-  transition:opacity .7s ease, transform .7s ease;
-}
-
-.reveal.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.kicker{
-  color:#548031;
-  font-weight:900;
-  text-transform:uppercase;
-  font-size:13px;
-  letter-spacing:.6px;
-  margin-bottom:10px;
-}
-
-h1,h2,h3{
-  color:#0e4e2d;
-}
-
-h1{
-  font-size:43px;
-  line-height:1.08;
-  margin-bottom:18px;
-}
-
-h2{
-  font-size:31px;
-  margin:56px 0 20px;
-}
-
-h3{
-  font-size:22px;
-}
-
-.lead{
-  font-size:18px;
-  color:#56645d;
-  max-width:850px;
-  margin-bottom:13px;
-}
-
+/* HERO */
 .hero{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:36px;
-  align-items:center;
-  padding:38px 0 34px;
-}
-
-.hero-img{
-  min-height:360px;
-  border-radius:32px;
-  background:
-    linear-gradient(rgba(14,78,45,.10), rgba(14,78,45,.10)),
-    url("../hintergrundbild.png");
-  background-size:cover;
-  background-position:center;
-  box-shadow:0 18px 42px rgba(14,78,45,.16);
-}
-
-.hero-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-top:22px;
-}
-
-.hero-actions a{
-  text-decoration:none;
-  font-weight:900;
-  border-radius:999px;
-  padding:13px 18px;
-  transition:.25s ease;
-}
-
-.primary-link{
-  background:#0e4e2d;
-  color:white;
-}
-
-.secondary-link{
-  background:#f6f3ee;
-  color:#0e4e2d;
-  border:1px solid rgba(14,78,45,.16);
-}
-
-.hero-actions a:hover{
-  transform:translateY(-3px);
-  box-shadow:0 10px 24px rgba(14,78,45,.12);
-}
-
-.about-layout{
-  display:grid;
-  grid-template-columns:.9fr 1.1fr;
-  gap:24px;
-  align-items:start;
-}
-
-.about-intro{
-  background:#f6f3ee;
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:26px;
-  padding:26px;
-}
-
-.about-intro p{
-  color:#3d4a43;
-  margin-bottom:12px;
-}
-
-.about-cards{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-
-.about-card{
-  background:white;
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:22px;
-  padding:20px;
-  box-shadow:0 8px 20px rgba(14,78,45,.06);
-  transition:.25s ease;
-}
-
-.about-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 14px 28px rgba(14,78,45,.10);
-}
-
-.about-card h3{
-  font-size:18px;
-  margin-bottom:8px;
-}
-
-.about-card p{
-  color:#3d4a43;
-  font-size:15px;
-}
-
-.service{
-  display:grid;
-  grid-template-columns:36% 64%;
-  background:white;
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:24px;
+  position:relative;
+  width:100vw;
+  min-height:390px;
+  margin-top:-26px;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  margin-bottom:54px;
+  padding:0;
   overflow:hidden;
-  margin:22px 0;
-  box-shadow:0 8px 22px rgba(14,78,45,.07);
-  transition:.25s ease;
+  background:
+    url("../bilder/hintergrundbild.png"),
+    linear-gradient(135deg,#f6f3ee 0%,#eef4ec 55%,#dfe9dc 100%);
+  background-size:cover;
+  background-position:center right;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
 }
-
-.service:hover{
-  transform:translateY(-4px);
-  box-shadow:0 16px 34px rgba(14,78,45,.12);
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to right,
+    rgba(254,254,253,1) 0%,
+    rgba(254,254,253,.98) 24%,
+    rgba(254,254,253,.90) 38%,
+    rgba(254,254,253,.68) 52%,
+    rgba(254,254,253,.30) 68%,
+    rgba(254,254,253,0) 88%
+  );
+  pointer-events:none;
 }
-
-.service:nth-child(even){
-  grid-template-columns:64% 36%;
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:80px;
+  background:linear-gradient(to bottom,rgba(254,254,253,0),#fefefd);
+  pointer-events:none;
 }
-
-.service:nth-child(even) img{
-  order:2;
-}
-
-.service img{
-  width:100%;
-  height:100%;
-  min-height:230px;
-  max-height:270px;
-  object-fit:cover;
-}
-
-.service-content{
-  padding:24px 26px;
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:1120px;
+  min-height:390px;
+  margin:0 auto;
+  padding:54px 24px;
   display:flex;
   flex-direction:column;
   justify-content:center;
 }
+.hero-content h1,.hero-content .lead,.hero-actions{max-width:590px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.hero-actions a{text-decoration:none;font-weight:900;border-radius:999px;padding:13px 18px;transition:.25s ease}
+.primary-link{background:#0e4e2d;color:white}
+.secondary-link{background:#f6f3ee;color:#0e4e2d;border:1px solid rgba(14,78,45,.16)}
+.hero-actions a:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(14,78,45,.12)}
 
-.service h3{
-  font-size:24px;
-  margin-bottom:8px;
+.about-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:start}
+.about-intro{background:#f6f3ee;border:1px solid rgba(14,78,45,.14);border-radius:26px;padding:26px}
+.about-intro p{color:#3d4a43;margin-bottom:12px}
+.about-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.about-card{background:white;border:1px solid rgba(14,78,45,.14);border-radius:22px;padding:20px;box-shadow:0 8px 20px rgba(14,78,45,.06);transition:.25s ease}
+.about-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(14,78,45,.10)}
+.about-card h3{font-size:18px;margin-bottom:8px}
+.about-card p{color:#3d4a43;font-size:15px}
+
+.service{
+  display:grid;grid-template-columns:36% 64%;
+  background:white;border:1px solid rgba(14,78,45,.14);border-radius:24px;
+  overflow:hidden;margin:22px 0;box-shadow:0 8px 22px rgba(14,78,45,.07);transition:.25s ease
 }
+.service.reverse{grid-template-columns:64% 36%}
+.service.reverse img{order:2}
+.service:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(14,78,45,.12)}
+.service img{width:100%;height:100%;min-height:245px;object-fit:cover}
+.service-content{padding:24px 26px;display:flex;flex-direction:column;justify-content:center}
+.service h3{font-size:24px;margin-bottom:8px}
+.short{color:#3d4a43;font-size:15.5px;margin-bottom:8px;max-width:730px}
 
-.short{
-  color:#3d4a43;
-  font-size:15.5px;
-  margin-bottom:10px;
-}
-
-details{
-  margin-top:12px;
-  border-top:1px solid rgba(14,78,45,.14);
-  padding-top:12px;
-}
-
+details{margin-top:12px;border-top:1px solid rgba(14,78,45,.14);padding-top:14px}
 summary{
-  color:#0e4e2d;
-  font-weight:900;
-  list-style:none;
-  width:fit-content;
-  padding:8px 0;
+  color:#0e4e2d;background:#eef4ec;border:1px solid rgba(14,78,45,.14);
+  border-radius:999px;font-weight:900;list-style:none;width:fit-content;
+  padding:9px 14px;transition:.25s ease
 }
+summary:hover{background:#dfe9dc}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"  ▾";color:#0e4e2d}
+details[open] summary::after{content:"  ▴"}
+.details-text{margin-top:14px;color:#3d4a43;font-size:15.5px;max-width:760px}
 
-summary::-webkit-details-marker{
-  display:none;
-}
-
-summary::after{
-  content:"  anzeigen";
-  font-size:14px;
-  color:#548031;
-}
-
-details[open] summary::after{
-  content:"  schließen";
-}
-
-.details-text{
-  margin-top:12px;
-  color:#3d4a43;
-  font-size:15.5px;
-  max-width:720px;
-}
-
-.info-box{
-  background:#f6f3ee;
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:26px;
-  padding:26px;
-  margin-top:20px;
-}
-
-.info-box p{
-  color:#3d4a43;
-  margin-bottom:12px;
-}
+.info-box{background:#f6f3ee;border:1px solid rgba(14,78,45,.14);border-radius:26px;padding:26px;margin-top:20px}
+.info-box p{color:#3d4a43;margin-bottom:12px}
 
 .area-section{
-  display:grid;
-  grid-template-columns:.95fr 1.05fr;
-  gap:26px;
-  align-items:center;
-  background:#f6f3ee;
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:28px;
-  padding:26px;
+  display:grid;grid-template-columns:.95fr 1.05fr;gap:26px;align-items:center;
+  background:#f6f3ee;border:1px solid rgba(14,78,45,.14);border-radius:28px;padding:26px
 }
-
-.area-img{
-  min-height:310px;
-  border-radius:24px;
+.area-visual{
+  min-height:300px;border-radius:24px;
   background:
-    linear-gradient(rgba(14,78,45,.06), rgba(14,78,45,.06)),
-    url("../einsatzgebiet.png");
-  background-size:cover;
-  background-position:center;
+    linear-gradient(rgba(14,78,45,.04),rgba(14,78,45,.04)),
+    url("../bilder/Einsatztgebiet.png"),
+    linear-gradient(135deg,#fefefd 0%,#eef4ec 50%,#dfe9dc 100%);
+  background-size:cover;background-position:center;
   box-shadow:0 12px 28px rgba(14,78,45,.12);
+  border:1px solid rgba(14,78,45,.12)
 }
+.extra-area{margin-top:18px;color:#3d4a43}
+.extra-area strong{color:#0e4e2d}
 
-.areas{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:18px;
-}
+.contact{background:#f6f3ee;border:1px solid rgba(14,78,45,.14);border-radius:28px;padding:28px;margin-top:56px}
+.contact-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;margin-top:18px}
+form{background:white;border:1px solid rgba(14,78,45,.12);border-radius:22px;padding:22px}
+label{display:block;color:#0e4e2d;font-weight:900;font-size:14px;margin-bottom:6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #d8ded8;border-radius:12px;margin-bottom:13px;font-family:inherit;font-size:15px}
+textarea{min-height:135px;max-height:135px;resize:none}
+.field-hint{display:block;margin-top:-7px;margin-bottom:13px;color:#6d776f;font-size:12.5px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{border:0;background:#0e4e2d;color:white;border-radius:999px;padding:14px 18px;font-weight:900;cursor:pointer;width:100%;transition:.25s ease}
+.btn:hover{background:#08391f;transform:translateY(-2px)}
+.side-contact{display:grid;gap:14px}
+.contact-card{background:white;border:1px solid rgba(14,78,45,.13);border-radius:18px;padding:18px;text-decoration:none;color:#1f2933;transition:.25s ease}
+.contact-card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(14,78,45,.10)}
+.contact-card strong{display:block;color:#0e4e2d;margin-bottom:5px}
+.contact-card span{color:#56645d;font-size:15px}
+.qr-box{background:white;border:1px solid rgba(14,78,45,.12);border-radius:18px;padding:18px;text-align:center}
+.qr-box img{width:132px;height:132px;object-fit:cover;border-radius:14px;margin-bottom:10px}
 
-.areas span{
-  background:white;
-  border:1px solid rgba(14,78,45,.13);
-  border-radius:999px;
-  padding:10px 14px;
-  font-weight:900;
-  color:#0e4e2d;
-}
+.footer{margin-top:60px;background:#0e4e2d;color:white;border-radius:30px 30px 0 0;padding:30px 30px 18px}
+.footer-main{display:grid;grid-template-columns:1.1fr .9fr .9fr .9fr;gap:24px;margin-bottom:24px}
+.footer h3{color:white;font-size:17px;margin-bottom:8px}
+.footer p,.footer li{color:#e7efe8;font-size:14px}
+.footer ul{list-style:none}
+.footer a{color:#fefefd;text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.top-link{display:inline-block;border:1px solid rgba(255,255,255,.35);padding:10px 14px;border-radius:999px;font-weight:900;margin-top:8px;background:transparent;color:#fefefd;font-family:inherit}
+.top-link:hover{background:rgba(255,255,255,.12)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.18);padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:#e7efe8}
+.footer-bottom a{margin-left:14px}
 
-.extra-area{
-  margin-top:18px;
-  color:#3d4a43;
-}
-
-.extra-area strong{
-  color:#0e4e2d;
-}
-
-.contact{
-  background:#f6f3ee;
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:28px;
-  padding:28px;
-  margin-top:56px;
-}
-
-.contact-layout{
-  display:grid;
-  grid-template-columns:1.25fr .75fr;
-  gap:24px;
-  margin-top:18px;
-}
-
-form{
-  background:white;
-  border:1px solid rgba(14,78,45,.12);
-  border-radius:22px;
-  padding:22px;
-}
-
-label{
-  display:block;
-  color:#0e4e2d;
-  font-weight:900;
-  font-size:14px;
-  margin-bottom:6px;
-}
-
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  border:1px solid #d8ded8;
-  border-radius:12px;
-  margin-bottom:13px;
-  font-family:inherit;
-  font-size:15px;
-}
-
-textarea{
-  min-height:135px;
-  resize:vertical;
-}
-
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.btn{
-  border:0;
-  background:#0e4e2d;
-  color:white;
-  border-radius:999px;
-  padding:14px 18px;
-  font-weight:900;
-  cursor:pointer;
-  width:100%;
-  transition:.25s ease;
-}
-
-.btn:hover{
-  background:#08391f;
-  transform:translateY(-2px);
-}
-
-.side-contact{
-  display:grid;
-  gap:14px;
-}
-
-.contact-card{
-  background:white;
-  border:1px solid rgba(14,78,45,.13);
-  border-radius:18px;
-  padding:18px;
-  text-decoration:none;
-  color:#1f2933;
-  transition:.25s ease;
-}
-
-.contact-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 24px rgba(14,78,45,.10);
-}
-
-.contact-card strong{
-  display:block;
-  color:#0e4e2d;
-  margin-bottom:5px;
-}
-
-.contact-card span{
-  color:#56645d;
-  font-size:15px;
-}
-
-.qr-box{
-  background:white;
-  border:1px solid rgba(14,78,45,.12);
-  border-radius:18px;
-  padding:18px;
-  text-align:center;
-}
-
-.qr-box img{
-  width:132px;
-  height:132px;
-  object-fit:cover;
-  border-radius:14px;
-  margin-bottom:10px;
-}
-
-.footer{
-  margin-top:60px;
-  background:#0e4e2d;
-  color:white;
-  border-radius:30px 30px 0 0;
-  padding:30px 30px 18px;
-}
-
-.footer-main{
-  display:grid;
-  grid-template-columns:1.1fr .9fr .9fr .9fr;
-  gap:24px;
-  margin-bottom:24px;
-}
-
-.footer h3{
-  color:white;
-  font-size:17px;
-  margin-bottom:8px;
-}
-
-.footer p,
-.footer li{
-  color:#e7efe8;
-  font-size:14px;
-}
-
-.footer ul{
-  list-style:none;
-}
-
-.footer a{
-  color:#fefefd;
-  text-decoration:none;
-}
-
-.footer a:hover{
-  text-decoration:underline;
-}
-
-.top-link{
-  display:inline-block;
-  border:1px solid rgba(255,255,255,.35);
-  padding:10px 14px;
-  border-radius:999px;
-  font-weight:900;
-  margin-top:8px;
-  background:transparent;
-  color:#fefefd;
-  font-family:inherit;
-}
-
-.top-link:hover{
-  background:rgba(255,255,255,.12);
-}
-
-.footer-bottom{
-  border-top:1px solid rgba(255,255,255,.18);
-  padding-top:16px;
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  flex-wrap:wrap;
-  font-size:13px;
-  color:#e7efe8;
-}
-
-.footer-bottom a{
-  margin-left:14px;
-}
-
-@media(max-width:950px){
-  .header-inner{
-    display:block;
-  }
-
-  .nav{
-    margin-top:14px;
-    display:flex;
-    flex-wrap:wrap;
-  }
-
-  .dropdown-content{
-    position:static;
-    box-shadow:none;
-    margin-top:6px;
-  }
-
-  .hero,
-  .about-layout,
-  .area-section,
-  .contact-layout,
-  .footer-main,
-  .row{
-    grid-template-columns:1fr;
-  }
-
-  .about-cards{
-    grid-template-columns:1fr;
-  }
-
-  .service,
-  .service:nth-child(even){
-    grid-template-columns:1fr;
-  }
-
-  .service:nth-child(even) img{
-    order:0;
-  }
-
-  .service img{
-    min-height:220px;
-    max-height:none;
-  }
-
-  h1{
-    font-size:33px;
-  }
-
-  h2{
-    font-size:27px;
-  }
-
-  .brand img{
-    width:58px;
-    height:58px;
-  }
+@media(max-width:900px){
+  .header-inner{display:block}
+  .nav{margin-top:14px}
+  .dropdown-content{position:static;box-shadow:none;margin-top:6px}
+  .hero{min-height:auto;margin-top:-26px;background-position:center right}
+  .hero::before{background:linear-gradient(to bottom,rgba(254,254,253,.98) 0%,rgba(254,254,253,.94) 52%,rgba(254,254,253,.76) 100%)}
+  .hero-content{min-height:auto;padding:42px 24px}
+  .hero-content h1,.hero-content .lead,.hero-actions{max-width:100%}
+  .about-layout,.area-section,.contact-layout,.footer-main,.row{grid-template-columns:1fr}
+  .about-cards{grid-template-columns:1fr}
+  .service,.service.reverse{grid-template-columns:1fr}
+  .service.reverse img{order:0}
+  .service img{min-height:220px}
+  h1{font-size:33px}
+  h2{font-size:27px}
+  .brand img{width:58px;height:58px}
 }
 </style>
 </head>
@@ -690,7 +222,7 @@ textarea{
 <header class="header" id="oben">
   <div class="header-inner">
     <a class="brand" href="../">
-      <img src="../Logo.png" alt="AlltagsHilfe Service Logo">
+      <img src="../bilder/Logo.png" alt="AlltagsHilfe Service Logo">
       <span>AlltagsHilfe Service</span>
     </a>
 
@@ -700,7 +232,7 @@ textarea{
       <div class="dropdown">
         <button class="dropbtn">Über uns ▾</button>
         <div class="dropdown-content">
-          <a href="#ueber-uns">Warum AlltagsHilfe?</a>
+          <a href="#ueber-uns">Privatkunden</a>
           <a href="#fuer-wen">Für wen wir da sind</a>
         </div>
       </div>
@@ -736,17 +268,16 @@ textarea{
 <div class="wrap">
 
 <section class="hero reveal" id="ueber-uns">
-  <div>
+  <div class="hero-content">
     <div class="kicker">Privatkunden</div>
     <h1>Hilfe rund um Haus, Garten und Alltag</h1>
 
     <p class="lead">
       Im Alltag bleiben viele Aufgaben liegen, weil Zeit, Kraft oder die passende Unterstützung fehlen.
-      Genau hier möchten wir entlasten.
     </p>
 
     <p class="lead">
-      Wir unterstützen bei kleinen und großen Aufgaben – persönlich, zuverlässig und mit klarer Absprache vor Beginn.
+      Wir unterstützen bei kleinen und größeren Aufgaben – persönlich, zuverlässig und mit klarer Absprache vor Beginn.
     </p>
 
     <div class="hero-actions">
@@ -754,8 +285,6 @@ textarea{
       <a class="secondary-link" href="#leistungen">Leistungen ansehen</a>
     </div>
   </div>
-
-  <div class="hero-img"></div>
 </section>
 
 <section class="reveal" id="fuer-wen">
@@ -763,15 +292,9 @@ textarea{
 
   <div class="about-layout">
     <div class="about-intro">
-      <p>
-        Unser Alltag ist oft voller Aufgaben, die erledigt werden müssen – im Haushalt, im Garten, im Keller, bei einem Umzug oder rund um das eigene Zuhause.
-      </p>
-      <p>
-        Für manche fehlt die Zeit. Für andere fehlt die Kraft. Und manchmal braucht man einfach jemanden, der zuverlässig mit anpackt.
-      </p>
-      <p>
-        AlltagsHilfe Service soll genau diese Lücke schließen: unkompliziert, persönlich und mit einem offenen Ohr für Ihre Situation.
-      </p>
+      <p>Unser Alltag ist oft voller Aufgaben, die erledigt werden müssen – im Haushalt, im Garten, im Keller, bei einem Umzug oder rund um das eigene Zuhause.</p>
+      <p>Für manche fehlt die Zeit. Für andere fehlt die Kraft. Und manchmal braucht man einfach jemanden, der zuverlässig mit anpackt.</p>
+      <p>AlltagsHilfe Service soll genau diese Lücke schließen: unkompliziert, persönlich und mit einem offenen Ohr für Ihre Situation.</p>
     </div>
 
     <div class="about-cards">
@@ -802,12 +325,12 @@ textarea{
   <h2 class="reveal">Unsere Leistungen</h2>
 
   <article class="service reveal" id="reinigung">
-    <img src="../bilder/reinigung.jpg" alt="Reinigung">
+    <img src="../bilder/privat-reinigung.png" alt="Reinigung">
     <div class="service-content">
       <h3>Reinigung</h3>
-      <p class="short">Einmalige oder regelmäßige Reinigungsarbeiten nach Absprache.</p>
+      <p class="short">Saubere Bereiche nach Absprache.</p>
       <details>
-        <summary>Leistungsumfang</summary>
+        <summary>Leistungsdetails</summary>
         <p class="details-text">
           Wir übernehmen Reinigungsarbeiten für Treppenhäuser, Eingangsbereiche, Gemeinschaftsflächen oder private Bereiche.
           Vor Beginn klären wir gemeinsam, welche Flächen gereinigt werden sollen, ob Reinigungsmaterial vorhanden ist und in welchem Umfang die Reinigung gewünscht wird.
@@ -816,28 +339,28 @@ textarea{
     </div>
   </article>
 
-  <article class="service reveal" id="gartenpflege">
-    <img src="../bilder/gartenpflege.jpg" alt="Gartenpflege">
+  <article class="service reverse reveal" id="gartenpflege">
+    <img src="../bilder/privat-gartenpflege.png" alt="Gartenpflege">
     <div class="service-content">
       <h3>Gartenpflege</h3>
-      <p class="short">Gartenflächen wieder ordentlich und gepflegt aussehen lassen.</p>
+      <p class="short">Einfache Pflegearbeiten für Garten und Außenbereich.</p>
       <details>
-        <summary>Leistungsumfang</summary>
+        <summary>Leistungsdetails</summary>
         <p class="details-text">
-          Wir unterstützen bei Rasenpflege, Unkrautentfernung, Heckenschnitt und weiteren Arbeiten rund um Garten und Außenbereich.
-          Ob einmalige Hilfe oder regelmäßige Unterstützung – wir besprechen den Umfang vorab und finden eine passende Lösung.
+          Wir unterstützen bei einfachen Gartenarbeiten wie Rasenpflege, Unkrautentfernung, Laubarbeiten, Randbereichen und kleineren Schnittarbeiten nach Absprache.
+          Bei größeren oder komplexeren Arbeiten prüfen wir vorab ehrlich, ob wir diese übernehmen können.
         </p>
       </details>
     </div>
   </article>
 
   <article class="service reveal" id="entruempelung">
-    <img src="../bilder/entruempelung.jpg" alt="Entrümpelung">
+    <img src="../bilder/privat-entruempelung.png" alt="Entrümpelung">
     <div class="service-content">
       <h3>Entrümpelung</h3>
-      <p class="short">Wir helfen dabei, wieder Platz und Ordnung zu schaffen.</p>
+      <p class="short">Platz schaffen und Ordnung herstellen.</p>
       <details>
-        <summary>Leistungsumfang</summary>
+        <summary>Leistungsdetails</summary>
         <p class="details-text">
           Ob Keller, Garage, Dachboden oder einzelne Räume – wir unterstützen beim Sortieren, Tragen, Räumen und Vorbereiten für Entsorgung oder Übergabe.
           Fotos per WhatsApp helfen uns, den Aufwand schnell und realistisch einzuschätzen.
@@ -846,13 +369,13 @@ textarea{
     </div>
   </article>
 
-  <article class="service reveal" id="haushaltsaufloesung">
-    <img src="../bilder/haushaltsaufloesung.jpg" alt="Haushaltsauflösung">
+  <article class="service reverse reveal" id="haushaltsaufloesung">
+    <img src="../bilder/privat-haushaltsaufloesung.png" alt="Haushaltsauflösung">
     <div class="service-content">
       <h3>Haushaltsauflösung</h3>
       <p class="short">Unterstützung bei Wohnungs- und Haushaltsauflösungen.</p>
       <details>
-        <summary>Leistungsumfang</summary>
+        <summary>Leistungsdetails</summary>
         <p class="details-text">
           Bei Haushaltsauflösungen ist eine gute Planung besonders wichtig.
           Wir besprechen, welche Bereiche geräumt werden sollen, was erhalten bleibt und wie die Übergabe vorbereitet werden kann.
@@ -863,12 +386,12 @@ textarea{
   </article>
 
   <article class="service reveal" id="transporte">
-    <img src="../bilder/transporte.jpg" alt="Transporte">
+    <img src="../bilder/privat-transporte.png" alt="Transporte">
     <div class="service-content">
       <h3>Transporte</h3>
-      <p class="short">Kleintransporte, Abholungen und Unterstützung beim Tragen.</p>
+      <p class="short">Kleintransporte und Unterstützung beim Tragen.</p>
       <details>
-        <summary>Leistungsumfang</summary>
+        <summary>Leistungsdetails</summary>
         <p class="details-text">
           Wir unterstützen bei kleineren Transporten, Abholungen sowie beim Be- und Entladen.
           Vorab klären wir Strecke, Tragewege, Aufwand und gewünschten Zeitraum, damit der Einsatz gut geplant werden kann.
@@ -877,13 +400,13 @@ textarea{
     </div>
   </article>
 
-  <article class="service reveal" id="weitere">
-    <img src="../bilder/weitere-unterstuetzung.jpg" alt="Weitere Unterstützung">
+  <article class="service reverse reveal" id="weitere">
+    <img src="../bilder/privat-transporte.png" alt="Weitere Unterstützung">
     <div class="service-content">
       <h3>Weitere Unterstützung</h3>
-      <p class="short">Praktische Hilfe bei kleineren Aufgaben rund um Haus und Alltag.</p>
+      <p class="short">Sie beschreiben die Aufgabe – wir prüfen die Umsetzung.</p>
       <details>
-        <summary>Leistungsumfang</summary>
+        <summary>Leistungsdetails</summary>
         <p class="details-text">
           Auch bei Möbelmontage, Keller und Garage, kleinen Hilfsarbeiten oder anderen praktischen Aufgaben können Sie uns anfragen.
           Oft reicht eine kurze Beschreibung oder ein Foto, damit wir einschätzen können, ob und wie wir helfen können.
@@ -895,20 +418,10 @@ textarea{
 
 <section class="reveal" id="preise">
   <h2>Transparente Preise</h2>
-
   <div class="info-box">
-    <p>
-      Jeder Auftrag ist individuell. Deshalb erstellen wir Ihnen vor Beginn eine klare und unverbindliche Preisübersicht.
-      Die Angebotserstellung ist kostenlos.
-    </p>
-
-    <p>
-      Bei Bedarf ist auch eine kurze Besichtigung möglich, damit wir den Aufwand besser einschätzen und Ihnen direkt einen passenden Preis vorschlagen können.
-    </p>
-
-    <p>
-      Kurzfristige Termine sind nach Verfügbarkeit oft innerhalb der nächsten Tage bis zu einer Woche möglich.
-    </p>
+    <p>Jeder Auftrag ist individuell. Deshalb erstellen wir Ihnen vor Beginn eine klare und unverbindliche Preisübersicht. Die Angebotserstellung ist kostenlos.</p>
+    <p>Bei Bedarf ist auch eine kurze Besichtigung möglich, damit wir den Aufwand besser einschätzen und Ihnen direkt einen passenden Preis vorschlagen können.</p>
+    <p>Sollte sich der Umfang ändern, sprechen wir dies vorher mit Ihnen ab.</p>
   </div>
 </section>
 
@@ -921,7 +434,7 @@ textarea{
       <h3>Wir sind in Ihrer Nähe</h3>
 
       <p class="lead">
-        Unser Fokus liegt auf Ahrensburg, Bargteheide, Großhansdorf, Ammersbek, Hamburg und der Umgebung.
+        Unser Fokus liegt auf Ahrensburg, Bargteheide, Großhansdorf, Ammersbek, Hamburg und der näheren Umgebung.
       </p>
 
       <p class="extra-area">
@@ -930,44 +443,27 @@ textarea{
       </p>
     </div>
 
-    <div class="area-img"></div>
+    <div class="area-visual"></div>
   </div>
 </section>
 
 <section class="contact reveal" id="kontakt">
   <h2>Kontakt & Anfrage</h2>
-
-  <p class="lead">
-    Beschreiben Sie kurz Ihr Anliegen. Wir melden uns schnellstmöglich zurück.
-  </p>
+  <p class="lead">Beschreiben Sie kurz Ihr Anliegen. Wir melden uns schnellstmöglich zurück.</p>
 
   <div class="contact-layout">
     <form autocomplete="on">
       <div class="row">
-        <div>
-          <label>Vor- und Nachname</label>
-          <input name="Name" placeholder="Ihr Name">
-        </div>
-
-        <div>
-          <label>Telefon</label>
-          <input name="Telefon" placeholder="Telefonnummer">
-        </div>
+        <div><label>Vor- und Nachname</label><input name="Name" maxlength="80" autocomplete="name" placeholder="Ihr Name"></div>
+        <div><label>Telefon</label><input name="Telefon" maxlength="40" autocomplete="tel" placeholder="Telefonnummer"></div>
       </div>
 
       <label>E-Mail</label>
-      <input name="E-Mail" placeholder="E-Mail-Adresse">
+      <input name="E-Mail" maxlength="90" autocomplete="email" placeholder="E-Mail-Adresse">
 
       <div class="row">
-        <div>
-          <label>PLZ</label>
-          <input name="PLZ" placeholder="z. B. 22926">
-        </div>
-
-        <div>
-          <label>Ort</label>
-          <input name="Ort" placeholder="z. B. Ahrensburg">
-        </div>
+        <div><label>PLZ</label><input name="PLZ" maxlength="10" autocomplete="postal-code" placeholder="z. B. 22926"></div>
+        <div><label>Ort</label><input name="Ort" maxlength="60" autocomplete="address-level2" placeholder="z. B. Ahrensburg"></div>
       </div>
 
       <label>Gewünschte Leistung</label>
@@ -982,32 +478,22 @@ textarea{
       </select>
 
       <label>Wunschtermin / Zeitraum</label>
-      <input name="Wunschtermin" placeholder="Optional, z. B. nächste Woche">
+      <input name="Wunschtermin" maxlength="80" placeholder="Optional, z. B. nächste Woche">
 
       <label>Nachricht</label>
-      <textarea name="Nachricht" placeholder="Beschreiben Sie kurz den Auftrag und wichtige Hinweise."></textarea>
+      <textarea name="Nachricht" maxlength="900" placeholder="Beschreiben Sie kurz den Auftrag und wichtige Hinweise."></textarea>
+      <small class="field-hint">Maximal 900 Zeichen</small>
 
       <button class="btn" type="button">Anfrage senden</button>
     </form>
 
     <div class="side-contact">
-      <a class="contact-card" href="tel:+4915229546946">
-        <strong>Telefon</strong>
-        <span>+49 1522 9546946</span>
-      </a>
-
-      <a class="contact-card" href="mailto:info@service-alltagshilfe.de?subject=Anfrage%20AlltagsHilfe%20Service">
-        <strong>E-Mail</strong>
-        <span>info@service-alltagshilfe.de</span>
-      </a>
-
-      <a class="contact-card" href="https://wa.me/4915229546946" target="_blank">
-        <strong>WhatsApp</strong>
-        <span>Nachricht schreiben</span>
-      </a>
+      <a class="contact-card" href="tel:+4915229546946"><strong>Telefon</strong><span>+49 1522 9546946</span></a>
+      <a class="contact-card" href="mailto:info@service-alltagshilfe.de?subject=Anfrage%20AlltagsHilfe%20Service"><strong>E-Mail</strong><span>info@service-alltagshilfe.de</span></a>
+      <a class="contact-card" href="https://wa.me/4915229546946" target="_blank"><strong>WhatsApp</strong><span>Nachricht schreiben</span></a>
 
       <div class="qr-box">
-        <img src="../whatsapp-qr.jpg" alt="WhatsApp QR-Code">
+        <img src="../bilder/whatsapp-qr.jpg" alt="WhatsApp QR-Code">
         <h3>WhatsApp QR-Code</h3>
         <p>QR-Code scannen und Bilder oder Informationen zum Auftrag direkt senden.</p>
       </div>
@@ -1027,7 +513,7 @@ textarea{
       <h3>Schnelllinks</h3>
       <ul>
         <li><a href="../">Startseite</a></li>
-        <li><a href="#ueber-uns">Über uns</a></li>
+        <li><a href="../firmen/">Firmenkunden</a></li>
         <li><a href="#leistungen">Leistungen</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
@@ -1038,7 +524,7 @@ textarea{
       <ul>
         <li><a href="#preise">Preise</a></li>
         <li><a href="#einsatzgebiet">Einsatzgebiet</a></li>
-        <li><a href="../firmen/">Firmenkunden</a></li>
+        <li><a href="../datenschutz/">Datenschutz</a></li>
         <li><a href="../impressum/">Impressum</a></li>
       </ul>
     </div>
@@ -1062,41 +548,22 @@ textarea{
 </div>
 
 <script>
-const header = document.querySelector('.header');
+const header=document.querySelector('.header');
+window.addEventListener('scroll',()=>{window.scrollY>20?header.classList.add('scrolled'):header.classList.remove('scrolled')});
 
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 20) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-});
-
-const revealItems = document.querySelectorAll('.reveal');
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    } else {
-      entry.target.classList.remove('show');
-    }
+const revealItems=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add('show')}
+    else{entry.target.classList.remove('show')}
   });
-}, { threshold: 0.12 });
+},{threshold:.12});
+revealItems.forEach(item=>observer.observe(item));
 
-revealItems.forEach(item => observer.observe(item));
-
-  document.querySelectorAll('.back-to-top').forEach(button => {
-  button.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
-  });
+document.querySelectorAll('.back-to-top').forEach(button=>{
+  button.addEventListener('click',()=>window.scrollTo({top:0,left:0,behavior:'smooth'}));
 });
 </script>
-  
 
 </body>
 </html>
