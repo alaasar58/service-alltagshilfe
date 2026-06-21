@@ -782,7 +782,143 @@ textarea{min-height:135px;max-height:135px;resize:none}
 </footer>
 
 </div>
+  
+document.querySelectorAll('.date-field').forEach(field => {
+  const today = new Date().toISOString().split('T')[0];
+  field.setAttribute('min', today);
+});
 
+function clearFormErrors(form){
+  form.querySelectorAll('.form-field').forEach(field => {
+    field.classList.remove('invalid');
+    const error = field.querySelector('.error-message');
+    if(error) error.textContent = '';
+  });
+}
+
+function setFieldError(input, message){
+  const field = input.closest('.form-field');
+  if(!field) return;
+
+  field.classList.add('invalid');
+
+  const error = field.querySelector('.error-message');
+  if(error) error.textContent = message || 'Bitte dieses Feld ausfüllen.';
+}
+
+function validateCustomForm(form){
+  clearFormErrors(form);
+
+  let firstInvalid = null;
+
+  form.querySelectorAll('[required]').forEach(input => {
+    if(input.type === 'checkbox'){
+      if(!input.checked){
+        setFieldError(input, input.dataset.error);
+        if(!firstInvalid) firstInvalid = input;
+      }
+      return;
+    }
+
+    if(!input.value || input.value.trim() === ''){
+      setFieldError(input, input.dataset.error);
+      if(!firstInvalid) firstInvalid = input;
+      return;
+    }
+
+    if(input.type === 'email' && !input.checkValidity()){
+      setFieldError(input, input.dataset.error);
+      if(!firstInvalid) firstInvalid = input;
+    }
+  });
+
+  const callbackSelect = form.querySelector('.callback-select');
+  const phoneInput = form.querySelector('input[name="Telefon"]');
+
+  if(callbackSelect && phoneInput && callbackSelect.value === 'Ja' && phoneInput.value.trim() === ''){
+    setFieldError(phoneInput, 'Bitte Telefonnummer für den gewünschten Rückruf eingeben.');
+    if(!firstInvalid) firstInvalid = phoneInput;
+  }
+
+  if(firstInvalid){
+    firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
+    setTimeout(() => firstInvalid.focus(), 350);
+    return false;
+  }
+
+  return true;
+}
+
+function showPopup(success, title, message){
+  const popup = document.getElementById('formPopup');
+  const icon = document.getElementById('popupIcon');
+  const popupTitle = document.getElementById('popupTitle');
+  const popupMessage = document.getElementById('popupMessage');
+
+  if(!popup || !icon || !popupTitle || !popupMessage) return;
+
+  icon.textContent = success ? '✓' : '!';
+  icon.style.background = success ? '#0e4e2d' : '#b42318';
+  popupTitle.textContent = title;
+  popupMessage.textContent = message;
+  popup.classList.add('show');
+}
+
+document.querySelectorAll('.ajax-form').forEach(form => {
+  const button = form.querySelector('.submit-btn');
+  const defaultButtonText = form.dataset.buttonText || 'Anfrage senden';
+
+  form.addEventListener('submit', async function(event){
+    event.preventDefault();
+
+    if(!validateCustomForm(form)){
+      return;
+    }
+
+    if(button){
+      button.disabled = true;
+      button.textContent = 'Wird gesendet...';
+    }
+
+    const formData = new FormData(form);
+
+    try{
+      await fetch(form.action, {
+        method:'POST',
+        body:formData,
+        mode:'no-cors'
+      });
+
+      form.reset();
+      clearFormErrors(form);
+
+      showPopup(
+        true,
+        'Anfrage gesendet',
+        'Vielen Dank. Ihre Anfrage wurde übermittelt. Wir melden uns schnellstmöglich zurück.'
+      );
+    }catch(error){
+      showPopup(
+        false,
+        'Anfrage konnte nicht gesendet werden',
+        'Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per Telefon oder WhatsApp.'
+      );
+    }finally{
+      if(button){
+        button.disabled = false;
+        button.textContent = defaultButtonText;
+      }
+    }
+  });
+});
+
+const popupClose = document.getElementById('popupClose');
+if(popupClose){
+  popupClose.addEventListener('click', () => {
+    const popup = document.getElementById('formPopup');
+    if(popup) popup.classList.remove('show');
+  });
+}
 <script>
 const header=document.querySelector('.header');
 window.addEventListener('scroll',()=>{window.scrollY>20?header.classList.add('scrolled'):header.classList.remove('scrolled')});
@@ -800,6 +936,13 @@ document.querySelectorAll('.back-to-top').forEach(button=>{
   button.addEventListener('click',()=>window.scrollTo({top:0,left:0,behavior:'smooth'}));
 });
 </script>
-
+<div class="form-popup" id="formPopup">
+  <div class="form-popup-box">
+    <div class="form-popup-icon" id="popupIcon">✓</div>
+    <h3 id="popupTitle">Anfrage gesendet</h3>
+    <p id="popupMessage">Vielen Dank. Ihre Anfrage wurde übermittelt. Wir melden uns schnellstmöglich zurück.</p>
+    <button class="popup-btn" type="button" id="popupClose">Fertig</button>
+  </div>
+</div>
 </body>
 </html>
