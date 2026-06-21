@@ -783,7 +783,23 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
 </div>
   
-document.querySelectorAll('.date-field').forEach(field => {
+<script>
+const header=document.querySelector('.header');
+window.addEventListener('scroll',()=>{window.scrollY>20?header.classList.add('scrolled'):header.classList.remove('scrolled')});
+
+const revealItems=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add('show')}
+    else{entry.target.classList.remove('show')}
+  });
+},{threshold:.12});
+revealItems.forEach(item=>observer.observe(item));
+
+document.querySelectorAll('.back-to-top').forEach(button=>{
+  button.addEventListener('click',()=>window.scrollTo({top:0,left:0,behavior:'smooth'}));
+});
+  document.querySelectorAll('.date-field').forEach(field => {
   const today = new Date().toISOString().split('T')[0];
   field.setAttribute('min', today);
 });
@@ -919,6 +935,7 @@ if(popupClose){
     if(popup) popup.classList.remove('show');
   });
 }
+
 <script>
 const header=document.querySelector('.header');
 window.addEventListener('scroll',()=>{window.scrollY>20?header.classList.add('scrolled'):header.classList.remove('scrolled')});
