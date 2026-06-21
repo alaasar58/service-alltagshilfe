@@ -616,11 +616,11 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
 
     <div class="form-field">
-      <label>Nachname *</label>
-      <input name="Nachname" maxlength="80" autocomplete="family-name" placeholder="Nachname des Ansprechpartners" required data-error="Bitte Nachname eingeben.">
-      <small class="error-message"></small>
-    </div>
-  </div>
+  <label>Nachricht *</label>
+  <textarea name="Nachricht" maxlength="900" placeholder="Beschreiben Sie kurz den Auftrag, die Fläche, den Zustand oder wichtige Hinweise." required data-error="Bitte Nachricht eingeben."></textarea>
+  <small class="field-hint char-counter">0 / 900 Zeichen</small>
+  <small class="error-message"></small>
+</div>
 
   <div class="row">
     <div class="form-field">
@@ -690,28 +690,27 @@ textarea{min-height:135px;max-height:135px;resize:none}
     <small class="error-message"></small>
   </div>
 
-  <div class="form-field">
-    <label>Wie haben Sie uns gefunden?</label>
-    <select name="Gefunden">
-      <option value="">Bitte auswählen</option>
-      <option>Google</option>
-      <option>Facebook</option>
-      <option>Instagram</option>
-      <option>Empfehlung</option>
-      <option>Flyer</option>
-      <option>eBay Kleinanzeigen</option>
-      <option>WhatsApp / Kontaktkarte</option>
-      <option>Sonstiges</option>
-    </select>
-    <small class="error-message"></small>
-  </div>
+ <div class="form-field">
+  <label>Wie haben Sie uns gefunden?</label>
+  <select name="Gefunden" class="found-select">
+    <option value="">Bitte auswählen</option>
+    <option>Google</option>
+    <option>Facebook</option>
+    <option>Instagram</option>
+    <option>Empfehlung</option>
+    <option>Flyer</option>
+    <option>eBay Kleinanzeigen</option>
+    <option>WhatsApp / Kontaktkarte</option>
+    <option>Sonstiges</option>
+  </select>
+  <small class="error-message"></small>
+</div>
 
-  <div class="form-field">
-    <label>Nachricht *</label>
-    <textarea name="Nachricht" maxlength="900" placeholder="Beschreiben Sie kurz den Auftrag, die Fläche, den Zustand oder wichtige Hinweise." required data-error="Bitte Nachricht eingeben."></textarea>
-    <small class="field-hint">Maximal 900 Zeichen</small>
-    <small class="error-message"></small>
-  </div>
+<div class="form-field found-other-wrap" style="display:none">
+  <label>Bitte kurz angeben</label>
+  <input name="GefundenSonstiges" maxlength="80" placeholder="z. B. Nachbar, Verein, Firma, Sonstiges" data-error="Bitte kurz angeben.">
+  <small class="error-message"></small>
+</div>
 
   <div class="form-field">
     <label class="checkline">
@@ -783,25 +782,77 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
 </div>
   
+<div class="form-popup" id="formPopup">
+  <div class="form-popup-box">
+    <div class="form-popup-icon" id="popupIcon">✓</div>
+    <h3 id="popupTitle">Anfrage gesendet</h3>
+    <p id="popupMessage">Vielen Dank. Ihre Anfrage wurde übermittelt. Wir melden uns schnellstmöglich zurück.</p>
+    <button class="popup-btn" type="button" id="popupClose">Fertig</button>
+  </div>
+</div>
+
 <script>
-const header=document.querySelector('.header');
-window.addEventListener('scroll',()=>{window.scrollY>20?header.classList.add('scrolled'):header.classList.remove('scrolled')});
-
-const revealItems=document.querySelectorAll('.reveal');
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){entry.target.classList.add('show')}
-    else{entry.target.classList.remove('show')}
-  });
-},{threshold:.12});
-revealItems.forEach(item=>observer.observe(item));
-
-document.querySelectorAll('.back-to-top').forEach(button=>{
-  button.addEventListener('click',()=>window.scrollTo({top:0,left:0,behavior:'smooth'}));
+const header = document.querySelector('.header');
+window.addEventListener('scroll', () => {
+  window.scrollY > 20 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
 });
-  document.querySelectorAll('.date-field').forEach(field => {
+
+const revealItems = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    } else {
+      entry.target.classList.remove('show');
+    }
+  });
+}, { threshold: .12 });
+
+revealItems.forEach(item => observer.observe(item));
+
+document.querySelectorAll('.back-to-top').forEach(button => {
+  button.addEventListener('click', () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  });
+});
+
+document.querySelectorAll('.date-field').forEach(field => {
   const today = new Date().toISOString().split('T')[0];
   field.setAttribute('min', today);
+});
+
+document.querySelectorAll('textarea[maxlength]').forEach(textarea => {
+  const counter = textarea.closest('.form-field')?.querySelector('.char-counter');
+
+  function updateCounter(){
+    if(counter){
+      counter.textContent = textarea.value.length + ' / ' + textarea.getAttribute('maxlength') + ' Zeichen';
+    }
+  }
+
+  textarea.addEventListener('input', updateCounter);
+  updateCounter();
+});
+
+document.querySelectorAll('.found-select').forEach(select => {
+  const sonstigesField = select.closest('form')?.querySelector('.found-other-wrap');
+  const sonstigesInput = select.closest('form')?.querySelector('input[name="GefundenSonstiges"]');
+
+  function toggleOther(){
+    if(!sonstigesField || !sonstigesInput) return;
+
+    if(select.value === 'Sonstiges'){
+      sonstigesField.style.display = 'block';
+      sonstigesInput.required = true;
+    }else{
+      sonstigesField.style.display = 'none';
+      sonstigesInput.required = false;
+      sonstigesInput.value = '';
+    }
+  }
+
+  select.addEventListener('change', toggleOther);
+  toggleOther();
 });
 
 function clearFormErrors(form){
@@ -857,7 +908,7 @@ function validateCustomForm(form){
   }
 
   if(firstInvalid){
-    firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
+    firstInvalid.scrollIntoView({ behavior:'smooth', block:'center' });
     setTimeout(() => firstInvalid.focus(), 350);
     return false;
   }
@@ -908,6 +959,14 @@ document.querySelectorAll('.ajax-form').forEach(form => {
       form.reset();
       clearFormErrors(form);
 
+      document.querySelectorAll('textarea[maxlength]').forEach(textarea => {
+        textarea.dispatchEvent(new Event('input'));
+      });
+
+      document.querySelectorAll('.found-select').forEach(select => {
+        select.dispatchEvent(new Event('change'));
+      });
+
       showPopup(
         true,
         'Anfrage gesendet',
@@ -929,37 +988,13 @@ document.querySelectorAll('.ajax-form').forEach(form => {
 });
 
 const popupClose = document.getElementById('popupClose');
+
 if(popupClose){
   popupClose.addEventListener('click', () => {
     const popup = document.getElementById('formPopup');
     if(popup) popup.classList.remove('show');
   });
 }
-
-<script>
-const header=document.querySelector('.header');
-window.addEventListener('scroll',()=>{window.scrollY>20?header.classList.add('scrolled'):header.classList.remove('scrolled')});
-
-const revealItems=document.querySelectorAll('.reveal');
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){entry.target.classList.add('show')}
-    else{entry.target.classList.remove('show')}
-  });
-},{threshold:.12});
-revealItems.forEach(item=>observer.observe(item));
-
-document.querySelectorAll('.back-to-top').forEach(button=>{
-  button.addEventListener('click',()=>window.scrollTo({top:0,left:0,behavior:'smooth'}));
-});
 </script>
-<div class="form-popup" id="formPopup">
-  <div class="form-popup-box">
-    <div class="form-popup-icon" id="popupIcon">✓</div>
-    <h3 id="popupTitle">Anfrage gesendet</h3>
-    <p id="popupMessage">Vielen Dank. Ihre Anfrage wurde übermittelt. Wir melden uns schnellstmöglich zurück.</p>
-    <button class="popup-btn" type="button" id="popupClose">Fertig</button>
-  </div>
-</div>
 </body>
 </html>
