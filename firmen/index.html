@@ -847,28 +847,22 @@ document.querySelectorAll('.date-field').forEach(field => {
 ========================= */
 
 function getVisitorId(){
-  const storageKey = 'ahs_visitor_id';
-  const timeKey = 'ahs_visitor_time';
-  const maxAgeMinutes = 30;
+  const key = 'ahs_visit_data';
   const now = Date.now();
+  const timeout = VISIT_TIMEOUT_MINUTES * 60 * 1000;
 
-  let id = localStorage.getItem(storageKey);
-  let savedTime = Number(localStorage.getItem(timeKey) || 0);
+  try{
+    const raw = localStorage.getItem(key);
 
-  const isExpired = !savedTime || (now - savedTime) > maxAgeMinutes * 60 * 1000;
+    if(raw){
+      const stored = JSON.parse(raw);
 
-  if(!id || isExpired){
-    const random = Math.random().toString(36).substring(2, 10);
-    const time = now.toString(36);
-    id = 'V-' + time + '-' + random;
-  }
-
-  localStorage.setItem(storageKey, id);
-  localStorage.setItem(timeKey, String(now));
-
-  return id;
-}
-  }
+      if(stored && stored.id && stored.lastSeen && (now - stored.lastSeen) < timeout){
+        stored.lastSeen = now;
+        localStorage.setItem(key, JSON.stringify(stored));
+        return stored.id;
+      }
+    }
   }catch(error){}
 
   const random = Math.random().toString(36).substring(2, 10);
