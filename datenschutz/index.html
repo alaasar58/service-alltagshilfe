@@ -1,3 +1,420 @@
-<h1>Datenschutz</h1>
-<p>Die Datenschutzerklärung wird zeitnah ergänzt.</p>
-<p><a href="../">Zurück zur Startseite</a></p>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datenschutzerklärung | AlltagsHilfe Service</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;user-select:none}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#fefefd;color:#1f2933;line-height:1.6;cursor:default}
+input,textarea,select{user-select:text;cursor:text}
+a,button{cursor:pointer}
+:target{scroll-margin-top:112px}
+
+.header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(254,254,253,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(14,78,45,.12);
+  transition:.25s ease
+}
+.header.scrolled{background:rgba(254,254,253,.84);box-shadow:0 8px 24px rgba(14,78,45,.08)}
+.header-inner{max-width:1180px;margin:auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:14px;color:#0e4e2d;font-weight:900;font-size:23px;text-decoration:none;white-space:nowrap}
+.brand img{width:64px;height:64px;border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(14,78,45,.18)}
+.nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nav a{
+  height:42px;display:inline-flex;align-items:center;justify-content:center;
+  color:#0e4e2d;text-decoration:none;font-weight:800;padding:0 14px;
+  border-radius:999px;background:transparent;border:0;font-size:14px;line-height:1;font-family:inherit;transition:.2s ease
+}
+.nav a:hover{background:#eef4ec}
+.home-btn{background:#0e4e2d!important;color:#fefefd!important}
+.home-btn:hover{background:#08391f!important}
+
+.wrap{max-width:1120px;margin:auto;padding:34px 24px 0}
+.kicker{color:#548031;font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:.6px;margin-bottom:10px}
+h1,h2,h3{color:#0e4e2d}
+h1{font-size:43px;line-height:1.08;margin-bottom:18px}
+h2{font-size:27px;margin:36px 0 14px}
+h3{font-size:20px;margin:24px 0 10px}
+.lead{font-size:18px;color:#56645d;max-width:850px;margin-bottom:18px}
+
+.legal-hero{
+  background:
+    linear-gradient(135deg,rgba(246,243,238,.96),rgba(238,244,236,.96)),
+    linear-gradient(135deg,#f6f3ee 0%,#eef4ec 55%,#dfe9dc 100%);
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:30px;
+  padding:34px;
+  box-shadow:0 12px 34px rgba(14,78,45,.08);
+  margin-bottom:28px
+}
+.legal-card{
+  background:white;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 8px 22px rgba(14,78,45,.06);
+  margin:20px 0
+}
+.legal-card p{color:#3d4a43;margin-bottom:10px}
+.legal-card ul{padding-left:22px;margin:10px 0 14px;color:#3d4a43}
+.legal-card li{margin-bottom:8px}
+.legal-card a{color:#0e4e2d;font-weight:900}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
+.info-box{
+  background:#f6f3ee;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:20px;
+  padding:18px
+}
+.info-box strong{display:block;color:#0e4e2d;margin-bottom:6px}
+.info-box span{display:block;color:#3d4a43}
+.note{background:#eef4ec;border-left:5px solid #0e4e2d;border-radius:16px;padding:16px;margin:16px 0;color:#3d4a43}
+
+.footer{margin-top:60px;background:#0e4e2d;color:white;border-radius:30px 30px 0 0;padding:30px 30px 18px}
+.footer-main{display:grid;grid-template-columns:1.1fr .9fr .9fr .9fr;gap:24px;margin-bottom:24px}
+.footer h3{color:white;font-size:17px;margin-bottom:8px}
+.footer p,.footer li{color:#e7efe8;font-size:14px}
+.footer ul{list-style:none}
+.footer a{color:#fefefd;text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.top-link{display:inline-block;border:1px solid rgba(255,255,255,.35);padding:10px 14px;border-radius:999px;font-weight:900;margin-top:8px;background:transparent;color:#fefefd;font-family:inherit}
+.top-link:hover{background:rgba(255,255,255,.12)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.18);padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:#e7efe8}
+.footer-bottom a{margin-left:14px}
+
+@media(max-width:900px){
+  .header-inner{display:block}
+  .nav{margin-top:14px}
+  .info-grid,.footer-main{grid-template-columns:1fr}
+  h1{font-size:33px}
+  h2{font-size:25px}
+  .brand img{width:58px;height:58px}
+  .legal-hero{padding:26px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header" id="oben">
+  <div class="header-inner">
+    <a class="brand" href="../">
+      <img src="../bilder/Logo.png" alt="AlltagsHilfe Service Logo">
+      <span>AlltagsHilfe Service</span>
+    </a>
+
+    <nav class="nav">
+      <a href="../" class="home-btn">Zur Startseite</a>
+      <a href="../privat/">Privatkunden</a>
+      <a href="../firmen/">Firmenkunden</a>
+      <a href="../impressum/">Impressum</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section class="legal-hero">
+  <div class="kicker">Datenschutz</div>
+  <h1>Datenschutzerklärung</h1>
+  <p class="lead">
+    In dieser Datenschutzerklärung informieren wir darüber, welche personenbezogenen Daten beim Besuch dieser Webseite und bei der Kontaktaufnahme verarbeitet werden.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>1. Verantwortlicher</h2>
+
+  <div class="info-grid">
+    <div class="info-box">
+      <strong>Unternehmen</strong>
+      <span>AlltagsHilfe Service</span>
+    </div>
+
+    <div class="info-box">
+      <strong>Inhaber</strong>
+      <span>Mohammed Alaa Sarhan</span>
+    </div>
+
+    <div class="info-box">
+      <strong>Anschrift</strong>
+      <span>Mühlenstraße 7<br>22941 Bargteheide<br>Deutschland</span>
+    </div>
+
+    <div class="info-box">
+      <strong>Kontakt</strong>
+      <span>Telefon: <a href="tel:+4915229546946">+49 1522 9546946</a><br>
+      E-Mail: <a href="mailto:info@service-alltagshilfe.de">info@service-alltagshilfe.de</a></span>
+    </div>
+  </div>
+</section>
+
+<section class="legal-card">
+  <h2>2. Allgemeine Hinweise zur Datenverarbeitung</h2>
+  <p>
+    Wir verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung dieser Webseite, zur Bearbeitung von Anfragen, zur Kommunikation mit Interessenten und Kunden sowie zur Durchführung vorvertraglicher oder vertraglicher Maßnahmen erforderlich ist.
+  </p>
+  <p>
+    Rechtsgrundlagen sind insbesondere Art. 6 Abs. 1 lit. b DSGVO, wenn die Verarbeitung zur Bearbeitung einer Anfrage oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist, sowie Art. 6 Abs. 1 lit. f DSGVO, wenn wir ein berechtigtes Interesse an einer sicheren, funktionierenden und nutzerfreundlichen Webseite haben.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>3. Hosting der Webseite über GitHub Pages</h2>
+  <p>
+    Diese Webseite wird über GitHub Pages bereitgestellt. GitHub Pages ist ein Dienst, mit dem statische Webseiten aus HTML-, CSS- und JavaScript-Dateien veröffentlicht werden können.
+  </p>
+  <p>
+    Beim Besuch einer über GitHub Pages bereitgestellten Webseite können technische Daten verarbeitet werden, insbesondere IP-Adresse, Zeitpunkt des Zugriffs, Browser- und Geräteinformationen sowie technische Zugriffsdaten. GitHub weist darauf hin, dass bei Besuchen von GitHub-Pages-Webseiten IP-Adressen aus Sicherheitsgründen protokolliert werden können.
+  </p>
+  <p>
+    Anbieter ist GitHub, Inc. bzw. GitHub B.V. Weitere Informationen finden Sie in den Datenschutzinformationen von GitHub.
+  </p>
+  <p>
+    Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der sicheren und zuverlässigen Bereitstellung unserer Webseite.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>4. Kontaktaufnahme per Formular</h2>
+  <p>
+    Wenn Sie uns über das Kontaktformular eine Anfrage senden, verarbeiten wir die von Ihnen eingegebenen Angaben zur Bearbeitung Ihrer Anfrage.
+  </p>
+  <p>Je nach Formular können insbesondere folgende Daten verarbeitet werden:</p>
+  <ul>
+    <li>Name und Vorname, soweit angegeben</li>
+    <li>E-Mail-Adresse</li>
+    <li>Telefonnummer, soweit angegeben oder bei gewünschtem Rückruf</li>
+    <li>Firma oder Betrieb bei Firmenanfragen</li>
+    <li>PLZ und Ort</li>
+    <li>gewünschte Leistung oder gewünschter Bereich</li>
+    <li>Wunschtermin, soweit angegeben</li>
+    <li>Ihre Nachricht und weitere freiwillige Angaben</li>
+  </ul>
+  <p>
+    Die Angaben werden verwendet, um Ihre Anfrage zu prüfen, Rückfragen zu stellen, ein Angebot vorzubereiten oder eine mögliche Zusammenarbeit zu organisieren.
+  </p>
+  <p>
+    Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Verarbeitung zur Bearbeitung Ihrer Anfrage oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. Soweit darüber hinaus eine technische Verarbeitung zur Formularübermittlung erfolgt, ist Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>5. Verarbeitung über Google Apps Script, Google Sheets und E-Mail</h2>
+  <p>
+    Die Formularübermittlung erfolgt technisch über Google Apps Script. Die übermittelten Formulardaten werden in einer Google-Tabelle gespeichert und zusätzlich als Benachrichtigung per E-Mail an uns übermittelt.
+  </p>
+  <p>
+    Dabei können personenbezogene Daten an Google verarbeitet werden, insbesondere die eingegebenen Formularangaben, technische Übermittlungsdaten und Zeitstempel.
+  </p>
+  <p>
+    Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Weitere Informationen zur Datenverarbeitung durch Google finden Sie in den Datenschutzinformationen von Google.
+  </p>
+  <p>
+    Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO für die Bearbeitung Ihrer Anfrage sowie Art. 6 Abs. 1 lit. f DSGVO für die technische Organisation und Dokumentation der Anfragebearbeitung.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>6. Kontaktaufnahme per E-Mail oder Telefon</h2>
+  <p>
+    Wenn Sie uns per E-Mail oder Telefon kontaktieren, verarbeiten wir die von Ihnen mitgeteilten Daten zur Bearbeitung Ihres Anliegens. Dazu können insbesondere Name, Kontaktdaten, Inhalt der Anfrage sowie weitere von Ihnen freiwillig übermittelte Informationen gehören.
+  </p>
+  <p>
+    Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Kontaktaufnahme mit einer Anfrage, einem Angebot oder einem Auftrag zusammenhängt. In anderen Fällen kann die Verarbeitung auf Art. 6 Abs. 1 lit. f DSGVO beruhen.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>7. WhatsApp-Kontakt</h2>
+  <p>
+    Auf dieser Webseite ist ein WhatsApp-Link eingebunden. Wenn Sie diesen Link anklicken, verlassen Sie unsere Webseite und es wird eine Verbindung zu WhatsApp hergestellt. Dabei können Daten durch WhatsApp bzw. Meta verarbeitet werden, insbesondere Ihre Telefonnummer, Kommunikationsinhalte, technische Daten und Nutzungsdaten, abhängig von Ihren Einstellungen und der Nutzung von WhatsApp.
+  </p>
+  <p>
+    Anbieter ist für Nutzer im Europäischen Wirtschaftsraum in der Regel WhatsApp Ireland Limited. Für die Verarbeitung durch WhatsApp gelten die Datenschutzinformationen von WhatsApp.
+  </p>
+  <p>
+    Nutzen Sie WhatsApp bitte nur, wenn Sie mit der dortigen Datenverarbeitung einverstanden sind. Alternativ können Sie uns jederzeit per Telefon, E-Mail oder über das Kontaktformular erreichen.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>8. interne Reichweitenmessung</h2>
+  <p>
+    Zur einfachen Verbesserung unserer Webseite können technische Nutzungsdaten intern erfasst werden. Dabei kann eine zufällige Besuchs-ID verwendet werden, um einen Seitenbesuch grob zusammenzufassen. Diese Besuchs-ID enthält keine Namen, Telefonnummern, E-Mail-Adressen oder Nachrichteninhalte.
+  </p>
+  <p>Erfasst werden können insbesondere:</p>
+  <ul>
+    <li>besuchte Seiten und Bereiche</li>
+    <li>Klicks auf wichtige Elemente wie Telefon, E-Mail, WhatsApp oder Formularbereiche</li>
+    <li>technische Zeitstempel</li>
+  </ul>
+  <p>
+    Die Auswertung dient ausschließlich dazu, die Webseite besser zu verstehen und Inhalte verständlicher aufzubauen. Es erfolgt keine Weitergabe zu Werbezwecken und keine Profilbildung mit Namen oder Kontaktdaten.
+  </p>
+  <p>
+    Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der Verbesserung der Webseite, der Bedienbarkeit und der Auswertung, welche Inhalte für Besucher relevant sind.
+  </p>
+  <div class="note">
+    Hinweis: Die Formularinhalte selbst werden nicht für die Reichweitenmessung verwendet. Anfrageinhalte werden getrennt zur Bearbeitung der Anfrage verarbeitet.
+  </div>
+</section>
+
+<section class="legal-card">
+  <h2>9. Cookies und lokaler Speicher</h2>
+  <p>
+    Diese Webseite verwendet derzeit keine klassischen Werbe-Cookies und kein Google Analytics. Für technische Funktionen oder eine einfache interne Reichweitenmessung kann der Browser-Speicher genutzt werden, zum Beispiel zur Wiedererkennung eines kurzen Besuchszeitraums oder zur technischen Stabilisierung der Auswertung.
+  </p>
+  <p>
+    Sie können gespeicherte Browserdaten jederzeit über die Einstellungen Ihres Browsers löschen.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>10. Speicherdauer</h2>
+  <p>
+    Wir speichern personenbezogene Daten nur so lange, wie es für den jeweiligen Zweck erforderlich ist. Anfragen werden grundsätzlich so lange gespeichert, wie dies zur Bearbeitung, Dokumentation, Nachverfolgung oder zur Erfüllung gesetzlicher Aufbewahrungspflichten notwendig ist.
+  </p>
+  <p>
+    Technische Tracking- und Reichweitendaten werden regelmäßig überprüft und gelöscht oder reduziert, sobald sie für die Auswertung nicht mehr erforderlich sind.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>11. Empfänger von Daten</h2>
+  <p>
+    Eine Weitergabe personenbezogener Daten erfolgt nur, wenn dies zur Bearbeitung Ihrer Anfrage erforderlich ist, eine gesetzliche Pflicht besteht oder wir einen Dienstleister zur technischen Bereitstellung einsetzen.
+  </p>
+  <p>Zu den möglichen Empfängern gehören insbesondere:</p>
+  <ul>
+    <li>Hosting- und technische Dienstleister wie GitHub Pages</li>
+    <li>Google-Dienste für Formularübermittlung, Tabellen und E-Mail-Benachrichtigung</li>
+    <li>WhatsApp bzw. Meta, wenn Sie den WhatsApp-Link nutzen</li>
+    <li>gegebenenfalls Steuerberater, Behörden oder sonstige Stellen, soweit gesetzlich erforderlich</li>
+  </ul>
+</section>
+
+<section class="legal-card">
+  <h2>12. Drittlandübermittlung</h2>
+  <p>
+    Bei der Nutzung von Diensten wie GitHub, Google oder WhatsApp kann eine Verarbeitung personenbezogener Daten außerhalb der Europäischen Union bzw. des Europäischen Wirtschaftsraums nicht ausgeschlossen werden. Die Anbieter treffen nach eigenen Angaben Maßnahmen zum Schutz personenbezogener Daten, etwa durch vertragliche Regelungen oder geeignete Garantien.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>13. Ihre Rechte</h2>
+  <p>Sie haben im Rahmen der geltenden gesetzlichen Voraussetzungen insbesondere folgende Rechte:</p>
+  <ul>
+    <li>Recht auf Auskunft über die verarbeiteten personenbezogenen Daten</li>
+    <li>Recht auf Berichtigung unrichtiger Daten</li>
+    <li>Recht auf Löschung</li>
+    <li>Recht auf Einschränkung der Verarbeitung</li>
+    <li>Recht auf Datenübertragbarkeit</li>
+    <li>Recht auf Widerspruch gegen bestimmte Verarbeitungen</li>
+    <li>Recht auf Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft</li>
+  </ul>
+  <p>
+    Zur Ausübung Ihrer Rechte können Sie sich jederzeit an uns wenden:
+    <a href="mailto:info@service-alltagshilfe.de">info@service-alltagshilfe.de</a>
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>14. Beschwerderecht bei einer Aufsichtsbehörde</h2>
+  <p>
+    Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer personenbezogenen Daten gegen Datenschutzrecht verstößt.
+  </p>
+  <p>
+    Zuständig kann insbesondere die Datenschutzaufsichtsbehörde Ihres Wohnortes, Ihres Arbeitsplatzes oder des Ortes des mutmaßlichen Verstoßes sein.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>15. Sicherheit der Datenübertragung</h2>
+  <p>
+    Diese Webseite wird grundsätzlich verschlüsselt per HTTPS bereitgestellt. Eine verschlüsselte Verbindung erkennen Sie an „https://“ in der Adresszeile Ihres Browsers.
+  </p>
+  <p>
+    Dennoch kann eine Datenübertragung im Internet Sicherheitslücken aufweisen. Ein vollständiger Schutz vor Zugriffen durch Dritte ist nicht möglich.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>16. Änderung dieser Datenschutzerklärung</h2>
+  <p>
+    Wir behalten uns vor, diese Datenschutzerklärung anzupassen, wenn sich technische Abläufe, gesetzliche Vorgaben oder unsere Leistungen ändern.
+  </p>
+  <p>
+    Stand: Juni 2026
+  </p>
+</section>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div>
+      <h3>AlltagsHilfe Service</h3>
+      <p>Zuverlässige Unterstützung rund um Haus, Garten und Alltag.</p>
+      <button class="top-link back-to-top" type="button">Nach oben</button>
+    </div>
+
+    <div>
+      <h3>Schnelllinks</h3>
+      <ul>
+        <li><a href="../">Startseite</a></li>
+        <li><a href="../privat/">Privatkunden</a></li>
+        <li><a href="../firmen/">Firmenkunden</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Informationen</h3>
+      <ul>
+        <li><a href="../datenschutz/">Datenschutz</a></li>
+        <li><a href="../impressum/">Impressum</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Kontakt</h3>
+      <p>
+        Telefon: <a href="tel:+4915229546946">+49 1522 9546946</a><br>
+        E-Mail: <a href="mailto:info@service-alltagshilfe.de">info@service-alltagshilfe.de</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 AlltagsHilfe Service</span>
+    <span>Webseite erstellt von AlltagsHilfe Service · Bilder teilweise KI-generiert</span>
+    <span>
+      <a href="../datenschutz/">Datenschutz</a>
+      <a href="../impressum/">Impressum</a>
+    </span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+const header = document.querySelector('.header');
+
+if(header){
+  window.addEventListener('scroll', () => {
+    window.scrollY > 20 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
+  });
+}
+
+document.querySelectorAll('.back-to-top').forEach(button => {
+  button.addEventListener('click', () => {
+    window.scrollTo({ top:0, left:0, behavior:'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
