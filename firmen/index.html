@@ -800,14 +800,12 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
 <script>
 const TRACKING_URL = "https://script.google.com/macros/s/AKfycbz1YPu4Li35oDFT2PgT2KvrZMiKJifDhXhaCYYgxw2u6NItMKRaMivm9UirW2e2hZPQ5A/exec";
-const VISIT_TIMEOUT_MINUTES = 30;
 
 /* =========================
    BASIS-FUNKTIONEN
 ========================= */
 
 const header = document.querySelector('.header');
-
 if(header){
   window.addEventListener('scroll', () => {
     window.scrollY > 20 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
@@ -815,7 +813,6 @@ if(header){
 }
 
 const revealItems = document.querySelectorAll('.reveal');
-
 if(revealItems.length){
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -825,13 +822,17 @@ if(revealItems.length){
         entry.target.classList.remove('show');
       }
     });
-  }, { threshold:.12 });
+  }, { threshold: .12 });
 
   revealItems.forEach(item => revealObserver.observe(item));
 }
 
 document.querySelectorAll('.back-to-top').forEach(button => {
   button.addEventListener('click', () => {
+    sendTracking('click_footer', {
+      click_area:'footer',
+      target:'Nach oben'
+    });
     window.scrollTo({ top:0, left:0, behavior:'smooth' });
   });
 });
@@ -843,93 +844,63 @@ document.querySelectorAll('.date-field').forEach(field => {
 
 /* =========================
    BESUCHS-ID
-   Eine ID pro Besuch, gültig ca. 30 Minuten
+   Eine ID bleibt ca. 30 Minuten gültig
 ========================= */
 
 function getVisitorId(){
-  const key = 'ahs_visit_data';
+  const storageKey = 'ahs_visitor_id';
+  const timeKey = 'ahs_visitor_time';
+  const maxAgeMinutes = 30;
   const now = Date.now();
-  const timeout = VISIT_TIMEOUT_MINUTES * 60 * 1000;
 
-  try{
-    const raw = localStorage.getItem(key);
+  let id = localStorage.getItem(storageKey);
+  let savedTime = Number(localStorage.getItem(timeKey) || 0);
+  const expired = !savedTime || (now - savedTime) > maxAgeMinutes * 60 * 1000;
 
-    if(raw){
-      const stored = JSON.parse(raw);
+  if(!id || expired){
+    const random = Math.random().toString(36).substring(2, 10);
+    const time = now.toString(36);
+    id = 'V-' + time + '-' + random;
+  }
 
-      if(stored && stored.id && stored.lastSeen && (now - stored.lastSeen) < timeout){
-        stored.lastSeen = now;
-        localStorage.setItem(key, JSON.stringify(stored));
-        return stored.id;
-      }
-    }
-  }catch(error){}
-
-  const random = Math.random().toString(36).substring(2, 10);
-  const time = now.toString(36);
-  const id = 'V-' + time + '-' + random;
-
-  try{
-    localStorage.setItem(key, JSON.stringify({
-      id:id,
-      lastSeen:now
-    }));
-  }catch(error){}
-
+  localStorage.setItem(storageKey, id);
+  localStorage.setItem(timeKey, String(now));
   return id;
 }
 
 function getDeviceType(){
   const width = window.innerWidth;
-
   if(width <= 767) return 'Handy';
   if(width <= 1024) return 'Tablet';
-
   return 'Desktop';
 }
 
 function getPageSource(){
   const path = window.location.pathname;
-
   if(path.includes('/privat')) return 'Privatkunden';
   if(path.includes('/firmen')) return 'Firmenkunden';
   if(path.includes('/impressum')) return 'Impressum';
   if(path.includes('/datenschutz')) return 'Datenschutz';
-
   return 'Startseite';
+}
+
+function cleanText(text){
+  return String(text || '').replace(/\s+/g, ' ').trim().slice(0, 160);
 }
 
 function getClickArea(element){
   if(!element) return 'inhalt';
-
-  if(element.closest('header') || element.closest('.nav')){
-    return 'navigation';
-  }
-
-  if(element.closest('.hero') || element.closest('main') || element.closest('.box')){
-    return 'hero';
-  }
-
-  if(element.closest('.contact') || element.closest('.side-contact') || element.closest('.contact-card') || element.closest('.qr-box')){
-    return 'kontakt';
-  }
-
-  if(element.closest('footer') || element.closest('.footer')){
-    return 'footer';
-  }
-
+  if(element.closest('.nav')) return 'navigation';
+  if(element.closest('.hero')) return 'hero';
+  if(element.closest('.contact')) return 'kontakt';
+  if(element.closest('.footer') || element.closest('footer')) return 'footer';
   return 'inhalt';
-}
-
-function cleanText(value){
-  return (value || '').replace(/\s+/g, ' ').trim();
 }
 
 function sendTracking(eventName, options){
   options = options || {};
 
   const data = new FormData();
-
   data.append('form_type', 'tracking');
   data.append('visitor_id', getVisitorId());
   data.append('event', eventName);
@@ -997,35 +968,31 @@ const trackableSections = [
   'leistungen',
   'preise',
   'zusammenarbeit',
-  'einsatzbereiche',
   'einsatzgebiet',
+  'einsatzbereiche',
   'kontakt'
 ];
 
 const seenSections = new Set();
 
-if('IntersectionObserver' in window){
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        const sectionId = entry.target.id;
-
-        if(sectionId && !seenSections.has(sectionId)){
-          seenSections.add(sectionId);
-
-          sendTracking('view_section_' + sectionId, {
-            section:sectionId
-          });
-        }
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const sectionId = entry.target.id;
+      if(sectionId && !seenSections.has(sectionId)){
+        seenSections.add(sectionId);
+        sendTracking('view_section_' + sectionId, {
+          section:sectionId
+        });
       }
-    });
-  }, { threshold:.45 });
-
-  trackableSections.forEach(id => {
-    const section = document.getElementById(id);
-    if(section) sectionObserver.observe(section);
+    }
   });
-}
+}, { threshold:.40 });
+
+trackableSections.forEach(id => {
+  const section = document.getElementById(id);
+  if(section) sectionObserver.observe(section);
+});
 
 /* =========================
    GROBE ZEIT PRO BEREICH
@@ -1034,11 +1001,13 @@ if('IntersectionObserver' in window){
 let activeSection = '';
 let lastSectionTime = Date.now();
 
-function normalizeSectionForTime(sectionId){
-  if(sectionId === 'fuer-wen') return 'ueber-uns';
-  if(sectionId === 'einsatzbereiche') return 'leistungen';
-
-  return sectionId;
+function mapSectionForDashboard(section){
+  if(section === 'fuer-wen' || section === 'ueber-uns' || section === 'ueberblick') return 'ueberblick';
+  if(section === 'leistungen' || section === 'einsatzbereiche') return 'leistungen';
+  if(section === 'preise' || section === 'zusammenarbeit') return 'preise';
+  if(section === 'einsatzgebiet') return 'einsatzgebiet';
+  if(section === 'kontakt') return 'kontakt';
+  return section;
 }
 
 function detectActiveSection(){
@@ -1058,7 +1027,7 @@ function detectActiveSection(){
     }
   });
 
-  return normalizeSectionForTime(bestSection);
+  return bestSection;
 }
 
 setInterval(() => {
@@ -1072,11 +1041,10 @@ setInterval(() => {
 
     if(seconds >= 10){
       sendTracking('section_time', {
-        section:activeSection,
+        section:mapSectionForDashboard(activeSection),
         value:String(seconds),
         duration_seconds:Math.round((Date.now() - visitStart) / 1000)
       });
-
       lastSectionTime = now;
     }
   }else{
@@ -1091,56 +1059,50 @@ setInterval(() => {
 
 document.addEventListener('click', function(event){
   const link = event.target.closest('a');
+  const button = event.target.closest('button');
 
   if(link){
     const href = link.getAttribute('href') || '';
-    const text = cleanText(link.textContent);
+    const text = cleanText(link.textContent || href);
     const clickArea = getClickArea(link);
     const target = text || href;
 
     if(href.includes('wa.me')){
-      sendTracking('click_whatsapp', {
-        target:target,
-        click_area:clickArea
-      });
+      sendTracking('click_whatsapp', { click_area:clickArea, target:target });
       return;
     }
 
     if(href.startsWith('tel:')){
-      sendTracking('click_phone', {
-        target:target,
-        click_area:clickArea
-      });
+      sendTracking('click_phone', { click_area:clickArea, target:target });
       return;
     }
 
     if(href.startsWith('mailto:')){
-      sendTracking('click_email', {
-        target:target,
-        click_area:clickArea
-      });
+      sendTracking('click_email', { click_area:clickArea, target:target });
       return;
     }
 
     if(href.includes('/privat') || text.toLowerCase().includes('privat')){
-      sendTracking('click_privat', {
-        target:target,
-        click_area:clickArea
-      });
+      sendTracking('click_privat', { click_area:clickArea, target:target });
       return;
     }
 
     if(href.includes('/firmen') || text.toLowerCase().includes('firma') || text.toLowerCase().includes('firmen')){
-      sendTracking('click_firmen', {
-        target:target,
-        click_area:clickArea
-      });
+      sendTracking('click_firmen', { click_area:clickArea, target:target });
       return;
     }
 
-    sendTracking('click_link', {
-      target:target,
-      click_area:clickArea
+    sendTracking('click_' + clickArea, {
+      click_area:clickArea,
+      target:target
+    });
+    return;
+  }
+
+  if(button && !button.closest('form')){
+    sendTracking('click_' + getClickArea(button), {
+      click_area:getClickArea(button),
+      target:cleanText(button.textContent)
     });
   }
 });
@@ -1149,19 +1111,18 @@ document.addEventListener('click', function(event){
    LEISTUNGSDETAILS TRACKEN
 ========================= */
 
-document.querySelectorAll('details').forEach(detail => {
-  detail.addEventListener('toggle', () => {
-    if(!detail.open) return;
+document.querySelectorAll('details').forEach(details => {
+  details.addEventListener('toggle', () => {
+    if(!details.open) return;
 
-    const service = detail.closest('.service');
-    const title = service ? cleanText(service.querySelector('h3') ? service.querySelector('h3').textContent : '') : '';
-    const summary = cleanText(detail.querySelector('summary') ? detail.querySelector('summary').textContent : '');
-    const detailName = title || summary || 'Leistungsdetails';
+    const article = details.closest('article');
+    const heading = article ? article.querySelector('h3') : null;
+    const detailName = cleanText(heading ? heading.textContent : details.querySelector('summary')?.textContent || 'Leistungsdetails');
 
     sendTracking('details_open', {
-      target:detailName,
-      detail_name:getPageSource() + ': ' + detailName,
-      click_area:getClickArea(detail)
+      click_area:getClickArea(details),
+      detail_name:detailName,
+      target:detailName
     });
   });
 });
@@ -1213,153 +1174,139 @@ document.querySelectorAll('.found-select').forEach(select => {
 });
 
 /* =========================
-   FORMULAR-TRACKING
+   FORMULAR TRACKING
 ========================= */
 
+const formTrackingState = new WeakMap();
+
 function getFormKind(form){
-  const typeInput = form.querySelector('input[name="form_type"]');
-  const value = typeInput ? typeInput.value : '';
-
-  if(value === 'privat') return 'privat';
-  if(value === 'firmen') return 'firmen';
-
-  return '';
+  const input = form.querySelector('input[name="form_type"]');
+  return input ? input.value : '';
 }
 
-function getFieldName(input){
+function getReadableFieldName(input){
   if(!input) return '';
+  if(input.name === 'website') return '';
 
-  const formField = input.closest('.form-field');
-  const label = formField ? formField.querySelector('label') : null;
-
-  if(label){
-    return cleanText(label.textContent).replace('*', '').trim();
-  }
-
-  return input.name || input.type || 'Feld';
+  const field = input.closest('.form-field');
+  const label = field ? field.querySelector('label') : null;
+  return cleanText(label ? label.textContent.replace('*','') : input.name || input.type || 'Feld');
 }
 
 function countRequiredFilled(form){
-  let total = 0;
-  let filled = 0;
-
-  form.querySelectorAll('[required]').forEach(input => {
-    total++;
-
-    if(input.type === 'checkbox'){
-      if(input.checked) filled++;
-      return;
-    }
-
-    if(input.value && input.value.trim() !== ''){
-      filled++;
-    }
-  });
-
-  return filled + '/' + total;
+  const requiredFields = Array.from(form.querySelectorAll('[required]')).filter(input => input.name !== 'website');
+  const filled = requiredFields.filter(input => {
+    if(input.type === 'checkbox') return input.checked;
+    return String(input.value || '').trim() !== '';
+  }).length;
+  return filled + ' von ' + requiredFields.length;
 }
 
-document.querySelectorAll('.ajax-form').forEach(form => {
+function trackFormEvent(form, eventName, extra){
+  extra = extra || {};
   const kind = getFormKind(form);
   if(!kind) return;
 
-  let formStarted = false;
-  let formSubmitted = false;
-  let formAbandonSent = false;
-  let formViewSent = false;
-  let lastFieldName = '';
+  sendTracking(eventName + '_' + kind, {
+    form_kind:kind,
+    target:kind === 'privat' ? 'Privatkunden Formular' : 'Firmenkunden Formular',
+    last_field:extra.last_field || '',
+    required_filled:countRequiredFilled(form),
+    click_area:'kontakt'
+  });
+}
 
-  if('IntersectionObserver' in window){
-    const formObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting && !formViewSent){
-          formViewSent = true;
+function markFormSeen(form){
+  const state = formTrackingState.get(form) || {};
+  if(state.seen) return;
+  state.seen = true;
+  formTrackingState.set(form, state);
+  trackFormEvent(form, 'form_view');
+}
 
-          sendTracking('form_view_' + kind, {
-            form_kind:kind,
-            section:'kontakt',
-            target:kind + ' Formular'
-          });
+function markFormStarted(form, input){
+  const state = formTrackingState.get(form) || {};
+  const lastField = getReadableFieldName(input);
+  state.lastField = lastField || state.lastField || '';
 
-          formObserver.disconnect();
-        }
-      });
-    }, { threshold:.35 });
-
-    formObserver.observe(form);
+  if(!state.started){
+    state.started = true;
+    formTrackingState.set(form, state);
+    trackFormEvent(form, 'form_start', { last_field:state.lastField });
+  }else{
+    formTrackingState.set(form, state);
   }
+}
 
-  form.addEventListener('input', function(event){
-    const input = event.target.closest('input, textarea, select');
-    if(!input) return;
+function markFormSubmitted(form){
+  const state = formTrackingState.get(form) || {};
+  state.submitted = true;
+  formTrackingState.set(form, state);
+  trackFormEvent(form, 'form_submit', { last_field:state.lastField || '' });
+}
 
-    lastFieldName = getFieldName(input);
+function trackFormProgress(form, input){
+  const state = formTrackingState.get(form) || {};
+  const lastField = getReadableFieldName(input);
+  if(lastField) state.lastField = lastField;
+  formTrackingState.set(form, state);
 
-    if(!formStarted){
-      formStarted = true;
+  clearTimeout(state.progressTimer);
+  state.progressTimer = setTimeout(() => {
+    trackFormEvent(form, 'form_progress', { last_field:state.lastField || '' });
+  }, 1800);
+}
 
-      sendTracking('form_start_' + kind, {
-        form_kind:kind,
-        last_field:lastFieldName,
-        required_filled:countRequiredFilled(form),
-        target:kind + ' Formular'
-      });
-      return;
-    }
-
-    sendTracking('form_progress_' + kind, {
-      form_kind:kind,
-      last_field:lastFieldName,
-      required_filled:countRequiredFilled(form),
-      target:kind + ' Formular'
-    });
-  }, true);
-
-  form.addEventListener('change', function(event){
-    const input = event.target.closest('input, textarea, select');
-    if(!input) return;
-
-    lastFieldName = getFieldName(input);
-
-    if(!formStarted){
-      formStarted = true;
-
-      sendTracking('form_start_' + kind, {
-        form_kind:kind,
-        last_field:lastFieldName,
-        required_filled:countRequiredFilled(form),
-        target:kind + ' Formular'
-      });
-    }
-  }, true);
-
-  function sendAbandonIfNeeded(){
-    if(formStarted && !formSubmitted && !formAbandonSent){
-      formAbandonSent = true;
-
-      sendTracking('form_abandon_' + kind, {
-        form_kind:kind,
-        last_field:lastFieldName,
-        required_filled:countRequiredFilled(form),
-        target:kind + ' Formular'
-      });
-    }
-  }
-
-  window.addEventListener('pagehide', sendAbandonIfNeeded);
-
-  document.addEventListener('visibilitychange', () => {
-    if(document.visibilityState === 'hidden'){
-      sendAbandonIfNeeded();
+const formObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      markFormSeen(entry.target);
     }
   });
+}, { threshold:.30 });
 
-  form.dataset.trackingKind = kind;
-  form.dataset.trackingStarted = 'false';
+document.querySelectorAll('.ajax-form').forEach(form => {
+  formTrackingState.set(form, { seen:false, started:false, submitted:false, lastField:'' });
+  formObserver.observe(form);
 
-  form.addEventListener('submit', () => {
-    formSubmitted = true;
-  }, true);
+  form.addEventListener('focusin', event => {
+    const input = event.target;
+    if(!input || !input.name || input.name === 'website') return;
+    markFormStarted(form, input);
+    trackFormProgress(form, input);
+  });
+
+  form.addEventListener('input', event => {
+    const input = event.target;
+    if(!input || !input.name || input.name === 'website') return;
+    markFormStarted(form, input);
+    trackFormProgress(form, input);
+  });
+
+  form.addEventListener('change', event => {
+    const input = event.target;
+    if(!input || !input.name || input.name === 'website') return;
+    markFormStarted(form, input);
+    trackFormProgress(form, input);
+  });
+});
+
+function sendAbandonForStartedForms(){
+  document.querySelectorAll('.ajax-form').forEach(form => {
+    const state = formTrackingState.get(form);
+    if(state && state.started && !state.submitted && !state.abandonSent){
+      state.abandonSent = true;
+      formTrackingState.set(form, state);
+      trackFormEvent(form, 'form_abandon', { last_field:state.lastField || '' });
+    }
+  });
+}
+
+window.addEventListener('beforeunload', sendAbandonForStartedForms);
+document.addEventListener('visibilitychange', () => {
+  if(document.visibilityState === 'hidden'){
+    sendAbandonForStartedForms();
+  }
 });
 
 /* =========================
@@ -1369,7 +1316,6 @@ document.querySelectorAll('.ajax-form').forEach(form => {
 function clearFormErrors(form){
   form.querySelectorAll('.form-field').forEach(field => {
     field.classList.remove('invalid');
-
     const error = field.querySelector('.error-message');
     if(error) error.textContent = '';
   });
@@ -1380,14 +1326,12 @@ function setFieldError(input, message){
   if(!field) return;
 
   field.classList.add('invalid');
-
   const error = field.querySelector('.error-message');
   if(error) error.textContent = message || 'Bitte dieses Feld ausfüllen.';
 }
 
 function validateCustomForm(form){
   clearFormErrors(form);
-
   let firstInvalid = null;
 
   form.querySelectorAll('[required]').forEach(input => {
@@ -1448,7 +1392,6 @@ function showPopup(success, title, message){
 }
 
 const popupClose = document.getElementById('popupClose');
-
 if(popupClose){
   popupClose.addEventListener('click', () => {
     const popup = document.getElementById('formPopup');
@@ -1485,26 +1428,7 @@ document.querySelectorAll('.ajax-form').forEach(form => {
         mode:'no-cors'
       });
 
-      const formTypeInput = form.querySelector('input[name="form_type"]');
-      const formType = formTypeInput ? formTypeInput.value : '';
-
-      if(formType === 'privat'){
-        sendTracking('form_submit_privat', {
-          form_kind:'privat',
-          target:'Privatkunden Formular',
-          last_field:'Abgesendet',
-          required_filled:countRequiredFilled(form)
-        });
-      }
-
-      if(formType === 'firmen'){
-        sendTracking('form_submit_firmen', {
-          form_kind:'firmen',
-          target:'Firmenkunden Formular',
-          last_field:'Abgesendet',
-          required_filled:countRequiredFilled(form)
-        });
-      }
+      markFormSubmitted(form);
 
       form.reset();
       clearFormErrors(form);
@@ -1537,5 +1461,6 @@ document.querySelectorAll('.ajax-form').forEach(form => {
   });
 });
 </script>
+
 </body>
 </html>
