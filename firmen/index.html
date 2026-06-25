@@ -800,6 +800,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
 <script>
 const TRACKING_URL = "https://script.google.com/macros/s/AKfycbz1YPu4Li35oDFT2PgT2KvrZMiKJifDhXhaCYYgxw2u6NItMKRaMivm9UirW2e2hZPQ5A/exec";
+const VISIT_TIMEOUT_MINUTES = 30;
 
 /* =========================
    BASIS-FUNKTIONEN
@@ -824,7 +825,7 @@ if(revealItems.length){
         entry.target.classList.remove('show');
       }
     });
-  }, { threshold: .12 });
+  }, { threshold:.12 });
 
   revealItems.forEach(item => revealObserver.observe(item));
 }
@@ -842,18 +843,38 @@ document.querySelectorAll('.date-field').forEach(field => {
 
 /* =========================
    BESUCHS-ID
-   Eine ID pro Besuch / Tab
+   Eine ID pro Besuch, gültig ca. 30 Minuten
 ========================= */
 
 function getVisitorId(){
-  let id = sessionStorage.getItem('ahs_visitor_id');
+  const key = 'ahs_visit_data';
+  const now = Date.now();
+  const timeout = VISIT_TIMEOUT_MINUTES * 60 * 1000;
 
-  if(!id){
-    const random = Math.random().toString(36).substring(2, 10);
-    const time = Date.now().toString(36);
-    id = 'V-' + time + '-' + random;
-    sessionStorage.setItem('ahs_visitor_id', id);
-  }
+  try{
+    const raw = localStorage.getItem(key);
+
+    if(raw){
+      const stored = JSON.parse(raw);
+
+      if(stored && stored.id && stored.lastSeen && (now - stored.lastSeen) < timeout){
+        stored.lastSeen = now;
+        localStorage.setItem(key, JSON.stringify(stored));
+        return stored.id;
+      }
+    }
+  }catch(error){}
+
+  const random = Math.random().toString(36).substring(2, 10);
+  const time = now.toString(36);
+  const id = 'V-' + time + '-' + random;
+
+  try{
+    localStorage.setItem(key, JSON.stringify({
+      id:id,
+      lastSeen:now
+    }));
+  }catch(error){}
 
   return id;
 }
@@ -878,6 +899,32 @@ function getPageSource(){
   return 'Startseite';
 }
 
+function getClickArea(element){
+  if(!element) return 'inhalt';
+
+  if(element.closest('header') || element.closest('.nav')){
+    return 'navigation';
+  }
+
+  if(element.closest('.hero') || element.closest('main') || element.closest('.box')){
+    return 'hero';
+  }
+
+  if(element.closest('.contact') || element.closest('.side-contact') || element.closest('.contact-card') || element.closest('.qr-box')){
+    return 'kontakt';
+  }
+
+  if(element.closest('footer') || element.closest('.footer')){
+    return 'footer';
+  }
+
+  return 'inhalt';
+}
+
+function cleanText(value){
+  return (value || '').replace(/\s+/g, ' ').trim();
+}
+
 function sendTracking(eventName, options){
   options = options || {};
 
@@ -897,6 +944,11 @@ function sendTracking(eventName, options){
   data.append('section', options.section || '');
   data.append('value', options.value || '');
   data.append('duration_seconds', options.duration_seconds || '');
+  data.append('click_area', options.click_area || '');
+  data.append('detail_name', options.detail_name || '');
+  data.append('form_kind', options.form_kind || '');
+  data.append('last_field', options.last_field || '');
+  data.append('required_filled', options.required_filled || '');
 
   fetch(TRACKING_URL, {
     method:'POST',
@@ -941,35 +993,39 @@ const visitStart = Date.now();
 const trackableSections = [
   'ueberblick',
   'ueber-uns',
+  'fuer-wen',
   'leistungen',
   'preise',
   'zusammenarbeit',
+  'einsatzbereiche',
   'einsatzgebiet',
   'kontakt'
 ];
 
 const seenSections = new Set();
 
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      const sectionId = entry.target.id;
+if('IntersectionObserver' in window){
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const sectionId = entry.target.id;
 
-      if(sectionId && !seenSections.has(sectionId)){
-        seenSections.add(sectionId);
+        if(sectionId && !seenSections.has(sectionId)){
+          seenSections.add(sectionId);
 
-        sendTracking('view_section_' + sectionId, {
-          section:sectionId
-        });
+          sendTracking('view_section_' + sectionId, {
+            section:sectionId
+          });
+        }
       }
-    }
-  });
-}, { threshold:.45 });
+    });
+  }, { threshold:.45 });
 
-trackableSections.forEach(id => {
-  const section = document.getElementById(id);
-  if(section) sectionObserver.observe(section);
-});
+  trackableSections.forEach(id => {
+    const section = document.getElementById(id);
+    if(section) sectionObserver.observe(section);
+  });
+}
 
 /* =========================
    GROBE ZEIT PRO BEREICH
@@ -977,6 +1033,13 @@ trackableSections.forEach(id => {
 
 let activeSection = '';
 let lastSectionTime = Date.now();
+
+function normalizeSectionForTime(sectionId){
+  if(sectionId === 'fuer-wen') return 'ueber-uns';
+  if(sectionId === 'einsatzbereiche') return 'leistungen';
+
+  return sectionId;
+}
 
 function detectActiveSection(){
   let bestSection = '';
@@ -995,7 +1058,7 @@ function detectActiveSection(){
     }
   });
 
-  return bestSection;
+  return normalizeSectionForTime(bestSection);
 }
 
 setInterval(() => {
@@ -1028,45 +1091,79 @@ setInterval(() => {
 
 document.addEventListener('click', function(event){
   const link = event.target.closest('a');
-  if(!link) return;
 
-  const href = link.getAttribute('href') || '';
-  const text = (link.textContent || '').trim();
+  if(link){
+    const href = link.getAttribute('href') || '';
+    const text = cleanText(link.textContent);
+    const clickArea = getClickArea(link);
+    const target = text || href;
 
-  if(href.includes('wa.me')){
-    sendTracking('click_whatsapp', {
-      target:href
+    if(href.includes('wa.me')){
+      sendTracking('click_whatsapp', {
+        target:target,
+        click_area:clickArea
+      });
+      return;
+    }
+
+    if(href.startsWith('tel:')){
+      sendTracking('click_phone', {
+        target:target,
+        click_area:clickArea
+      });
+      return;
+    }
+
+    if(href.startsWith('mailto:')){
+      sendTracking('click_email', {
+        target:target,
+        click_area:clickArea
+      });
+      return;
+    }
+
+    if(href.includes('/privat') || text.toLowerCase().includes('privat')){
+      sendTracking('click_privat', {
+        target:target,
+        click_area:clickArea
+      });
+      return;
+    }
+
+    if(href.includes('/firmen') || text.toLowerCase().includes('firma') || text.toLowerCase().includes('firmen')){
+      sendTracking('click_firmen', {
+        target:target,
+        click_area:clickArea
+      });
+      return;
+    }
+
+    sendTracking('click_link', {
+      target:target,
+      click_area:clickArea
     });
-    return;
   }
+});
 
-  if(href.startsWith('tel:')){
-    sendTracking('click_phone', {
-      target:href
-    });
-    return;
-  }
+/* =========================
+   LEISTUNGSDETAILS TRACKEN
+========================= */
 
-  if(href.startsWith('mailto:')){
-    sendTracking('click_email', {
-      target:href
-    });
-    return;
-  }
+document.querySelectorAll('details').forEach(detail => {
+  detail.addEventListener('toggle', () => {
+    if(!detail.open) return;
 
-  if(href.includes('/privat') || text.toLowerCase().includes('privat')){
-    sendTracking('click_privat', {
-      target:href || text
-    });
-    return;
-  }
+    const service = detail.closest('.service');
+    const title = service ? cleanText(service.querySelector('h3') ? service.querySelector('h3').textContent : '') : '';
+    const summary = cleanText(detail.querySelector('summary') ? detail.querySelector('summary').textContent : '');
+    const detailName = title || summary || 'Leistungsdetails';
 
-  if(href.includes('/firmen') || text.toLowerCase().includes('firma') || text.toLowerCase().includes('firmen')){
-    sendTracking('click_firmen', {
-      target:href || text
+    sendTracking('details_open', {
+      target:detailName,
+      detail_name:getPageSource() + ': ' + detailName,
+      click_area:getClickArea(detail)
     });
-    return;
-  }
+  });
 });
 
 /* =========================
@@ -1074,7 +1171,8 @@ document.addEventListener('click', function(event){
 ========================= */
 
 document.querySelectorAll('textarea[maxlength]').forEach(textarea => {
-  const counter = textarea.closest('.form-field') ? textarea.closest('.form-field').querySelector('.char-counter') : null;
+  const field = textarea.closest('.form-field');
+  const counter = field ? field.querySelector('.char-counter') : null;
 
   function updateCounter(){
     if(counter){
@@ -1112,6 +1210,156 @@ document.querySelectorAll('.found-select').forEach(select => {
 
   select.addEventListener('change', toggleOther);
   toggleOther();
+});
+
+/* =========================
+   FORMULAR-TRACKING
+========================= */
+
+function getFormKind(form){
+  const typeInput = form.querySelector('input[name="form_type"]');
+  const value = typeInput ? typeInput.value : '';
+
+  if(value === 'privat') return 'privat';
+  if(value === 'firmen') return 'firmen';
+
+  return '';
+}
+
+function getFieldName(input){
+  if(!input) return '';
+
+  const formField = input.closest('.form-field');
+  const label = formField ? formField.querySelector('label') : null;
+
+  if(label){
+    return cleanText(label.textContent).replace('*', '').trim();
+  }
+
+  return input.name || input.type || 'Feld';
+}
+
+function countRequiredFilled(form){
+  let total = 0;
+  let filled = 0;
+
+  form.querySelectorAll('[required]').forEach(input => {
+    total++;
+
+    if(input.type === 'checkbox'){
+      if(input.checked) filled++;
+      return;
+    }
+
+    if(input.value && input.value.trim() !== ''){
+      filled++;
+    }
+  });
+
+  return filled + '/' + total;
+}
+
+document.querySelectorAll('.ajax-form').forEach(form => {
+  const kind = getFormKind(form);
+  if(!kind) return;
+
+  let formStarted = false;
+  let formSubmitted = false;
+  let formAbandonSent = false;
+  let formViewSent = false;
+  let lastFieldName = '';
+
+  if('IntersectionObserver' in window){
+    const formObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting && !formViewSent){
+          formViewSent = true;
+
+          sendTracking('form_view_' + kind, {
+            form_kind:kind,
+            section:'kontakt',
+            target:kind + ' Formular'
+          });
+
+          formObserver.disconnect();
+        }
+      });
+    }, { threshold:.35 });
+
+    formObserver.observe(form);
+  }
+
+  form.addEventListener('input', function(event){
+    const input = event.target.closest('input, textarea, select');
+    if(!input) return;
+
+    lastFieldName = getFieldName(input);
+
+    if(!formStarted){
+      formStarted = true;
+
+      sendTracking('form_start_' + kind, {
+        form_kind:kind,
+        last_field:lastFieldName,
+        required_filled:countRequiredFilled(form),
+        target:kind + ' Formular'
+      });
+      return;
+    }
+
+    sendTracking('form_progress_' + kind, {
+      form_kind:kind,
+      last_field:lastFieldName,
+      required_filled:countRequiredFilled(form),
+      target:kind + ' Formular'
+    });
+  }, true);
+
+  form.addEventListener('change', function(event){
+    const input = event.target.closest('input, textarea, select');
+    if(!input) return;
+
+    lastFieldName = getFieldName(input);
+
+    if(!formStarted){
+      formStarted = true;
+
+      sendTracking('form_start_' + kind, {
+        form_kind:kind,
+        last_field:lastFieldName,
+        required_filled:countRequiredFilled(form),
+        target:kind + ' Formular'
+      });
+    }
+  }, true);
+
+  function sendAbandonIfNeeded(){
+    if(formStarted && !formSubmitted && !formAbandonSent){
+      formAbandonSent = true;
+
+      sendTracking('form_abandon_' + kind, {
+        form_kind:kind,
+        last_field:lastFieldName,
+        required_filled:countRequiredFilled(form),
+        target:kind + ' Formular'
+      });
+    }
+  }
+
+  window.addEventListener('pagehide', sendAbandonIfNeeded);
+
+  document.addEventListener('visibilitychange', () => {
+    if(document.visibilityState === 'hidden'){
+      sendAbandonIfNeeded();
+    }
+  });
+
+  form.dataset.trackingKind = kind;
+  form.dataset.trackingStarted = 'false';
+
+  form.addEventListener('submit', () => {
+    formSubmitted = true;
+  }, true);
 });
 
 /* =========================
@@ -1237,17 +1485,24 @@ document.querySelectorAll('.ajax-form').forEach(form => {
         mode:'no-cors'
       });
 
-      const formType = form.querySelector('input[name="form_type"]') ? form.querySelector('input[name="form_type"]').value : '';
+      const formTypeInput = form.querySelector('input[name="form_type"]');
+      const formType = formTypeInput ? formTypeInput.value : '';
 
       if(formType === 'privat'){
         sendTracking('form_submit_privat', {
-          target:'Privatkunden Formular'
+          form_kind:'privat',
+          target:'Privatkunden Formular',
+          last_field:'Abgesendet',
+          required_filled:countRequiredFilled(form)
         });
       }
 
       if(formType === 'firmen'){
         sendTracking('form_submit_firmen', {
-          target:'Firmenkunden Formular'
+          form_kind:'firmen',
+          target:'Firmenkunden Formular',
+          last_field:'Abgesendet',
+          required_filled:countRequiredFilled(form)
         });
       }
 
