@@ -303,6 +303,13 @@ textarea{min-height:135px;max-height:135px;resize:none}
   color:#0e4e2d;
   font-weight:900;
 }
+
+
+/* Verbesserungen Dropdown & QR */
+.dropdown.force-close .dropdown-content{display:none!important}
+.qr-link{display:block;text-decoration:none;color:#1f2933}
+.qr-link:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(14,78,45,.10)}
+
 @media(max-width:900px){
   .header-inner{display:block}
   .nav{margin-top:14px}
@@ -579,13 +586,13 @@ textarea{min-height:135px;max-height:135px;resize:none}
   <div class="row">
     <div class="form-field">
       <label>E-Mail *</label>
-      <input name="E-Mail" type="email" maxlength="90" autocomplete="email" placeholder="E-Mail-Adresse" required data-error="Bitte gültige E-Mail-Adresse eingeben.">
+      <input name="E-Mail" type="email" maxlength="90" autocomplete="email" placeholder="E-Mail-Adresse" required data-error="Bitte eine gültige E-Mail-Adresse eingeben.">
       <small class="error-message"></small>
     </div>
 
     <div class="form-field">
       <label>Telefon</label>
-      <input name="Telefon" maxlength="40" autocomplete="tel" placeholder="Telefonnummer">
+      <input name="Telefon" type="tel" inputmode="tel" maxlength="25" autocomplete="tel" placeholder="Telefonnummer" pattern="[0-9+()/\-\s]{6,25}" data-error="Bitte eine gültige Telefonnummer ohne Buchstaben eingeben.">
       <small class="error-message"></small>
     </div>
   </div>
@@ -602,7 +609,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
   <div class="row">
     <div class="form-field">
       <label>PLZ *</label>
-      <input name="PLZ" maxlength="10" autocomplete="postal-code" placeholder="z. B. 22926" required data-error="Bitte PLZ eingeben.">
+      <input name="PLZ" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="z. B. 22926" pattern="[0-9]{5}" required data-error="Bitte eine gültige 5-stellige PLZ eingeben.">
       <small class="error-message"></small>
     </div>
 
@@ -678,11 +685,11 @@ textarea{min-height:135px;max-height:135px;resize:none}
       <a class="contact-card" href="mailto:info@service-alltagshilfe.de?subject=Anfrage%20AlltagsHilfe%20Service"><strong>E-Mail</strong><span>info@service-alltagshilfe.de</span></a>
       <a class="contact-card" href="https://wa.me/4915229546946" target="_blank"><strong>WhatsApp</strong><span>Nachricht schreiben</span></a>
 
-      <div class="qr-box">
+      <a class="qr-box qr-link" href="https://wa.me/4915229546946" target="_blank" rel="noopener">
         <img src="../bilder/whatsapp-qr.jpg" alt="WhatsApp QR-Code">
         <h3>WhatsApp QR-Code</h3>
         <p>QR-Code scannen und Bilder oder Informationen zum Auftrag direkt senden.</p>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -750,6 +757,7 @@ const TRACKING_URL = "https://script.google.com/macros/s/AKfycbz1YPu4Li35oDFT2Pg
 ========================= */
 
 const header = document.querySelector('.header');
+
 if(header){
   window.addEventListener('scroll', () => {
     window.scrollY > 20 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
@@ -757,6 +765,7 @@ if(header){
 }
 
 const revealItems = document.querySelectorAll('.reveal');
+
 if(revealItems.length){
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -773,10 +782,11 @@ if(revealItems.length){
 
 document.querySelectorAll('.back-to-top').forEach(button => {
   button.addEventListener('click', () => {
-    sendTracking('click_footer', {
-      click_area:'footer',
-      target:'Nach oben'
+    sendTracking('click_button', {
+      target:'Nach oben',
+      click_area:detectClickArea(button)
     });
+
     window.scrollTo({ top:0, left:0, behavior:'smooth' });
   });
 });
@@ -787,8 +797,26 @@ document.querySelectorAll('.date-field').forEach(field => {
 });
 
 /* =========================
+   DROPDOWN NACH KLICK SCHLIESSEN
+========================= */
+
+document.querySelectorAll('.dropdown-content a').forEach(link => {
+  link.addEventListener('click', () => {
+    const dropdown = link.closest('.dropdown');
+    if(!dropdown) return;
+
+    dropdown.classList.add('force-close');
+
+    setTimeout(() => {
+      dropdown.classList.remove('force-close');
+    }, 700);
+  });
+});
+
+
+/* =========================
    BESUCHS-ID
-   Eine ID bleibt ca. 30 Minuten gültig
+   1 ID bleibt ca. 30 Minuten gültig
 ========================= */
 
 function getVisitorId(){
@@ -799,9 +827,10 @@ function getVisitorId(){
 
   let id = localStorage.getItem(storageKey);
   let savedTime = Number(localStorage.getItem(timeKey) || 0);
-  const expired = !savedTime || (now - savedTime) > maxAgeMinutes * 60 * 1000;
 
-  if(!id || expired){
+  const isExpired = !savedTime || (now - savedTime) > maxAgeMinutes * 60 * 1000;
+
+  if(!id || isExpired){
     const random = Math.random().toString(36).substring(2, 10);
     const time = now.toString(36);
     id = 'V-' + time + '-' + random;
@@ -809,42 +838,42 @@ function getVisitorId(){
 
   localStorage.setItem(storageKey, id);
   localStorage.setItem(timeKey, String(now));
+
   return id;
 }
 
 function getDeviceType(){
   const width = window.innerWidth;
+
   if(width <= 767) return 'Handy';
   if(width <= 1024) return 'Tablet';
+
   return 'Desktop';
 }
 
 function getPageSource(){
   const path = window.location.pathname;
+
   if(path.includes('/privat')) return 'Privatkunden';
   if(path.includes('/firmen')) return 'Firmenkunden';
   if(path.includes('/impressum')) return 'Impressum';
   if(path.includes('/datenschutz')) return 'Datenschutz';
+
   return 'Startseite';
 }
 
-function cleanText(text){
-  return String(text || '').replace(/\s+/g, ' ').trim().slice(0, 160);
-}
-
-function getClickArea(element){
-  if(!element) return 'inhalt';
-  if(element.closest('.nav')) return 'navigation';
-  if(element.closest('.hero')) return 'hero';
-  if(element.closest('.contact')) return 'kontakt';
-  if(element.closest('.footer') || element.closest('footer')) return 'footer';
-  return 'inhalt';
+function cleanText(value){
+  return String(value || '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 180);
 }
 
 function sendTracking(eventName, options){
   options = options || {};
 
   const data = new FormData();
+
   data.append('form_type', 'tracking');
   data.append('visitor_id', getVisitorId());
   data.append('event', eventName);
@@ -912,31 +941,35 @@ const trackableSections = [
   'leistungen',
   'preise',
   'zusammenarbeit',
-  'einsatzgebiet',
   'einsatzbereiche',
+  'einsatzgebiet',
   'kontakt'
 ];
 
 const seenSections = new Set();
 
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      const sectionId = entry.target.id;
-      if(sectionId && !seenSections.has(sectionId)){
-        seenSections.add(sectionId);
-        sendTracking('view_section_' + sectionId, {
-          section:sectionId
-        });
-      }
-    }
-  });
-}, { threshold:.40 });
+if('IntersectionObserver' in window){
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const sectionId = entry.target.id;
 
-trackableSections.forEach(id => {
-  const section = document.getElementById(id);
-  if(section) sectionObserver.observe(section);
-});
+        if(sectionId && !seenSections.has(sectionId)){
+          seenSections.add(sectionId);
+
+          sendTracking('view_section_' + sectionId, {
+            section:sectionId
+          });
+        }
+      }
+    });
+  }, { threshold:.45 });
+
+  trackableSections.forEach(id => {
+    const section = document.getElementById(id);
+    if(section) sectionObserver.observe(section);
+  });
+}
 
 /* =========================
    GROBE ZEIT PRO BEREICH
@@ -945,13 +978,9 @@ trackableSections.forEach(id => {
 let activeSection = '';
 let lastSectionTime = Date.now();
 
-function mapSectionForDashboard(section){
-  if(section === 'fuer-wen' || section === 'ueber-uns' || section === 'ueberblick') return 'ueberblick';
-  if(section === 'leistungen' || section === 'einsatzbereiche') return 'leistungen';
-  if(section === 'preise' || section === 'zusammenarbeit') return 'preise';
-  if(section === 'einsatzgebiet') return 'einsatzgebiet';
-  if(section === 'kontakt') return 'kontakt';
-  return section;
+function normalizeSection(id){
+  if(id === 'fuer-wen' || id === 'einsatzbereiche') return 'ueberblick';
+  return id;
 }
 
 function detectActiveSection(){
@@ -967,7 +996,7 @@ function detectActiveSection(){
 
     if(rect.bottom > 120 && rect.top < window.innerHeight && distance < bestDistance){
       bestDistance = distance;
-      bestSection = id;
+      bestSection = normalizeSection(id);
     }
   });
 
@@ -985,10 +1014,11 @@ setInterval(() => {
 
     if(seconds >= 10){
       sendTracking('section_time', {
-        section:mapSectionForDashboard(activeSection),
+        section:activeSection,
         value:String(seconds),
         duration_seconds:Math.round((Date.now() - visitStart) / 1000)
       });
+
       lastSectionTime = now;
     }
   }else{
@@ -998,61 +1028,110 @@ setInterval(() => {
 }, 10000);
 
 /* =========================
-   KLICKS TRACKEN
+   KLICK-BEREICH ERKENNEN
+========================= */
+
+function detectClickArea(element){
+  if(!element) return 'inhalt';
+
+  if(element.closest('.header') || element.closest('.nav')) return 'navigation';
+  if(element.closest('.hero')) return 'hero';
+  if(element.closest('.contact') || element.closest('.side-contact') || element.closest('.qr-box')) return 'kontakt';
+  if(element.closest('.footer')) return 'footer';
+
+  return 'inhalt';
+}
+
+/* =========================
+   LINK- UND BUTTON-KLICKS TRACKEN
 ========================= */
 
 document.addEventListener('click', function(event){
-  const link = event.target.closest('a');
+  const summary = event.target.closest('summary');
+
+  if(summary){
+    const details = summary.closest('details');
+    const service = summary.closest('.service');
+    const title = service ? cleanText(service.querySelector('h3')?.textContent) : cleanText(summary.textContent);
+    const willOpen = details ? !details.open : false;
+
+    if(willOpen){
+      sendTracking('details_open', {
+        target:title,
+        detail_name:title,
+        click_area:detectClickArea(summary)
+      });
+    }
+
+    return;
+  }
+
   const button = event.target.closest('button');
 
-  if(link){
-    const href = link.getAttribute('href') || '';
-    const text = cleanText(link.textContent || href);
-    const clickArea = getClickArea(link);
-    const target = text || href;
+  if(button && !button.closest('form')){
+    sendTracking('click_button', {
+      target:cleanText(button.textContent || button.getAttribute('aria-label') || 'Button'),
+      click_area:detectClickArea(button)
+    });
+  }
 
-    if(href.includes('wa.me')){
-      sendTracking('click_whatsapp', { click_area:clickArea, target:target });
-      return;
-    }
+  const link = event.target.closest('a');
+  if(!link) return;
 
-    if(href.startsWith('tel:')){
-      sendTracking('click_phone', { click_area:clickArea, target:target });
-      return;
-    }
+  const href = link.getAttribute('href') || '';
+  const text = cleanText(link.textContent || href);
+  const clickArea = detectClickArea(link);
 
-    if(href.startsWith('mailto:')){
-      sendTracking('click_email', { click_area:clickArea, target:target });
-      return;
-    }
-
-    if(href.includes('/privat') || text.toLowerCase().includes('privat')){
-      sendTracking('click_privat', { click_area:clickArea, target:target });
-      return;
-    }
-
-    if(href.includes('/firmen') || text.toLowerCase().includes('firma') || text.toLowerCase().includes('firmen')){
-      sendTracking('click_firmen', { click_area:clickArea, target:target });
-      return;
-    }
-
-    sendTracking('click_' + clickArea, {
-      click_area:clickArea,
-      target:target
+  if(href.includes('wa.me')){
+    sendTracking('click_whatsapp', {
+      target:href,
+      click_area:clickArea
     });
     return;
   }
 
-  if(button && !button.closest('form')){
-    sendTracking('click_' + getClickArea(button), {
-      click_area:getClickArea(button),
-      target:cleanText(button.textContent)
+  if(href.startsWith('tel:')){
+    sendTracking('click_phone', {
+      target:href,
+      click_area:clickArea
     });
+    return;
   }
+
+  if(href.startsWith('mailto:')){
+    sendTracking('click_email', {
+      target:href,
+      click_area:clickArea
+    });
+    return;
+  }
+
+  if(href.includes('/privat') || text.toLowerCase().includes('privat')){
+    sendTracking('click_privat', {
+      target:href || text,
+      click_area:clickArea
+    });
+    return;
+  }
+
+  if(href.includes('/firmen') || text.toLowerCase().includes('firma') || text.toLowerCase().includes('firmen')){
+    sendTracking('click_firmen', {
+      target:href || text,
+      click_area:clickArea
+    });
+    return;
+  }
+
+  sendTracking('click_link', {
+    target:href || text,
+    click_area:clickArea
+  });
 });
 
+
+
 /* =========================
-   LEISTUNGSDETAILS TRACKEN
+   DETAILS TRACKEN
 ========================= */
 
 document.querySelectorAll('details').forEach(details => {
@@ -1060,13 +1139,14 @@ document.querySelectorAll('details').forEach(details => {
     if(!details.open) return;
 
     const article = details.closest('article');
-    const heading = article ? article.querySelector('h3') : null;
-    const detailName = cleanText(heading ? heading.textContent : details.querySelector('summary')?.textContent || 'Leistungsdetails');
+    const headline = article ? article.querySelector('h3') : null;
+    const label = headline ? headline.textContent.trim() : 'Leistungsdetails';
 
     sendTracking('details_open', {
+      detail_name:label,
+      target:label,
       click_area:getClickArea(details),
-      detail_name:detailName,
-      target:detailName
+      section:article && article.id ? article.id : ''
     });
   });
 });
@@ -1076,8 +1156,7 @@ document.querySelectorAll('details').forEach(details => {
 ========================= */
 
 document.querySelectorAll('textarea[maxlength]').forEach(textarea => {
-  const field = textarea.closest('.form-field');
-  const counter = field ? field.querySelector('.char-counter') : null;
+  const counter = textarea.closest('.form-field') ? textarea.closest('.form-field').querySelector('.char-counter') : null;
 
   function updateCounter(){
     if(counter){
@@ -1118,148 +1197,13 @@ document.querySelectorAll('.found-select').forEach(select => {
 });
 
 /* =========================
-   FORMULAR TRACKING
-========================= */
-
-const formTrackingState = new WeakMap();
-
-function getFormKind(form){
-  const input = form.querySelector('input[name="form_type"]');
-  return input ? input.value : '';
-}
-
-function getReadableFieldName(input){
-  if(!input) return '';
-  if(input.name === 'website') return '';
-
-  const field = input.closest('.form-field');
-  const label = field ? field.querySelector('label') : null;
-  return cleanText(label ? label.textContent.replace('*','') : input.name || input.type || 'Feld');
-}
-
-function countRequiredFilled(form){
-  const requiredFields = Array.from(form.querySelectorAll('[required]')).filter(input => input.name !== 'website');
-  const filled = requiredFields.filter(input => {
-    if(input.type === 'checkbox') return input.checked;
-    return String(input.value || '').trim() !== '';
-  }).length;
-  return filled + ' von ' + requiredFields.length;
-}
-
-function trackFormEvent(form, eventName, extra){
-  extra = extra || {};
-  const kind = getFormKind(form);
-  if(!kind) return;
-
-  sendTracking(eventName + '_' + kind, {
-    form_kind:kind,
-    target:kind === 'privat' ? 'Privatkunden Formular' : 'Firmenkunden Formular',
-    last_field:extra.last_field || '',
-    required_filled:countRequiredFilled(form),
-    click_area:'kontakt'
-  });
-}
-
-function markFormSeen(form){
-  const state = formTrackingState.get(form) || {};
-  if(state.seen) return;
-  state.seen = true;
-  formTrackingState.set(form, state);
-  trackFormEvent(form, 'form_view');
-}
-
-function markFormStarted(form, input){
-  const state = formTrackingState.get(form) || {};
-  const lastField = getReadableFieldName(input);
-  state.lastField = lastField || state.lastField || '';
-
-  if(!state.started){
-    state.started = true;
-    formTrackingState.set(form, state);
-    trackFormEvent(form, 'form_start', { last_field:state.lastField });
-  }else{
-    formTrackingState.set(form, state);
-  }
-}
-
-function markFormSubmitted(form){
-  const state = formTrackingState.get(form) || {};
-  state.submitted = true;
-  formTrackingState.set(form, state);
-  trackFormEvent(form, 'form_submit', { last_field:state.lastField || '' });
-}
-
-function trackFormProgress(form, input){
-  const state = formTrackingState.get(form) || {};
-  const lastField = getReadableFieldName(input);
-  if(lastField) state.lastField = lastField;
-  formTrackingState.set(form, state);
-
-  clearTimeout(state.progressTimer);
-  state.progressTimer = setTimeout(() => {
-    trackFormEvent(form, 'form_progress', { last_field:state.lastField || '' });
-  }, 1800);
-}
-
-const formObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      markFormSeen(entry.target);
-    }
-  });
-}, { threshold:.30 });
-
-document.querySelectorAll('.ajax-form').forEach(form => {
-  formTrackingState.set(form, { seen:false, started:false, submitted:false, lastField:'' });
-  formObserver.observe(form);
-
-  form.addEventListener('focusin', event => {
-    const input = event.target;
-    if(!input || !input.name || input.name === 'website') return;
-    markFormStarted(form, input);
-    trackFormProgress(form, input);
-  });
-
-  form.addEventListener('input', event => {
-    const input = event.target;
-    if(!input || !input.name || input.name === 'website') return;
-    markFormStarted(form, input);
-    trackFormProgress(form, input);
-  });
-
-  form.addEventListener('change', event => {
-    const input = event.target;
-    if(!input || !input.name || input.name === 'website') return;
-    markFormStarted(form, input);
-    trackFormProgress(form, input);
-  });
-});
-
-function sendAbandonForStartedForms(){
-  document.querySelectorAll('.ajax-form').forEach(form => {
-    const state = formTrackingState.get(form);
-    if(state && state.started && !state.submitted && !state.abandonSent){
-      state.abandonSent = true;
-      formTrackingState.set(form, state);
-      trackFormEvent(form, 'form_abandon', { last_field:state.lastField || '' });
-    }
-  });
-}
-
-window.addEventListener('beforeunload', sendAbandonForStartedForms);
-document.addEventListener('visibilitychange', () => {
-  if(document.visibilityState === 'hidden'){
-    sendAbandonForStartedForms();
-  }
-});
-
-/* =========================
    FORMULAR-FEHLER
 ========================= */
 
 function clearFormErrors(form){
   form.querySelectorAll('.form-field').forEach(field => {
     field.classList.remove('invalid');
+
     const error = field.querySelector('.error-message');
     if(error) error.textContent = '';
   });
@@ -1270,12 +1214,32 @@ function setFieldError(input, message){
   if(!field) return;
 
   field.classList.add('invalid');
+
   const error = field.querySelector('.error-message');
   if(error) error.textContent = message || 'Bitte dieses Feld ausfüllen.';
 }
 
+function isValidEmail(value){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+}
+
+function isValidPhone(value){
+  if(!value || value.trim() === '') return true;
+
+  const cleaned = value.trim();
+  const onlyAllowedCharacters = /^[0-9+()\/\-\s]+$/.test(cleaned);
+  const digitsOnly = cleaned.replace(/\D/g, '');
+
+  return onlyAllowedCharacters && digitsOnly.length >= 6 && digitsOnly.length <= 15;
+}
+
+function isValidGermanPlz(value){
+  return /^[0-9]{5}$/.test((value || '').trim());
+}
+
 function validateCustomForm(form){
   clearFormErrors(form);
+
   let firstInvalid = null;
 
   form.querySelectorAll('[required]').forEach(input => {
@@ -1292,15 +1256,27 @@ function validateCustomForm(form){
       if(!firstInvalid) firstInvalid = input;
       return;
     }
-
-    if(input.type === 'email' && !input.checkValidity()){
-      setFieldError(input, input.dataset.error);
-      if(!firstInvalid) firstInvalid = input;
-    }
   });
+
+  const emailInput = form.querySelector('input[name="E-Mail"]');
+  if(emailInput && emailInput.value.trim() !== '' && !isValidEmail(emailInput.value.trim())){
+    setFieldError(emailInput, emailInput.dataset.error || 'Bitte eine gültige E-Mail-Adresse eingeben.');
+    if(!firstInvalid) firstInvalid = emailInput;
+  }
+
+  const plzInput = form.querySelector('input[name="PLZ"]');
+  if(plzInput && plzInput.value.trim() !== '' && !isValidGermanPlz(plzInput.value.trim())){
+    setFieldError(plzInput, plzInput.dataset.error || 'Bitte eine gültige 5-stellige PLZ eingeben.');
+    if(!firstInvalid) firstInvalid = plzInput;
+  }
 
   const callbackSelect = form.querySelector('.callback-select');
   const phoneInput = form.querySelector('input[name="Telefon"]');
+
+  if(phoneInput && phoneInput.value.trim() !== '' && !isValidPhone(phoneInput.value.trim())){
+    setFieldError(phoneInput, 'Bitte eine gültige Telefonnummer ohne Buchstaben eingeben.');
+    if(!firstInvalid) firstInvalid = phoneInput;
+  }
 
   if(callbackSelect && phoneInput && callbackSelect.value === 'Ja' && phoneInput.value.trim() === ''){
     setFieldError(phoneInput, 'Bitte Telefonnummer für den gewünschten Rückruf eingeben.');
@@ -1336,12 +1312,147 @@ function showPopup(success, title, message){
 }
 
 const popupClose = document.getElementById('popupClose');
+
 if(popupClose){
   popupClose.addEventListener('click', () => {
     const popup = document.getElementById('formPopup');
     if(popup) popup.classList.remove('show');
   });
 }
+
+/* =========================
+   FORMULAR-TRACKING
+========================= */
+
+const formStates = new WeakMap();
+
+function getFormType(form){
+  const raw = form.querySelector('input[name="form_type"]') ? form.querySelector('input[name="form_type"]').value : '';
+
+  if(raw === 'firmen') return 'firmen';
+  return 'privat';
+}
+
+function getFormEventName(form, eventPart){
+  return 'form_' + eventPart + '_' + getFormType(form);
+}
+
+function getFieldLabel(input){
+  const field = input.closest('.form-field');
+  const label = field ? field.querySelector('label') : null;
+  return cleanText(label ? label.textContent : input.name || input.type || 'Feld')
+    .replace('*', '')
+    .trim();
+}
+
+function getRequiredFilled(form){
+  const required = Array.from(form.querySelectorAll('[required]'));
+  const total = required.length;
+  let filled = 0;
+
+  required.forEach(input => {
+    if(input.type === 'checkbox'){
+      if(input.checked) filled++;
+      return;
+    }
+
+    if(input.value && input.value.trim() !== ''){
+      filled++;
+    }
+  });
+
+  return filled + '/' + total;
+}
+
+function ensureFormState(form){
+  if(!formStates.has(form)){
+    formStates.set(form, {
+      viewed:false,
+      started:false,
+      submitted:false,
+      lastField:'',
+      startedAt:0
+    });
+  }
+
+  return formStates.get(form);
+}
+
+document.querySelectorAll('.ajax-form').forEach(form => {
+  const state = ensureFormState(form);
+
+  if('IntersectionObserver' in window){
+    const formObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting && !state.viewed){
+          state.viewed = true;
+
+          sendTracking(getFormEventName(form, 'view'), {
+            form_kind:getFormType(form),
+            click_area:'kontakt'
+          });
+        }
+      });
+    }, { threshold:.25 });
+
+    formObserver.observe(form);
+  }else{
+    state.viewed = true;
+    sendTracking(getFormEventName(form, 'view'), {
+      form_kind:getFormType(form),
+      click_area:'kontakt'
+    });
+  }
+
+  form.querySelectorAll('input, select, textarea').forEach(input => {
+    if(input.name === 'website') return;
+
+    const markProgress = () => {
+      const currentState = ensureFormState(form);
+      currentState.lastField = getFieldLabel(input);
+
+      if(!currentState.started){
+        currentState.started = true;
+        currentState.startedAt = Date.now();
+
+        sendTracking(getFormEventName(form, 'start'), {
+          form_kind:getFormType(form),
+          last_field:currentState.lastField,
+          required_filled:getRequiredFilled(form),
+          click_area:'kontakt'
+        });
+      }else{
+        sendTracking(getFormEventName(form, 'progress'), {
+          form_kind:getFormType(form),
+          last_field:currentState.lastField,
+          required_filled:getRequiredFilled(form),
+          click_area:'kontakt'
+        });
+      }
+    };
+
+    input.addEventListener('input', markProgress);
+    input.addEventListener('change', markProgress);
+  });
+});
+
+window.addEventListener('pagehide', () => {
+  document.querySelectorAll('.ajax-form').forEach(form => {
+    const state = ensureFormState(form);
+
+    if(state.started && !state.submitted){
+      const seconds = state.startedAt ? Math.round((Date.now() - state.startedAt) / 1000) : '';
+
+      sendTracking(getFormEventName(form, 'abandon'), {
+        form_kind:getFormType(form),
+        last_field:state.lastField,
+        required_filled:getRequiredFilled(form),
+        duration_seconds:seconds,
+        click_area:'kontakt'
+      });
+    }
+  });
+});
 
 /* =========================
    FORMULAR ABSENDEN
@@ -1372,7 +1483,16 @@ document.querySelectorAll('.ajax-form').forEach(form => {
         mode:'no-cors'
       });
 
-      markFormSubmitted(form);
+      const state = ensureFormState(form);
+      state.submitted = true;
+
+      sendTracking(getFormEventName(form, 'submit'), {
+        target:getFormType(form) === 'firmen' ? 'Firmenkunden Formular' : 'Privatkunden Formular',
+        form_kind:getFormType(form),
+        last_field:state.lastField,
+        required_filled:getRequiredFilled(form),
+        click_area:'kontakt'
+      });
 
       form.reset();
       clearFormErrors(form);
@@ -1405,6 +1525,5 @@ document.querySelectorAll('.ajax-form').forEach(form => {
   });
 });
 </script>
-
 </body>
 </html>
