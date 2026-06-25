@@ -96,6 +96,112 @@ h3{font-size:20px;margin:24px 0 10px}
   .brand img{width:58px;height:58px}
   .legal-hero{padding:26px}
 }
+
+
+/* Mobile Menü final: kompakt, klappt nur bei Bedarf auf */
+.mobile-menu-toggle{
+  display:none;
+  border:1px solid rgba(14,78,45,.18);
+  background:#0e4e2d;
+  color:#fefefd;
+  border-radius:999px;
+  padding:10px 14px;
+  font-family:inherit;
+  font-weight:900;
+  line-height:1;
+}
+
+@media(max-width:900px){
+  .header{
+    position:sticky;
+    top:0;
+    background:rgba(254,254,253,.90);
+    backdrop-filter:blur(10px);
+    box-shadow:0 8px 18px rgba(14,78,45,.08);
+  }
+
+  .header-inner{
+    display:flex!important;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:8px 14px;
+  }
+
+  .brand{
+    font-size:17px;
+    gap:9px;
+  }
+
+  .brand img{
+    width:44px!important;
+    height:44px!important;
+  }
+
+  .mobile-menu-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .nav{
+    display:none;
+    width:100%;
+    flex-direction:column;
+    align-items:stretch;
+    gap:6px;
+    margin-top:8px!important;
+    padding:8px;
+    max-height:68vh;
+    overflow:auto;
+    background:rgba(254,254,253,.98);
+    border:1px solid rgba(14,78,45,.13);
+    border-radius:18px;
+    box-shadow:0 12px 28px rgba(14,78,45,.12);
+  }
+
+  .nav.open{
+    display:flex;
+  }
+
+  .nav a,
+  .dropbtn{
+    width:100%;
+    height:auto;
+    min-height:40px;
+    justify-content:flex-start;
+    padding:10px 12px;
+    border-radius:14px;
+  }
+
+  .dropdown{
+    width:100%;
+  }
+
+  .dropdown-content{
+    display:none;
+    position:static;
+    top:auto;
+    left:auto;
+    width:100%;
+    min-width:0;
+    padding:6px;
+    margin-top:4px;
+    border:0;
+    border-radius:14px;
+    box-shadow:none;
+    background:#eef4ec;
+  }
+
+  .dropdown:hover .dropdown-content{
+    display:none;
+  }
+
+  .dropdown.open .dropdown-content{
+    display:block;
+  }
+}
+
 </style>
 </head>
 
@@ -107,6 +213,9 @@ h3{font-size:20px;margin:24px 0 10px}
       <img src="../bilder/Logo.png" alt="AlltagsHilfe Service Logo">
       <span>AlltagsHilfe Service</span>
     </a>
+
+
+    <button class="mobile-menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false">Menü</button>
 
     <nav class="nav">
       <a href="../" class="home-btn">Zur Startseite</a>
@@ -244,7 +353,7 @@ h3{font-size:20px;margin:24px 0 10px}
 </section>
 
 <section class="legal-card">
-  <h2>8. interne Reichweitenmessung</h2>
+  <h2>8. Einfache interne Reichweitenmessung</h2>
   <p>
     Zur einfachen Verbesserung unserer Webseite können technische Nutzungsdaten intern erfasst werden. Dabei kann eine zufällige Besuchs-ID verwendet werden, um einen Seitenbesuch grob zusammenzufassen. Diese Besuchs-ID enthält keine Namen, Telefonnummern, E-Mail-Adressen oder Nachrichteninhalte.
   </p>
@@ -252,6 +361,8 @@ h3{font-size:20px;margin:24px 0 10px}
   <ul>
     <li>besuchte Seiten und Bereiche</li>
     <li>Klicks auf wichtige Elemente wie Telefon, E-Mail, WhatsApp oder Formularbereiche</li>
+    <li>ungefähre Verweildauer oder Zeitstufen</li>
+    <li>Gerätetyp, Spracheinstellung, Bildschirmgröße und Referrer</li>
     <li>technische Zeitstempel</li>
   </ul>
   <p>
@@ -414,6 +525,64 @@ document.querySelectorAll('.back-to-top').forEach(button => {
     window.scrollTo({ top:0, left:0, behavior:'smooth' });
   });
 });
+
+
+/* Mobile-Menü: nur öffnen, wenn man es braucht */
+(function(){
+  const menuButton = document.querySelector('.mobile-menu-toggle');
+  const nav = document.querySelector('.nav');
+
+  if(menuButton && nav){
+    menuButton.addEventListener('click', function(){
+      const isOpen = nav.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      menuButton.textContent = isOpen ? 'Schließen' : 'Menü';
+    });
+  }
+
+  document.querySelectorAll('.dropbtn').forEach(button => {
+    button.addEventListener('click', function(event){
+      if(window.innerWidth > 900) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      const currentDropdown = button.closest('.dropdown');
+      if(!currentDropdown) return;
+
+      document.querySelectorAll('.dropdown.open').forEach(dropdown => {
+        if(dropdown !== currentDropdown){
+          dropdown.classList.remove('open');
+        }
+      });
+
+      currentDropdown.classList.toggle('open');
+    });
+  });
+
+  document.querySelectorAll('.nav a').forEach(link => {
+    link.addEventListener('click', function(){
+      if(nav) nav.classList.remove('open');
+      if(menuButton){
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.textContent = 'Menü';
+      }
+      document.querySelectorAll('.dropdown.open').forEach(dropdown => dropdown.classList.remove('open'));
+      document.querySelectorAll('.dropdown.force-close').forEach(dropdown => dropdown.classList.remove('force-close'));
+    });
+  });
+
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 900){
+      if(nav) nav.classList.remove('open');
+      if(menuButton){
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.textContent = 'Menü';
+      }
+      document.querySelectorAll('.dropdown.open').forEach(dropdown => dropdown.classList.remove('open'));
+    }
+  });
+})();
 </script>
 
 </body>
