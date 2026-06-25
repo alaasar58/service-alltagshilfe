@@ -245,6 +245,489 @@ Ihr Ansprechpartner für praktische Dienstleistungen in der Region.
   <a href="impressum/">Impressum</a>
   <a href="datenschutz/">Datenschutz</a>
 </footer>
+<script>
+const TRACKING_URL = "https://script.google.com/macros/s/AKfycbz1YPu4Li35oDFT2PgT2KvrZMiKJifDhXhaCYYgxw2u6NItMKRaMivm9UirW2e2hZPQ5A/exec";
 
+/* =========================
+   BASIS-FUNKTIONEN
+========================= */
+
+const header = document.querySelector('.header');
+
+if(header){
+  window.addEventListener('scroll', () => {
+    window.scrollY > 20 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
+  });
+}
+
+const revealItems = document.querySelectorAll('.reveal');
+
+if(revealItems.length){
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+      }else{
+        entry.target.classList.remove('show');
+      }
+    });
+  }, { threshold: .12 });
+
+  revealItems.forEach(item => revealObserver.observe(item));
+}
+
+document.querySelectorAll('.back-to-top').forEach(button => {
+  button.addEventListener('click', () => {
+    window.scrollTo({ top:0, left:0, behavior:'smooth' });
+  });
+});
+
+document.querySelectorAll('.date-field').forEach(field => {
+  const today = new Date().toISOString().split('T')[0];
+  field.setAttribute('min', today);
+});
+
+/* =========================
+   BESUCHS-ID
+   Eine ID pro Besuch / Tab
+========================= */
+
+function getVisitorId(){
+  let id = sessionStorage.getItem('ahs_visitor_id');
+
+  if(!id){
+    const random = Math.random().toString(36).substring(2, 10);
+    const time = Date.now().toString(36);
+    id = 'V-' + time + '-' + random;
+    sessionStorage.setItem('ahs_visitor_id', id);
+  }
+
+  return id;
+}
+
+function getDeviceType(){
+  const width = window.innerWidth;
+
+  if(width <= 767) return 'Handy';
+  if(width <= 1024) return 'Tablet';
+
+  return 'Desktop';
+}
+
+function getPageSource(){
+  const path = window.location.pathname;
+
+  if(path.includes('/privat')) return 'Privatkunden';
+  if(path.includes('/firmen')) return 'Firmenkunden';
+  if(path.includes('/impressum')) return 'Impressum';
+  if(path.includes('/datenschutz')) return 'Datenschutz';
+
+  return 'Startseite';
+}
+
+function sendTracking(eventName, options){
+  options = options || {};
+
+  const data = new FormData();
+
+  data.append('form_type', 'tracking');
+  data.append('visitor_id', getVisitorId());
+  data.append('event', eventName);
+  data.append('page', window.location.pathname || '/');
+  data.append('title', document.title || '');
+  data.append('source', getPageSource());
+  data.append('device', getDeviceType());
+  data.append('language', navigator.language || '');
+  data.append('screen', window.innerWidth + 'x' + window.innerHeight);
+  data.append('referrer', document.referrer || '');
+  data.append('target', options.target || '');
+  data.append('section', options.section || '');
+  data.append('value', options.value || '');
+  data.append('duration_seconds', options.duration_seconds || '');
+
+  fetch(TRACKING_URL, {
+    method:'POST',
+    body:data,
+    mode:'no-cors',
+    keepalive:true
+  }).catch(() => {});
+}
+
+/* =========================
+   PAGE VIEW
+========================= */
+
+sendTracking('page_view');
+
+/* =========================
+   ZEIT-STUFEN
+========================= */
+
+const visitStart = Date.now();
+
+[
+  { seconds:15, value:'15s' },
+  { seconds:30, value:'30s' },
+  { seconds:60, value:'60s' },
+  { seconds:120, value:'120s' }
+].forEach(item => {
+  setTimeout(() => {
+    if(document.visibilityState === 'visible'){
+      sendTracking('time_' + item.seconds + 's', {
+        value:item.value,
+        duration_seconds:item.seconds
+      });
+    }
+  }, item.seconds * 1000);
+});
+
+/* =========================
+   SEKTIONEN GESEHEN
+========================= */
+
+const trackableSections = [
+  'ueberblick',
+  'ueber-uns',
+  'leistungen',
+  'preise',
+  'zusammenarbeit',
+  'einsatzgebiet',
+  'kontakt'
+];
+
+const seenSections = new Set();
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const sectionId = entry.target.id;
+
+      if(sectionId && !seenSections.has(sectionId)){
+        seenSections.add(sectionId);
+
+        sendTracking('view_section_' + sectionId, {
+          section:sectionId
+        });
+      }
+    }
+  });
+}, { threshold:.45 });
+
+trackableSections.forEach(id => {
+  const section = document.getElementById(id);
+  if(section) sectionObserver.observe(section);
+});
+
+/* =========================
+   GROBE ZEIT PRO BEREICH
+========================= */
+
+let activeSection = '';
+let lastSectionTime = Date.now();
+
+function detectActiveSection(){
+  let bestSection = '';
+  let bestDistance = Infinity;
+
+  trackableSections.forEach(id => {
+    const section = document.getElementById(id);
+    if(!section) return;
+
+    const rect = section.getBoundingClientRect();
+    const distance = Math.abs(rect.top - 130);
+
+    if(rect.bottom > 120 && rect.top < window.innerHeight && distance < bestDistance){
+      bestDistance = distance;
+      bestSection = id;
+    }
+  });
+
+  return bestSection;
+}
+
+setInterval(() => {
+  if(document.visibilityState !== 'visible') return;
+
+  const currentSection = detectActiveSection();
+  const now = Date.now();
+
+  if(activeSection && currentSection === activeSection){
+    const seconds = Math.round((now - lastSectionTime) / 1000);
+
+    if(seconds >= 10){
+      sendTracking('section_time', {
+        section:activeSection,
+        value:String(seconds),
+        duration_seconds:Math.round((Date.now() - visitStart) / 1000)
+      });
+
+      lastSectionTime = now;
+    }
+  }else{
+    activeSection = currentSection;
+    lastSectionTime = now;
+  }
+}, 10000);
+
+/* =========================
+   KLICKS TRACKEN
+========================= */
+
+document.addEventListener('click', function(event){
+  const link = event.target.closest('a');
+  if(!link) return;
+
+  const href = link.getAttribute('href') || '';
+  const text = (link.textContent || '').trim();
+
+  if(href.includes('wa.me')){
+    sendTracking('click_whatsapp', {
+      target:href
+    });
+    return;
+  }
+
+  if(href.startsWith('tel:')){
+    sendTracking('click_phone', {
+      target:href
+    });
+    return;
+  }
+
+  if(href.startsWith('mailto:')){
+    sendTracking('click_email', {
+      target:href
+    });
+    return;
+  }
+
+  if(href.includes('/privat') || text.toLowerCase().includes('privat')){
+    sendTracking('click_privat', {
+      target:href || text
+    });
+    return;
+  }
+
+  if(href.includes('/firmen') || text.toLowerCase().includes('firma') || text.toLowerCase().includes('firmen')){
+    sendTracking('click_firmen', {
+      target:href || text
+    });
+    return;
+  }
+});
+
+/* =========================
+   ZEICHENZÄHLER
+========================= */
+
+document.querySelectorAll('textarea[maxlength]').forEach(textarea => {
+  const counter = textarea.closest('.form-field') ? textarea.closest('.form-field').querySelector('.char-counter') : null;
+
+  function updateCounter(){
+    if(counter){
+      counter.textContent = textarea.value.length + ' / ' + textarea.getAttribute('maxlength') + ' Zeichen';
+    }
+  }
+
+  textarea.addEventListener('input', updateCounter);
+  updateCounter();
+});
+
+/* =========================
+   SONSTIGES-FELD
+========================= */
+
+document.querySelectorAll('.found-select').forEach(select => {
+  const form = select.closest('form');
+  if(!form) return;
+
+  const sonstigesField = form.querySelector('.found-other-wrap');
+  const sonstigesInput = form.querySelector('input[name="GefundenSonstiges"]');
+
+  function toggleOther(){
+    if(!sonstigesField || !sonstigesInput) return;
+
+    if(select.value === 'Sonstiges'){
+      sonstigesField.style.display = 'block';
+      sonstigesInput.required = true;
+    }else{
+      sonstigesField.style.display = 'none';
+      sonstigesInput.required = false;
+      sonstigesInput.value = '';
+    }
+  }
+
+  select.addEventListener('change', toggleOther);
+  toggleOther();
+});
+
+/* =========================
+   FORMULAR-FEHLER
+========================= */
+
+function clearFormErrors(form){
+  form.querySelectorAll('.form-field').forEach(field => {
+    field.classList.remove('invalid');
+
+    const error = field.querySelector('.error-message');
+    if(error) error.textContent = '';
+  });
+}
+
+function setFieldError(input, message){
+  const field = input.closest('.form-field');
+  if(!field) return;
+
+  field.classList.add('invalid');
+
+  const error = field.querySelector('.error-message');
+  if(error) error.textContent = message || 'Bitte dieses Feld ausfüllen.';
+}
+
+function validateCustomForm(form){
+  clearFormErrors(form);
+
+  let firstInvalid = null;
+
+  form.querySelectorAll('[required]').forEach(input => {
+    if(input.type === 'checkbox'){
+      if(!input.checked){
+        setFieldError(input, input.dataset.error);
+        if(!firstInvalid) firstInvalid = input;
+      }
+      return;
+    }
+
+    if(!input.value || input.value.trim() === ''){
+      setFieldError(input, input.dataset.error);
+      if(!firstInvalid) firstInvalid = input;
+      return;
+    }
+
+    if(input.type === 'email' && !input.checkValidity()){
+      setFieldError(input, input.dataset.error);
+      if(!firstInvalid) firstInvalid = input;
+    }
+  });
+
+  const callbackSelect = form.querySelector('.callback-select');
+  const phoneInput = form.querySelector('input[name="Telefon"]');
+
+  if(callbackSelect && phoneInput && callbackSelect.value === 'Ja' && phoneInput.value.trim() === ''){
+    setFieldError(phoneInput, 'Bitte Telefonnummer für den gewünschten Rückruf eingeben.');
+    if(!firstInvalid) firstInvalid = phoneInput;
+  }
+
+  if(firstInvalid){
+    firstInvalid.scrollIntoView({ behavior:'smooth', block:'center' });
+    setTimeout(() => firstInvalid.focus(), 350);
+    return false;
+  }
+
+  return true;
+}
+
+/* =========================
+   POPUP
+========================= */
+
+function showPopup(success, title, message){
+  const popup = document.getElementById('formPopup');
+  const icon = document.getElementById('popupIcon');
+  const popupTitle = document.getElementById('popupTitle');
+  const popupMessage = document.getElementById('popupMessage');
+
+  if(!popup || !icon || !popupTitle || !popupMessage) return;
+
+  icon.textContent = success ? '✓' : '!';
+  icon.style.background = success ? '#0e4e2d' : '#b42318';
+  popupTitle.textContent = title;
+  popupMessage.textContent = message;
+  popup.classList.add('show');
+}
+
+const popupClose = document.getElementById('popupClose');
+
+if(popupClose){
+  popupClose.addEventListener('click', () => {
+    const popup = document.getElementById('formPopup');
+    if(popup) popup.classList.remove('show');
+  });
+}
+
+/* =========================
+   FORMULAR ABSENDEN
+========================= */
+
+document.querySelectorAll('.ajax-form').forEach(form => {
+  const button = form.querySelector('.submit-btn');
+  const defaultButtonText = form.dataset.buttonText || 'Anfrage senden';
+
+  form.addEventListener('submit', async function(event){
+    event.preventDefault();
+
+    if(!validateCustomForm(form)){
+      return;
+    }
+
+    if(button){
+      button.disabled = true;
+      button.textContent = 'Wird gesendet...';
+    }
+
+    const formData = new FormData(form);
+
+    try{
+      await fetch(form.action, {
+        method:'POST',
+        body:formData,
+        mode:'no-cors'
+      });
+
+      const formType = form.querySelector('input[name="form_type"]') ? form.querySelector('input[name="form_type"]').value : '';
+
+      if(formType === 'privat'){
+        sendTracking('form_submit_privat', {
+          target:'Privatkunden Formular'
+        });
+      }
+
+      if(formType === 'firmen'){
+        sendTracking('form_submit_firmen', {
+          target:'Firmenkunden Formular'
+        });
+      }
+
+      form.reset();
+      clearFormErrors(form);
+
+      document.querySelectorAll('textarea[maxlength]').forEach(textarea => {
+        textarea.dispatchEvent(new Event('input'));
+      });
+
+      document.querySelectorAll('.found-select').forEach(select => {
+        select.dispatchEvent(new Event('change'));
+      });
+
+      showPopup(
+        true,
+        'Anfrage gesendet',
+        'Vielen Dank. Ihre Anfrage wurde übermittelt. Wir melden uns schnellstmöglich zurück.'
+      );
+    }catch(error){
+      showPopup(
+        false,
+        'Anfrage konnte nicht gesendet werden',
+        'Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per Telefon oder WhatsApp.'
+      );
+    }finally{
+      if(button){
+        button.disabled = false;
+        button.textContent = defaultButtonText;
+      }
+    }
+  });
+});
+</script>
 </body>
 </html>
