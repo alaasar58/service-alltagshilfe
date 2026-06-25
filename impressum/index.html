@@ -1,3 +1,280 @@
-<h1>Impressum</h1>
-<p>Die Angaben zum Impressum werden zeitnah ergänzt.</p>
-<p><a href="../">Zurück zur Startseite</a></p>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum | AlltagsHilfe Service</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;user-select:none}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#fefefd;color:#1f2933;line-height:1.6;cursor:default}
+input,textarea,select{user-select:text;cursor:text}
+a,button{cursor:pointer}
+:target{scroll-margin-top:112px}
+
+.header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(254,254,253,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(14,78,45,.12);
+  transition:.25s ease
+}
+.header.scrolled{background:rgba(254,254,253,.84);box-shadow:0 8px 24px rgba(14,78,45,.08)}
+.header-inner{max-width:1180px;margin:auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:14px;color:#0e4e2d;font-weight:900;font-size:23px;text-decoration:none;white-space:nowrap}
+.brand img{width:64px;height:64px;border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(14,78,45,.18)}
+.nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nav a{
+  height:42px;display:inline-flex;align-items:center;justify-content:center;
+  color:#0e4e2d;text-decoration:none;font-weight:800;padding:0 14px;
+  border-radius:999px;background:transparent;border:0;font-size:14px;line-height:1;font-family:inherit;transition:.2s ease
+}
+.nav a:hover{background:#eef4ec}
+.home-btn{background:#0e4e2d!important;color:#fefefd!important}
+.home-btn:hover{background:#08391f!important}
+
+.wrap{max-width:1120px;margin:auto;padding:34px 24px 0}
+.kicker{color:#548031;font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:.6px;margin-bottom:10px}
+h1,h2,h3{color:#0e4e2d}
+h1{font-size:43px;line-height:1.08;margin-bottom:18px}
+h2{font-size:27px;margin:36px 0 14px}
+h3{font-size:20px;margin:24px 0 10px}
+.lead{font-size:18px;color:#56645d;max-width:850px;margin-bottom:18px}
+
+.legal-hero{
+  background:
+    linear-gradient(135deg,rgba(246,243,238,.96),rgba(238,244,236,.96)),
+    linear-gradient(135deg,#f6f3ee 0%,#eef4ec 55%,#dfe9dc 100%);
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:30px;
+  padding:34px;
+  box-shadow:0 12px 34px rgba(14,78,45,.08);
+  margin-bottom:28px
+}
+.legal-card{
+  background:white;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 8px 22px rgba(14,78,45,.06);
+  margin:20px 0
+}
+.legal-card p{color:#3d4a43;margin-bottom:10px}
+.legal-card a{color:#0e4e2d;font-weight:900}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
+.info-box{
+  background:#f6f3ee;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:20px;
+  padding:18px
+}
+.info-box strong{display:block;color:#0e4e2d;margin-bottom:6px}
+.info-box span{display:block;color:#3d4a43}
+
+.footer{margin-top:60px;background:#0e4e2d;color:white;border-radius:30px 30px 0 0;padding:30px 30px 18px}
+.footer-main{display:grid;grid-template-columns:1.1fr .9fr .9fr .9fr;gap:24px;margin-bottom:24px}
+.footer h3{color:white;font-size:17px;margin-bottom:8px}
+.footer p,.footer li{color:#e7efe8;font-size:14px}
+.footer ul{list-style:none}
+.footer a{color:#fefefd;text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.top-link{display:inline-block;border:1px solid rgba(255,255,255,.35);padding:10px 14px;border-radius:999px;font-weight:900;margin-top:8px;background:transparent;color:#fefefd;font-family:inherit}
+.top-link:hover{background:rgba(255,255,255,.12)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.18);padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:#e7efe8}
+.footer-bottom a{margin-left:14px}
+
+@media(max-width:900px){
+  .header-inner{display:block}
+  .nav{margin-top:14px}
+  .info-grid,.footer-main{grid-template-columns:1fr}
+  h1{font-size:33px}
+  h2{font-size:25px}
+  .brand img{width:58px;height:58px}
+  .legal-hero{padding:26px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header" id="oben">
+  <div class="header-inner">
+    <a class="brand" href="../">
+      <img src="../bilder/Logo.png" alt="AlltagsHilfe Service Logo">
+      <span>AlltagsHilfe Service</span>
+    </a>
+
+    <nav class="nav">
+      <a href="../" class="home-btn">Zur Startseite</a>
+      <a href="../privat/">Privatkunden</a>
+      <a href="../firmen/">Firmenkunden</a>
+      <a href="../datenschutz/">Datenschutz</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section class="legal-hero">
+  <div class="kicker">Rechtliche Angaben</div>
+  <h1>Impressum</h1>
+  <p class="lead">
+    Angaben gemäß § 5 DDG sowie weitere rechtliche Hinweise zur Webseite von AlltagsHilfe Service.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>Angaben gemäß § 5 DDG</h2>
+
+  <div class="info-grid">
+    <div class="info-box">
+      <strong>Unternehmen</strong>
+      <span>AlltagsHilfe Service</span>
+    </div>
+
+    <div class="info-box">
+      <strong>Inhaber</strong>
+      <span>Mohammed Alaa Sarhan</span>
+    </div>
+
+    <div class="info-box">
+      <strong>Anschrift</strong>
+      <span>Mühlenstraße 7<br>22941 Bargteheide<br>Deutschland</span>
+    </div>
+
+    <div class="info-box">
+      <strong>Kontakt</strong>
+      <span>Telefon: <a href="tel:+4915229546946">+49 1522 9546946</a><br>
+      E-Mail: <a href="mailto:info@service-alltagshilfe.de">info@service-alltagshilfe.de</a></span>
+    </div>
+
+    <div class="info-box">
+      <strong>Gewerbeanmeldung</strong>
+      <span>Angemeldet bei der Stadt Bargteheide</span>
+    </div>
+
+    <div class="info-box">
+      <strong>Umsatzsteuer-ID</strong>
+      <span>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: wird nach Erteilung ergänzt.</span>
+    </div>
+  </div>
+</section>
+
+<section class="legal-card">
+  <h2>Verantwortlich für den Inhalt</h2>
+  <p>
+    Verantwortlich für den Inhalt dieser Webseite:
+  </p>
+  <p>
+    Mohammed Alaa Sarhan<br>
+    Mühlenstraße 7<br>
+    22941 Bargteheide<br>
+    Deutschland
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>Haftung für Inhalte</h2>
+  <p>
+    Die Inhalte dieser Webseite wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte übernehmen wir jedoch keine Gewähr.
+  </p>
+  <p>
+    Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>Haftung für Links</h2>
+  <p>
+    Diese Webseite kann Links zu externen Webseiten Dritter enthalten, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte keine Gewähr übernehmen.
+  </p>
+  <p>
+    Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>Urheberrecht</h2>
+  <p>
+    Die auf dieser Webseite veröffentlichten Inhalte, Texte, Bilder und Gestaltungen unterliegen dem deutschen Urheberrecht, soweit sie urheberrechtlich geschützt sind.
+  </p>
+  <p>
+    Eine Vervielfältigung, Bearbeitung, Verbreitung oder sonstige Verwertung außerhalb der Grenzen des Urheberrechts bedarf der vorherigen schriftlichen Zustimmung des jeweiligen Rechteinhabers.
+  </p>
+  <p>
+    Bilder auf dieser Webseite können teilweise KI-generiert oder grafisch bearbeitet sein.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>Verbraucherstreitbeilegung</h2>
+  <p>
+    Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+  </p>
+</section>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div>
+      <h3>AlltagsHilfe Service</h3>
+      <p>Zuverlässige Unterstützung rund um Haus, Garten und Alltag.</p>
+      <button class="top-link back-to-top" type="button">Nach oben</button>
+    </div>
+
+    <div>
+      <h3>Schnelllinks</h3>
+      <ul>
+        <li><a href="../">Startseite</a></li>
+        <li><a href="../privat/">Privatkunden</a></li>
+        <li><a href="../firmen/">Firmenkunden</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Informationen</h3>
+      <ul>
+        <li><a href="../datenschutz/">Datenschutz</a></li>
+        <li><a href="../impressum/">Impressum</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Kontakt</h3>
+      <p>
+        Telefon: <a href="tel:+4915229546946">+49 1522 9546946</a><br>
+        E-Mail: <a href="mailto:info@service-alltagshilfe.de">info@service-alltagshilfe.de</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 AlltagsHilfe Service</span>
+    <span>Webseite erstellt von AlltagsHilfe Service · Bilder teilweise KI-generiert</span>
+    <span>
+      <a href="../datenschutz/">Datenschutz</a>
+      <a href="../impressum/">Impressum</a>
+    </span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+const header = document.querySelector('.header');
+
+if(header){
+  window.addEventListener('scroll', () => {
+    window.scrollY > 20 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
+  });
+}
+
+document.querySelectorAll('.back-to-top').forEach(button => {
+  button.addEventListener('click', () => {
+    window.scrollTo({ top:0, left:0, behavior:'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
