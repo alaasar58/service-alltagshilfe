@@ -661,27 +661,6 @@ document.addEventListener('click', function(event){
 
 
 /* =========================
-   DETAILS TRACKEN
-========================= */
-
-document.querySelectorAll('details').forEach(details => {
-  details.addEventListener('toggle', () => {
-    if(!details.open) return;
-
-    const article = details.closest('article');
-    const headline = article ? article.querySelector('h3') : null;
-    const label = headline ? headline.textContent.trim() : 'Leistungsdetails';
-
-    sendTracking('details_open', {
-      detail_name:label,
-      target:label,
-      click_area:getClickArea(details),
-      section:article && article.id ? article.id : ''
-    });
-  });
-});
-
-/* =========================
    ZEICHENZÄHLER
 ========================= */
 
