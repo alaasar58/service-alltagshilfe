@@ -9,6 +9,9 @@
 *{box-sizing:border-box;margin:0;padding:0;user-select:none}
 html{scroll-behavior:smooth}
 body{font-family:Arial,sans-serif;background:#fefefd;color:#1f2933;line-height:1.6;cursor:default}
+/* Lange deutsche Woerter auf schmalen Displays umbrechen statt ueberlaufen lassen */
+h1,h2,h3,p,li{overflow-wrap:break-word;hyphens:auto}
+span,a{overflow-wrap:break-word}
 input,textarea,select{user-select:text;cursor:text}
 a,button{cursor:pointer}
 :target{scroll-margin-top:112px}
@@ -264,8 +267,8 @@ h3{font-size:20px;margin:24px 0 10px}
     </div>
 
     <div class="info-box">
-      <strong>Umsatzsteuer-ID</strong>
-      <span>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: wird nach Erteilung ergänzt.</span>
+      <strong>USt-IdNr.</strong>
+      <span>DE464006468</span>
     </div>
   </div>
 </section>
