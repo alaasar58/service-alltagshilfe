@@ -9,6 +9,9 @@
 *{box-sizing:border-box;margin:0;padding:0;user-select:none}
 html{scroll-behavior:smooth}
 body{font-family:Arial,sans-serif;background:#fefefd;color:#1f2933;line-height:1.6;cursor:default}
+/* Lange deutsche Woerter auf schmalen Displays umbrechen statt ueberlaufen lassen */
+h1,h2,h3,p,li{overflow-wrap:break-word;hyphens:auto}
+span,a{overflow-wrap:break-word}
 input,textarea,select{user-select:text;cursor:text}
 a,button,summary{cursor:pointer}
 :target{scroll-margin-top:112px}
@@ -1279,27 +1282,6 @@ document.addEventListener('click', function(event){
 
 
 /* =========================
-   DETAILS TRACKEN
-========================= */
-
-document.querySelectorAll('details').forEach(details => {
-  details.addEventListener('toggle', () => {
-    if(!details.open) return;
-
-    const article = details.closest('article');
-    const headline = article ? article.querySelector('h3') : null;
-    const label = headline ? headline.textContent.trim() : 'Leistungsdetails';
-
-    sendTracking('details_open', {
-      detail_name:label,
-      target:label,
-      click_area:getClickArea(details),
-      section:article && article.id ? article.id : ''
-    });
-  });
-});
-
-/* =========================
    ZEICHENZÄHLER
 ========================= */
 
@@ -1715,7 +1697,12 @@ document.querySelectorAll('.ajax-form').forEach(form => {
         menuButton.textContent = 'Menü';
       }
       document.querySelectorAll('.dropdown.open').forEach(dropdown => dropdown.classList.remove('open'));
-      document.querySelectorAll('.dropdown.force-close').forEach(dropdown => dropdown.classList.remove('force-close'));
+
+      /* force-close nur mobil sofort aufheben.
+         Auf dem Desktop schliesst es das Dropdown nach dem Klick kurz weg. */
+      if(window.innerWidth <= 900){
+        document.querySelectorAll('.dropdown.force-close').forEach(dropdown => dropdown.classList.remove('force-close'));
+      }
     });
   });
 

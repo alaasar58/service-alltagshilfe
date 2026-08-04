@@ -31,6 +31,16 @@
       cursor: default;
     }
 
+    /* Lange deutsche Woerter auf schmalen Displays umbrechen statt ueberlaufen lassen */
+    h1, h2, h3, p, li {
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+
+    span, a {
+      overflow-wrap: break-word;
+    }
+
     main {
       height: calc(100vh - 46px);
       display: flex;
@@ -659,27 +669,6 @@ document.addEventListener('click', function(event){
 });
 
 
-
-/* =========================
-   DETAILS TRACKEN
-========================= */
-
-document.querySelectorAll('details').forEach(details => {
-  details.addEventListener('toggle', () => {
-    if(!details.open) return;
-
-    const article = details.closest('article');
-    const headline = article ? article.querySelector('h3') : null;
-    const label = headline ? headline.textContent.trim() : 'Leistungsdetails';
-
-    sendTracking('details_open', {
-      detail_name:label,
-      target:label,
-      click_area:getClickArea(details),
-      section:article && article.id ? article.id : ''
-    });
-  });
-});
 
 /* =========================
    ZEICHENZÄHLER
