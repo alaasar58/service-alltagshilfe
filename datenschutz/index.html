@@ -64,6 +64,7 @@ h3{font-size:20px;margin:24px 0 10px}
   margin:20px 0
 }
 .legal-card p{color:#3d4a43;margin-bottom:10px}
+.legal-card h3{color:#0e4e2d;font-size:17px;margin:20px 0 8px}
 .legal-card ul{padding-left:22px;margin:10px 0 14px;color:#3d4a43}
 .legal-card li{margin-bottom:8px}
 .legal-card a{color:#0e4e2d;font-weight:900}
@@ -77,6 +78,11 @@ h3{font-size:20px;margin:24px 0 10px}
 .info-box strong{display:block;color:#0e4e2d;margin-bottom:6px}
 .info-box span{display:block;color:#3d4a43}
 .note{background:#eef4ec;border-left:5px solid #0e4e2d;border-radius:16px;padding:16px;margin:16px 0;color:#3d4a43}
+
+.optout-box{background:#eef4ec;border:1px solid rgba(14,78,45,.18);border-radius:16px;padding:18px;margin:16px 0}
+.optout-btn{display:inline-block;background:#0e4e2d;color:#fefefd;border:0;border-radius:999px;padding:12px 20px;font-weight:900;font-family:inherit;font-size:15px;cursor:pointer}
+.optout-btn:hover{background:#0b3f24}
+.optout-status{display:block;margin-top:10px;color:#3d4a43;font-size:14px}
 
 .footer{margin-top:60px;background:#0e4e2d;color:white;border-radius:30px 30px 0 0;padding:30px 30px 18px}
 .footer-main{display:grid;grid-template-columns:1.1fr .9fr .9fr .9fr;gap:24px;margin-bottom:24px}
@@ -206,6 +212,9 @@ h3{font-size:20px;margin:24px 0 10px}
 }
 
 </style>
+
+  <script defer src="/js/tracking.js"></script>
+  <script defer src="/js/site.js"></script>
 </head>
 
 <body>
@@ -358,12 +367,16 @@ h3{font-size:20px;margin:24px 0 10px}
 <section class="legal-card">
   <h2>8. interne Reichweiten&shy;messung</h2>
   <p>
-    Zur Verbesserung unserer Webseite können technische Nutzungsdaten intern erfasst werden. Dabei kann eine zufällige Besuchs-ID verwendet werden, um einen Seitenbesuch grob zusammenzufassen. Diese Besuchs-ID enthält keine Namen, Telefonnummern, E-Mail-Adressen oder Nachrichteninhalte.
+    Zur Verbesserung unserer Webseite können technische Nutzungsdaten intern erfasst werden. Dabei werden zwei zufällige Kennungen im Browser-Speicher abgelegt: eine Sitzungs-ID, die nach etwa 30 Minuten ohne Aktivität abläuft, und eine Geräte-ID, die dauerhaft gespeichert bleibt, damit wiederkehrende Besuche nicht doppelt gezählt werden. Diese Kennungen enthalten keine Namen, Telefonnummern, E-Mail-Adressen oder Nachrichteninhalte.
   </p>
   <p>Erfasst werden können insbesondere:</p>
   <ul>
-    <li>besuchte Seiten und Bereiche</li>
+    <li>besuchte Seiten und Bereiche sowie die Scrolltiefe</li>
     <li>Klicks auf wichtige Elemente wie Telefon, E-Mail, WhatsApp oder Formularbereiche</li>
+    <li>Verweildauer auf der Seite und in einzelnen Abschnitten</li>
+    <li>Fortschritt und Abbruch im Kontaktformular, jedoch ohne die eingegebenen Inhalte</li>
+    <li>grober Gerätetyp, Sprache und Bildschirmgröße des Browsers</li>
+    <li>Herkunft des Besuchs, etwa die verweisende Webseite oder Kampagnenangaben aus dem Link, zum Beispiel bei einem QR-Code</li>
     <li>technische Zeitstempel</li>
   </ul>
   <p>
@@ -375,6 +388,18 @@ h3{font-size:20px;margin:24px 0 10px}
   <div class="note">
     Hinweis: Die Formularinhalte selbst werden nicht für die Reichweitenmessung verwendet. Anfrageinhalte werden getrennt zur Bearbeitung der Anfrage verarbeitet.
   </div>
+
+  <h3>Widerspruch gegen die Reichweitenmessung</h3>
+  <p>
+    Sie können der Reichweitenmessung jederzeit widersprechen. Über die folgende Schaltfläche wird die Messung für diesen Browser dauerhaft abgeschaltet und die bereits gespeicherten Kennungen werden gelöscht. Die Entscheidung wird lokal in Ihrem Browser hinterlegt und gilt daher pro Gerät und Browser.
+  </p>
+  <div class="optout-box">
+    <button type="button" class="optout-btn" id="trackingOptOut">Auswertung deaktivieren</button>
+    <span class="optout-status" id="trackingStatus"></span>
+  </div>
+  <p>
+    Sendet Ihr Browser das Signal „Do Not Track“ oder eine Global-Privacy-Control-Einstellung, findet ohnehin keine Messung statt.
+  </p>
 </section>
 
 <section class="legal-card">
@@ -383,7 +408,10 @@ h3{font-size:20px;margin:24px 0 10px}
     Diese Webseite verwendet derzeit keine klassischen Werbe-Cookies und kein Google Analytics. Für technische Funktionen oder eine einfache interne Reichweitenmessung kann der Browser-Speicher genutzt werden, zum Beispiel zur Wiedererkennung eines kurzen Besuchszeitraums oder zur technischen Stabilisierung der Auswertung.
   </p>
   <p>
-    Sie können gespeicherte Browserdaten jederzeit über die Einstellungen Ihres Browsers löschen.
+    Für die interne Reichweitenmessung werden im lokalen Speicher des Browsers eine Geräte-ID, eine Sitzungs-ID, ein Zeitstempel der letzten Aktivität, ein Besuchszähler sowie gegebenenfalls die Herkunftsangabe des Besuchs abgelegt. Diese Angaben verlassen Ihren Browser nur in Form der oben beschriebenen Messdaten.
+  </p>
+  <p>
+    Sie können gespeicherte Browserdaten jederzeit über die Einstellungen Ihres Browsers löschen. Die Messung selbst lässt sich über die Schaltfläche in Abschnitt 8 dauerhaft abschalten.
   </p>
 </section>
 
@@ -512,79 +540,6 @@ h3{font-size:20px;margin:24px 0 10px}
 
 </div>
 
-<script>
-const header = document.querySelector('.header');
-
-if(header){
-  window.addEventListener('scroll', () => {
-    window.scrollY > 20 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
-  });
-}
-
-document.querySelectorAll('.back-to-top').forEach(button => {
-  button.addEventListener('click', () => {
-    window.scrollTo({ top:0, left:0, behavior:'smooth' });
-  });
-});
-
-
-/* Mobile-Menü: nur öffnen, wenn man es braucht */
-(function(){
-  const menuButton = document.querySelector('.mobile-menu-toggle');
-  const nav = document.querySelector('.nav');
-
-  if(menuButton && nav){
-    menuButton.addEventListener('click', function(){
-      const isOpen = nav.classList.toggle('open');
-      menuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      menuButton.textContent = isOpen ? 'Schließen' : 'Menü';
-    });
-  }
-
-  document.querySelectorAll('.dropbtn').forEach(button => {
-    button.addEventListener('click', function(event){
-      if(window.innerWidth > 900) return;
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      const currentDropdown = button.closest('.dropdown');
-      if(!currentDropdown) return;
-
-      document.querySelectorAll('.dropdown.open').forEach(dropdown => {
-        if(dropdown !== currentDropdown){
-          dropdown.classList.remove('open');
-        }
-      });
-
-      currentDropdown.classList.toggle('open');
-    });
-  });
-
-  document.querySelectorAll('.nav a').forEach(link => {
-    link.addEventListener('click', function(){
-      if(nav) nav.classList.remove('open');
-      if(menuButton){
-        menuButton.setAttribute('aria-expanded', 'false');
-        menuButton.textContent = 'Menü';
-      }
-      document.querySelectorAll('.dropdown.open').forEach(dropdown => dropdown.classList.remove('open'));
-      document.querySelectorAll('.dropdown.force-close').forEach(dropdown => dropdown.classList.remove('force-close'));
-    });
-  });
-
-  window.addEventListener('resize', function(){
-    if(window.innerWidth > 900){
-      if(nav) nav.classList.remove('open');
-      if(menuButton){
-        menuButton.setAttribute('aria-expanded', 'false');
-        menuButton.textContent = 'Menü';
-      }
-      document.querySelectorAll('.dropdown.open').forEach(dropdown => dropdown.classList.remove('open'));
-    }
-  });
-})();
-</script>
 
 </body>
 </html>
