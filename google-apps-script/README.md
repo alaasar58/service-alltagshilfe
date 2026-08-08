@@ -5,9 +5,21 @@ und die Kontaktanfragen. Es schreibt in drei Blätter:
 
 | Blatt | Inhalt |
 |---|---|
-| `Tracking` | ein Ereignis pro Zeile, 25 Spalten |
+| `Tracking` | ein Ereignis pro Zeile, 27 Spalten |
 | `Anfragen` | eine Kontaktanfrage pro Zeile, plus Spalte `Status` zum Abhaken |
 | `Dashboard` | Auswertung über Formeln, aktualisiert sich von selbst |
+
+## Wichtig vor dem Einbau
+
+Das bisherige Skript las den Datenkörper mit `JSON.parse(e.postData.contents)`
+und erwartete Felder wie `visitId` und `action`. Die Webseite sendet aber
+`FormData` mit Feldern wie `visitor_id` und `event`, und die Kontaktformulare
+gehen an dieselbe URL. Das alte Skript konnte beides nicht verarbeiten und
+kannte auch keine E-Mail-Benachrichtigung.
+
+Das neue Skript liest `e.parameter`, trennt Messdaten und Anfragen über
+`form_type` und verschickt die Benachrichtigung. Vor dem Umstieg lohnt der
+Blick, ob in der Tabelle zuletzt überhaupt neue Zeilen ankamen.
 
 ## Einbau
 
@@ -71,5 +83,7 @@ Tabelle klein hält.
 | Q | Letztes Feld | zuletzt bearbeitetes Formularfeld |
 | R | Pflichtfelder | z. B. `4/7` |
 | S | Gerät | Handy, Tablet, Desktop |
-| T | Kampagne | Herkunft, z. B. `source=flyer \| medium=qr` |
-| U–Y | Verweis, Sprache, Bildschirm, Titel, Client-Zeit | nur beim `page_view` gefüllt |
+| T | Betriebssystem | Android, iOS, Windows, macOS, Linux |
+| U | Browser | Chrome, Safari, Firefox, Edge, Samsung Internet, Opera |
+| V | Kampagne | Herkunft, z. B. `source=flyer \| medium=qr` |
+| W–AA | Verweis, Sprache, Bildschirm, Titel, Client-Zeit | nur beim `page_view` gefüllt |

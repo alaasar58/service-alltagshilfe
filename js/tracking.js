@@ -216,6 +216,35 @@
     return 'Desktop';
   }
 
+  function getOperatingSystem() {
+    var ua = window.navigator.userAgent || '';
+
+    if (/Android/.test(ua)) return 'Android';
+    if (/iPhone|iPad|iPod/.test(ua)) return 'iOS';
+    /* iPad meldet sich seit iPadOS 13 als Mac. */
+    if (/Macintosh/.test(ua) && window.navigator.maxTouchPoints > 1) return 'iOS';
+    if (/Windows NT/.test(ua)) return 'Windows';
+    if (/Mac OS X|Macintosh/.test(ua)) return 'macOS';
+    if (/Linux/.test(ua)) return 'Linux';
+
+    return 'Sonstige';
+  }
+
+  function getBrowser() {
+    var ua = window.navigator.userAgent || '';
+
+    /* Reihenfolge ist wichtig: Edge und Chrome tragen "Safari" im
+       Kennzeichen, Chrome zusaetzlich noch bei Edge. */
+    if (/Edg\//.test(ua)) return 'Edge';
+    if (/OPR\/|Opera/.test(ua)) return 'Opera';
+    if (/SamsungBrowser/.test(ua)) return 'Samsung Internet';
+    if (/Firefox\/|FxiOS/.test(ua)) return 'Firefox';
+    if (/CriOS|Chrome\//.test(ua)) return 'Chrome';
+    if (/Safari\//.test(ua)) return 'Safari';
+
+    return 'Sonstige';
+  }
+
   function getPageSource() {
     var path = window.location.pathname;
     if (path.indexOf('/privat') !== -1) return 'Privatkunden';
@@ -270,6 +299,8 @@
       title: isPageView ? (document.title || '') : '',
       source: getPageSource(),
       device: getDeviceType(),
+      os: isPageView ? getOperatingSystem() : '',
+      browser: isPageView ? getBrowser() : '',
       campaign: isPageView ? detectCampaign() : '',
       language: isPageView ? (window.navigator.language || '') : '',
       screen: isPageView ? (window.innerWidth + 'x' + window.innerHeight) : '',

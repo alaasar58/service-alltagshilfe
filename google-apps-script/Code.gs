@@ -28,8 +28,8 @@ var CONFIG = {
 var TRACKING_SPALTEN = [
   'Zeitstempel', 'Datum', 'Besucher-ID', 'Sitzungs-ID', 'Besuch-Nr', 'Reihenfolge',
   'Ereignis', 'Seite', 'Pfad', 'Abschnitt', 'Ziel', 'Wert', 'Sekunden', 'Bereich',
-  'Detail', 'Formular', 'Letztes Feld', 'Pflichtfelder', 'Gerät', 'Kampagne',
-  'Verweis', 'Sprache', 'Bildschirm', 'Titel', 'Client-Zeit'
+  'Detail', 'Formular', 'Letztes Feld', 'Pflichtfelder', 'Gerät', 'Betriebssystem',
+  'Browser', 'Kampagne', 'Verweis', 'Sprache', 'Bildschirm', 'Titel', 'Client-Zeit'
 ];
 
 var ANFRAGEN_SPALTEN = [
@@ -98,6 +98,8 @@ function ereignisSpeichern(p) {
     text(p.last_field),
     text(p.required_filled),
     text(p.device),
+    text(p.os),
+    text(p.browser),
     text(p.campaign),
     text(p.referrer),
     text(p.language),
@@ -468,15 +470,18 @@ function dashboardAufbauen() {
 
     var ziel = blatt.getRange(zelle).offset(1, 0).getA1Notation();
     blatt.getRange(ziel).setFormula(
-      '=IFERROR(QUERY(' + T + '!$A$2:$Y,"' + auswahl + '",0),"noch keine Daten")'
+      '=IFERROR(QUERY(' + T + '!$A$2:$AA,"' + auswahl + '",0),"noch keine Daten")'
     );
   }
 
   abfrage('A61', 'Woher kommen die Besucher',
-    "select T, count(A) where G = 'page_view' and T is not null group by T order by count(A) desc limit 10 label T 'Kampagne / Herkunft', count(A) 'Aufrufe'");
+    "select V, count(A) where G = 'page_view' and V is not null group by V order by count(A) desc limit 10 label V 'Kampagne / Herkunft', count(A) 'Aufrufe'");
 
-  abfrage('D61', 'Geräte',
-    "select S, count(A) where G = 'page_view' group by S order by count(A) desc label S 'Gerät', count(A) 'Aufrufe'");
+  abfrage('D61', 'Geräte und Systeme',
+    "select S, T, count(A) where G = 'page_view' group by S, T order by count(A) desc label S 'Gerät', T 'System', count(A) 'Aufrufe'");
+
+  abfrage('K61', 'Browser',
+    "select U, count(A) where G = 'page_view' and U is not null group by U order by count(A) desc label U 'Browser', count(A) 'Aufrufe'");
 
   abfrage('G61', 'Meistbesuchte Seiten',
     "select H, count(A) where G = 'page_view' group by H order by count(A) desc label H 'Seite', count(A) 'Aufrufe'");
@@ -515,7 +520,7 @@ function dashboardAufbauen() {
 
   blatt.getRange('E93').setValue('Letztes Feld vor dem Abbruch').setFontWeight('bold').setFontSize(12);
   blatt.getRange('E94').setFormula(
-    '=IFERROR(QUERY(' + T + '!$A$2:$Y,"select Q, count(A) where G = \'form_abandon\' and Q is not null group by Q order by count(A) desc limit 10 label Q \'Feld\', count(A) \'Abbrüche\'",0),"noch keine Daten")'
+    '=IFERROR(QUERY(' + T + '!$A$2:$AA,"select Q, count(A) where G = \'form_abandon\' and Q is not null group by Q order by count(A) desc limit 10 label Q \'Feld\', count(A) \'Abbrüche\'",0),"noch keine Daten")'
   );
 
   /* Herkunft der echten Anfragen ------------------------ */
