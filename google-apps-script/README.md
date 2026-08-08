@@ -1,73 +1,112 @@
-# Google Apps Script – Einrichtung
+# Google Apps Script – Umstieg
 
-Das Skript in `Code.gs` nimmt beides entgegen: die Messdaten der Webseite
-und die Kontaktanfragen. Es schreibt in drei Blätter:
+## Was bleibt, was sich ändert
 
-| Blatt | Inhalt |
+| Blatt | Was passiert |
 |---|---|
-| `Tracking` | ein Ereignis pro Zeile, 27 Spalten |
-| `Anfragen` | eine Kontaktanfrage pro Zeile, plus Spalte `Status` zum Abhaken |
-| `Dashboard` | Auswertung über Formeln, aktualisiert sich von selbst |
+| `Privatkunden` | **unverändert.** Gleiche Spalten, gleiche Anfrage-IDs, gleiche E-Mail |
+| `Firmenkunden` | **unverändert.** Ebenso |
+| `Tracking` | wird **eingefroren**. Kein Schreibzugriff mehr, bleibt vollständig als Archiv |
+| `Dashboard` | bleibt als Archiv stehen |
+| `Dashboard_Daten` | bleibt als Archiv stehen |
+| `Tracking_Ereignisse` | **neu.** Eine Zeile pro Ereignis, 28 Spalten |
+| `Auswertung` | **neu.** Kennzahlen, Verlauf, Tabellen |
 
-## Wichtig vor dem Einbau
+Die Formularverarbeitung ist Zeile für Zeile aus dem bisherigen Skript
+übernommen. Anfrage-IDs laufen weiter (`ANF-P-JJJJMMTT-001`), der
+E-Mail-Text ist identisch, `replyTo` bleibt die Adresse des Absenders.
 
-Das bisherige Skript las den Datenkörper mit `JSON.parse(e.postData.contents)`
-und erwartete Felder wie `visitId` und `action`. Die Webseite sendet aber
-`FormData` mit Feldern wie `visitor_id` und `event`, und die Kontaktformulare
-gehen an dieselbe URL. Das alte Skript konnte beides nicht verarbeiten und
-kannte auch keine E-Mail-Benachrichtigung.
+## Warum das Tracking umgestellt wird
 
-Das neue Skript liest `e.parameter`, trennt Messdaten und Anfragen über
-`form_type` und verschickt die Benachrichtigung. Vor dem Umstieg lohnt der
-Blick, ob in der Tabelle zuletzt überhaupt neue Zeilen ankamen.
+Bisher gab es **eine Zeile pro Besucher**, in der Summen und Listen
+fortgeschrieben wurden. Für jedes einzelne Ereignis musste das Skript die
+Zeile des Besuchers suchen (`createTextFinder` über die ganze Spalte),
+42 Zellen lesen und wieder zurückschreiben. Das wird mit jeder neuen Zeile
+langsamer, und Einzelheiten gehen verloren: Reihenfolge, Uhrzeit und
+Zusammenhang eines Besuchs lassen sich nicht mehr rekonstruieren.
 
-## Einbau
+Jetzt wird nur noch angehängt. Das ist schnell und bleibt es auch, und die
+Auswertung kann Fragen beantworten, die vorher nicht beantwortbar waren.
 
-1. Google-Tabelle öffnen → **Erweiterungen → Apps Script**.
-2. Den vorhandenen Code sichern (in eine Textdatei kopieren), dann durch
-   den Inhalt von `Code.gs` ersetzen.
-3. Oben in `CONFIG` bei Bedarf `benachrichtigungAn` auf die gewünschte
-   E-Mail-Adresse setzen. Leer lassen heißt: an den Besitzer des Skripts.
-4. Speichern, dann einmal die Funktion **`einrichten`** ausführen und die
-   Berechtigungen bestätigen.
-   Ein altes Blatt namens `Tracking` oder `Anfragen`, dessen Kopfzeile
-   nicht zu den neuen Spalten passt, wird dabei automatisch in
-   `Archiv Tracking JJJJ-MM-TT` umbenannt. Es geht nichts verloren.
-5. **Bereitstellen → Bereitstellungen verwalten → Bearbeiten (Stift) →
+## Reihenfolge beim Umstieg
+
+1. Tabelle öffnen → **Erweiterungen → Apps Script**.
+2. Den bisherigen Code in eine Textdatei sichern.
+3. Inhalt von `Code.gs` einfügen und speichern.
+4. Funktion **`einrichten`** ausführen, Berechtigungen bestätigen.
+   Legt `Tracking_Ereignisse` und `Auswertung` an. Fasst nichts Vorhandenes an.
+5. Funktion **`altdatenUebernehmen`** ausführen.
+   Wandelt das alte `Tracking`-Blatt in Ereignisse um. Ein zweiter Lauf
+   wird erkannt und abgebrochen, es entstehen also keine Doppel.
+6. **Bereitstellen → Bereitstellungen verwalten → Bearbeiten (Stift) →
    Version: Neue Version → Bereitstellen.**
-   Wichtig: die bestehende Bereitstellung bearbeiten, nicht eine neue
-   anlegen. Nur so bleibt die URL gleich, die in `js/tracking.js` und in
-   den Formularen steht.
+   Die vorhandene Bereitstellung bearbeiten, nicht eine neue anlegen —
+   sonst ändert sich die URL, die in `js/tracking.js` und in beiden
+   Formularen steht.
 
-## Aufräumen (optional, empfohlen)
+## Was die Übernahme aus einer alten Zeile macht
+
+Aus einem alten Sammeleintrag entstehen die einzelnen Ereignisse zurück:
+
+| Alte Spalte | Wird zu |
+|---|---|
+| ZeitstempelStart, Gerät, Sprache, Bildschirm, Referrer | ein `page_view` |
+| BesuchteSeiten | je weitere Seite ein `page_view` |
+| SektionenGesehen | je Abschnitt ein `view_section` |
+| DetailsGeöffnet | je Leistung ein `details_open` |
+| DauerSekunden | ein `page_leave` mit der Dauer |
+| MaxZeitstufe | ein `time_on_page` |
+| ZeitÜberblick … ZeitKontakt | je Bereich ein `section_time` |
+| KlickPrivat … KlickEmail | je Zähler so viele `click_*` wie gezählt |
+| FormularPrivat/Firmen Gesehen … Abbruch | je Zähler ein `form_*` mit `Formular = privat/firmen` |
+
+Ein Besuch mit drei Abschnitten, zwei geöffneten Leistungen und vier
+Klicks wird so zu rund 20 Ereigniszeilen.
+
+Übernommene Zeilen tragen in Spalte `Herkunft` den Wert **`Import`**,
+laufende Messungen den Wert `Live`. So lassen sie sich jederzeit trennen.
+
+## Zwei ehrliche Einschränkungen bei den Altdaten
+
+1. **Alle Ereignisse eines alten Besuchs bekommen die Startzeit des
+   Besuchs.** Genauere Zeiten hat das alte Blatt nie gespeichert. Für
+   Tages-, Wochen- und Monatszahlen ist das ohne Bedeutung, die
+   Reihenfolge innerhalb eines Besuchs ist aber nur ungefähr.
+2. **Besucher und Sitzung sind bei Altdaten dasselbe.** Die alte
+   Besuchs-ID lief nach 30 Minuten ab, war also eher eine Sitzung als ein
+   Gerät. Für den Zeitraum vor dem Umstieg sind „Besucher" und
+   „Sitzungen" daher gleich groß. Ab dem Umstieg werden beide getrennt
+   gezählt, wiederkehrende Besucher sind dann erkennbar.
+
+Betriebssystem, Browser und Kampagne bleiben bei Altdaten leer — diese
+Angaben wurden vorher nicht erhoben. Bei der Kampagne wird ersatzweise der
+Verweis eingetragen, etwa `referrer=www.google.com`.
+
+## Aufräumen (optional)
 
 Abschnitt 10 der Datenschutzerklärung verspricht, dass Messdaten gelöscht
 werden, sobald sie nicht mehr gebraucht werden. Dafür gibt es
-`altdatenLoeschen()` mit `CONFIG.aufbewahrungMonate` (Standard: 14 Monate).
+`altdatenLoeschen()` mit `CONFIG.aufbewahrungMonate` (Standard 14).
 
-Einrichten unter **Trigger → Trigger hinzufügen**:
-Funktion `altdatenLoeschen`, zeitgesteuert, Tagestimer.
+Einrichten unter **Trigger → Trigger hinzufügen**: Funktion
+`altdatenLoeschen`, zeitgesteuert, Tagestimer.
 
-## Dashboard neu aufbauen
+## Auswertung neu aufbauen
 
-`dashboardAufbauen()` von Hand ausführen. Das Blatt wird komplett neu
-geschrieben, die Daten in `Tracking` und `Anfragen` bleiben unberührt.
+`auswertungAufbauen()` von Hand ausführen. Das Blatt wird neu geschrieben,
+die Daten bleiben unberührt.
 
-## Hinweis zur Geschwindigkeit
+Die Auswertung rechnet mit `FILTER` über ganze Spalten. Bis in den Bereich
+einiger zehntausend Zeilen bleibt das flüssig; danach hilft der Tagestrigger.
 
-Das Dashboard rechnet mit `FILTER` über die ganzen Spalten. Bis in den
-Bereich von einigen zehntausend Zeilen ist das flüssig. Wird es später
-träge, hilft der Tagestrigger aus dem vorigen Abschnitt, weil er die
-Tabelle klein hält.
-
-## Spalten im Blatt `Tracking`
+## Spalten in `Tracking_Ereignisse`
 
 | Spalte | Feld | Bedeutung |
 |---|---|---|
 | A | Zeitstempel | Eingang auf dem Server |
-| B | Datum | nur das Datum, Grundlage für alle Auswertungen |
+| B | Datum | nur das Datum, Grundlage aller Auswertungen |
 | C | Besucher-ID | dauerhaft, erkennt wiederkehrende Geräte |
-| D | Sitzungs-ID | eine Zusammenhängende Besuchsstrecke, endet nach 30 Min. Pause |
+| D | Sitzungs-ID | ein zusammenhängender Besuch, endet nach 30 Min. Pause |
 | E | Besuch-Nr | der wievielte Besuch dieses Geräts |
 | F | Reihenfolge | Position des Ereignisses innerhalb der Seite |
 | G | Ereignis | `page_view`, `view_section`, `click_phone`, `form_submit` … |
@@ -87,3 +126,4 @@ Tabelle klein hält.
 | U | Browser | Chrome, Safari, Firefox, Edge, Samsung Internet, Opera |
 | V | Kampagne | Herkunft, z. B. `source=flyer \| medium=qr` |
 | W–AA | Verweis, Sprache, Bildschirm, Titel, Client-Zeit | nur beim `page_view` gefüllt |
+| AB | Herkunft | `Live` oder `Import` |
