@@ -28,17 +28,48 @@ Zusammenhang eines Besuchs lassen sich nicht mehr rekonstruieren.
 Jetzt wird nur noch angehängt. Das ist schnell und bleibt es auch, und die
 Auswertung kann Fragen beantworten, die vorher nicht beantwortbar waren.
 
+## Die drei Dateien
+
+Das Skript ist auf drei Dateien verteilt. Apps Script legt alle Dateien in
+denselben Namensraum, die Reihenfolge im Editor spielt also keine Rolle.
+
+| Datei | Zeilen | Inhalt |
+|---|---|---|
+| `Code.gs` | 438 | Eingang, Formulare, Messung, Einrichtung, Helfer |
+| `Uebernahme.gs` | 245 | einmalige Übernahme der Altdaten |
+| `Auswertung.gs` | 245 | Aufbau des Auswertungsblatts |
+
+Vorher lag alles in einer Datei mit 912 Zeilen. Beim Einfügen in den
+Editor kann so viel Text abgeschnitten werden, das endet dann in
+`SyntaxError: Unexpected end of input`. Drei kleinere Dateien sind
+zuverlässiger.
+
+**Nach jedem Einfügen prüfen, ob die letzte Zeile stimmt:**
+
+| Datei | letzte Zeilen |
+|---|---|
+| `Code.gs` | `  });` dann `}` — die Funktion `testEmail` |
+| `Uebernahme.gs` | `  return treffer ? …` dann `}` — die Funktion `kampagneAusVerweis` |
+| `Auswertung.gs` | `  return blatt;` dann `}` — die Funktion `auswertungAufbauen` |
+
+Steht am Ende etwas anderes, wurde der Text abgeschnitten. Dann den
+Rohtext über den Knopf **Raw** auf GitHub öffnen, dort mit Strg+A alles
+markieren und erneut einfügen.
+
 ## Reihenfolge beim Umstieg
 
 1. Tabelle öffnen → **Erweiterungen → Apps Script**.
 2. Den bisherigen Code in eine Textdatei sichern.
-3. Inhalt von `Code.gs` einfügen und speichern.
-4. Funktion **`einrichten`** ausführen, Berechtigungen bestätigen.
+3. Inhalt von `Code.gs` in die vorhandene Datei einfügen und speichern.
+4. Über **+ → Skript** zwei weitere Dateien anlegen: `Uebernahme` und
+   `Auswertung`. Den jeweiligen Inhalt einfügen und speichern.
+   Die Endung `.gs` setzt Apps Script von selbst.
+5. Funktion **`einrichten`** ausführen, Berechtigungen bestätigen.
    Legt `Tracking_Ereignisse` und `Auswertung` an. Fasst nichts Vorhandenes an.
-5. Funktion **`altdatenUebernehmen`** ausführen.
+6. Funktion **`altdatenUebernehmen`** ausführen.
    Wandelt das alte `Tracking`-Blatt in Ereignisse um. Ein zweiter Lauf
    wird erkannt und abgebrochen, es entstehen also keine Doppel.
-6. **Bereitstellen → Bereitstellungen verwalten → Bearbeiten (Stift) →
+7. **Bereitstellen → Bereitstellungen verwalten → Bearbeiten (Stift) →
    Version: Neue Version → Bereitstellen.**
    Die vorhandene Bereitstellung bearbeiten, nicht eine neue anlegen —
    sonst ändert sich die URL, die in `js/tracking.js` und in beiden
