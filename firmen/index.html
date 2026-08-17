@@ -354,12 +354,50 @@ textarea{min-height:135px;max-height:135px;resize:none}
   width:100%;
   max-width:520px;
   margin:auto;
+  position:relative;
+  max-height:calc(100vh - 40px);
+  overflow:hidden auto;
   background:#fefefd;
   border-radius:26px;
   padding:26px;
   box-shadow:0 24px 70px rgba(0,0,0,.24);
   border:1px solid rgba(14,78,45,.14);
 }
+
+/* Werbebild: randlos ueber die volle Fensterbreite, zieht ueber die Innenabstaende hinaus */
+.season-visual{
+  margin:-26px -26px 18px;
+  line-height:0;
+}
+
+.season-visual svg{
+  display:block;
+  width:100%;
+  height:150px;
+}
+
+.season-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:0;
+  border-radius:50%;
+  background:rgba(254,254,253,.92);
+  color:#0e4e2d;
+  font-size:22px;
+  line-height:1;
+  font-family:inherit;
+  padding:0;
+  box-shadow:0 3px 10px rgba(14,78,45,.22);
+  transition:.2s ease;
+}
+
+.season-close:hover{background:#ffffff;transform:scale(1.06)}
 
 .season-box h3{color:#0e4e2d;font-size:24px;margin-bottom:8px}
 .season-box p{color:#3d4a43;font-size:15px;margin-bottom:12px}
@@ -382,7 +420,20 @@ textarea{min-height:135px;max-height:135px;resize:none}
   padding:0;
 }
 
-.season-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+/* Bleibt beim Scrollen unten stehen, damit der Absende-Button
+   auf kleinen Bildschirmen immer erreichbar ist. */
+.season-actions{
+  position:sticky;
+  bottom:-26px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin:0 -26px -26px;
+  padding:14px 26px 26px;
+  background:linear-gradient(rgba(254,254,253,0),#fefefd 22%);
+}
+
 .season-actions .submit-btn{width:auto;flex:1 1 200px}
 
 .season-later{
@@ -398,24 +449,28 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
 .season-later:hover{background:#eef4ec}
 
-.season-close{
-  float:right;
-  border:0;
-  background:transparent;
-  color:#56645d;
-  font-size:22px;
-  line-height:1;
-  font-family:inherit;
-  padding:0 0 0 12px;
-}
-
-.season-close:hover{color:#0e4e2d}
-
 @media(max-width:900px){
   .season-banner{padding:20px}
   .season-banner-btn{width:100%}
   .season-box{padding:22px}
+  .season-visual{margin:-22px -22px 14px}
+  .season-visual svg{height:104px}
+  .season-actions{bottom:-22px;margin:0 -22px -22px;padding:12px 22px 22px}
   .season-actions .submit-btn,.season-later{width:100%;flex:1 1 100%}
+  /* PLZ/Ort und Name/Telefon sind kurz genug, um auch auf dem Handy
+     nebeneinander zu stehen - das spart im Fenster rund 190px Hoehe. */
+  .season-box .row{grid-template-columns:1fr 1fr}
+  /* Auf schmalen Schirmen zaehlt, dass das erste Feld sofort sichtbar ist. */
+  .season-visual svg{height:92px}
+  .season-hint{display:none}
+}
+
+/* Sehr flache Bildschirme (kleine Handys, Querformat):
+   Bild und Abstaende schrumpfen, damit das erste Feld frei bleibt. */
+@media(max-height:700px){
+  .season-visual svg{height:66px}
+  .season-box h3{font-size:21px}
+  .season-note{padding:10px 12px;font-size:14px;margin-bottom:12px}
 }
 
 .checkline{
@@ -1108,6 +1163,80 @@ textarea{min-height:135px;max-height:135px;resize:none}
   <div class="season-box">
     <button class="season-close season-dismiss" type="button" aria-label="Fenster schließen">&times;</button>
 
+    <div class="season-visual" aria-hidden="false">
+      <svg viewBox="0 0 520 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Laub im Herbst und Winterdienst: freie, sichere Wege">
+        <defs>
+          <linearGradient id="sHerbst" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f9f3e7"/>
+            <stop offset="1" stop-color="#eaddc4"/>
+          </linearGradient>
+          <linearGradient id="sWinter" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#cfe0ea"/>
+            <stop offset="1" stop-color="#eaf3f7"/>
+          </linearGradient>
+          <linearGradient id="sWeg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e9e2d5"/>
+            <stop offset="1" stop-color="#faf7f1"/>
+          </linearGradient>
+          <g id="blatt">
+            <path d="M0 0C5-8 15-8 20 0C15 8 5 8 0 0Z"/>
+            <path d="M2 0H18" stroke="#00000026" stroke-width="1.1" fill="none"/>
+          </g>
+          <g id="flocke" stroke-width="1.7" stroke-linecap="round" fill="none">
+            <path d="M0-7V7M-6-3.5L6 3.5M-6 3.5L6-3.5"/>
+            <path d="M-2.2-5H2.2M-2.2 5H2.2"/>
+          </g>
+        </defs>
+
+        <!-- Himmel, diagonal geteilt: links Herbst, rechts Winter -->
+        <rect width="520" height="150" fill="url(#sHerbst)"/>
+        <path d="M292 0H520V150H228Z" fill="url(#sWinter)"/>
+
+        <!-- Fallende Blaetter -->
+        <g opacity=".92">
+          <use href="#blatt" fill="#d6a054" transform="translate(22 40) rotate(35) scale(.78)"/>
+          <use href="#blatt" fill="#b06a2e" transform="translate(104 26) rotate(-42) scale(.68)"/>
+          <use href="#blatt" fill="#c8813a" transform="translate(150 58) rotate(18) scale(.7)"/>
+          <use href="#blatt" fill="#a85a2a" transform="translate(182 30) rotate(-25) scale(.62)"/>
+          <use href="#blatt" fill="#d6a054" transform="translate(126 74) rotate(52) scale(.6)"/>
+        </g>
+
+        <!-- Schneeflocken auf der Winterseite -->
+        <g stroke="#8fb3c4" opacity=".75">
+          <use href="#flocke" transform="translate(320 30)"/>
+          <use href="#flocke" transform="translate(378 58) scale(.82)"/>
+          <use href="#flocke" transform="translate(432 26) scale(1.1)"/>
+          <use href="#flocke" transform="translate(478 62) scale(.86)"/>
+          <use href="#flocke" transform="translate(350 82) scale(.66)"/>
+          <use href="#flocke" transform="translate(500 34) scale(.68)"/>
+          <use href="#flocke" transform="translate(410 92) scale(.6)"/>
+        </g>
+
+        <!-- Boden: links Laub-Grasnarbe, rechts Schneedecke -->
+        <path d="M0 100C70 92 140 96 210 102C280 108 350 104 420 99C462 96 492 97 520 100V150H0Z" fill="#2a6039"/>
+        <path d="M262 104C330 108 380 105 430 101C466 98 494 99 520 102V150H246Z" fill="#ffffff"/>
+        <path d="M262 104C330 108 380 105 430 101C466 98 494 99 520 102" stroke="#c3d8e2" stroke-width="1.2" fill="none"/>
+
+        <path d="M0 100C70 92 140 96 210 102C280 108 350 104 420 99C462 96 492 97 520 100" stroke="#4d8a5c" stroke-width="1.6" fill="none"/>
+
+        <!-- Der freigeraeumte Weg quer durch beide Jahreszeiten -->
+        <path d="M246 101L272 101L312 150H186Z" fill="url(#sWeg)"/>
+        <path d="M246 101L272 101L312 150H186Z" fill="none" stroke="#c9c1b1" stroke-width="1.3" opacity=".85"/>
+        <path d="M214 128H288M198 141H302" stroke="#0e4e2d" stroke-width="1" opacity=".13" fill="none"/>
+
+        <!-- Laub liegt neben dem Weg, nicht darauf -->
+        <g opacity=".95">
+          <use href="#blatt" fill="#c8813a" transform="translate(14 118) rotate(-18)"/>
+          <use href="#blatt" fill="#a85a2a" transform="translate(46 132) rotate(12) scale(.9)"/>
+          <use href="#blatt" fill="#d6a054" transform="translate(84 120) rotate(-8) scale(.95)"/>
+          <use href="#blatt" fill="#b06a2e" transform="translate(104 140) rotate(24) scale(.85)"/>
+          <use href="#blatt" fill="#c8813a" transform="translate(128 112) rotate(-30) scale(.8)"/>
+          <use href="#blatt" fill="#a85a2a" transform="translate(60 108) rotate(6) scale(.7)"/>
+        </g>
+
+      </svg>
+    </div>
+
     <div class="kicker">Saison-Vormerkung</div>
     <h3 id="saisonTitel">Laub &amp; Winterdienst</h3>
 
@@ -1120,7 +1249,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
       Begrenzte Kapazitäten: Für die Wintersaison berücksichtigen wir die Reihenfolge der Anmeldungen.
     </div>
 
-    <p>
+    <p class="season-hint">
       Tragen Sie sich unverbindlich ein. Sie erhalten Ihr Angebot per E-Mail – kostenlos und ohne Verpflichtung.
     </p>
 
@@ -1587,8 +1716,6 @@ document.addEventListener('click', function(event){
     click_area:clickArea
   });
 });
-
-
 
 /* =========================
    ZEICHENZÄHLER
