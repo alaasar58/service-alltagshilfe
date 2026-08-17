@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privatkunden | AlltagsHilfe Service</title>
+<title>Privatkunden &amp; Alltagsbegleitung | AlltagsHilfe Service</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;user-select:none}
@@ -170,6 +170,29 @@ details[open] summary::after{content:"  ▴"}
 .extra-area{margin-top:18px;color:#3d4a43}
 .extra-area strong{color:#0e4e2d}
 
+/* Bildflaechen mit spaeter austauschbarem Motiv: --img setzen genuegt */
+.begleitung-visual{
+  min-height:300px;border-radius:24px;
+  background:
+    linear-gradient(rgba(14,78,45,.04),rgba(14,78,45,.04)),
+    var(--img,linear-gradient(135deg,#fefefd 0%,#eef4ec 50%,#dfe9dc 100%)),
+    linear-gradient(135deg,#fefefd 0%,#eef4ec 50%,#dfe9dc 100%);
+  background-size:cover;background-position:center;
+  box-shadow:0 12px 28px rgba(14,78,45,.12);
+  border:1px solid rgba(14,78,45,.12)
+}
+.service-visual{
+  min-height:245px;
+  background:
+    linear-gradient(rgba(14,78,45,.04),rgba(14,78,45,.04)),
+    var(--img,linear-gradient(135deg,#eef4ec 0%,#dfe9dc 55%,#cfe0cb 100%)),
+    linear-gradient(135deg,#eef4ec 0%,#dfe9dc 55%,#cfe0cb 100%);
+  background-size:cover;background-position:center
+}
+.service.reverse .service-visual{order:2}
+.begleitung-cards{margin-top:22px}
+.notice-box strong{display:block;color:#0e4e2d;margin-bottom:8px;font-size:17px}
+
 .contact{background:#f6f3ee;border:1px solid rgba(14,78,45,.14);border-radius:28px;padding:28px;margin-top:56px}
 .contact-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;margin-top:18px}
 form{background:white;border:1px solid rgba(14,78,45,.12);border-radius:22px;padding:22px}
@@ -325,7 +348,8 @@ textarea{min-height:135px;max-height:135px;resize:none}
   .about-cards{grid-template-columns:1fr}
   .service,.service.reverse{grid-template-columns:1fr}
   .service.reverse img{order:0}
-  .service img{min-height:220px}
+  .service.reverse .service-visual{order:0}
+  .service img,.service-visual{min-height:220px}
   h1{font-size:33px}
   h2{font-size:27px}
   .brand img{width:58px;height:58px}
@@ -497,6 +521,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
         <button class="dropbtn">Über uns ▾</button>
         <div class="dropdown-content">
           <a href="#ueber-uns">Privatkunden</a>
+          <a href="#alltagsbegleitung">Alltagsbegleitung</a>
           <a href="#fuer-wen">Für wen wir da sind</a>
         </div>
       </div>
@@ -504,6 +529,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
       <div class="dropdown">
         <button class="dropbtn">Leistungen ▾</button>
         <div class="dropdown-content">
+          <a href="#begleitung">Alltagsbegleitung</a>
           <a href="#reinigung">Reinigung</a>
           <a href="#gartenpflege">Gartenpflege</a>
           <a href="#entruempelung">Entrümpelung</a>
@@ -534,20 +560,83 @@ textarea{min-height:135px;max-height:135px;resize:none}
 <section class="hero reveal" id="ueber-uns">
   <div class="hero-content">
     <div class="kicker">Privatkunden</div>
-    <h1>Hilfe rund um Haus, Garten und Alltag</h1>
+    <h1>Alltagsbegleitung und Hilfe rund um Haus und Garten</h1>
 
     <p class="lead">
-      Im Alltag bleiben viele Aufgaben liegen, weil Zeit, Kraft oder die passende Unterstützung fehlen.
+      Unser Schwerpunkt ist die Begleitung im Alltag: Zeit, Gesellschaft und Unterstützung bei dem, was allein schwerfällt.
     </p>
 
     <p class="lead">
-  Ob kleine Aufgabe oder größerer Einsatz – wir packen mit an. Persönlich, zuverlässig und mit klarer Absprache vor Beginn.
-</p>
+      Dazu kommt die praktische Hilfe rund um Haushalt und Garten. Ob kleine Aufgabe oder größerer Einsatz – wir packen mit an. Persönlich, zuverlässig und mit klarer Absprache vor Beginn.
+    </p>
 
     <div class="hero-actions">
       <a class="primary-link" href="#kontakt">Anfrage stellen</a>
+      <a class="secondary-link" href="#alltagsbegleitung">Alltagsbegleitung</a>
       <a class="secondary-link" href="#leistungen">Leistungen ansehen</a>
     </div>
+  </div>
+</section>
+
+<section class="reveal" id="alltagsbegleitung">
+  <div class="kicker">Unser Schwerpunkt</div>
+  <h2>Alltagsbegleitung</h2>
+
+  <p class="lead">
+    Manchmal fehlt nicht die Hilfe beim Tragen, sondern jemand, der da ist. Der zuhört, mitgeht und sich Zeit nimmt.
+  </p>
+
+  <div class="area-section">
+    <div>
+      <h3>Zeit, die wirklich für Sie da ist</h3>
+
+      <p class="lead">
+        Wir kommen zu Ihnen nach Hause oder begleiten Sie nach draußen – so oft und so lange, wie es für Sie passt.
+      </p>
+
+      <p class="lead">
+        Ein fester Termin in der Woche, eine Begleitung zu einem wichtigen Gespräch oder einfach ein paar ruhige Stunden zu zweit: Was gebraucht wird, besprechen wir vorher in Ruhe.
+      </p>
+
+      <p class="extra-area">
+        <strong>Für Angehörige</strong><br>
+        Sie können nicht immer vor Ort sein? Wir sind verlässlich da und melden uns, wenn etwas auffällt.
+      </p>
+    </div>
+
+    <div class="begleitung-visual"></div>
+  </div>
+
+  <div class="about-cards begleitung-cards">
+    <div class="about-card">
+      <h3>Gesellschaft &amp; Gespräch</h3>
+      <p>Zeit zum Reden und Zuhören, gemeinsam Kaffee trinken, vorlesen, Erinnerungen austauschen oder zusammen ein Spiel spielen.</p>
+    </div>
+
+    <div class="about-card">
+      <h3>Begleitung außer Haus</h3>
+      <p>Zum Einkauf, zum Termin, zum Amt, zur Post oder einfach zu einem Spaziergang an der frischen Luft – Sie gehen den Weg nicht allein.</p>
+    </div>
+
+    <div class="about-card">
+      <h3>Unterstützung im Alltag</h3>
+      <p>Post und Papiere sortieren, Termine im Blick behalten, kleine Besorgungen erledigen und Ordnung in das bringen, was liegen geblieben ist.</p>
+    </div>
+
+    <div class="about-card">
+      <h3>Entlastung für Angehörige</h3>
+      <p>Verlässliche Anwesenheit für ein paar Stunden, damit Angehörige in dieser Zeit durchatmen und ihre eigenen Dinge erledigen können.</p>
+    </div>
+  </div>
+
+  <div class="info-box notice-box">
+    <strong>Was wir nicht anbieten</strong>
+    <p>
+      Wir sind kein Pflegedienst. Wir übernehmen keine Aufgaben, die eine medizinische Ausbildung voraussetzen – also keine Körperpflege, keine Medikamentengabe und keine Wundversorgung.
+    </p>
+    <p>
+      Unsere Begleitung ist Zeit, Gesellschaft und praktische Unterstützung im Alltag. Wenn Sie mehr brauchen, sagen wir Ihnen das offen und ehrlich.
+    </p>
   </div>
 </section>
 
@@ -564,7 +653,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
     <div class="about-cards">
       <div class="about-card">
         <h3>Für Senioren</h3>
-        <p>Wir unterstützen Menschen, die möglichst lange selbstständig zuhause leben möchten und bei bestimmten Aufgaben Entlastung brauchen.</p>
+        <p>Wir begleiten Menschen, die möglichst lange selbstständig zuhause leben möchten – mit Gesellschaft, Begleitung nach draußen und Entlastung bei Aufgaben, die schwerfallen.</p>
       </div>
 
       <div class="about-card">
@@ -588,7 +677,23 @@ textarea{min-height:135px;max-height:135px;resize:none}
 <section id="leistungen">
   <h2 class="reveal">Unsere Leistungen</h2>
 
-  <article class="service reveal" id="reinigung">
+  <article class="service reveal" id="begleitung">
+    <div class="service-visual" role="img" aria-label="Alltagsbegleitung"></div>
+    <div class="service-content">
+      <h3>Alltagsbegleitung</h3>
+      <p class="short">Zeit, Gesellschaft und Begleitung – für alles, was allein schwerfällt.</p>
+      <details>
+        <summary>Leistungsdetails</summary>
+        <p class="details-text">
+          Wir nehmen uns Zeit für Gespräche, begleiten Sie zum Einkauf, zu Terminen oder zum Spaziergang und unterstützen bei Post, Papieren und kleinen Besorgungen.
+          Vorab besprechen wir in Ruhe, was gebraucht wird, wie oft wir kommen und wie lange ein Termin dauern soll.
+          Pflegerische oder medizinische Aufgaben übernehmen wir nicht.
+        </p>
+      </details>
+    </div>
+  </article>
+
+  <article class="service reverse reveal" id="reinigung">
     <img src="../bilder/privat-reinigung.png" alt="Reinigung">
     <div class="service-content">
       <h3>Reinigung</h3>
@@ -603,7 +708,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reverse reveal" id="gartenpflege">
+  <article class="service reveal" id="gartenpflege">
     <img src="../bilder/privat-gartenpflege.png" alt="Gartenpflege">
     <div class="service-content">
       <h3>Gartenpflege</h3>
@@ -618,7 +723,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reveal" id="entruempelung">
+  <article class="service reverse reveal" id="entruempelung">
     <img src="../bilder/privat-entruempelung.png" alt="Entrümpelung">
     <div class="service-content">
       <h3>Entrümpelung</h3>
@@ -633,7 +738,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reverse reveal" id="haushaltsaufloesung">
+  <article class="service reveal" id="haushaltsaufloesung">
     <img src="../bilder/privat-haushaltsaufloesung.png" alt="Haushaltsauflösung">
     <div class="service-content">
       <h3>Haushaltsauflösung</h3>
@@ -649,7 +754,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reveal" id="transporte">
+  <article class="service reverse reveal" id="transporte">
     <img src="../bilder/privat-transporte.png" alt="Transporte">
     <div class="service-content">
       <h3>Transporte</h3>
@@ -664,7 +769,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reverse reveal" id="weitere">
+  <article class="service reveal" id="weitere">
     <img src="../bilder/saubere_werkzeuge_vor_dem_eingang.png" alt="Weitere Unterstützung">
     <div class="service-content">
       <h3>Weitere Unterstützung</h3>
@@ -775,6 +880,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
     <label>Gewünschte Leistung *</label>
     <select name="Leistung" required data-error="Bitte gewünschte Leistung auswählen.">
       <option value="">Bitte auswählen</option>
+      <option>Alltagsbegleitung</option>
       <option>Reinigung</option>
       <option>Gartenpflege</option>
       <option>Entrümpelung</option>
@@ -858,6 +964,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
       <ul>
         <li><a href="../">Startseite</a></li>
         <li><a href="../firmen/">Firmenkunden</a></li>
+        <li><a href="#alltagsbegleitung">Alltagsbegleitung</a></li>
         <li><a href="#leistungen">Leistungen</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
