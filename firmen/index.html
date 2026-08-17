@@ -67,7 +67,7 @@ h3{font-size:22px}
   padding:0;
   overflow:hidden;
   background:
-    url("../bilder/firmen-hero.png"),
+    url("../bilder/firmen-hero.webp"),
     linear-gradient(135deg,#f6f3ee 0%,#eef4ec 55%,#dfe9dc 100%);
   background-size:cover;
   background-position:center right;
@@ -173,7 +173,7 @@ details[open] summary::after{content:"  ▴"}
   min-height:300px;border-radius:24px;
   background:
     linear-gradient(rgba(14,78,45,.04),rgba(14,78,45,.04)),
-    url("../bilder/Einsatztgebiet.png"),
+    url("../bilder/Einsatztgebiet.webp"),
     linear-gradient(135deg,#fefefd 0%,#eef4ec 50%,#dfe9dc 100%);
   background-size:cover;background-position:center;
   box-shadow:0 12px 28px rgba(14,78,45,.12);
@@ -295,6 +295,182 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
 .popup-btn:hover{
   background:#08391f;
+}
+
+/* =========================
+   SAISON: LAUB & WINTERDIENST
+========================= */
+
+.season-banner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+  background:#f6f3ee;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:26px;
+  padding:22px 26px;
+  margin-bottom:36px;
+}
+
+.season-banner-text{max-width:640px}
+.season-banner-text strong{display:block;color:#0e4e2d;font-size:19px;margin-bottom:4px}
+.season-banner-text span{color:#3d4a43;font-size:15.5px}
+
+.season-banner-btn{
+  border:0;
+  background:#0e4e2d;
+  color:white;
+  border-radius:999px;
+  padding:13px 20px;
+  font-weight:900;
+  font-family:inherit;
+  font-size:15px;
+  white-space:nowrap;
+  transition:.25s ease;
+}
+
+.season-banner-btn:hover{background:#08391f;transform:translateY(-2px)}
+
+/* Liegt bewusst unter dem Erfolgs-Popup (.form-popup hat z-index 9999),
+   damit die Bestaetigung nach dem Absenden immer obenauf liegt. */
+.season-popup{
+  position:fixed;
+  inset:0;
+  z-index:9000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  overflow-y:auto;
+  background:rgba(14,78,45,.34);
+  backdrop-filter:blur(6px);
+}
+
+.season-popup.show{display:flex}
+
+.season-box{
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  position:relative;
+  max-height:calc(100vh - 40px);
+  overflow:hidden auto;
+  background:#fefefd;
+  border-radius:26px;
+  padding:26px;
+  box-shadow:0 24px 70px rgba(0,0,0,.24);
+  border:1px solid rgba(14,78,45,.14);
+}
+
+/* Werbebild: randlos ueber die volle Fensterbreite, zieht ueber die Innenabstaende hinaus */
+.season-visual{
+  margin:-26px -26px 18px;
+  line-height:0;
+}
+
+.season-visual svg{
+  display:block;
+  width:100%;
+  height:150px;
+}
+
+.season-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:0;
+  border-radius:50%;
+  background:rgba(254,254,253,.92);
+  color:#0e4e2d;
+  font-size:22px;
+  line-height:1;
+  font-family:inherit;
+  padding:0;
+  box-shadow:0 3px 10px rgba(14,78,45,.22);
+  transition:.2s ease;
+}
+
+.season-close:hover{background:#ffffff;transform:scale(1.06)}
+
+.season-box h3{color:#0e4e2d;font-size:24px;margin-bottom:8px}
+.season-box p{color:#3d4a43;font-size:15px;margin-bottom:12px}
+
+.season-note{
+  background:#eef4ec;
+  border:1px solid rgba(14,78,45,.14);
+  border-radius:16px;
+  padding:12px 14px;
+  color:#0e4e2d;
+  font-size:14.5px;
+  font-weight:700;
+  margin-bottom:16px;
+}
+
+.season-box form{
+  background:transparent;
+  border:0;
+  border-radius:0;
+  padding:0;
+}
+
+/* Bleibt beim Scrollen unten stehen, damit der Absende-Button
+   auf kleinen Bildschirmen immer erreichbar ist. */
+.season-actions{
+  position:sticky;
+  bottom:-26px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin:0 -26px -26px;
+  padding:14px 26px 26px;
+  background:linear-gradient(rgba(254,254,253,0),#fefefd 22%);
+}
+
+.season-actions .submit-btn{width:auto;flex:1 1 200px}
+
+.season-later{
+  border:1px solid rgba(14,78,45,.18);
+  background:transparent;
+  color:#0e4e2d;
+  border-radius:999px;
+  padding:14px 18px;
+  font-weight:900;
+  font-family:inherit;
+  transition:.25s ease;
+}
+
+.season-later:hover{background:#eef4ec}
+
+@media(max-width:900px){
+  .season-banner{padding:20px}
+  .season-banner-btn{width:100%}
+  .season-box{padding:22px}
+  .season-visual{margin:-22px -22px 14px}
+  .season-visual svg{height:104px}
+  .season-actions{bottom:-22px;margin:0 -22px -22px;padding:12px 22px 22px}
+  .season-actions .submit-btn,.season-later{width:100%;flex:1 1 100%}
+  /* PLZ/Ort und Name/Telefon sind kurz genug, um auch auf dem Handy
+     nebeneinander zu stehen - das spart im Fenster rund 190px Hoehe. */
+  .season-box .row{grid-template-columns:1fr 1fr}
+  /* Auf schmalen Schirmen zaehlt, dass das erste Feld sofort sichtbar ist. */
+  .season-visual svg{height:92px}
+  .season-hint{display:none}
+}
+
+/* Sehr flache Bildschirme (kleine Handys, Querformat):
+   Bild und Abstaende schrumpfen, damit das erste Feld frei bleibt. */
+@media(max-height:700px){
+  .season-visual svg{height:66px}
+  .season-box h3{font-size:21px}
+  .season-note{padding:10px 12px;font-size:14px;margin-bottom:12px}
 }
 
 .checkline{
@@ -500,7 +676,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
 <header class="header" id="oben">
   <div class="header-inner">
     <a class="brand" href="../">
-      <img src="../bilder/Logo.png" alt="AlltagsHilfe Service Logo">
+      <img src="../bilder/Logo.webp" alt="AlltagsHilfe Service Logo">
       <span>AlltagsHilfe Service</span>
     </a>
 
@@ -525,6 +701,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
           <a href="#reinigung">Reinigung</a>
           <a href="#raeumung">Räumung & Ordnung</a>
           <a href="#garten">Außenbereiche</a>
+          <a href="#winterdienst">Laub &amp; Winterdienst</a>
           <a href="#sonderaufgaben">Weitere Unterstützung</a>
         </div>
       </div>
@@ -568,6 +745,14 @@ textarea{min-height:135px;max-height:135px;resize:none}
   </div>
 </section>
 
+<div class="season-banner" id="saisonBanner">
+  <div class="season-banner-text">
+    <strong>Laub &amp; Winterdienst – Kapazitäten jetzt sichern</strong>
+    <span>Räum- und Streupflicht auf Ihrem Grundstück, ohne eigenes Personal. Die Kapazitäten für die Wintersaison sind begrenzt – lassen Sie sich unverbindlich vormerken.</span>
+  </div>
+  <button class="season-banner-btn season-open" type="button">Angebot anfordern</button>
+</div>
+
 <section class="reveal">
   <h2>Wofür wir stehen</h2>
 
@@ -590,7 +775,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
   <h2 class="reveal">Unsere Leistungen</h2>
 
   <article class="service reveal" id="reinigung">
-    <div class="service-media" style="--img:url('../bilder/firmen-reinigung.png')"></div>
+    <div class="service-media" style="--img:url('../bilder/firmen-reinigung.webp')"></div>
     <div class="service-content">
       <h3>Reinigung & Pflege von Flächen</h3>
      <p class="short">Gepflegte Bereiche, die einen guten Eindruck machen.</p>
@@ -606,7 +791,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
   </article>
 
   <article class="service reverse reveal" id="raeumung">
-    <div class="service-media" style="--img:url('../bilder/firmen-raeumung.png')"></div>
+    <div class="service-media" style="--img:url('../bilder/firmen-raeumung.webp')"></div>
     <div class="service-content">
       <h3>Räumung & Ordnung schaffen</h3>
 <p class="short">Aus voll wird nutzbar – wir schaffen Ordnung und Übersicht.</p>
@@ -623,7 +808,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
   </article>
 
   <article class="service reveal" id="garten">
-    <div class="service-media" style="--img:url('../bilder/firmen-gartenpflege.png')"></div>
+    <div class="service-media" style="--img:url('../bilder/firmen-gartenpflege.webp')"></div>
     <div class="service-content">
       <h3>Gartenpflege & Außenbereiche</h3>
       <p class="short">Ein gepflegtes Außenbild, ohne dass es Ihre Zeit kostet.</p>
@@ -638,8 +823,31 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reverse reveal" id="sonderaufgaben">
-    <div class="service-media" style="--img:url('../bilder/firmen-sonderaufgaben.png')"></div>
+  <article class="service reverse reveal" id="winterdienst">
+    <div class="service-media" style="--img:none"></div>
+    <div class="service-content">
+      <h3>Laubentfernung &amp; Winterdienst</h3>
+      <p class="short">Freie, sichere Wege auf Ihrem Objekt – im vereinbarten Umfang und zu festen Zeiten.</p>
+
+      <details>
+        <summary>Leistungsdetails</summary>
+        <p class="details-text">
+          Im Herbst räumen wir Laub von Wegen, Zufahrten, Parkflächen, Höfen und Eingangsbereichen und kümmern uns um die Entsorgung.
+          Im Winter halten wir Gehwege, Zufahrten und Eingänge nach Absprache frei und streuen im vereinbarten Umfang.
+        </p>
+        <p class="details-text">
+          Für Hausverwaltungen, Eigentümergemeinschaften und Gewerbeobjekte legen wir vorab schriftlich fest, welche Flächen betreut werden, in welchem Zeitraum und in welcher Häufigkeit.
+          Sie haben einen festen Ansprechpartner und klare Absprachen.
+        </p>
+        <p class="details-text">
+          Die Kapazitäten für die Wintersaison sind begrenzt. Wir berücksichtigen die Reihenfolge der Anmeldungen – eine frühe Vormerkung sichert den Einsatz.
+        </p>
+      </details>
+    </div>
+  </article>
+
+  <article class="service reveal" id="sonderaufgaben">
+    <div class="service-media" style="--img:url('../bilder/firmen-sonderaufgaben.webp')"></div>
     <div class="service-content">
       <h3>Weitere praktische Unterstützung</h3>
       <p class="short">Sie beschreiben die Aufgabe – wir prüfen die Umsetzung.</p>
@@ -826,6 +1034,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
       <option>Reinigung & Pflege von Flächen</option>
       <option>Räumung & Ordnung schaffen</option>
       <option>Gartenpflege & Außenbereiche</option>
+      <option>Laubentfernung &amp; Winterdienst</option>
       <option>Weitere praktische Unterstützung</option>
       <option>Noch unklar / bitte beraten</option>
     </select>
@@ -895,7 +1104,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
       <a class="contact-card" href="https://wa.me/4915229546946" target="_blank"><strong>WhatsApp</strong><span>Nachricht schreiben</span></a>
 
       <a class="qr-box qr-link" href="https://wa.me/4915229546946" target="_blank" rel="noopener">
-        <img src="../bilder/whatsapp-qr.jpg" alt="WhatsApp QR-Code">
+        <img src="../bilder/whatsapp-qr.jpg" alt="WhatsApp QR-Code" width="304" height="304" loading="lazy" decoding="async">
         <h3>WhatsApp QR-Code</h3>
         <p>QR-Code scannen und Informationen oder Bilder zum Auftrag direkt senden.</p>
       </a>
@@ -917,6 +1126,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
         <li><a href="../">Startseite</a></li>
         <li><a href="../privat/">Privatkunden</a></li>
         <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#winterdienst">Laub &amp; Winterdienst</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
     </div>
@@ -949,6 +1159,176 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
 </div>
   
+<div class="season-popup" id="saisonPopup" role="dialog" aria-modal="true" aria-labelledby="saisonTitel">
+  <div class="season-box">
+    <button class="season-close season-dismiss" type="button" aria-label="Fenster schließen">&times;</button>
+
+    <div class="season-visual" aria-hidden="false">
+      <svg viewBox="0 0 520 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Laub im Herbst und Winterdienst: freie, sichere Wege">
+        <defs>
+          <linearGradient id="sHerbst" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f9f3e7"/>
+            <stop offset="1" stop-color="#eaddc4"/>
+          </linearGradient>
+          <linearGradient id="sWinter" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#cfe0ea"/>
+            <stop offset="1" stop-color="#eaf3f7"/>
+          </linearGradient>
+          <linearGradient id="sWeg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e9e2d5"/>
+            <stop offset="1" stop-color="#faf7f1"/>
+          </linearGradient>
+          <g id="blatt">
+            <path d="M0 0C5-8 15-8 20 0C15 8 5 8 0 0Z"/>
+            <path d="M2 0H18" stroke="#00000026" stroke-width="1.1" fill="none"/>
+          </g>
+          <g id="flocke" stroke-width="1.7" stroke-linecap="round" fill="none">
+            <path d="M0-7V7M-6-3.5L6 3.5M-6 3.5L6-3.5"/>
+            <path d="M-2.2-5H2.2M-2.2 5H2.2"/>
+          </g>
+        </defs>
+
+        <!-- Himmel, diagonal geteilt: links Herbst, rechts Winter -->
+        <rect width="520" height="150" fill="url(#sHerbst)"/>
+        <path d="M292 0H520V150H228Z" fill="url(#sWinter)"/>
+
+        <!-- Fallende Blaetter -->
+        <g opacity=".92">
+          <use href="#blatt" fill="#d6a054" transform="translate(22 40) rotate(35) scale(.78)"/>
+          <use href="#blatt" fill="#b06a2e" transform="translate(104 26) rotate(-42) scale(.68)"/>
+          <use href="#blatt" fill="#c8813a" transform="translate(150 58) rotate(18) scale(.7)"/>
+          <use href="#blatt" fill="#a85a2a" transform="translate(182 30) rotate(-25) scale(.62)"/>
+          <use href="#blatt" fill="#d6a054" transform="translate(126 74) rotate(52) scale(.6)"/>
+        </g>
+
+        <!-- Schneeflocken auf der Winterseite -->
+        <g stroke="#8fb3c4" opacity=".75">
+          <use href="#flocke" transform="translate(320 30)"/>
+          <use href="#flocke" transform="translate(378 58) scale(.82)"/>
+          <use href="#flocke" transform="translate(432 26) scale(1.1)"/>
+          <use href="#flocke" transform="translate(478 62) scale(.86)"/>
+          <use href="#flocke" transform="translate(350 82) scale(.66)"/>
+          <use href="#flocke" transform="translate(500 34) scale(.68)"/>
+          <use href="#flocke" transform="translate(410 92) scale(.6)"/>
+        </g>
+
+        <!-- Boden: links Laub-Grasnarbe, rechts Schneedecke -->
+        <path d="M0 100C70 92 140 96 210 102C280 108 350 104 420 99C462 96 492 97 520 100V150H0Z" fill="#2a6039"/>
+        <path d="M262 104C330 108 380 105 430 101C466 98 494 99 520 102V150H246Z" fill="#ffffff"/>
+        <path d="M262 104C330 108 380 105 430 101C466 98 494 99 520 102" stroke="#c3d8e2" stroke-width="1.2" fill="none"/>
+
+        <path d="M0 100C70 92 140 96 210 102C280 108 350 104 420 99C462 96 492 97 520 100" stroke="#4d8a5c" stroke-width="1.6" fill="none"/>
+
+        <!-- Der freigeraeumte Weg quer durch beide Jahreszeiten -->
+        <path d="M246 101L272 101L312 150H186Z" fill="url(#sWeg)"/>
+        <path d="M246 101L272 101L312 150H186Z" fill="none" stroke="#c9c1b1" stroke-width="1.3" opacity=".85"/>
+        <path d="M214 128H288M198 141H302" stroke="#0e4e2d" stroke-width="1" opacity=".13" fill="none"/>
+
+        <!-- Laub liegt neben dem Weg, nicht darauf -->
+        <g opacity=".95">
+          <use href="#blatt" fill="#c8813a" transform="translate(14 118) rotate(-18)"/>
+          <use href="#blatt" fill="#a85a2a" transform="translate(46 132) rotate(12) scale(.9)"/>
+          <use href="#blatt" fill="#d6a054" transform="translate(84 120) rotate(-8) scale(.95)"/>
+          <use href="#blatt" fill="#b06a2e" transform="translate(104 140) rotate(24) scale(.85)"/>
+          <use href="#blatt" fill="#c8813a" transform="translate(128 112) rotate(-30) scale(.8)"/>
+          <use href="#blatt" fill="#a85a2a" transform="translate(60 108) rotate(6) scale(.7)"/>
+        </g>
+
+      </svg>
+    </div>
+
+    <div class="kicker">Saison-Vormerkung</div>
+    <h3 id="saisonTitel">Laub &amp; Winterdienst</h3>
+
+    <p>
+      Im Herbst fällt das Laub, im Winter gilt die Räum- und Streupflicht auf Ihrem Grundstück.
+      Wir übernehmen beides – für Gewerbeobjekte, Hausverwaltungen und Eigentümergemeinschaften.
+    </p>
+
+    <div class="season-note">
+      Begrenzte Kapazitäten: Für die Wintersaison berücksichtigen wir die Reihenfolge der Anmeldungen.
+    </div>
+
+    <p class="season-hint">
+      Tragen Sie sich unverbindlich ein. Sie erhalten Ihr Angebot per E-Mail – kostenlos und ohne Verpflichtung.
+    </p>
+
+    <form action="https://script.google.com/macros/s/AKfycbz1YPu4Li35oDFT2PgT2KvrZMiKJifDhXhaCYYgxw2u6NItMKRaMivm9UirW2e2hZPQ5A/exec" method="POST" autocomplete="on" class="ajax-form season-form" data-button-text="Angebot anfordern">
+      <input type="hidden" name="form_type" value="firmen">
+      <input type="hidden" name="Leistung" value="Vormerkung Laub &amp; Winterdienst">
+      <input type="hidden" name="Gefunden" value="Saison-Fenster Firmenkunden">
+      <input type="hidden" name="Nachricht" value="">
+      <input type="text" name="website" style="display:none">
+
+      <div class="form-field">
+        <label>E-Mail *</label>
+        <input name="E-Mail" type="email" maxlength="90" autocomplete="email" placeholder="E-Mail-Adresse" required data-error="Bitte eine gültige E-Mail-Adresse eingeben.">
+        <small class="error-message"></small>
+      </div>
+
+      <div class="row">
+        <div class="form-field">
+          <label>PLZ *</label>
+          <input name="PLZ" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="z. B. 22926" pattern="[0-9]{5}" required data-error="Bitte eine gültige 5-stellige PLZ eingeben.">
+          <small class="error-message"></small>
+        </div>
+
+        <div class="form-field">
+          <label>Ort *</label>
+          <input name="Ort" maxlength="60" autocomplete="address-level2" placeholder="z. B. Ahrensburg" required data-error="Bitte Ort eingeben.">
+          <small class="error-message"></small>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-field">
+          <label>Firma / Ansprechpartner</label>
+          <input name="Nachname" maxlength="80" autocomplete="organization" placeholder="Optional">
+          <small class="error-message"></small>
+        </div>
+
+        <div class="form-field">
+          <label>Telefon</label>
+          <input name="Telefon" type="tel" inputmode="tel" maxlength="25" autocomplete="tel" placeholder="Optional" pattern="[0-9+()/\-\s]{6,25}" data-error="Bitte eine gültige Telefonnummer ohne Buchstaben eingeben.">
+          <small class="error-message"></small>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Woran haben Sie Interesse? *</label>
+        <select name="Interesse" class="season-interest" required data-error="Bitte auswählen.">
+          <option value="">Bitte auswählen</option>
+          <option>Laubentfernung</option>
+          <option>Winterdienst</option>
+          <option>Beides</option>
+        </select>
+        <small class="error-message"></small>
+      </div>
+
+      <div class="form-field">
+        <label class="checkline">
+          <input type="checkbox" name="Datenschutz" value="Akzeptiert" required data-error="Bitte Datenschutzerklärung bestätigen.">
+          <span>Ich habe die <a href="../datenschutz/" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zur Erstellung eines Angebots zu. *</span>
+        </label>
+        <small class="error-message"></small>
+      </div>
+
+      <div class="form-field">
+        <label class="checkline">
+          <input type="checkbox" name="Werbeeinwilligung" value="Ja" class="season-consent">
+          <span>Freiwillig: Ich möchte auch künftig Saison-Angebote per E-Mail erhalten. Diese Einwilligung kann ich jederzeit formlos widerrufen.</span>
+        </label>
+        <small class="error-message"></small>
+      </div>
+
+      <div class="season-actions">
+        <button class="btn submit-btn" type="submit">Angebot anfordern</button>
+        <button class="season-later season-dismiss" type="button">Später</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="form-popup" id="formPopup">
   <div class="form-popup-box">
     <div class="form-popup-icon" id="popupIcon">✓</div>
@@ -1336,8 +1716,6 @@ document.addEventListener('click', function(event){
     click_area:clickArea
   });
 });
-
-
 
 /* =========================
    ZEICHENZÄHLER
@@ -1774,6 +2152,173 @@ document.querySelectorAll('.ajax-form').forEach(form => {
       document.querySelectorAll('.dropdown.open').forEach(dropdown => dropdown.classList.remove('open'));
     }
   });
+})();
+
+/* =========================
+   SAISON-VORMERKUNG
+   Laub & Winterdienst
+========================= */
+
+(function(){
+
+  /* --- Hier laesst sich die Aktion steuern, ohne Programmierkenntnisse ---
+     SAISON_AN         : false schaltet das Fenster komplett ab
+     SAISON_START_MONAT: ab welchem Monat es erscheint (8 = August)
+     SAISON_ENDE_MONAT : bis einschliesslich welchem Monat (2 = Februar)
+     VERZOEGERUNG_MS   : wie lange nach dem Oeffnen der Seite (6000 = 6 Sekunden) */
+  const SAISON_AN          = true;
+  const SAISON_START_MONAT = 8;
+  const SAISON_ENDE_MONAT  = 2;
+  const VERZOEGERUNG_MS    = 6000;
+
+  const popup = document.getElementById('saisonPopup');
+  if(!popup) return;
+
+  const form = popup.querySelector('.season-form');
+  const GESEHEN_KEY  = 'saison_popup_gesehen';
+  const GESENDET_KEY = 'saison_vormerkung_gesendet';
+
+  function speicherLesen(speicher, schluessel){
+    try{ return speicher.getItem(schluessel); }catch(error){ return null; }
+  }
+
+  function speicherSchreiben(speicher, schluessel, wert){
+    try{ speicher.setItem(schluessel, wert); }catch(error){ /* privater Modus: dann eben nicht merken */ }
+  }
+
+  function inSaison(){
+    const monat = new Date().getMonth() + 1;
+
+    if(SAISON_START_MONAT <= SAISON_ENDE_MONAT){
+      return monat >= SAISON_START_MONAT && monat <= SAISON_ENDE_MONAT;
+    }
+
+    return monat >= SAISON_START_MONAT || monat <= SAISON_ENDE_MONAT;
+  }
+
+  function istGeoeffnet(){
+    return popup.classList.contains('show');
+  }
+
+  function oeffnen(quelle){
+    if(istGeoeffnet()) return;
+
+    popup.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    speicherSchreiben(sessionStorage, GESEHEN_KEY, 'ja');
+
+    const erstesFeld = form ? form.querySelector('input[name="E-Mail"]') : null;
+    if(erstesFeld && window.innerWidth > 900) erstesFeld.focus();
+
+    sendTracking('saison_popup_open', {
+      target:'Saison-Vormerkung',
+      value:quelle,
+      click_area:'saison'
+    });
+  }
+
+  function schliessen(quelle){
+    if(!istGeoeffnet()) return;
+
+    popup.classList.remove('show');
+    document.body.style.overflow = '';
+
+    if(quelle){
+      sendTracking('saison_popup_close', {
+        target:'Saison-Vormerkung',
+        value:quelle,
+        click_area:'saison'
+      });
+    }
+  }
+
+  /* Banner-Button und jeder andere Ausloeser mit der Klasse season-open */
+  document.querySelectorAll('.season-open').forEach(button => {
+    button.addEventListener('click', function(){
+      oeffnen('Banner');
+    });
+  });
+
+  popup.querySelectorAll('.season-dismiss').forEach(button => {
+    button.addEventListener('click', function(){
+      schliessen('Später');
+    });
+  });
+
+  /* Klick auf den Hintergrund schliesst, Klick in die Box nicht */
+  popup.addEventListener('click', function(event){
+    if(event.target === popup) schliessen('Hintergrund');
+  });
+
+  document.addEventListener('keydown', function(event){
+    if(event.key === 'Escape') schliessen('Esc');
+  });
+
+  /* Nachricht-Feld befuellen, bevor das allgemeine Formular-Skript die Daten einsammelt.
+     Laeuft in der Capture-Phase am document und damit garantiert vor dem Absende-Listener. */
+  if(form){
+    document.addEventListener('submit', function(event){
+      if(event.target !== form) return;
+
+      const interesse = form.querySelector('.season-interest');
+      const einwilligung = form.querySelector('.season-consent');
+      const nachricht = form.querySelector('input[name="Nachricht"]');
+      if(!nachricht) return;
+
+      const zeilen = [
+        'Vormerkung über das Saison-Fenster (Firmenkunden).',
+        'Interesse: ' + (interesse && interesse.value ? interesse.value : 'nicht angegeben') + '.',
+        'Zeitpunkt: ' + new Date().toLocaleString('de-DE') + '.'
+      ];
+
+      if(einwilligung && einwilligung.checked){
+        zeilen.push(
+          'Einwilligung für künftige Saison-Angebote erteilt. Wortlaut: "Freiwillig: Ich möchte auch künftig ' +
+          'Saison-Angebote per E-Mail erhalten. Diese Einwilligung kann ich jederzeit formlos widerrufen." ' +
+          'Hinweis: Vor dem Versand von Werbe-E-Mails ist eine Bestätigung durch den Empfänger einzuholen.'
+        );
+      }else{
+        zeilen.push('Keine Einwilligung für künftige Werbe-E-Mails – nur einmaliges Angebot zulässig.');
+      }
+
+      nachricht.value = zeilen.join(' ');
+    }, true);
+
+    /* Nach erfolgreichem Absenden das Fenster schliessen, damit die
+       gruene Bestaetigung frei liegt, und kuenftig nicht mehr zeigen. */
+    form.addEventListener('submit', function(){
+      /* Das allgemeine Formular-Skript hat zu diesem Zeitpunkt bereits geprueft.
+         Bei Fehlern bleibt das Fenster offen, damit die Meldungen sichtbar sind. */
+      if(form.querySelector('.form-field.invalid')) return;
+
+      speicherSchreiben(localStorage, GESENDET_KEY, 'ja');
+
+      window.setTimeout(function(){
+        schliessen('');
+      }, 60);
+    });
+  }
+
+  /* Automatisches Oeffnen */
+  if(!SAISON_AN) return;
+  if(!inSaison()) return;
+  if(speicherLesen(sessionStorage, GESEHEN_KEY)) return;
+  if(speicherLesen(localStorage, GESENDET_KEY)) return;
+
+  window.setTimeout(function(){
+    const aktiv = document.activeElement;
+    const tippt = aktiv && ['INPUT','TEXTAREA','SELECT'].indexOf(aktiv.tagName) !== -1;
+
+    /* Niemand wird beim Ausfuellen des Kontaktformulars unterbrochen,
+       und die Erfolgsmeldung wird nicht ueberdeckt. */
+    if(tippt) return;
+
+    const erfolgsPopup = document.getElementById('formPopup');
+    if(erfolgsPopup && erfolgsPopup.classList.contains('show')) return;
+
+    oeffnen('Automatisch');
+  }, VERZOEGERUNG_MS);
+
 })();
 </script>
 </body>
