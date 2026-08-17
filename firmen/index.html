@@ -1254,9 +1254,17 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </p>
 
     <form action="https://script.google.com/macros/s/AKfycbz1YPu4Li35oDFT2PgT2KvrZMiKJifDhXhaCYYgxw2u6NItMKRaMivm9UirW2e2hZPQ5A/exec" method="POST" autocomplete="on" class="ajax-form season-form" data-button-text="Angebot anfordern">
+      <!-- Bewusst exakt dieselben Feldnamen wie im Kontaktformular weiter unten:
+           das Google-Skript erwartet diesen Satz, zusaetzliche oder fehlende
+           Felder lassen die Zeile in der Tabelle nicht ankommen. -->
       <input type="hidden" name="form_type" value="firmen">
       <input type="hidden" name="Leistung" value="Vormerkung Laub &amp; Winterdienst">
       <input type="hidden" name="Gefunden" value="Saison-Fenster Firmenkunden">
+      <input type="hidden" name="GefundenSonstiges" value="">
+      <input type="hidden" name="Vorname" value="">
+      <input type="hidden" name="Rueckruf" value="Nein">
+      <input type="hidden" name="Wunschtermin" value="">
+      <input type="hidden" name="Einsatzart" value="">
       <input type="hidden" name="Nachricht" value="">
       <input type="text" name="website" style="display:none">
 
@@ -1282,11 +1290,19 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
       <div class="row">
         <div class="form-field">
-          <label>Firma / Ansprechpartner</label>
-          <input name="Nachname" maxlength="80" autocomplete="organization" placeholder="Optional">
+          <label>Firma / Betrieb *</label>
+          <input name="Firma" maxlength="90" autocomplete="organization" placeholder="Name des Unternehmens" required data-error="Bitte Firma oder Betrieb eingeben.">
           <small class="error-message"></small>
         </div>
 
+        <div class="form-field">
+          <label>Ansprechpartner *</label>
+          <input name="Nachname" maxlength="80" autocomplete="family-name" placeholder="Nachname" required data-error="Bitte Ansprechpartner eingeben.">
+          <small class="error-message"></small>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="form-field">
           <label>Telefon</label>
           <input name="Telefon" type="tel" inputmode="tel" maxlength="25" autocomplete="tel" placeholder="Optional" pattern="[0-9+()/\-\s]{6,25}" data-error="Bitte eine gültige Telefonnummer ohne Buchstaben eingeben.">
@@ -1296,7 +1312,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
       <div class="form-field">
         <label>Woran haben Sie Interesse? *</label>
-        <select name="Interesse" class="season-interest" required data-error="Bitte auswählen.">
+        <select class="season-interest" required data-error="Bitte auswählen.">
           <option value="">Bitte auswählen</option>
           <option>Laubentfernung</option>
           <option>Winterdienst</option>
@@ -1315,7 +1331,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
       <div class="form-field">
         <label class="checkline">
-          <input type="checkbox" name="Werbeeinwilligung" value="Ja" class="season-consent">
+          <input type="checkbox" value="Ja" class="season-consent">
           <span>Freiwillig: Ich möchte auch künftig Saison-Angebote per E-Mail erhalten. Diese Einwilligung kann ich jederzeit formlos widerrufen.</span>
         </label>
         <small class="error-message"></small>
