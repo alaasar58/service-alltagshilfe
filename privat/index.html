@@ -222,6 +222,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
 .top-link:hover{background:rgba(255,255,255,.12)}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.18);padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:#e7efe8}
 .footer-bottom a{margin-left:14px}
+.credit-link{margin-left:0!important;text-decoration:underline}
 .error-message{
   display:none;
   color:#b42318;
@@ -311,6 +312,25 @@ textarea{min-height:135px;max-height:135px;resize:none}
 /* =========================
    SAISON: LAUB & WINTERDIENST
 ========================= */
+
+/* Saison-Kachel zeigt beide Jahreszeiten nebeneinander: links Herbst, rechts Winter.
+   Deshalb volle Breite statt der sonst ueblichen Bild-Text-Aufteilung. */
+#winterdienst{grid-template-columns:1fr}
+.service-duo{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:rgba(14,78,45,.14)}
+.service-duo figure{position:relative;margin:0;line-height:0}
+.service-duo img{width:100%;height:235px;object-fit:cover;display:block}
+.service-duo figcaption{
+  position:absolute;left:12px;bottom:12px;
+  background:rgba(14,78,45,.88);color:#fefefd;
+  font-size:12.5px;font-weight:900;line-height:1;
+  padding:7px 11px;border-radius:999px;letter-spacing:.3px
+}
+
+@media(max-width:900px){
+  .service-duo{grid-template-columns:1fr}
+  .service-duo img{height:190px}
+}
+
 
 /* Bildflaeche fuer Leistungen ohne eigenes Foto.
    Bild spaeter einfach per style="--img:url('../bilder/datei.webp')" einhaengen. */
@@ -487,13 +507,15 @@ textarea{min-height:135px;max-height:135px;resize:none}
   .season-box .row{grid-template-columns:1fr 1fr}
   /* Auf schmalen Schirmen zaehlt, dass das erste Feld sofort sichtbar ist. */
   .season-visual svg{height:92px}
-  .season-hint{display:none}
 }
 
 /* Sehr flache Bildschirme (kleine Handys, Querformat):
    Bild und Abstaende schrumpfen, damit das erste Feld frei bleibt. */
 @media(max-height:700px){
   .season-visual svg{height:66px}
+  /* Auf sehr flachen Bildschirmen zaehlt jede Zeile, damit das erste
+     Feld nicht hinter der Buttonleiste verschwindet. */
+  .season-hint{display:none}
   .season-box h3{font-size:21px}
   .season-note{padding:10px 12px;font-size:14px;margin-bottom:12px}
 }
@@ -922,8 +944,17 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reverse reveal" id="winterdienst">
-    <div class="service-visual"></div>
+  <article class="service reveal" id="winterdienst">
+    <div class="service-duo">
+      <figure>
+        <img src="../bilder/saison-laub.webp" alt="Zusammengetragenes Herbstlaub auf einem Gehweg vor einem Hauseingang" width="800" height="450" loading="lazy" decoding="async">
+        <figcaption>Herbst</figcaption>
+      </figure>
+      <figure>
+        <img src="../bilder/saison-schnee.webp" alt="Frisch geräumter und gestreuter Gehweg an einem verschneiten Hauseingang" width="800" height="450" loading="lazy" decoding="async">
+        <figcaption>Winter</figcaption>
+      </figure>
+    </div>
     <div class="service-content">
       <h3>Laubentfernung & Winterdienst</h3>
       <p class="short">Im Herbst das Laub, im Winter freie Wege – nach fester Absprache.</p>
@@ -941,7 +972,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reveal" id="entruempelung">
+  <article class="service reverse reveal" id="entruempelung">
     <img src="../bilder/privat-entruempelung.webp" width="800" height="600" loading="lazy" decoding="async" alt="Entrümpelung">
     <div class="service-content">
       <h3>Entrümpelung</h3>
@@ -956,7 +987,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reverse reveal" id="haushaltsaufloesung">
+  <article class="service reveal" id="haushaltsaufloesung">
     <img src="../bilder/privat-haushaltsaufloesung.webp" width="800" height="600" loading="lazy" decoding="async" alt="Haushaltsauflösung">
     <div class="service-content">
       <h3>Haushaltsauflösung</h3>
@@ -972,7 +1003,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reveal" id="transporte">
+  <article class="service reverse reveal" id="transporte">
     <img src="../bilder/privat-transporte.webp" width="800" height="800" loading="lazy" decoding="async" alt="Transporte">
     <div class="service-content">
       <h3>Transporte</h3>
@@ -987,7 +1018,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reverse reveal" id="weitere">
+  <article class="service reveal" id="weitere">
     <img src="../bilder/saubere_werkzeuge_vor_dem_eingang.webp" width="800" height="800" loading="lazy" decoding="async" alt="Weitere Unterstützung">
     <div class="service-content">
       <h3>Weitere Unterstützung</h3>
@@ -1208,7 +1239,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
   <div class="footer-bottom">
     <span>© 2026 AlltagsHilfe Service</span>
-    <span>Webseite erstellt von AlltagsHilfe Service · Bilder teilweise KI-generiert</span>
+    <span>Webseite erstellt von <a class="credit-link" href="https://alaasar58.github.io/Lynn-portfolio/" target="_blank" rel="noopener">Lynn Kawage</a> · Bilder teilweise KI-generiert</span>
     <span>
       <a href="../datenschutz/">Datenschutz</a>
       <a href="../impressum/">Impressum</a>
@@ -1296,20 +1327,19 @@ textarea{min-height:135px;max-height:135px;resize:none}
       </svg>
     </div>
 
-    <div class="kicker">Saison-Vormerkung</div>
-    <h3 id="saisonTitel">Laub &amp; Winterdienst</h3>
+    <div class="kicker">Herbst &amp; Winter</div>
+    <h3 id="saisonTitel">Laub weg, Wege frei</h3>
 
     <p>
-      Im Herbst fällt das Laub, im Winter müssen Wege frei und sicher sein.
-      Wir übernehmen beides – für Ihr Zuhause, nach fester Absprache.
+      Wir holen im Herbst das Laub von Ihren Wegen und räumen im Winter Schnee und Eis – zu festen Zeiten, nach klarer Absprache.
     </p>
 
     <div class="season-note">
-      Begrenzte Kapazitäten: Für den Winterdienst berücksichtigen wir die Reihenfolge der Anmeldungen.
+      Begrenzte Plätze für den Winterdienst. Wer sich früh meldet, kommt zuerst dran.
     </div>
 
     <p class="season-hint">
-      Tragen Sie sich unverbindlich ein. Sie erhalten Ihr persönliches Angebot per E-Mail – kostenlos und ohne Verpflichtung.
+      Kostenlos und unverbindlich.
     </p>
 
     <form action="https://script.google.com/macros/s/AKfycbz1YPu4Li35oDFT2PgT2KvrZMiKJifDhXhaCYYgxw2u6NItMKRaMivm9UirW2e2hZPQ5A/exec" method="POST" autocomplete="on" class="ajax-form season-form" data-button-text="Angebot anfordern">
@@ -2231,27 +2261,16 @@ document.querySelectorAll('.ajax-form').forEach(form => {
      SAISON_AN         : false schaltet das Fenster komplett ab
      SAISON_START_MONAT: ab welchem Monat es erscheint (8 = August)
      SAISON_ENDE_MONAT : bis einschliesslich welchem Monat (2 = Februar)
-     VERZOEGERUNG_MS   : wie lange nach dem Oeffnen der Seite (6000 = 6 Sekunden) */
+     VERZOEGERUNG_MS   : wie lange nach dem Oeffnen der Seite (300 = knapp sofort) */
   const SAISON_AN          = true;
   const SAISON_START_MONAT = 8;
   const SAISON_ENDE_MONAT  = 2;
-  const VERZOEGERUNG_MS    = 6000;
+  const VERZOEGERUNG_MS    = 300;
 
   const popup = document.getElementById('saisonPopup');
   if(!popup) return;
 
   const form = popup.querySelector('.season-form');
-  const GESEHEN_KEY  = 'saison_popup_gesehen';
-  const GESENDET_KEY = 'saison_vormerkung_gesendet';
-
-  function speicherLesen(speicher, schluessel){
-    try{ return speicher.getItem(schluessel); }catch(error){ return null; }
-  }
-
-  function speicherSchreiben(speicher, schluessel, wert){
-    try{ speicher.setItem(schluessel, wert); }catch(error){ /* privater Modus: dann eben nicht merken */ }
-  }
-
   function inSaison(){
     const monat = new Date().getMonth() + 1;
 
@@ -2271,7 +2290,6 @@ document.querySelectorAll('.ajax-form').forEach(form => {
 
     popup.classList.add('show');
     document.body.style.overflow = 'hidden';
-    speicherSchreiben(sessionStorage, GESEHEN_KEY, 'ja');
 
     const erstesFeld = form ? form.querySelector('input[name="E-Mail"]') : null;
     if(erstesFeld && window.innerWidth > 900) erstesFeld.focus();
@@ -2357,19 +2375,16 @@ document.querySelectorAll('.ajax-form').forEach(form => {
          Bei Fehlern bleibt das Fenster offen, damit die Meldungen sichtbar sind. */
       if(form.querySelector('.form-field.invalid')) return;
 
-      speicherSchreiben(localStorage, GESENDET_KEY, 'ja');
-
       window.setTimeout(function(){
         schliessen('');
       }, 60);
     });
   }
 
-  /* Automatisches Oeffnen */
+  /* Automatisches Oeffnen bei jedem Seitenaufruf - so gewuenscht.
+     Es wird bewusst nichts im Browser gemerkt, auch nicht nach dem Absenden. */
   if(!SAISON_AN) return;
   if(!inSaison()) return;
-  if(speicherLesen(sessionStorage, GESEHEN_KEY)) return;
-  if(speicherLesen(localStorage, GESENDET_KEY)) return;
 
   window.setTimeout(function(){
     const aktiv = document.activeElement;
