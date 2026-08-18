@@ -463,13 +463,15 @@ textarea{min-height:135px;max-height:135px;resize:none}
   .season-box .row{grid-template-columns:1fr 1fr}
   /* Auf schmalen Schirmen zaehlt, dass das erste Feld sofort sichtbar ist. */
   .season-visual svg{height:92px}
-  .season-hint{display:none}
 }
 
 /* Sehr flache Bildschirme (kleine Handys, Querformat):
    Bild und Abstaende schrumpfen, damit das erste Feld frei bleibt. */
 @media(max-height:700px){
   .season-visual svg{height:66px}
+  /* Auf sehr flachen Bildschirmen zaehlt jede Zeile, damit das erste
+     Feld nicht hinter der Buttonleiste verschwindet. */
+  .season-hint{display:none}
   .season-box h3{font-size:21px}
   .season-note{padding:10px 12px;font-size:14px;margin-bottom:12px}
 }
@@ -1150,7 +1152,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
 
   <div class="footer-bottom">
     <span>© 2026 AlltagsHilfe Service</span>
-    <span>Webseite erstellt von <a class="credit-link" href="https://alaasar58.github.io/Lynn-portfolio/" target="_blank" rel="noopener">Lynn Kawqge</a> · Bilder teilweise KI-generiert</span>
+    <span>Webseite erstellt von <a class="credit-link" href="https://alaasar58.github.io/Lynn-portfolio/" target="_blank" rel="noopener">Lynn Kawage</a> · Bilder teilweise KI-generiert</span>
     <span>
       <a href="../datenschutz/">Datenschutz</a>
       <a href="../impressum/">Impressum</a>
@@ -1238,20 +1240,19 @@ textarea{min-height:135px;max-height:135px;resize:none}
       </svg>
     </div>
 
-    <div class="kicker">Saison-Vormerkung</div>
-    <h3 id="saisonTitel">Laub &amp; Winterdienst</h3>
+    <div class="kicker">Herbst &amp; Winter</div>
+    <h3 id="saisonTitel">Laub weg, Wege frei</h3>
 
     <p>
-      Im Herbst fällt das Laub, im Winter gilt die Räum- und Streupflicht auf Ihrem Grundstück.
-      Wir übernehmen beides – für Gewerbeobjekte, Hausverwaltungen und Eigentümergemeinschaften.
+      Wir holen im Herbst das Laub von Ihren Flächen und räumen im Winter Schnee und Eis – damit Sie Ihrer Räum- und Streupflicht nachkommen, mit festem Ansprechpartner.
     </p>
 
     <div class="season-note">
-      Begrenzte Kapazitäten: Für die Wintersaison berücksichtigen wir die Reihenfolge der Anmeldungen.
+      Begrenzte Plätze für den Winterdienst. Wer sich früh meldet, kommt zuerst dran.
     </div>
 
     <p class="season-hint">
-      Tragen Sie sich unverbindlich ein. Sie erhalten Ihr Angebot per E-Mail – kostenlos und ohne Verpflichtung.
+      Kostenlos und unverbindlich.
     </p>
 
     <form action="https://script.google.com/macros/s/AKfycbz1YPu4Li35oDFT2PgT2KvrZMiKJifDhXhaCYYgxw2u6NItMKRaMivm9UirW2e2hZPQ5A/exec" method="POST" autocomplete="on" class="ajax-form season-form" data-button-text="Angebot anfordern">
@@ -2182,27 +2183,16 @@ document.querySelectorAll('.ajax-form').forEach(form => {
      SAISON_AN         : false schaltet das Fenster komplett ab
      SAISON_START_MONAT: ab welchem Monat es erscheint (8 = August)
      SAISON_ENDE_MONAT : bis einschliesslich welchem Monat (2 = Februar)
-     VERZOEGERUNG_MS   : wie lange nach dem Oeffnen der Seite (6000 = 6 Sekunden) */
+     VERZOEGERUNG_MS   : wie lange nach dem Oeffnen der Seite (300 = knapp sofort) */
   const SAISON_AN          = true;
   const SAISON_START_MONAT = 8;
   const SAISON_ENDE_MONAT  = 2;
-  const VERZOEGERUNG_MS    = 6000;
+  const VERZOEGERUNG_MS    = 300;
 
   const popup = document.getElementById('saisonPopup');
   if(!popup) return;
 
   const form = popup.querySelector('.season-form');
-  const GESEHEN_KEY  = 'saison_popup_gesehen';
-  const GESENDET_KEY = 'saison_vormerkung_gesendet';
-
-  function speicherLesen(speicher, schluessel){
-    try{ return speicher.getItem(schluessel); }catch(error){ return null; }
-  }
-
-  function speicherSchreiben(speicher, schluessel, wert){
-    try{ speicher.setItem(schluessel, wert); }catch(error){ /* privater Modus: dann eben nicht merken */ }
-  }
-
   function inSaison(){
     const monat = new Date().getMonth() + 1;
 
@@ -2222,7 +2212,6 @@ document.querySelectorAll('.ajax-form').forEach(form => {
 
     popup.classList.add('show');
     document.body.style.overflow = 'hidden';
-    speicherSchreiben(sessionStorage, GESEHEN_KEY, 'ja');
 
     const erstesFeld = form ? form.querySelector('input[name="E-Mail"]') : null;
     if(erstesFeld && window.innerWidth > 900) erstesFeld.focus();
@@ -2308,19 +2297,16 @@ document.querySelectorAll('.ajax-form').forEach(form => {
          Bei Fehlern bleibt das Fenster offen, damit die Meldungen sichtbar sind. */
       if(form.querySelector('.form-field.invalid')) return;
 
-      speicherSchreiben(localStorage, GESENDET_KEY, 'ja');
-
       window.setTimeout(function(){
         schliessen('');
       }, 60);
     });
   }
 
-  /* Automatisches Oeffnen */
+  /* Automatisches Oeffnen bei jedem Seitenaufruf - so gewuenscht.
+     Es wird bewusst nichts im Browser gemerkt, auch nicht nach dem Absenden. */
   if(!SAISON_AN) return;
   if(!inSaison()) return;
-  if(speicherLesen(sessionStorage, GESEHEN_KEY)) return;
-  if(speicherLesen(localStorage, GESENDET_KEY)) return;
 
   window.setTimeout(function(){
     const aktiv = document.activeElement;
