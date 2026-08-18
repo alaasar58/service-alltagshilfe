@@ -302,6 +302,25 @@ textarea{min-height:135px;max-height:135px;resize:none}
    SAISON: LAUB & WINTERDIENST
 ========================= */
 
+/* Saison-Kachel zeigt beide Jahreszeiten nebeneinander: links Herbst, rechts Winter.
+   Deshalb volle Breite statt der sonst ueblichen Bild-Text-Aufteilung. */
+#winterdienst{grid-template-columns:1fr}
+.service-duo{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:rgba(14,78,45,.14)}
+.service-duo figure{position:relative;margin:0;line-height:0}
+.service-duo img{width:100%;height:235px;object-fit:cover;display:block}
+.service-duo figcaption{
+  position:absolute;left:12px;bottom:12px;
+  background:rgba(14,78,45,.88);color:#fefefd;
+  font-size:12.5px;font-weight:900;line-height:1;
+  padding:7px 11px;border-radius:999px;letter-spacing:.3px
+}
+
+@media(max-width:900px){
+  .service-duo{grid-template-columns:1fr}
+  .service-duo img{height:190px}
+}
+
+
 .season-banner{
   display:flex;
   align-items:center;
@@ -826,8 +845,17 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reverse reveal" id="winterdienst">
-    <div class="service-media" style="--img:none"></div>
+  <article class="service reveal" id="winterdienst">
+    <div class="service-duo">
+      <figure>
+        <img src="../bilder/saison-laub.webp" alt="Zusammengetragenes Herbstlaub auf einem Gehweg vor einem Hauseingang" width="800" height="450" loading="lazy" decoding="async">
+        <figcaption>Herbst</figcaption>
+      </figure>
+      <figure>
+        <img src="../bilder/saison-schnee.webp" alt="Frisch geräumter und gestreuter Gehweg an einem verschneiten Hauseingang" width="800" height="450" loading="lazy" decoding="async">
+        <figcaption>Winter</figcaption>
+      </figure>
+    </div>
     <div class="service-content">
       <h3>Laubentfernung &amp; Winterdienst</h3>
       <p class="short">Freie, sichere Wege auf Ihrem Objekt – im vereinbarten Umfang und zu festen Zeiten.</p>
@@ -849,7 +877,7 @@ textarea{min-height:135px;max-height:135px;resize:none}
     </div>
   </article>
 
-  <article class="service reveal" id="sonderaufgaben">
+  <article class="service reverse reveal" id="sonderaufgaben">
     <div class="service-media" style="--img:url('../bilder/firmen-sonderaufgaben.webp')"></div>
     <div class="service-content">
       <h3>Weitere praktische Unterstützung</h3>
