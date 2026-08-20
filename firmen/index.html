@@ -34,36 +34,17 @@
 
     <nav class="nav">
       <a href="../" class="home-btn">Zur Startseite</a>
-
-      <div class="dropdown">
-        <button class="dropbtn">Überblick ▾</button>
-        <div class="dropdown-content">
-          <a href="#ueberblick">Firmenkunden</a>
-          <a href="#leistungen">Leistungen</a>
-          <a href="#einsatzbereiche">Einsatzbereiche</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">Leistungen ▾</button>
-        <div class="dropdown-content">
-          <a href="#reinigung">Reinigung</a>
-          <a href="#raeumung">Räumung & Ordnung</a>
-          <a href="#garten">Außenbereiche</a>
-          <a href="#winterdienst">Laub &amp; Winterdienst</a>
-          <a href="#sonderaufgaben">Weitere Unterstützung</a>
-        </div>
-      </div>
-
-      <a href="#zusammenarbeit">Zusammenarbeit</a>
-      <a href="#einsatzgebiet">Einsatzgebiet</a>
+      <a href="reinigung/">Reinigung & Objektpflege</a>
+      <a href="aussenbereiche/">Außenbereiche & Winterdienst</a>
+      <a href="transport-raeumung/">Transport & Räumung</a>
+      <a href="unterstuetzung/">Praktische Unterstützung</a>
 
       <div class="dropdown">
         <button class="dropbtn">Kontakt ▾</button>
         <div class="dropdown-content">
           <a href="#kontakt">Kontaktformular</a>
           <a href="tel:+4915229546946">Telefon</a>
-          <a href="mailto:info@service-alltagshilfe.de?subject=Firmenanfrage%20AlltagsHilfe%20Service">E-Mail</a>
+          <a href="mailto:info@service-alltagshilfe.de">E-Mail</a>
           <a href="https://wa.me/4915229546946" target="_blank">WhatsApp</a>
         </div>
       </div>
@@ -120,145 +101,45 @@
   </div>
 </section>
 
-<section id="leistungen">
-  <h2 class="reveal">Unsere Leistungen</h2>
+<section class="reveal" id="leistungen">
+  <h2>Unsere Bereiche</h2>
+  <p class="lead">Wählen Sie den Bereich, um den es geht – dahinter finden Sie die einzelnen Leistungen.</p>
 
-  <article class="service reveal" id="reinigung">
-    <div class="service-media" style="--img:url('../bilder/firmen-reinigung.webp')"></div>
-    <div class="service-content">
-      <h3>Reinigung & Pflege von Flächen</h3>
-     <p class="short">Gepflegte Bereiche, die einen guten Eindruck machen.</p>
+<div class="bereich-gitter">
+  <a class="bereich-karte kern" href="reinigung/">
+    <div class="kicker">Unser Schwerpunkt</div>
+    <h3>Reinigung & Objektpflege</h3>
+    <p>Zuverlässige Reinigung für Büros, Gewerberäume, Treppenhäuser und andere Immobilien.</p>
+    <ul class="bereich-stich"><li>Büroreinigung</li><li>Treppenhausreinigung</li><li>Gemeinschaftsbereiche</li></ul>
+    <span class="bereich-mehr">Mehr ansehen</span>
+  </a>
 
-      <details>
-        <summary>Leistungsdetails</summary>
-        <p class="details-text">
-          Je nach Auftrag reinigen wir Böden, Treppen, Eingangsbereiche, Gemeinschaftsflächen, Nebenräume, Oberflächen oder andere genutzte Bereiche.
-          Vor Beginn klären wir genau, welche Flächen gereinigt werden sollen, ob Material vorhanden ist und ob die Unterstützung einmalig oder regelmäßig gebraucht wird.
-        </p>
-      </details>
-    </div>
-  </article>
+  <a class="bereich-karte" href="aussenbereiche/">
+    <div class="kicker">Rund ums Objekt</div>
+    <h3>Außenbereiche & Winterdienst</h3>
+    <p>Gepflegte Außenflächen und freie Wege – im Herbst das Laub, im Winter Räumen und Streuen.</p>
+    <ul class="bereich-stich"><li>Außenpflege</li><li>Laub & saisonale Arbeiten</li><li>Winterdienst</li></ul>
+    <span class="bereich-mehr">Mehr ansehen</span>
+  </a>
 
-  <article class="service reverse reveal" id="raeumung">
-    <div class="service-media" style="--img:url('../bilder/firmen-raeumung.webp')"></div>
-    <div class="service-content">
-      <h3>Räumung & Ordnung schaffen</h3>
-<p class="short">Aus voll wird nutzbar – wir schaffen Ordnung und Übersicht.</p>
-      
-      <details>
-        <summary>Leistungsdetails</summary>
-        <p class="details-text">
-          Wir unterstützen beim Räumen, Sortieren, Tragen und Vorbereiten von Bereichen, die leer, ordentlich oder übergabefähig gemacht werden sollen.
-          Das kann bei einzelnen Räumen, Abstellflächen, Kellern, Garagen, Nebenräumen oder kleineren Leerständen sinnvoll sein.
-          Eine erste Einschätzung ist oft anhand von Fotos möglich.
-        </p>
-      </details>
-    </div>
-  </article>
+  <a class="bereich-karte" href="transport-raeumung/">
+    <div class="kicker">Platz schaffen</div>
+    <h3>Transport & Räumung</h3>
+    <p>Wir räumen, transportieren und schaffen Ordnung – für einzelne Räume oder ganze Flächen.</p>
+    <ul class="bereich-stich"><li>Räumung</li><li>Entrümpelung</li><li>Abholung & Transport</li></ul>
+    <span class="bereich-mehr">Mehr ansehen</span>
+  </a>
 
-  <article class="service reveal" id="garten">
-    <div class="service-media" style="--img:url('../bilder/firmen-gartenpflege.webp')"></div>
-    <div class="service-content">
-      <h3>Gartenpflege & Außenbereiche</h3>
-      <p class="short">Ein gepflegtes Außenbild, ohne dass es Ihre Zeit kostet.</p>
-
-      <details>
-        <summary>Leistungsdetails</summary>
-        <p class="details-text">
-          Wir übernehmen einfache Garten- und Pflegearbeiten wie Rasenpflege, Unkrautentfernung, Laubarbeiten, Randbereiche, Wege und kleinere Schnittarbeiten nach Absprache.
-          Bei größeren oder komplexeren Arbeiten prüfen wir vorab ehrlich, ob wir diese übernehmen können.
-        </p>
-      </details>
-    </div>
-  </article>
-
-  <article class="service reveal" id="winterdienst">
-    <div class="service-duo">
-      <figure>
-        <img src="../bilder/saison-laub.webp" alt="Zusammengetragenes Herbstlaub auf einem Gehweg vor einem Hauseingang" width="800" height="450" loading="lazy" decoding="async">
-        <figcaption>Herbst</figcaption>
-      </figure>
-      <figure>
-        <img src="../bilder/saison-schnee.webp" alt="Frisch geräumter und gestreuter Gehweg an einem verschneiten Hauseingang" width="800" height="450" loading="lazy" decoding="async">
-        <figcaption>Winter</figcaption>
-      </figure>
-    </div>
-    <div class="service-content">
-      <h3>Laubentfernung &amp; Winterdienst</h3>
-      <p class="short">Freie, sichere Wege auf Ihrem Objekt – im vereinbarten Umfang und zu festen Zeiten.</p>
-
-      <details>
-        <summary>Leistungsdetails</summary>
-        <p class="details-text">
-          Im Herbst räumen wir Laub von Wegen, Zufahrten, Parkflächen, Höfen und Eingangsbereichen und kümmern uns um die Entsorgung.
-          Im Winter halten wir Gehwege, Zufahrten und Eingänge nach Absprache frei und streuen im vereinbarten Umfang.
-        </p>
-        <p class="details-text">
-          Für Hausverwaltungen, Eigentümergemeinschaften und Gewerbeobjekte legen wir vorab schriftlich fest, welche Flächen betreut werden, in welchem Zeitraum und in welcher Häufigkeit.
-          Sie haben einen festen Ansprechpartner und klare Absprachen.
-        </p>
-        <p class="details-text">
-          Die Kapazitäten für die Wintersaison sind begrenzt. Wir berücksichtigen die Reihenfolge der Anmeldungen – eine frühe Vormerkung sichert den Einsatz.
-        </p>
-      </details>
-    </div>
-  </article>
-
-  <article class="service reverse reveal" id="sonderaufgaben">
-    <div class="service-media" style="--img:url('../bilder/firmen-sonderaufgaben.webp')"></div>
-    <div class="service-content">
-      <h3>Weitere praktische Unterstützung</h3>
-      <p class="short">Sie beschreiben die Aufgabe – wir prüfen die Umsetzung.</p>
-
-      <details>
-        <summary>Leistungsdetails</summary>
-        <p class="details-text">
-          Auch Botengänge oder einfache Fahrten von A nach B sind nach Absprache möglich, zum Beispiel für Unterlagen, kleinere Waren, Material oder wichtige Dokumente.
-          Vorab prüfen wir ehrlich, ob der Einsatz zeitlich, organisatorisch und vom Umfang her sinnvoll umsetzbar ist.
-        </p>
-      </details>
-    </div>
-  </article>
+  <a class="bereich-karte" href="unterstuetzung/">
+    <div class="kicker">Was sonst noch anfällt</div>
+    <h3>Praktische Unterstützung</h3>
+    <p>Kleinere praktische Aufgaben rund um Ihr Objekt – auch kurzfristig.</p>
+    <ul class="bereich-stich"><li>Botengänge und Fahrten</li><li>Kurzfristiger Bedarf</li></ul>
+    <span class="bereich-mehr">Mehr ansehen</span>
+  </a>
+</div>
 </section>
 
-<section class="reveal" id="einsatzbereiche">
-  <h2>Typische Einsatzbereiche</h2>
-  <p class="lead">
-  Unsere Unterstützung eignet sich für viele Betriebe und Einrichtungen – zum Beispiel für Büros, Praxen, Apotheken, Kindergärten, Bäckereien, Autohäuser, Hausverwaltungen, kleinere Einkaufsbereiche und andere gewerbliche Objekte.
-</p>
-
-  <div class="target-grid">
-    <div class="target-card">
-      <h3>Genutzte Innenbereiche</h3>
-      <p>Reinigung, Ordnung und Pflege von Bereichen, die regelmäßig genutzt werden.</p>
-    </div>
-
-    <div class="target-card">
-      <h3>Treppen & Eingänge</h3>
-      <p>Unterstützung bei Bereichen, die sauber und gepflegt wirken sollen.</p>
-    </div>
-
-    <div class="target-card">
-      <h3>Keller & Nebenräume</h3>
-      <p>Räumen, Sortieren und wieder nutzbar machen von Flächen.</p>
-    </div>
-
-    <div class="target-card">
-      <h3>Außenbereiche</h3>
-      <p>Pflege von Grünflächen, Wegen, Randbereichen und Eingängen.</p>
-    </div>
-
-    <div class="target-card">
-      <h3>Kurzfristiger Bedarf</h3>
-      <p>Hilfe bei praktischen Aufgaben, wenn kurzfristig Unterstützung gebraucht wird.</p>
-    </div>
-
-    <div class="target-card">
-      <h3>Regelmäßige Unterstützung</h3>
-      <p>Wiederkehrende Hilfe nach Absprache, wenn Aufgaben dauerhaft anfallen.</p>
-    </div>
-  </div>
-</section>
 
 <section class="reveal" id="zusammenarbeit">
   <h2>Zusammenarbeit</h2>
@@ -482,10 +363,10 @@
       <h3>Schnelllinks</h3>
       <ul>
         <li><a href="../">Startseite</a></li>
-        <li><a href="../privat/">Privatkunden</a></li>
-        <li><a href="#leistungen">Leistungen</a></li>
-        <li><a href="#winterdienst">Laub &amp; Winterdienst</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="reinigung/">Reinigung & Objektpflege</a></li>
+        <li><a href="aussenbereiche/">Außenbereiche & Winterdienst</a></li>
+        <li><a href="transport-raeumung/">Transport & Räumung</a></li>
+        <li><a href="unterstuetzung/">Praktische Unterstützung</a></li>
       </ul>
     </div>
 
