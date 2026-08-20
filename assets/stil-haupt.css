@@ -274,10 +274,14 @@ textarea{min-height:135px;max-height:135px;resize:none}
 /* Leistung ohne eigenes Foto laeuft ueber die volle Breite */
 .service.breit{grid-template-columns:1fr}
 
-/* Uebersichtsseiten: vier Bereichskarten statt einer langen Leistungsliste.
-   Bewusst nur ein Satz und hoechstens drei Stichworte - die vollstaendige
-   Aufzaehlung gehoert auf die jeweilige Unterseite. */
-.bereich-gitter{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+/* Uebersichtsseiten: der Kernbereich laeuft als breite Karte oben, die drei
+   uebrigen stehen kleiner darunter. Groesse und Platz zeigen den Schwerpunkt -
+   er muss nirgends ausgeschrieben werden. Details gehoeren auf die Unterseite. */
+.bereich-gitter{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+.bereich-karte.kern{grid-column:1 / -1}
+.bereich-karte.kern h3{font-size:30px;margin-bottom:12px}
+.bereich-karte.kern p{max-width:64ch}
+.bereich-karte.kern .bereich-stich{margin-top:4px}
 .bereich-karte{
   display:flex;flex-direction:column;
   background:white;border:1px solid rgba(14,78,45,.14);border-radius:24px;
@@ -296,7 +300,12 @@ textarea{min-height:135px;max-height:135px;resize:none}
 .bereich-mehr{margin-top:auto;color:#0e4e2d;font-weight:900;font-size:15px}
 .bereich-mehr::after{content:" ›"}
 
+@media(max-width:1024px){
+  .bereich-gitter{grid-template-columns:1fr 1fr}
+}
+
 @media(max-width:900px){
   .bereich-gitter{grid-template-columns:1fr}
+  .bereich-karte.kern h3{font-size:25px}
   .bereich-karte{padding:22px}
 }

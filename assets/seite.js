@@ -856,6 +856,7 @@ document.querySelectorAll('.ajax-form').forEach(form => {
 
     popup.classList.add('show');
     document.body.style.overflow = 'hidden';
+    if(quelle === 'Automatisch') merken();
 
     const erstesFeld = form ? form.querySelector('input[name="E-Mail"]') : null;
     if(erstesFeld && window.innerWidth > 900) erstesFeld.focus();
@@ -947,10 +948,22 @@ document.querySelectorAll('.ajax-form').forEach(form => {
     });
   }
 
-  /* Automatisches Oeffnen bei jedem Seitenaufruf - so gewuenscht.
-     Es wird bewusst nichts im Browser gemerkt, auch nicht nach dem Absenden. */
+  /* Einmal pro Besuch: Wer sich durch die Seiten klickt, soll das Fenster
+     nicht bei jedem Wechsel erneut sehen. Gemerkt wird das nur im
+     Sitzungsspeicher des Browsers - beim naechsten Besuch erscheint es wieder. */
+  const GESEHEN = 'saison_popup_gesehen';
+
+  function schonGesehen(){
+    try{ return !!sessionStorage.getItem(GESEHEN); }catch(e){ return false; }
+  }
+
+  function merken(){
+    try{ sessionStorage.setItem(GESEHEN, 'ja'); }catch(e){ /* privater Modus */ }
+  }
+
   if(!SAISON_AN) return;
   if(!inSaison()) return;
+  if(schonGesehen()) return;
 
   window.setTimeout(function(){
     const aktiv = document.activeElement;
