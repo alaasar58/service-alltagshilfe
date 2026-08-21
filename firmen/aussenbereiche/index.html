@@ -52,12 +52,25 @@
 <a class="zurueck" href="../">Zurück zu Firmenkunden</a>
 
 <section class="seiten-kopf reveal">
-  <h1>Außenbereiche & Winterdienst</h1>
-  <p class="lead">Freie Wege und gepflegte Flächen rund um Ihr Objekt.</p>
-  <div class="hero-actions">
-    <a class="primary-link" href="#kontakt">Anfrage stellen</a>
+  <div class="seiten-kopf-text">
+    <h1>Außenbereiche & Winterdienst</h1>
+    <p class="lead">Über das Jahr verteilt: erst Grünpflege, dann Laub, dann Schnee und Eis.</p>
+    <div class="hero-actions">
+      <a class="primary-link" href="#kontakt">Anfrage stellen</a>
+    </div>
   </div>
+  <figure class="seiten-kopf-bild">
+    <img src="../../bilder/firmen-gartenpflege.webp" alt="Gepflegte Grünfläche an einem Gewerbeobjekt" decoding="async">
+  </figure>
 </section>
+
+<div class="jahr-leiste reveal">
+  <p class="jahr-titel">Über das Jahr verteilt</p>
+  <div class="jahr-feld"><strong>März bis Oktober</strong><span>Grünflächen und Wege</span></div>
+  <div class="jahr-feld"><strong>Oktober bis Dezember</strong><span>Laub auf Wegen und Parkflächen</span></div>
+  <div class="jahr-feld"><strong>November bis März</strong><span>Räum- und Streudienst</span></div>
+</div>
+
 
 <div class="season-banner">
   <div class="season-banner-text">
@@ -69,31 +82,28 @@
 
 <section id="leistungen">
 <article class="lblock reveal" id="aussenpflege">
-  <figure class="lblock-bild">
-    <img src="../../bilder/firmen-gartenpflege.webp" alt="Gepflegte Grünfläche an einem Gewerbeobjekt" loading="lazy" decoding="async">
-  </figure>
   <div class="lblock-text">
     <h2>Außenpflege</h2>
+    <p class="lblock-saison">März bis Oktober</p>
     <p>Grünstreifen mähen, Randbereiche und Pflasterfugen von Unkraut freihalten, Wege kehren, Sträucher in Form halten. Das Außenbild ist das Erste, was Besucher und Mieter sehen.</p>
     <p>Wir kommen in festem Turnus, sodass es gar nicht erst auffällt – und niemand aus Ihrem Team sich darum kümmern muss.</p>
+    <p>Der Turnus richtet sich nach dem Wuchs: in den Sommermonaten öfter, im Spätherbst deutlich seltener, im Winter gar nicht.</p>
     <div class="lblock-punkte">
       <strong>Das gehört dazu</strong>
       <ul>
         <li>Grünflächen und Randbereiche</li>
         <li>Wege, Höfe und Parkflächen kehren</li>
         <li>Unkraut in Pflasterfugen</li>
-        <li>Fester Turnus nach Vereinbarung</li>
+        <li>Turnus nach Jahreszeit</li>
       </ul>
     </div>
   </div>
 </article>
 
 <article class="lblock reveal" id="laub">
-  <figure class="lblock-bild">
-    <img src="../../bilder/saison-laub.webp" alt="Laub auf einem gepflasterten Weg vor einem Gebäude" loading="lazy" decoding="async">
-  </figure>
   <div class="lblock-text">
-    <h2>Laub und saisonale Arbeiten</h2>
+    <h2>Laub und Herbstarbeiten</h2>
+    <p class="lblock-saison">Oktober bis Dezember</p>
     <p>Nasses Laub auf Wegen und Parkflächen ist rutschig – und damit ein Thema für Ihre Verkehrssicherungspflicht. In der Hochphase reicht ein Durchgang oft nicht aus.</p>
     <p>Wir stimmen ab, wie oft geräumt wird, und dokumentieren die Einsätze auf Wunsch. Die Entsorgung übernehmen wir.</p>
     <div class="lblock-punkte">
@@ -109,14 +119,12 @@
 </article>
 
 <article class="lblock reveal" id="winterdienst">
-  <figure class="lblock-bild">
-    <img src="../../bilder/saison-schnee.webp" alt="Geräumte und gestreute Zufahrt eines Gebäudes" loading="lazy" decoding="async">
-  </figure>
   <div class="lblock-text">
     <h2>Winterdienst</h2>
+    <p class="lblock-saison">November bis März</p>
     <p>Als Eigentümer oder Verwalter tragen Sie die Räum- und Streupflicht. Kommt jemand auf einem nicht geräumten Weg zu Schaden, ist das schnell ein Haftungsfall.</p>
     <p>Wir übernehmen das für Gehwege, Zufahrten, Eingänge und Stellplätze. Umfang, Zeiten und Häufigkeit halten wir vorher schriftlich fest, ebenso wer bei welcher Wetterlage anrückt. Sie haben eine feste Ansprechperson.</p>
-    <p>Die Plätze für die Wintersaison sind begrenzt und werden nach Reihenfolge der Anmeldungen vergeben.</p>
+    <p>Der Winterdienst wird vor der Saison vereinbart, nicht während. Die Räumtouren werden im Herbst geplant, und die Plätze sind begrenzt.</p>
     <div class="lblock-punkte">
       <strong>Das gehört dazu</strong>
       <ul>
@@ -201,6 +209,7 @@
     <select name="Leistung" required data-error="Bitte gewünschten Bereich auswählen.">
       <option value="">Bitte auswählen</option>
       <option>Reinigung & Pflege von Flächen</option>
+      <option>Bauendreinigung</option>
       <option>Räumung & Ordnung schaffen</option>
       <option selected>Gartenpflege & Außenbereiche</option>
       <option>Laubentfernung &amp; Winterdienst</option>

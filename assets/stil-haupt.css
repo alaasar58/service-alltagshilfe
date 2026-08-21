@@ -262,14 +262,22 @@ a.season-banner-btn{display:inline-block;text-align:center;text-decoration:none;
   border:1px solid rgba(14,78,45,.14);
   border-radius:28px;
   padding:30px;
-  margin-bottom:26px
+  margin-bottom:26px;
+  display:grid;grid-template-columns:1.15fr 1fr;gap:26px;align-items:center
+}
+.seiten-kopf-bild{margin:0;line-height:0}
+.seiten-kopf-bild img{
+  width:100%;height:100%;min-height:210px;max-height:250px;object-fit:cover;
+  display:block;border-radius:20px
 }
 .seiten-kopf h1{font-size:33px;margin-bottom:12px}
 .seiten-kopf .lead{margin-bottom:0}
 .seiten-kopf .hero-actions{margin-top:20px}
 
 @media(max-width:900px){
-  .seiten-kopf{padding:24px}
+  .seiten-kopf{padding:22px;grid-template-columns:1fr;gap:18px}
+  .seiten-kopf-bild{order:-1}
+  .seiten-kopf-bild img{min-height:0;height:170px}
   .seiten-kopf h1{font-size:26px}
 }
 
@@ -370,4 +378,30 @@ a.season-banner-btn{display:inline-block;text-align:center;text-decoration:none;
   .lblock-text h2{font-size:22px}
   .lblock-punkte ul{grid-template-columns:1fr}
   .zurueck{width:100%;justify-content:center}
+}
+
+/* Jahresleiste auf den Aussen-Seiten: was faellt wann an. */
+.jahr-leiste{
+  background:white;border:1px solid rgba(14,78,45,.14);border-radius:20px;
+  padding:18px 22px;margin:0 0 22px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px 22px;align-items:start
+}
+.jahr-titel{
+  grid-column:1 / -1;margin:0;font-size:13px;letter-spacing:.4px;
+  text-transform:uppercase;color:#0e4e2d;font-weight:900
+}
+.jahr-feld{display:flex;flex-direction:column;gap:3px;
+  border-left:3px solid rgba(14,78,45,.22);padding-left:12px}
+.jahr-feld strong{font-size:15px;color:#0e4e2d}
+.jahr-feld span{font-size:14.5px;color:#56645d}
+
+/* Zeitraum direkt unter der Ueberschrift der Leistung */
+.lblock-saison{
+  display:inline-block;margin:-4px 0 14px;
+  background:#eef4ec;color:#0e4e2d;border:1px solid rgba(14,78,45,.15);
+  border-radius:999px;padding:5px 13px;font-size:13.5px;font-weight:800
+}
+
+@media(max-width:900px){
+  .jahr-leiste{grid-template-columns:1fr;padding:16px 18px}
 }
