@@ -5,207 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Datenschutzerklärung | AlltagsHilfe Service</title>
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0;user-select:none}
-html{scroll-behavior:smooth}
-body{font-family:Arial,sans-serif;background:#fefefd;color:#1f2933;line-height:1.6;cursor:default}
-/* Lange deutsche Woerter auf schmalen Displays umbrechen statt ueberlaufen lassen */
-h1,h2,h3,p,li{overflow-wrap:break-word;hyphens:auto}
-span,a{overflow-wrap:break-word}
-input,textarea,select{user-select:text;cursor:text}
-a,button{cursor:pointer}
-:target{scroll-margin-top:112px}
-
-.header{
-  position:sticky;top:0;z-index:100;
-  background:rgba(254,254,253,.94);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(14,78,45,.12);
-  transition:.25s ease
-}
-.header.scrolled{background:rgba(254,254,253,.84);box-shadow:0 8px 24px rgba(14,78,45,.08)}
-.header-inner{max-width:1180px;margin:auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:14px;color:#0e4e2d;font-weight:900;font-size:23px;text-decoration:none;white-space:nowrap}
-.brand img{width:64px;height:64px;border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(14,78,45,.18)}
-.nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.nav a{
-  height:42px;display:inline-flex;align-items:center;justify-content:center;
-  color:#0e4e2d;text-decoration:none;font-weight:800;padding:0 14px;
-  border-radius:999px;background:transparent;border:0;font-size:14px;line-height:1;font-family:inherit;transition:.2s ease
-}
-.nav a:hover{background:#eef4ec}
-.home-btn{background:#0e4e2d!important;color:#fefefd!important}
-.home-btn:hover{background:#08391f!important}
-
-.wrap{max-width:1120px;margin:auto;padding:34px 24px 0}
-.kicker{color:#548031;font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:.6px;margin-bottom:10px}
-h1,h2,h3{color:#0e4e2d}
-h1{font-size:43px;line-height:1.08;margin-bottom:18px}
-h2{font-size:27px;margin:36px 0 14px}
-h3{font-size:20px;margin:24px 0 10px}
-.lead{font-size:18px;color:#56645d;max-width:850px;margin-bottom:18px}
-
-.legal-hero{
-  background:
-    linear-gradient(135deg,rgba(246,243,238,.96),rgba(238,244,236,.96)),
-    linear-gradient(135deg,#f6f3ee 0%,#eef4ec 55%,#dfe9dc 100%);
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:30px;
-  padding:34px;
-  box-shadow:0 12px 34px rgba(14,78,45,.08);
-  margin-bottom:28px
-}
-.legal-card{
-  background:white;
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:24px;
-  padding:26px;
-  box-shadow:0 8px 22px rgba(14,78,45,.06);
-  margin:20px 0
-}
-.legal-card p{color:#3d4a43;margin-bottom:10px}
-.legal-card ul{padding-left:22px;margin:10px 0 14px;color:#3d4a43}
-.legal-card li{margin-bottom:8px}
-.legal-card a{color:#0e4e2d;font-weight:900}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
-.info-box{
-  background:#f6f3ee;
-  border:1px solid rgba(14,78,45,.14);
-  border-radius:20px;
-  padding:18px
-}
-.info-box strong{display:block;color:#0e4e2d;margin-bottom:6px}
-.info-box span{display:block;color:#3d4a43}
-.note{background:#eef4ec;border-left:5px solid #0e4e2d;border-radius:16px;padding:16px;margin:16px 0;color:#3d4a43}
-
-.footer{margin-top:60px;background:#0e4e2d;color:white;border-radius:30px 30px 0 0;padding:30px 30px 18px}
-.footer-main{display:grid;grid-template-columns:1.1fr .9fr .9fr .9fr;gap:24px;margin-bottom:24px}
-.footer h3{color:white;font-size:17px;margin-bottom:8px}
-.footer p,.footer li{color:#e7efe8;font-size:14px}
-.footer ul{list-style:none}
-.footer a{color:#fefefd;text-decoration:none}
-.footer a:hover{text-decoration:underline}
-.top-link{display:inline-block;border:1px solid rgba(255,255,255,.35);padding:10px 14px;border-radius:999px;font-weight:900;margin-top:8px;background:transparent;color:#fefefd;font-family:inherit}
-.top-link:hover{background:rgba(255,255,255,.12)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.18);padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:#e7efe8}
-.footer-bottom a{margin-left:14px}
-
-@media(max-width:900px){
-  .header-inner{display:block}
-  .nav{margin-top:14px}
-  .info-grid,.footer-main{grid-template-columns:1fr}
-  h1{font-size:33px}
-  h2{font-size:25px}
-  .brand img{width:58px;height:58px}
-  .legal-hero{padding:26px}
-}
-
-
-/* Mobile Menü final: kompakt, klappt nur bei Bedarf auf */
-.mobile-menu-toggle{
-  display:none;
-  border:1px solid rgba(14,78,45,.18);
-  background:#0e4e2d;
-  color:#fefefd;
-  border-radius:999px;
-  padding:10px 14px;
-  font-family:inherit;
-  font-weight:900;
-  line-height:1;
-}
-
-@media(max-width:900px){
-  .header{
-    position:sticky;
-    top:0;
-    background:rgba(254,254,253,.90);
-    backdrop-filter:blur(10px);
-    box-shadow:0 8px 18px rgba(14,78,45,.08);
-  }
-
-  .header-inner{
-    display:flex!important;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    padding:8px 14px;
-  }
-
-  .brand{
-    font-size:17px;
-    gap:9px;
-  }
-
-  .brand img{
-    width:44px!important;
-    height:44px!important;
-  }
-
-  .mobile-menu-toggle{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  .nav{
-    display:none;
-    width:100%;
-    flex-direction:column;
-    align-items:stretch;
-    gap:6px;
-    margin-top:8px!important;
-    padding:8px;
-    max-height:68vh;
-    overflow:auto;
-    background:rgba(254,254,253,.98);
-    border:1px solid rgba(14,78,45,.13);
-    border-radius:18px;
-    box-shadow:0 12px 28px rgba(14,78,45,.12);
-  }
-
-  .nav.open{
-    display:flex;
-  }
-
-  .nav a,
-  .dropbtn{
-    width:100%;
-    height:auto;
-    min-height:40px;
-    justify-content:flex-start;
-    padding:10px 12px;
-    border-radius:14px;
-  }
-
-  .dropdown{
-    width:100%;
-  }
-
-  .dropdown-content{
-    display:none;
-    position:static;
-    top:auto;
-    left:auto;
-    width:100%;
-    min-width:0;
-    padding:6px;
-    margin-top:4px;
-    border:0;
-    border-radius:14px;
-    box-shadow:none;
-    background:#eef4ec;
-  }
-
-  .dropdown:hover .dropdown-content{
-    display:none;
-  }
-
-  .dropdown.open .dropdown-content{
-    display:block;
-  }
-}
-
-</style>
+<link rel="stylesheet" href="../assets/stil-recht.css">
 </head>
 
 <body>
@@ -213,7 +13,7 @@ h3{font-size:20px;margin:24px 0 10px}
 <header class="header" id="oben">
   <div class="header-inner">
     <a class="brand" href="../">
-      <img src="../bilder/Logo.png" alt="AlltagsHilfe Service Logo">
+      <img src="../bilder/Logo.webp" alt="AlltagsHilfe Service Logo">
       <span>AlltagsHilfe Service</span>
     </a>
 
@@ -317,7 +117,42 @@ h3{font-size:20px;margin:24px 0 10px}
 </section>
 
 <section class="legal-card">
-  <h2>5. Verarbeitung über Google Apps Script, Google Sheets und E-Mail</h2>
+  <h2>5. Saison-Vormerkung für Laubentfernung und Winterdienst</h2>
+  <p>
+    Auf unseren Seiten für Privat- und Firmenkunden können Sie sich unverbindlich für ein Angebot zur Laubentfernung und zum Winterdienst vormerken lassen. Dabei verarbeiten wir folgende Angaben:
+  </p>
+  <ul>
+    <li>E-Mail-Adresse</li>
+    <li>PLZ und Ort, um zu prüfen, ob der Einsatzort in unserem Einsatzgebiet liegt</li>
+    <li>Name beziehungsweise Firma und Ansprechpartner, soweit angegeben</li>
+    <li>Telefonnummer, soweit angegeben</li>
+    <li>Ihre Angabe, ob Sie Interesse an Laubentfernung, Winterdienst oder beidem haben</li>
+    <li>Zeitpunkt der Vormerkung</li>
+  </ul>
+  <p>
+    Diese Angaben verwenden wir, um Ihnen ein auf Ihre Angaben abgestimmtes Angebot zu erstellen und per E-Mail zuzusenden sowie um die begrenzten Kapazitäten für die Wintersaison zu planen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, da die Verarbeitung auf Ihre Anfrage hin zur Durchführung vorvertraglicher Maßnahmen erfolgt.
+  </p>
+  <p>
+    Die technische Übermittlung und Speicherung erfolgt wie bei unseren übrigen Formularen über Google Apps Script und Google Sheets. Die Hinweise im folgenden Abschnitt gelten entsprechend.
+  </p>
+
+  <h3>Freiwillige Einwilligung in künftige Saison-Angebote</h3>
+  <p>
+    Zusätzlich können Sie freiwillig ankreuzen, dass Sie auch künftig Saison-Angebote per E-Mail erhalten möchten. Dieses Feld ist nicht vorausgewählt und keine Voraussetzung dafür, dass Sie Ihr angefordertes Angebot erhalten.
+  </p>
+  <p>
+    Rechtsgrundlage für den Versand dieser weiteren Angebote ist ausschließlich Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 7 Abs. 2 UWG. Zum Nachweis speichern wir den Zeitpunkt der Einwilligung und den Wortlaut, dem Sie zugestimmt haben.
+  </p>
+  <p>
+    Sie können diese Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, formlos und ohne Angabe von Gründen – zum Beispiel per E-Mail an <a href="mailto:info@service-alltagshilfe.de">info@service-alltagshilfe.de</a>. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt davon unberührt.
+  </p>
+  <p>
+    Ihre Angaben zur Saison-Vormerkung löschen wir, sobald sie für den genannten Zweck nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen, spätestens nach Ablauf der jeweiligen Saison. Haben Sie in weitere Saison-Angebote eingewilligt, speichern wir Ihre E-Mail-Adresse bis zum Widerruf dieser Einwilligung.
+  </p>
+</section>
+
+<section class="legal-card">
+  <h2>6. Verarbeitung über Google Apps Script, Google Sheets und E-Mail</h2>
   <p>
     Die Formularübermittlung erfolgt technisch über Google Apps Script. Die übermittelten Formulardaten werden in einer Google-Tabelle gespeichert und zusätzlich als Benachrichtigung per E-Mail an uns übermittelt.
   </p>
@@ -333,7 +168,7 @@ h3{font-size:20px;margin:24px 0 10px}
 </section>
 
 <section class="legal-card">
-  <h2>6. Kontaktaufnahme per E-Mail oder Telefon</h2>
+  <h2>7. Kontaktaufnahme per E-Mail oder Telefon</h2>
   <p>
     Wenn Sie uns per E-Mail oder Telefon kontaktieren, verarbeiten wir die von Ihnen mitgeteilten Daten zur Bearbeitung Ihres Anliegens. Dazu können insbesondere Name, Kontaktdaten, Inhalt der Anfrage sowie weitere von Ihnen freiwillig übermittelte Informationen gehören.
   </p>
@@ -343,7 +178,7 @@ h3{font-size:20px;margin:24px 0 10px}
 </section>
 
 <section class="legal-card">
-  <h2>7. WhatsApp-Kontakt</h2>
+  <h2>8. WhatsApp-Kontakt</h2>
   <p>
     Auf dieser Webseite ist ein WhatsApp-Link eingebunden. Wenn Sie diesen Link anklicken, verlassen Sie unsere Webseite und es wird eine Verbindung zu WhatsApp hergestellt. Dabei können Daten durch WhatsApp bzw. Meta verarbeitet werden, insbesondere Ihre Telefonnummer, Kommunikationsinhalte, technische Daten und Nutzungsdaten, abhängig von Ihren Einstellungen und der Nutzung von WhatsApp.
   </p>
@@ -356,7 +191,7 @@ h3{font-size:20px;margin:24px 0 10px}
 </section>
 
 <section class="legal-card">
-  <h2>8. interne Reichweiten&shy;messung</h2>
+  <h2>9. interne Reichweiten&shy;messung</h2>
   <p>
     Zur Verbesserung unserer Webseite können technische Nutzungsdaten intern erfasst werden. Dabei kann eine zufällige Besuchs-ID verwendet werden, um einen Seitenbesuch grob zusammenzufassen. Diese Besuchs-ID enthält keine Namen, Telefonnummern, E-Mail-Adressen oder Nachrichteninhalte.
   </p>
@@ -378,9 +213,12 @@ h3{font-size:20px;margin:24px 0 10px}
 </section>
 
 <section class="legal-card">
-  <h2>9. Cookies und lokaler Speicher</h2>
+  <h2>10. Cookies und lokaler Speicher</h2>
   <p>
     Diese Webseite verwendet derzeit keine klassischen Werbe-Cookies und kein Google Analytics. Für technische Funktionen oder eine einfache interne Reichweitenmessung kann der Browser-Speicher genutzt werden, zum Beispiel zur Wiedererkennung eines kurzen Besuchszeitraums oder zur technischen Stabilisierung der Auswertung.
+  </p>
+  <p>
+    Zusätzlich merkt sich Ihr Browser für die Dauer des Besuchs, ob Ihnen der Hinweis zur Saison-Vormerkung für Laubentfernung und Winterdienst bereits angezeigt wurde. Dadurch erscheint er beim Wechsel zwischen unseren Seiten nicht erneut. Diese Angabe wird nicht an uns übertragen und verfällt, sobald Sie den Browser schließen.
   </p>
   <p>
     Sie können gespeicherte Browserdaten jederzeit über die Einstellungen Ihres Browsers löschen.
@@ -388,7 +226,7 @@ h3{font-size:20px;margin:24px 0 10px}
 </section>
 
 <section class="legal-card">
-  <h2>10. Speicherdauer</h2>
+  <h2>11. Speicherdauer</h2>
   <p>
     Wir speichern personenbezogene Daten nur so lange, wie es für den jeweiligen Zweck erforderlich ist. Anfragen werden grundsätzlich so lange gespeichert, wie dies zur Bearbeitung, Dokumentation, Nachverfolgung oder zur Erfüllung gesetzlicher Aufbewahrungspflichten notwendig ist.
   </p>
@@ -398,7 +236,7 @@ h3{font-size:20px;margin:24px 0 10px}
 </section>
 
 <section class="legal-card">
-  <h2>11. Empfänger von Daten</h2>
+  <h2>12. Empfänger von Daten</h2>
   <p>
     Eine Weitergabe personenbezogener Daten erfolgt nur, wenn dies zur Bearbeitung Ihrer Anfrage erforderlich ist, eine gesetzliche Pflicht besteht oder wir einen Dienstleister zur technischen Bereitstellung einsetzen.
   </p>
@@ -412,14 +250,14 @@ h3{font-size:20px;margin:24px 0 10px}
 </section>
 
 <section class="legal-card">
-  <h2>12. Drittland&shy;übermittlung</h2>
+  <h2>13. Drittland&shy;übermittlung</h2>
   <p>
     Bei der Nutzung von Diensten wie GitHub, Google oder WhatsApp kann eine Verarbeitung personenbezogener Daten außerhalb der Europäischen Union bzw. des Europäischen Wirtschaftsraums nicht ausgeschlossen werden. Die Anbieter treffen nach eigenen Angaben Maßnahmen zum Schutz personenbezogener Daten, etwa durch vertragliche Regelungen oder geeignete Garantien.
   </p>
 </section>
 
 <section class="legal-card">
-  <h2>13. Ihre Rechte</h2>
+  <h2>14. Ihre Rechte</h2>
   <p>Sie haben im Rahmen der geltenden gesetzlichen Voraussetzungen insbesondere folgende Rechte:</p>
   <ul>
     <li>Recht auf Auskunft über die verarbeiteten personenbezogenen Daten</li>
@@ -437,7 +275,7 @@ h3{font-size:20px;margin:24px 0 10px}
 </section>
 
 <section class="legal-card">
-  <h2>14. Beschwerderecht bei einer Aufsichtsbehörde</h2>
+  <h2>15. Beschwerderecht bei einer Aufsichtsbehörde</h2>
   <p>
     Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer personenbezogenen Daten gegen Datenschutzrecht verstößt.
   </p>
@@ -447,7 +285,7 @@ h3{font-size:20px;margin:24px 0 10px}
 </section>
 
 <section class="legal-card">
-  <h2>15. Sicherheit der Datenübertragung</h2>
+  <h2>16. Sicherheit der Datenübertragung</h2>
   <p>
     Diese Webseite wird grundsätzlich verschlüsselt per HTTPS bereitgestellt. Eine verschlüsselte Verbindung erkennen Sie an „https://“ in der Adresszeile Ihres Browsers.
   </p>
@@ -457,7 +295,7 @@ h3{font-size:20px;margin:24px 0 10px}
 </section>
 
 <section class="legal-card">
-  <h2>16. Änderung dieser Datenschutz&shy;erklärung</h2>
+  <h2>17. Änderung dieser Datenschutz&shy;erklärung</h2>
   <p>
     Wir behalten uns vor, diese Datenschutzerklärung anzupassen, wenn sich technische Abläufe, gesetzliche Vorgaben oder unsere Leistungen ändern.
   </p>
@@ -502,7 +340,7 @@ h3{font-size:20px;margin:24px 0 10px}
 
   <div class="footer-bottom">
     <span>© 2026 AlltagsHilfe Service</span>
-    <span>Webseite erstellt von AlltagsHilfe Service · Bilder teilweise KI-generiert</span>
+    <span>Webseite erstellt von <a class="credit-link" href="https://alaasar58.github.io/Lynn-portfolio/" target="_blank" rel="noopener">Lynn Kawage</a> · Bilder teilweise KI-generiert</span>
     <span>
       <a href="../datenschutz/">Datenschutz</a>
       <a href="../impressum/">Impressum</a>
@@ -512,79 +350,7 @@ h3{font-size:20px;margin:24px 0 10px}
 
 </div>
 
-<script>
-const header = document.querySelector('.header');
-
-if(header){
-  window.addEventListener('scroll', () => {
-    window.scrollY > 20 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
-  });
-}
-
-document.querySelectorAll('.back-to-top').forEach(button => {
-  button.addEventListener('click', () => {
-    window.scrollTo({ top:0, left:0, behavior:'smooth' });
-  });
-});
-
-
-/* Mobile-Menü: nur öffnen, wenn man es braucht */
-(function(){
-  const menuButton = document.querySelector('.mobile-menu-toggle');
-  const nav = document.querySelector('.nav');
-
-  if(menuButton && nav){
-    menuButton.addEventListener('click', function(){
-      const isOpen = nav.classList.toggle('open');
-      menuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      menuButton.textContent = isOpen ? 'Schließen' : 'Menü';
-    });
-  }
-
-  document.querySelectorAll('.dropbtn').forEach(button => {
-    button.addEventListener('click', function(event){
-      if(window.innerWidth > 900) return;
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      const currentDropdown = button.closest('.dropdown');
-      if(!currentDropdown) return;
-
-      document.querySelectorAll('.dropdown.open').forEach(dropdown => {
-        if(dropdown !== currentDropdown){
-          dropdown.classList.remove('open');
-        }
-      });
-
-      currentDropdown.classList.toggle('open');
-    });
-  });
-
-  document.querySelectorAll('.nav a').forEach(link => {
-    link.addEventListener('click', function(){
-      if(nav) nav.classList.remove('open');
-      if(menuButton){
-        menuButton.setAttribute('aria-expanded', 'false');
-        menuButton.textContent = 'Menü';
-      }
-      document.querySelectorAll('.dropdown.open').forEach(dropdown => dropdown.classList.remove('open'));
-      document.querySelectorAll('.dropdown.force-close').forEach(dropdown => dropdown.classList.remove('force-close'));
-    });
-  });
-
-  window.addEventListener('resize', function(){
-    if(window.innerWidth > 900){
-      if(nav) nav.classList.remove('open');
-      if(menuButton){
-        menuButton.setAttribute('aria-expanded', 'false');
-        menuButton.textContent = 'Menü';
-      }
-      document.querySelectorAll('.dropdown.open').forEach(dropdown => dropdown.classList.remove('open'));
-    }
-  });
-})();
-</script>
+<script src="../assets/basis.js"></script>
 
 </body>
 </html>

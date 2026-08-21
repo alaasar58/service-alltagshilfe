@@ -1,0 +1,3 @@
+/(Startseite): 0.14 MB in 2 Bilddateien
+/privat: 0.86 MB in 12 Bilddateien
+/firmen: 0.81 MB in 10 Bilddateien
