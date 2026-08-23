@@ -454,3 +454,8 @@ details.lblock{
   .bewerbung-adresse{font-size:16px}
   .bewerbung-box .hero-actions .primary-link{width:100%;text-align:center}
 }
+
+/* FAQ: Gruppenbeschriftung im vorhandenen Kicker-Stil, damit die Liste
+   bei vielen Fragen lesbar bleibt. Keine neue Komponente. */
+.faq-gruppe{margin:26px 0 10px}
+.faq-gruppe:first-of-type{margin-top:18px}
