@@ -430,3 +430,32 @@ details.lblock{
 @media(max-width:900px){
   .jahr-leiste{grid-template-columns:1fr;padding:16px 18px}
 }
+
+/* Bewerbung: nicht jeder hat ein E-Mail-Programm eingerichtet. Die Adresse
+   steht deshalb lesbar da und laesst sich mit einem Klick kopieren. */
+.bewerbung-box{
+  background:linear-gradient(135deg,#f6f3ee 0%,#eef4ec 100%);
+  border:1px solid rgba(14,78,45,.2);border-radius:24px;
+  padding:26px 28px;margin-top:20px;text-align:center
+}
+.bewerbung-hinweis{
+  display:block;font-size:13px;letter-spacing:.4px;text-transform:uppercase;
+  color:#0e4e2d;font-weight:900;margin-bottom:8px
+}
+.bewerbung-adresse{
+  display:block;font-size:22px;font-weight:900;color:#0e4e2d;
+  word-break:break-all;margin-bottom:18px
+}
+.bewerbung-box .hero-actions{justify-content:center}
+.bewerbung-fussnote{margin-top:16px;font-size:14px;color:#56645d}
+.kopieren{cursor:pointer;font-family:inherit;font-weight:900;font-size:16px;
+  border-radius:999px;padding:13px 18px;transition:.25s ease}
+.kopieren:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(14,78,45,.12)}
+.kopieren.fertig{background:#0e4e2d;color:#fefefd;border-color:#0e4e2d}
+
+@media(max-width:900px){
+  .bewerbung-box{padding:22px 18px}
+  .bewerbung-adresse{font-size:18px}
+  .bewerbung-box .hero-actions .primary-link,
+  .bewerbung-box .hero-actions .kopieren{width:100%;text-align:center}
+}
