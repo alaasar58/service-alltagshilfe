@@ -911,14 +911,13 @@ document.querySelectorAll('.ajax-form').forEach(form => {
     document.addEventListener('submit', function(event){
       if(event.target !== form) return;
 
-      const interesse = form.querySelector('.season-interest');
       const einwilligung = form.querySelector('.season-consent');
       const nachricht = form.querySelector('input[name="Nachricht"]');
       if(!nachricht) return;
 
       const zeilen = [
         'Vormerkung über das Saison-Fenster (' + getPageSource() + ').',
-        'Interesse: ' + (interesse && interesse.value ? interesse.value : 'nicht angegeben') + '.',
+        'Gewünscht: Winterdienst.',
         'Zeitpunkt: ' + new Date().toLocaleString('de-DE') + '.'
       ];
 

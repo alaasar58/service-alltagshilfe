@@ -145,7 +145,7 @@ a.season-banner-btn{display:inline-block;text-align:center;text-decoration:none;
 .season-popup.show{display:flex}
 .season-box{width:100%; max-width:520px; margin:auto; position:relative; max-height:calc(100vh - 40px); overflow:hidden auto; background:#fefefd; border-radius:26px; padding:26px; box-shadow:0 24px 70px rgba(0,0,0,.24); border:1px solid rgba(14,78,45,.14)}
 .season-visual{margin:-26px -26px 18px; line-height:0}
-.season-visual svg{display:block; width:100%; height:150px}
+.season-visual svg,.season-visual img{display:block; width:100%; height:150px; object-fit:cover}
 .season-close{position:absolute; top:14px; right:14px; width:34px; height:34px; display:flex; align-items:center; justify-content:center; border:0; border-radius:50%; background:rgba(254,254,253,.92); color:#0e4e2d; font-size:22px; line-height:1; font-family:inherit; padding:0; box-shadow:0 3px 10px rgba(14,78,45,.22); transition:.2s ease}
 .season-close:hover{background:#ffffff;transform:scale(1.06)}
 .season-box h3{color:#0e4e2d;font-size:24px;margin-bottom:8px}
@@ -162,15 +162,15 @@ a.season-banner-btn{display:inline-block;text-align:center;text-decoration:none;
   .season-banner-btn{width:100%}
   .season-box{padding:22px}
   .season-visual{margin:-22px -22px 14px}
-  .season-visual svg{height:104px}
+  .season-visual svg,.season-visual img{height:104px}
   .season-actions{bottom:-22px;margin:0 -22px -22px;padding:12px 22px 22px}
   .season-actions .submit-btn,.season-later{width:100%;flex:1 1 100%}
   .season-box .row{grid-template-columns:1fr 1fr}
-  .season-visual svg{height:92px}
+  .season-visual svg,.season-visual img{height:92px}
 }
 
 @media(max-height:700px){
-  .season-visual svg{height:66px}
+  .season-visual svg,.season-visual img{height:66px}
   .season-hint{display:none}
   .season-box h3{font-size:21px}
   .season-note{padding:10px 12px;font-size:14px;margin-bottom:12px}
@@ -292,11 +292,11 @@ a.season-banner-btn{display:inline-block;text-align:center;text-decoration:none;
 .bereich-karte{
   display:flex;flex-direction:column;
   background:white;border:1px solid rgba(14,78,45,.14);border-radius:20px;
-  padding:18px 20px;text-decoration:none;color:#1f2933;
+  padding:20px;text-decoration:none;color:#1f2933;
   box-shadow:0 6px 16px rgba(14,78,45,.06);transition:.25s ease
 }
 .bereich-karte:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(14,78,45,.11)}
-.bereich-karte h3{font-size:19px;margin-bottom:6px}
+.bereich-karte h3{font-size:20px;margin-bottom:6px}
 .bereich-karte p{color:#3d4a43;font-size:15.5px;margin-bottom:12px}
 
 /* Stichworte als ruhige Zeile statt als Kachelreihe - die Uebersicht soll
@@ -309,10 +309,10 @@ a.season-banner-btn{display:inline-block;text-align:center;text-decoration:none;
    kleiner darunter. Groesse und Platz zeigen den Schwerpunkt - er muss
    nirgends ausgeschrieben werden. Details gehoeren auf die Unterseite. */
 .bereich-karte.kern{
-  grid-column:1 / -1;padding:22px 24px;
+  grid-column:1 / -1;padding:20px;
   background:linear-gradient(135deg,#f6f3ee 0%,#eef4ec 100%);border-color:rgba(14,78,45,.24)
 }
-.bereich-karte.kern h3{font-size:22px;margin-bottom:8px}
+.bereich-karte.kern h3{font-size:20px;margin-bottom:8px}
 .bereich-karte.kern p{max-width:64ch;margin-bottom:14px}
 .bereich-karte.kern .bereich-stich{font-size:14.5px;margin-bottom:12px}
 /* Jede Karte fuehrt weiter - das muss man ihr ansehen. */
@@ -331,7 +331,7 @@ a.season-banner-btn{display:inline-block;text-align:center;text-decoration:none;
 @media(max-width:900px){
   .bereich-gitter{grid-template-columns:1fr}
   .bereich-karte.kern{padding:22px}
-  .bereich-karte.kern h3{font-size:21px}
+  .bereich-karte.kern h3{font-size:20px}
 }
 
 /* ---- Leistungsseiten -------------------------------------------------
@@ -360,6 +360,8 @@ details.lblock{
 .lblock[open] > summary::after{content:"▾";transform:rotate(180deg)}
 .lblock-titel{font-size:22px;font-weight:900;color:#0e4e2d;line-height:1.25}
 .lblock-text{padding:0 26px 24px}
+.lblock-bild{margin:0 0 16px;line-height:0}
+.lblock-bild img{width:100%;height:210px;object-fit:cover;display:block;border-radius:14px}
 .lblock-text p{color:#3d4a43;font-size:16.5px;line-height:1.72;margin-bottom:12px}
 .lblock-text p:last-of-type{margin-bottom:0}
 
@@ -397,6 +399,7 @@ details.lblock{
   .lblock > summary{padding:17px 20px}
   .lblock-titel{font-size:20px}
   .lblock-text{padding:0 20px 20px}
+  .lblock-bild img{height:165px}
   .lblock-punkte ul{grid-template-columns:1fr}
   .zurueck{width:100%;justify-content:center}
 }
@@ -411,6 +414,7 @@ details.lblock{
   grid-column:1 / -1;margin:0;font-size:13px;letter-spacing:.4px;
   text-transform:uppercase;color:#0e4e2d;font-weight:900
 }
+.jahr-hinweis{grid-column:1 / -1;margin:-6px 0 2px;font-size:13.5px;color:#56645d}
 .jahr-feld{display:flex;flex-direction:column;gap:3px;
   border-left:3px solid rgba(14,78,45,.22);padding-left:12px}
 .jahr-feld strong{font-size:15px;color:#0e4e2d}
