@@ -84,6 +84,7 @@ details[open] summary::after{content:" ▴"}
 .contact-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;margin-top:18px}
 form{background:white;border:1px solid rgba(14,78,45,.12);border-radius:22px;padding:22px}
 label{display:block;color:#0e4e2d;font-weight:900;font-size:14px;margin-bottom:6px}
+button{font-family:inherit}
 input,select,textarea{width:100%;padding:12px;border:1px solid #d8ded8;border-radius:12px;margin-bottom:13px;font-family:inherit;font-size:15px}
 textarea{min-height:135px;max-height:135px;resize:none}
 .field-hint{display:block;margin-top:-7px;margin-bottom:13px;color:#6d776f;font-size:12.5px}
@@ -308,14 +309,20 @@ a.season-banner-btn{display:inline-block;text-align:center;text-decoration:none;
    kleiner darunter. Groesse und Platz zeigen den Schwerpunkt - er muss
    nirgends ausgeschrieben werden. Details gehoeren auf die Unterseite. */
 .bereich-karte.kern{
-  grid-column:1 / -1;padding:26px 28px;
+  grid-column:1 / -1;padding:22px 24px;
   background:linear-gradient(135deg,#f6f3ee 0%,#eef4ec 100%);border-color:rgba(14,78,45,.24)
 }
-.bereich-karte.kern h3{font-size:27px;margin-bottom:10px}
+.bereich-karte.kern h3{font-size:22px;margin-bottom:8px}
 .bereich-karte.kern p{max-width:64ch;margin-bottom:14px}
 .bereich-karte.kern .bereich-stich{font-size:14.5px;margin-bottom:12px}
-.bereich-mehr{margin-top:auto;color:#0e4e2d;font-weight:900;font-size:15px}
-.bereich-mehr::after{content:" ›"}
+/* Jede Karte fuehrt weiter - das muss man ihr ansehen. */
+.bereich-mehr{
+  margin-top:auto;padding-top:14px;
+  display:inline-flex;align-items:center;gap:6px;
+  color:#0e4e2d;font-weight:900;font-size:14.5px
+}
+.bereich-mehr::after{content:"›";font-size:18px;line-height:1}
+.bereich-karte:hover .bereich-mehr{text-decoration:underline}
 
 @media(max-width:1024px){
   .bereich-gitter{grid-template-columns:1fr 1fr}
@@ -324,7 +331,7 @@ a.season-banner-btn{display:inline-block;text-align:center;text-decoration:none;
 @media(max-width:900px){
   .bereich-gitter{grid-template-columns:1fr}
   .bereich-karte.kern{padding:22px}
-  .bereich-karte.kern h3{font-size:24px}
+  .bereich-karte.kern h3{font-size:21px}
 }
 
 /* ---- Leistungsseiten -------------------------------------------------
@@ -351,8 +358,7 @@ details.lblock{
   transition:transform .2s ease
 }
 .lblock[open] > summary::after{content:"▾";transform:rotate(180deg)}
-.lblock-titel{font-family:Georgia,'Times New Roman',serif;font-size:23px;
-  font-weight:700;color:#0e4e2d;line-height:1.25}
+.lblock-titel{font-size:22px;font-weight:900;color:#0e4e2d;line-height:1.25}
 .lblock-text{padding:0 26px 24px}
 .lblock-text p{color:#3d4a43;font-size:16.5px;line-height:1.72;margin-bottom:12px}
 .lblock-text p:last-of-type{margin-bottom:0}

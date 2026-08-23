@@ -1,0 +1,64 @@
+/* Vorlagen zum Ausfuellen und Ausdrucken.
+   Bewusst schlicht und eigenstaendig: diese Seiten senden nichts, sie
+   werden ausgefuellt, ausgedruckt oder als PDF gesichert. */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f6f3ee;color:#1f2933;line-height:1.55;padding:26px 16px}
+.blatt{max-width:840px;margin:0 auto;background:white;border:1px solid rgba(14,78,45,.16);
+  border-radius:20px;padding:34px 38px}
+
+.kopf{display:flex;align-items:center;gap:14px;border-bottom:2px solid #0e4e2d;padding-bottom:16px;margin-bottom:8px}
+.kopf img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+.kopf-text strong{display:block;font-size:18px;color:#0e4e2d}
+.kopf-text span{font-size:13px;color:#56645d}
+
+h1{font-size:24px;color:#0e4e2d;margin:20px 0 6px}
+.unterzeile{font-size:14.5px;color:#56645d;margin-bottom:22px}
+
+h2{font-size:15px;color:#0e4e2d;text-transform:uppercase;letter-spacing:.5px;
+  margin:26px 0 12px;padding-bottom:6px;border-bottom:1px solid rgba(14,78,45,.16)}
+
+.reihe{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}
+.reihe.drei{grid-template-columns:1fr 1fr 1fr}
+.feld{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.feld.breit{grid-column:1 / -1}
+label{font-size:12.5px;font-weight:700;color:#3d4a43}
+label .pflicht{color:#a4262c}
+input[type=text],input[type=date],input[type=email],input[type=tel],select,textarea{
+  font-family:inherit;font-size:14.5px;padding:9px 10px;
+  border:1px solid #c9d2cb;border-radius:8px;background:#fdfdfc;width:100%}
+textarea{min-height:70px;resize:vertical}
+.hinweis{font-size:12.5px;color:#56645d;margin-top:3px}
+
+.wahl{display:flex;flex-wrap:wrap;gap:8px 18px;padding:4px 0}
+.wahl label{display:flex;align-items:center;gap:7px;font-weight:400;font-size:14.5px;color:#1f2933}
+.wahl input{width:16px;height:16px;accent-color:#0e4e2d}
+
+.liste{list-style:none;display:grid;gap:8px}
+.liste li{display:flex;align-items:flex-start;gap:9px;font-size:14.5px}
+.liste input{width:16px;height:16px;margin-top:3px;accent-color:#0e4e2d;flex:none}
+
+.kasten{background:#eef4ec;border:1px solid rgba(14,78,45,.16);border-radius:12px;
+  padding:14px 16px;font-size:13.5px;color:#3d4a43;margin-top:14px}
+.kasten strong{color:#0e4e2d}
+
+.unterschriften{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:34px}
+.linie{border-top:1px solid #1f2933;padding-top:6px;font-size:12.5px;color:#56645d;margin-top:44px}
+
+.knopfzeile{max-width:840px;margin:0 auto 18px;display:flex;gap:10px;flex-wrap:wrap}
+.knopf{font-family:inherit;font-size:14.5px;font-weight:900;cursor:pointer;
+  background:#0e4e2d;color:white;border:0;border-radius:999px;padding:11px 20px;text-decoration:none;
+  display:inline-flex;align-items:center}
+.knopf.leise{background:white;color:#0e4e2d;border:1px solid rgba(14,78,45,.24)}
+
+@media(max-width:700px){
+  .blatt{padding:22px 18px}
+  .reihe,.reihe.drei,.unterschriften{grid-template-columns:1fr}
+}
+
+@media print{
+  body{background:white;padding:0}
+  .blatt{border:0;border-radius:0;padding:0;max-width:none}
+  .knopfzeile{display:none}
+  h2{break-after:avoid}
+  .feld,.liste li{break-inside:avoid}
+}

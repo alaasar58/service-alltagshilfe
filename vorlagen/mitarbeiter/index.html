@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personalbogen zur Anmeldung | AlltagsHilfe Service</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../../assets/stil-vorlage.css">
+</head>
+
+<body>
+
+<div class="knopfzeile">
+  <button class="knopf" type="button" onclick="window.print()">Drucken oder als PDF sichern</button>
+  <a class="knopf leise" href="../../">Zur Startseite</a>
+</div>
+
+<div class="blatt">
+
+  <div class="kopf">
+    <img src="../../bilder/Logo.webp" alt="AlltagsHilfe Service">
+    <div class="kopf-text">
+      <strong>AlltagsHilfe Service</strong>
+      <span>Mohammed Alaa Sarhan &middot; Bargteheide &middot; info@service-alltagshilfe.de</span>
+    </div>
+  </div>
+
+  <h1>Personalbogen zur Anmeldung</h1>
+  <p class="unterzeile">
+    Bitte vollständig ausfüllen und unterschrieben zurückgeben. Diese Angaben werden für die
+    Anmeldung bei Krankenkasse und Finanzamt sowie für die Lohnabrechnung benötigt.
+    Felder mit <span style="color:#a4262c">*</span> sind Pflichtangaben.
+  </p>
+
+  <h2>1. Angaben zur Person</h2>
+  <div class="reihe">
+    <div class="feld"><label>Vorname <span class="pflicht">*</span></label><input type="text"></div>
+    <div class="feld"><label>Nachname <span class="pflicht">*</span></label><input type="text"></div>
+    <div class="feld"><label>Geburtsname (falls abweichend)</label><input type="text"></div>
+    <div class="feld"><label>Geburtsdatum <span class="pflicht">*</span></label><input type="date"></div>
+    <div class="feld"><label>Geburtsort <span class="pflicht">*</span></label><input type="text"></div>
+    <div class="feld"><label>Geburtsland <span class="pflicht">*</span></label><input type="text"></div>
+    <div class="feld"><label>Staatsangehörigkeit <span class="pflicht">*</span></label><input type="text"></div>
+    <div class="feld">
+      <label>Geschlecht (für die Meldung) <span class="pflicht">*</span></label>
+      <div class="wahl">
+        <label><input type="radio" name="geschlecht"> weiblich</label>
+        <label><input type="radio" name="geschlecht"> männlich</label>
+        <label><input type="radio" name="geschlecht"> divers</label>
+        <label><input type="radio" name="geschlecht"> ohne Angabe</label>
+      </div>
+    </div>
+    <div class="feld breit"><label>Straße und Hausnummer <span class="pflicht">*</span></label><input type="text"></div>
+    <div class="feld"><label>PLZ <span class="pflicht">*</span></label><input type="text"></div>
+    <div class="feld"><label>Wohnort <span class="pflicht">*</span></label><input type="text"></div>
+    <div class="feld"><label>Telefon <span class="pflicht">*</span></label><input type="tel"></div>
+    <div class="feld"><label>E-Mail</label><input type="email"></div>
+  </div>
+
+  <h2>2. Sozialversicherung und Steuer</h2>
+  <div class="reihe">
+    <div class="feld">
+      <label>Sozialversicherungsnummer <span class="pflicht">*</span></label>
+      <input type="text">
+      <span class="hinweis">Steht auf dem Sozialversicherungsausweis. Falls noch keine vorhanden: bitte hier „liegt nicht vor“ eintragen.</span>
+    </div>
+    <div class="feld">
+      <label>Steuer-Identifikationsnummer <span class="pflicht">*</span></label>
+      <input type="text">
+      <span class="hinweis">Elf Ziffern, vom Finanzamt zugeteilt.</span>
+    </div>
+    <div class="feld breit">
+      <label>Gesetzliche Krankenkasse <span class="pflicht">*</span></label>
+      <input type="text">
+      <span class="hinweis">Bei privater Versicherung bitte den Namen der Versicherung eintragen.</span>
+    </div>
+    <div class="feld"><label>Steuerklasse</label><input type="text"></div>
+    <div class="feld">
+      <label>Konfession (für die Kirchensteuer)</label>
+      <input type="text">
+      <span class="hinweis">Zum Beispiel „evangelisch“, „katholisch“ oder „keine“.</span>
+    </div>
+    <div class="feld">
+      <label>Familienstand</label>
+      <div class="wahl">
+        <label><input type="radio" name="familie"> ledig</label>
+        <label><input type="radio" name="familie"> verheiratet</label>
+        <label><input type="radio" name="familie"> geschieden</label>
+        <label><input type="radio" name="familie"> verwitwet</label>
+      </div>
+    </div>
+    <div class="feld"><label>Anzahl der Kinder</label><input type="text"></div>
+  </div>
+
+  <h2>3. Bankverbindung für die Lohnzahlung</h2>
+  <div class="reihe">
+    <div class="feld breit"><label>Kontoinhaber <span class="pflicht">*</span></label><input type="text"></div>
+    <div class="feld"><label>IBAN <span class="pflicht">*</span></label><input type="text"></div>
+    <div class="feld"><label>Kreditinstitut</label><input type="text"></div>
+  </div>
+
+  <h2>4. Angaben zur Beschäftigung</h2>
+  <div class="reihe">
+    <div class="feld"><label>Beginn der Tätigkeit <span class="pflicht">*</span></label><input type="date"></div>
+    <div class="feld"><label>Tätigkeit</label><input type="text"></div>
+    <div class="feld"><label>Wochenstunden</label><input type="text"></div>
+    <div class="feld">
+      <label>Art der Beschäftigung <span class="pflicht">*</span></label>
+      <div class="wahl">
+        <label><input type="radio" name="art"> Minijob</label>
+        <label><input type="radio" name="art"> Teilzeit</label>
+        <label><input type="radio" name="art"> Vollzeit</label>
+        <label><input type="radio" name="art"> kurzfristig</label>
+      </div>
+    </div>
+    <div class="feld breit">
+      <label>Weitere Beschäftigungen bei anderen Arbeitgebern <span class="pflicht">*</span></label>
+      <div class="wahl">
+        <label><input type="radio" name="weitere"> nein</label>
+        <label><input type="radio" name="weitere"> ja, und zwar:</label>
+      </div>
+      <input type="text">
+      <span class="hinweis">Wichtig bei Minijobs: Mehrere Beschäftigungen werden zusammengerechnet und ändern die Anmeldung.</span>
+    </div>
+    <div class="feld breit">
+      <label>Trifft eines davon auf Sie zu?</label>
+      <div class="wahl">
+        <label><input type="checkbox"> Schüler oder Schülerin</label>
+        <label><input type="checkbox"> Studium</label>
+        <label><input type="checkbox"> Rente oder Pension</label>
+        <label><input type="checkbox"> Elternzeit</label>
+        <label><input type="checkbox"> arbeitsuchend gemeldet</label>
+      </div>
+    </div>
+    <div class="feld breit">
+      <label>Schwerbehinderung</label>
+      <div class="wahl">
+        <label><input type="radio" name="sb"> nein</label>
+        <label><input type="radio" name="sb"> ja</label>
+      </div>
+      <span class="hinweis">Freiwillige Angabe. Sie wirkt sich auf den Kündigungsschutz und den Zusatzurlaub aus.</span>
+    </div>
+  </div>
+
+  <h2>5. Diese Unterlagen bitte mitbringen</h2>
+  <ul class="liste">
+    <li><input type="checkbox"> Personalausweis oder Reisepass</li>
+    <li><input type="checkbox"> Bei Staatsangehörigkeit außerhalb der EU: Aufenthaltstitel mit Arbeitserlaubnis</li>
+    <li><input type="checkbox"> Sozialversicherungsausweis</li>
+    <li><input type="checkbox"> Mitgliedsbescheinigung der Krankenkasse</li>
+    <li><input type="checkbox"> Nachweis der Steuer-Identifikationsnummer</li>
+    <li><input type="checkbox"> Bei Minijob neben anderer Beschäftigung: Bescheinigung des anderen Arbeitgebers</li>
+    <li><input type="checkbox"> Führerschein, falls Fahrten zur Tätigkeit gehören</li>
+  </ul>
+
+  <div class="kasten">
+    <strong>Wozu wir diese Angaben brauchen</strong><br>
+    Wir verwenden sie ausschließlich für die Anmeldung bei der Krankenkasse und beim Finanzamt,
+    für die Lohnabrechnung und für die gesetzlich vorgeschriebene Aufbewahrung. Wir geben sie
+    nur an die Stellen weiter, die dafür zuständig sind – Krankenkasse, Finanzamt, Minijob-Zentrale,
+    Berufsgenossenschaft und das Lohnbüro. Nach Ende der gesetzlichen Aufbewahrungsfristen werden
+    sie gelöscht. Rechtsgrundlage ist Artikel 6 Absatz 1 Buchstabe b und c DSGVO in Verbindung
+    mit § 26 Bundesdatenschutzgesetz.
+  </div>
+
+  <h2>6. Bestätigung</h2>
+  <p style="font-size:14.5px;color:#3d4a43">
+    Ich bestätige, dass meine Angaben vollständig und richtig sind. Änderungen – zum Beispiel
+    Umzug, Wechsel der Krankenkasse oder eine weitere Beschäftigung – teile ich unverzüglich mit.
+  </p>
+
+  <div class="unterschriften">
+    <div class="linie">Ort, Datum</div>
+    <div class="linie">Unterschrift der Mitarbeiterin oder des Mitarbeiters</div>
+  </div>
+
+  <div class="kasten" style="margin-top:26px">
+    <strong>Intern auszufüllen</strong><br>
+    Eingang am ______________ &middot; Anmeldung Krankenkasse am ______________ &middot;
+    Minijob-Zentrale am ______________ &middot; Berufsgenossenschaft am ______________ &middot;
+    Unterlagen vollständig: ja / nein
+  </div>
+
+</div>
+
+</body>
+</html>
