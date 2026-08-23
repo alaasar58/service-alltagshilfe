@@ -979,3 +979,36 @@ document.querySelectorAll('.ajax-form').forEach(form => {
   }, VERZOEGERUNG_MS);
 
 })();
+
+/* Adresse kopieren - fuer alle, bei denen sich kein E-Mail-Programm oeffnet.
+   Laeuft nur, wenn ein solcher Knopf auf der Seite steht. */
+document.querySelectorAll('.kopieren[data-ziel]').forEach(function(knopf){
+  knopf.addEventListener('click', function(){
+    const quelle = document.getElementById(knopf.getAttribute('data-ziel'));
+    if(!quelle) return;
+    const text = quelle.textContent.trim();
+    const melden = function(){
+      const alt = knopf.textContent;
+      knopf.textContent = 'Kopiert';
+      knopf.classList.add('fertig');
+      setTimeout(function(){ knopf.textContent = alt; knopf.classList.remove('fertig'); }, 2000);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(melden, function(){ markieren(quelle); });
+    }else{
+      markieren(quelle);
+    }
+  });
+});
+
+/* Faellt das Kopieren aus, wird die Adresse wenigstens markiert -
+   dann genuegt ein langer Druck beziehungsweise Strg+C. */
+function markieren(el){
+  try{
+    const bereich = document.createRange();
+    bereich.selectNodeContents(el);
+    const auswahl = window.getSelection();
+    auswahl.removeAllRanges();
+    auswahl.addRange(bereich);
+  }catch(e){}
+}
